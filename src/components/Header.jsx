@@ -1,0 +1,283 @@
+import { useEffect, useRef, useState } from "react";
+import { Link, NavLink } from "react-router-dom";
+import Logo from "./Logo";
+import { IconChevron } from "./Icons";
+import { useLanguage } from "../context/LanguageContext";
+import LanguageToggle from "./LanguageToggle";
+
+function useNav(t) {
+  return [
+    { label: t("nav.home"), to: "/" },
+    {
+      label: t("nav.about"),
+      items: [
+        { title: t("nav.about_overview"), desc: t("nav.about_overview_desc"), to: "/about/overview" },
+        { title: t("nav.about_mission"), desc: t("nav.about_mission_desc"), to: "/about/mission" },
+        { title: t("nav.about_founder"), desc: t("nav.about_founder_desc"), to: "/about/founder" },
+        { title: t("nav.about_team"), desc: t("nav.about_team_desc"), to: "/about/team" },
+        { title: t("nav.about_certifications"), desc: t("nav.about_certifications_desc"), href: "#certifications" },
+      ],
+    },
+    {
+      label: t("nav.systems"),
+      wide: true,
+      items: [
+        { title: t("nav.systems_fire"), desc: t("nav.systems_fire_desc"), to: "/systems/fire-fighting" },
+        { title: t("nav.systems_alarm"), desc: t("nav.systems_alarm_desc"), to: "/systems/fire-alarm" },
+        { title: t("nav.systems_voice"), desc: t("nav.systems_voice_desc"), to: "/systems/voice-evacuation" },
+        { title: t("nav.systems_light"), desc: t("nav.systems_light_desc"), to: "/systems/emergency-lighting" },
+        { title: t("nav.systems_elv"), desc: t("nav.systems_elv_desc"), to: "/systems/elv" },
+        { title: t("nav.systems_smoke"), desc: t("nav.systems_smoke_desc"), to: "/systems/smoke-management" },
+      ],
+    },
+    {
+      label: t("nav.brands"),
+      items: [
+        { title: t("nav.brands_all"), desc: t("nav.brands_all_desc"), to: "/products" },
+        { title: "Honeywell", desc: t("nav.brands_honeywell_desc"), to: "/products?supplier=honeywell" },
+        { title: "Teknoware / ESCALUX", desc: t("nav.brands_teknoware_desc"), to: "/products?supplier=teknoware" },
+        { title: "Waterfall", desc: t("nav.brands_waterfall_desc"), to: "/products?supplier=waterfall" },
+        { title: "Uranus Cable", desc: t("nav.brands_uranus_desc"), to: "/products?supplier=uranus" },
+        { title: "H3C", desc: t("nav.brands_h3c_desc"), to: "/products?supplier=h3c" },
+        { title: "KD Pipes", desc: t("nav.brands_kdpipes_desc"), to: "/products?supplier=kdpipes" },
+      ],
+    },
+    {
+      label: t("nav.projects"),
+      items: [
+        { title: t("nav.projects_all"), desc: t("nav.projects_all_desc"), to: "/projects" },
+        { title: t("nav.projects_residential"), desc: t("nav.projects_residential_desc"), to: "/projects?type=Residential" },
+        { title: t("nav.projects_commercial"), desc: t("nav.projects_commercial_desc"), to: "/projects?type=Commercial" },
+        { title: t("nav.projects_healthcare"), desc: t("nav.projects_healthcare_desc"), to: "/projects?type=Healthcare" },
+        { title: t("nav.projects_hospitality"), desc: t("nav.projects_hospitality_desc"), to: "/projects?type=Hospitality" },
+      ],
+    },
+    { label: t("nav.careers"), to: "/careers" },
+    { label: t("nav.contact"), to: "/contact" },
+  ];
+}
+
+export default function Header() {
+  const { t } = useLanguage();
+  const NAV = useNav(t);
+  const [shrink, setShrink] = useState(false);
+  const [openIdx, setOpenIdx] = useState(null);
+  const [drawerOpen, setDrawerOpen] = useState(false);
+  const [drawerGroup, setDrawerGroup] = useState(null);
+  const headerRef = useRef(null);
+
+  useEffect(() => {
+    const onScroll = () => setShrink(window.scrollY > 40);
+    window.addEventListener("scroll", onScroll);
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  useEffect(() => {
+    const closeAll = () => setOpenIdx(null);
+    document.addEventListener("click", closeAll);
+    return () => document.removeEventListener("click", closeAll);
+  }, []);
+
+  return (
+    <>
+      <header
+        ref={headerRef}
+        className="sticky top-0 z-[200] bg-white/95 backdrop-blur-md border-b border-ink/[.08] shadow-[0_2px_20px_-8px_rgba(0,0,0,.08)]"
+      >
+        <div
+          className={`max-w-[1280px] mx-auto px-8 flex items-center justify-between transition-[height] duration-300 ${
+            shrink ? "h-[92px]" : "h-[104px]"
+          }`}
+        >
+          <Link to="/" className="flex items-center">
+            <Logo size={84} />
+          </Link>
+
+          <nav className="hidden [@media(min-width:1080px)]:flex items-center gap-0.5">
+            {NAV.map((item, idx) => (
+              <div
+                key={item.label}
+                className="relative"
+                onClick={(e) => e.stopPropagation()}
+              >
+                {item.items ? (
+                  <>
+                    <button
+                      type="button"
+                      onClick={() => setOpenIdx(openIdx === idx ? null : idx)}
+                      className="flex items-center gap-1.5 px-3 py-3.5 text-[13px] font-semibold uppercase tracking-[.06em] text-ink whitespace-nowrap hover:text-flame1 transition-colors"
+                    >
+                      {item.label}
+                      <IconChevron
+                        className={`w-2.5 h-2.5 opacity-60 transition-transform duration-300 ${
+                          openIdx === idx ? "rotate-180" : ""
+                        }`}
+                      />
+                    </button>
+                    <span
+                      className={`absolute left-3 right-3 bottom-2 h-[2px] bg-gradient-to-r from-flame1 to-gold origin-left transition-transform duration-300 ${
+                        openIdx === idx ? "scale-x-100" : "scale-x-0"
+                      }`}
+                    />
+                    <div
+                      className={`absolute top-full ${
+                        item.wide ? "left-1/2 -translate-x-1/2 min-w-[560px] grid grid-cols-2" : "left-1/2 -translate-x-1/2 min-w-[340px]"
+                      } bg-white border border-ink/[.08] rounded-sm shadow-[0_30px_60px_-20px_rgba(0,0,0,.15)] p-2.5 gap-0.5 transition-all duration-300 ${
+                        openIdx === idx ? "opacity-100 pointer-events-auto translate-y-0" : "opacity-0 pointer-events-none -translate-y-2"
+                      }`}
+                    >
+                      {item.items.map((sub) =>
+                        sub.to ? (
+                          <Link
+                            key={sub.title}
+                            to={sub.to}
+                            onClick={() => setOpenIdx(null)}
+                            className="flex flex-col gap-0.5 px-3.5 py-3 rounded-sm hover:bg-paper2 transition-colors group"
+                          >
+                            <span className="text-[14px] font-semibold text-ink group-hover:text-flame1">
+                              {sub.title}
+                            </span>
+                            <span className="text-[12px] text-inksoft">{sub.desc}</span>
+                          </Link>
+                        ) : (
+                          <a
+                            key={sub.title}
+                            href={sub.href}
+                            onClick={() => setOpenIdx(null)}
+                            className="flex flex-col gap-0.5 px-3.5 py-3 rounded-sm hover:bg-paper2 transition-colors group"
+                          >
+                            <span className="text-[14px] font-semibold text-ink group-hover:text-flame1">
+                              {sub.title}
+                            </span>
+                            <span className="text-[12px] text-inksoft">{sub.desc}</span>
+                          </a>
+                        )
+                      )}
+                    </div>
+                  </>
+                ) : item.to ? (
+                  <Link
+                    to={item.to}
+                    className="relative flex items-center px-3 py-3.5 text-[13px] font-semibold uppercase tracking-[.06em] text-ink whitespace-nowrap hover:text-flame1 transition-colors group"
+                  >
+                    {item.label}
+                    <span className="absolute left-3 right-3 bottom-2 h-[2px] bg-gradient-to-r from-flame1 to-gold origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-300" />
+                  </Link>
+                ) : (
+                  <a
+                    href={item.href}
+                    className="relative flex items-center px-3 py-3.5 text-[13px] font-semibold uppercase tracking-[.06em] text-ink whitespace-nowrap hover:text-flame1 transition-colors group"
+                  >
+                    {item.label}
+                    <span className="absolute left-3 right-3 bottom-2 h-[2px] bg-gradient-to-r from-flame1 to-gold origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-300" />
+                  </a>
+                )}
+              </div>
+            ))}
+          </nav>
+
+          <div className="flex items-center gap-3.5">
+            <LanguageToggle className="hidden [@media(min-width:1080px)]:inline-flex" />
+            <a href="#contact" className="btn btn-flame hidden [@media(min-width:1080px)]:inline-flex !py-2.5">
+              {t("header.getInTouch")}
+            </a>
+            <button
+              aria-label="Open menu"
+              onClick={() => setDrawerOpen(true)}
+              className="[@media(min-width:1080px)]:hidden w-10 h-10 flex items-center justify-center flex-col gap-[5px]"
+            >
+              <span className="w-[22px] h-0.5 bg-ink" />
+              <span className="w-[22px] h-0.5 bg-ink" />
+              <span className="w-[22px] h-0.5 bg-ink" />
+            </button>
+          </div>
+        </div>
+      </header>
+
+      {/* Mobile Drawer */}
+      <div
+        className={`fixed inset-0 z-[300] bg-white overflow-y-auto transition-transform duration-400 [@media(min-width:1080px)]:hidden ${
+          drawerOpen ? "translate-x-0" : "translate-x-full"
+        }`}
+      >
+        <div className="flex justify-between items-center px-6 py-5 border-b border-ink/[.08]">
+          <Logo size={34} />
+          <div className="flex items-center gap-3">
+            <LanguageToggle />
+            <button
+              onClick={() => setDrawerOpen(false)}
+              className="w-10 h-10 flex items-center justify-center text-ink text-2xl"
+            >
+              &times;
+            </button>
+          </div>
+        </div>
+        <div className="px-3.5 pb-14 pt-2.5">
+          {NAV.map((item, idx) => (
+            <div key={item.label} className="border-b border-ink/[.08]">
+              {item.items ? (
+                <>
+                  <button
+                    type="button"
+                    onClick={() => setDrawerGroup(drawerGroup === idx ? null : idx)}
+                    className="w-full flex justify-between items-center px-2.5 py-[18px] text-ink text-[17px] font-medium font-display tracking-wide"
+                  >
+                    {item.label}
+                    <IconChevron
+                      className={`w-3 h-3 transition-transform duration-300 ${
+                        drawerGroup === idx ? "rotate-180" : ""
+                      }`}
+                    />
+                  </button>
+                  <div
+                    className={`overflow-hidden transition-[max-height] duration-400 ${
+                      drawerGroup === idx ? "max-h-[600px]" : "max-h-0"
+                    }`}
+                  >
+                    {item.items.map((sub) =>
+                      sub.to ? (
+                        <Link
+                          key={sub.title}
+                          to={sub.to}
+                          onClick={() => setDrawerOpen(false)}
+                          className="block px-2.5 py-2.5 pl-5 text-[14.5px] text-inksoft border-l-2 border-ink/[.08] hover:text-flame1"
+                        >
+                          {sub.title}
+                        </Link>
+                      ) : (
+                        <a
+                          key={sub.title}
+                          href={sub.href}
+                          onClick={() => setDrawerOpen(false)}
+                          className="block px-2.5 py-2.5 pl-5 text-[14.5px] text-inksoft border-l-2 border-ink/[.08] hover:text-flame1"
+                        >
+                          {sub.title}
+                        </a>
+                      )
+                    )}
+                  </div>
+                </>
+              ) : item.to ? (
+                <Link
+                  to={item.to}
+                  onClick={() => setDrawerOpen(false)}
+                  className="block px-2.5 py-[18px] text-ink text-[17px] font-medium font-display tracking-wide"
+                >
+                  {item.label}
+                </Link>
+              ) : (
+                <a
+                  href={item.href}
+                  onClick={() => setDrawerOpen(false)}
+                  className="block px-2.5 py-[18px] text-ink text-[17px] font-medium font-display tracking-wide"
+                >
+                  {item.label}
+                </a>
+              )}
+            </div>
+          ))}
+        </div>
+      </div>
+    </>
+  );
+}

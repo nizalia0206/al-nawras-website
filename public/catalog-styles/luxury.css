@@ -1,0 +1,324 @@
+/* ============================================================
+   AL NAWRAS — Luxury Product Presentation Layer
+   3D-tilt product cards, glare sweep, elevated depth system,
+   refined motion for the full shopping flow.
+   ============================================================ */
+
+:root {
+  --graphite: #12181f;
+  --card-radius: 18px;
+  --tilt-ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* ---------------------------------------------------------
+   Product Card — 3D tilt tile
+   JS sets --rx / --ry / --mx / --my per-card on mousemove;
+   CSS does the actual transform + lighting.
+--------------------------------------------------------- */
+.product-card {
+  --rx: 0deg;
+  --ry: 0deg;
+  --mx: 50%;
+  --my: 50%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  overflow: visible;
+  cursor: pointer;
+  border-radius: var(--card-radius);
+  background: linear-gradient(180deg, #ffffff 0%, #fbfbfc 100%);
+  border: 1px solid var(--line);
+  transform: perspective(1000px) rotateX(var(--rx)) rotateY(var(--ry)) translateZ(0);
+  transform-style: preserve-3d;
+  transition: transform 0.45s var(--tilt-ease), box-shadow 0.45s var(--tilt-ease), border-color 0.3s ease;
+  box-shadow:
+    0 1px 2px rgba(10, 20, 40, 0.04),
+    0 6px 16px rgba(10, 20, 40, 0.05);
+  will-change: transform;
+}
+
+.product-card.is-hovering {
+  transition: transform 0.08s linear, box-shadow 0.25s ease;
+  transform: perspective(1000px) rotateX(var(--rx)) rotateY(var(--ry)) translateZ(0) scale(1.015);
+  border-color: rgba(10, 31, 61, 0.14);
+  box-shadow:
+    0 1px 2px rgba(10, 20, 40, 0.05),
+    0 10px 20px -6px rgba(10, 20, 40, 0.16),
+    0 34px 54px -18px rgba(10, 20, 40, 0.26);
+}
+
+/* Quick View overlay — fades over the thumb on hover */
+.product-card .quick-view {
+  position: absolute;
+  left: 50%;
+  bottom: 14px;
+  z-index: 2;
+  transform: translate(-50%, 10px);
+  opacity: 0;
+  background: rgba(10, 20, 40, 0.88);
+  backdrop-filter: blur(6px);
+  color: #fff;
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  padding: 8px 16px;
+  border-radius: 100px;
+  white-space: nowrap;
+  transition: opacity 0.3s ease, transform 0.3s var(--tilt-ease);
+  pointer-events: none;
+}
+.product-card.is-hovering .quick-view {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+/* Glare sweep — follows the cursor, only visible while hovering */
+.product-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+  border-radius: inherit;
+  background: radial-gradient(
+    480px circle at var(--mx) var(--my),
+    rgba(255, 255, 255, 0.5),
+    rgba(255, 255, 255, 0.08) 32%,
+    transparent 62%
+  );
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  mix-blend-mode: overlay;
+}
+.product-card.is-hovering::before { opacity: 1; }
+
+/* Faint edge highlight for definition against white page bg */
+.product-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  z-index: 4;
+  pointer-events: none;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.6);
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+.product-card.is-hovering::after { opacity: 1; }
+
+.product-card .thumb {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  background: #ffffff;
+  overflow: hidden;
+  border-radius: var(--card-radius) var(--card-radius) 0 0;
+  transform-style: preserve-3d;
+}
+
+.product-card .thumb img {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: 8px;
+  transform: translateZ(38px) scale(1);
+  transition: transform 0.45s var(--tilt-ease);
+}
+.product-card.is-hovering .thumb img {
+  transform: translateZ(64px) scale(1.07);
+}
+
+.product-card .supplier-tag {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  z-index: 2;
+  background: rgba(10, 20, 40, 0.82);
+  backdrop-filter: blur(6px);
+  color: #fff;
+  font-size: 10.5px;
+  font-weight: 700;
+  padding: 5px 11px;
+  border-radius: 100px;
+  letter-spacing: 0.03em;
+  transform: translateZ(36px);
+  box-shadow: 0 4px 10px rgba(10, 20, 40, 0.25);
+}
+
+.product-card .body {
+  position: relative;
+  z-index: 2;
+  padding: 17px 17px 19px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
+  background: transparent;
+  transform: translateZ(14px);
+}
+.product-card .cat-chip {
+  font-size: 10.5px;
+  font-weight: 800;
+  color: var(--flame-600);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+.product-card h3, .product-card h4 {
+  font-size: 15px;
+  line-height: 1.36;
+  min-height: 41px;
+  color: var(--navy-900);
+  font-family: var(--font-display);
+  font-weight: 650;
+  letter-spacing: -0.005em;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.product-card .short {
+  font-size: 12.5px;
+  color: var(--slate-500);
+  line-height: 1.45;
+  flex: 1;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.product-card .price-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 6px;
+  padding-top: 12px;
+  border-top: 1px dashed var(--line);
+}
+.product-card .price {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 16.5px;
+  color: var(--navy-900);
+  letter-spacing: -0.01em;
+}
+.product-card .add-btn {
+  position: relative;
+  width: 38px;
+  height: 38px;
+  border-radius: 11px;
+  background: var(--navy-900);
+  color: white;
+  display: grid;
+  place-items: center;
+  border: none;
+  overflow: hidden;
+  transition: background 0.2s ease, transform 0.2s var(--tilt-ease), box-shadow 0.2s ease;
+  box-shadow: 0 2px 6px rgba(10, 20, 40, 0.2);
+}
+.product-card .add-btn svg { width: 17px; height: 17px; position: relative; z-index: 1; transition: transform 0.25s ease; }
+.product-card .add-btn:hover {
+  background: var(--flame-500);
+  transform: scale(1.08) translateY(-1px);
+  box-shadow: 0 6px 16px rgba(226, 88, 15, 0.38);
+}
+.product-card .add-btn:active { transform: scale(0.94); }
+.product-card .add-btn:hover svg { transform: rotate(90deg); }
+
+/* Success pulse when item is added */
+@keyframes add-pulse {
+  0% { box-shadow: 0 0 0 0 rgba(226, 88, 15, 0.45); }
+  70% { box-shadow: 0 0 0 14px rgba(226, 88, 15, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(226, 88, 15, 0); }
+}
+.product-card .add-btn.pulsing { animation: add-pulse 0.6s var(--tilt-ease); }
+
+/* Respect reduced motion: disable tilt & glare entirely */
+@media (prefers-reduced-motion: reduce) {
+  .product-card, .product-card .thumb img, .product-card .add-btn {
+    transition: none !important;
+    transform: none !important;
+  }
+  .product-card::before, .product-card::after { display: none; }
+}
+
+/* touch devices now get real tilt/glow feedback via onTouchStart in
+   useTilt.js — no forced override needed here anymore. */
+
+/* ---------------------------------------------------------
+   Product Detail — hero gallery with depth
+--------------------------------------------------------- */
+.gallery-main {
+  position: relative;
+  border-radius: 22px;
+  overflow: hidden;
+  background: #ffffff;
+  box-shadow:
+    0 1px 2px rgba(10,20,40,0.05),
+    0 30px 60px -24px rgba(10,20,40,0.28);
+  border: 1px solid var(--line);
+  transition: box-shadow 0.4s var(--tilt-ease);
+}
+.gallery-main:hover {
+  box-shadow:
+    0 1px 2px rgba(10,20,40,0.06),
+    0 36px 70px -22px rgba(10,20,40,0.32);
+}
+
+.btn.btn-primary { transition: transform 0.2s var(--tilt-ease), box-shadow 0.2s ease; }
+.btn.btn-primary:hover { transform: translateY(-1px); box-shadow: 0 10px 20px -6px rgba(10, 20, 40, 0.25); }
+.gallery-main::after {
+  content: "";
+  position: absolute;
+  left: 50%; bottom: 4%;
+  width: 55%; height: 12%;
+  background: radial-gradient(closest-side, rgba(10,20,40,0.20), transparent 75%);
+  transform: translateX(-50%);
+  filter: blur(3px);
+}
+.gallery-main img {
+  position: relative;
+  z-index: 1;
+  transition: transform 0.5s var(--tilt-ease);
+  filter: drop-shadow(0 20px 24px rgba(10,20,40,0.16));
+}
+.gallery-main:hover img { transform: scale(1.035); }
+
+.gallery-thumbs button {
+  transition: transform 0.2s var(--tilt-ease), border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.gallery-thumbs button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px rgba(10,20,40,0.14);
+}
+.gallery-thumbs button.active {
+  box-shadow: 0 6px 14px rgba(226,88,15,0.22);
+}
+
+/* ---------------------------------------------------------
+   Suggestions strip — reuse card but slightly smaller motion
+--------------------------------------------------------- */
+.sugg-grid .product-card .thumb img { padding: 6px; }
+
+/* ---------------------------------------------------------
+   Micro fade-up reveal for grids (applied via JS root class)
+--------------------------------------------------------- */
+@keyframes card-rise {
+  from { opacity: 0; transform: translateY(18px) scale(0.98); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+.product-grid .product-card {
+  animation: card-rise 0.55s var(--tilt-ease) both;
+}
+.product-grid .product-card:nth-child(1) { animation-delay: 0.02s; }
+.product-grid .product-card:nth-child(2) { animation-delay: 0.06s; }
+.product-grid .product-card:nth-child(3) { animation-delay: 0.10s; }
+.product-grid .product-card:nth-child(4) { animation-delay: 0.14s; }
+.product-grid .product-card:nth-child(5) { animation-delay: 0.18s; }
+.product-grid .product-card:nth-child(6) { animation-delay: 0.22s; }
+.product-grid .product-card:nth-child(7) { animation-delay: 0.26s; }
+.product-grid .product-card:nth-child(8) { animation-delay: 0.30s; }
+
+@media (prefers-reduced-motion: reduce) {
+  .product-grid .product-card { animation: none; }
+}
