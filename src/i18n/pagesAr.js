@@ -77,6 +77,10 @@ export const aboutPages = {
     leadership: "القيادة",
     heading: "الأشخاص وراء الأنوار",
   },
+  certifications: {
+    crumbAbout: "من نحن",
+    crumbCurrent: "الشهادات",
+  },
 };
 
 // job titles keyed by team member id (from data/content.js `team`)

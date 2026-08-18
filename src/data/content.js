@@ -182,11 +182,11 @@ export const projects = [
 ];
 
 export const certifications = [
-  { num: "01", title: "ISO 9001:2015", desc: "Quality Management System — supply, installation, design & maintenance of fire alarm and firefighting systems." },
-  { num: "02", title: "Sharjah Civil Defense", desc: "Category A licensed installer & maintainer of detection, alarm and firefighting systems." },
-  { num: "03", title: "Dubai Civil Defense", desc: "Category A & D license covering fire/smoke detection and ventilation & smoke control systems." },
-  { num: "04", title: "Abu Dhabi Civil Defense", desc: "Licensed distributor for firefighting and life-safety equipment across the Emirate." },
-  { num: "05", title: "Honeywell Silver Partner", desc: "2024 Catalyst META Fire System Integrator Program — Silver Partner status." },
+  { num: "01", title: "ISO 9001:2015", desc: "Quality Management System — supply, installation, design & maintenance of fire alarm and firefighting systems.", image: "/assets/certificates/iso-9001-2015.jpg" },
+  { num: "02", title: "Sharjah Civil Defense", desc: "Category A licensed installer & maintainer of detection, alarm and firefighting systems.", image: "/assets/certificates/sharjah-civil-defense.jpg" },
+  { num: "03", title: "Dubai Civil Defense", desc: "Category A & D license covering fire/smoke detection and ventilation & smoke control systems.", image: "/assets/certificates/dubai-civil-defense.jpg" },
+  { num: "04", title: "Abu Dhabi Civil Defense", desc: "Licensed distributor for firefighting and life-safety equipment across the Emirate.", image: "/assets/certificates/abu-dhabi-civil-defense.jpg" },
+  { num: "05", title: "Honeywell Silver Partner", desc: "2024 Catalyst META Fire System Integrator Program — Silver Partner status.", image: "/assets/certificates/honeywell-silver-partner.jpg" },
   { num: "06", title: "Authorized Distributor", desc: "Honeywell, Teknoware, Waterfall, KD Industries, Uranus (Rewire International) and H3C." },
 ];
 

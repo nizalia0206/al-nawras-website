@@ -5,6 +5,7 @@ import Overview from "./pages/about/Overview";
 import Mission from "./pages/about/Mission";
 import Founder from "./pages/about/Founder";
 import Team from "./pages/about/Team";
+import AboutCertifications from "./pages/about/Certifications";
 import FireFighting from "./pages/systems/FireFighting";
 import FireAlarm from "./pages/systems/FireAlarm";
 import VoiceEvacuation from "./pages/systems/VoiceEvacuation";
@@ -28,6 +29,7 @@ export default function App() {
         <Route path="/about/mission" element={<Mission />} />
         <Route path="/about/founder" element={<Founder />} />
         <Route path="/about/team" element={<Team />} />
+        <Route path="/about/certifications" element={<AboutCertifications />} />
         <Route path="/systems/fire-fighting" element={<FireFighting />} />
         <Route path="/systems/fire-alarm" element={<FireAlarm />} />
         <Route path="/systems/voice-evacuation" element={<VoiceEvacuation />} />

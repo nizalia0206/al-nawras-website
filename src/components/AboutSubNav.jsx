@@ -8,6 +8,7 @@ export default function AboutSubNav() {
     { label: t("nav.about_mission"), to: "/about/mission" },
     { label: t("nav.about_founder"), to: "/about/founder" },
     { label: t("nav.about_team"), to: "/about/team" },
+    { label: t("nav.about_certifications"), to: "/about/certifications" },
   ];
   return (
     <div className="border-b border-black/[.09] bg-paper2">

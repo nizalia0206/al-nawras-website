@@ -80,9 +80,9 @@ export default function Footer() {
               <Link to="/about/founder" className="text-[14px] text-steellight hover:text-white transition-colors">
                 {t("nav.about_founder")}
               </Link>
-              <a href="#certifications" className="text-[14px] text-steellight hover:text-white transition-colors">
+              <Link to="/about/certifications" className="text-[14px] text-steellight hover:text-white transition-colors">
                 {t("nav.about_certifications")}
-              </a>
+              </Link>
             </div>
           </div>
 

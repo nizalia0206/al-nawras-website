@@ -4,7 +4,6 @@ import ServicesGrid from "../components/ServicesGrid";
 import About from "../components/About";
 import Brands from "../components/Brands";
 import Projects from "../components/Projects";
-import Certifications from "../components/Certifications";
 import Testimonial from "../components/Testimonial";
 import AskAI from "../components/AskAI";
 import WhatsAppButton from "../components/WhatsAppButton";
@@ -18,7 +17,6 @@ export default function Home() {
       <About />
       <Brands />
       <Projects />
-      <Certifications />
       <Testimonial />
       <AskAI />
       <WhatsAppButton />

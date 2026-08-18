@@ -3,8 +3,8 @@ import { certifications } from "../data/content";
 import { certificationsAr } from "../i18n/arabicContent";
 import { useLanguage } from "../context/LanguageContext";
 
-export default function Certifications() {
-  const { t, lang } = useLanguage();
+export default function CertificationsGrid() {
+  const { lang } = useLanguage();
   const withImages = certifications.filter((c) => c.image);
   const [active, setActive] = useState(null);
 
@@ -24,70 +24,58 @@ export default function Certifications() {
   }, [active, withImages.length]);
 
   return (
-    <section id="certifications" className="bg-white py-[90px] md:py-[110px] border-t border-ink/[.06]">
-      <div className="max-w-[1280px] mx-auto px-8">
-        <div className="max-w-[680px] mb-14">
-          <div className="sec-eyebrow">{t("certifications.eyebrow")}</div>
-          <h2 className="font-display font-semibold uppercase text-[28px] md:text-[40px] leading-[1.08] text-ink">
-            {t("certifications.title")}
-          </h2>
-          <p className="mt-5 text-[15.5px] md:text-[16.5px] leading-[1.75] text-inksoft">
-            {t("certifications.body")}
-          </p>
-        </div>
+    <>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {certifications.map((c) => {
+          const ar = lang === "ar" ? certificationsAr[c.num] : null;
+          const imgIndex = c.image ? withImages.findIndex((w) => w.num === c.num) : -1;
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {certifications.map((c) => {
-            const ar = lang === "ar" ? certificationsAr[c.num] : null;
-            const imgIndex = c.image ? withImages.findIndex((w) => w.num === c.num) : -1;
-
-            return (
-              <div
-                key={c.num}
-                className="group relative bg-white border border-ink/[.08] rounded-md overflow-hidden flex flex-col transition-all duration-300 hover:border-flame1/40 hover:-translate-y-1 hover:shadow-[0_20px_40px_-18px_rgba(238,108,47,.35)]"
-              >
-                {c.image ? (
-                  <button
-                    type="button"
-                    onClick={() => setActive(imgIndex)}
-                    className="relative h-[210px] w-full overflow-hidden bg-paper2 border-b border-ink/[.06]"
-                    aria-label={`${ar?.title || c.title} — enlarge certificate`}
-                  >
-                    <img
-                      src={c.image}
-                      alt={`${ar?.title || c.title} certificate`}
-                      loading="lazy"
-                      className="absolute inset-0 w-full h-full object-cover object-top transition-transform duration-500 ease-[var(--ease)] group-hover:scale-[1.06]"
-                    />
-                    <span className="absolute inset-0 bg-gradient-to-t from-ink/55 via-ink/0 to-ink/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                    <span className="absolute bottom-3 right-3 w-8 h-8 rounded-full bg-white/95 text-ink flex items-center justify-center opacity-0 translate-y-1.5 scale-90 transition-all duration-300 ease-[var(--ease)] group-hover:opacity-100 group-hover:translate-y-0 group-hover:scale-100 shadow-md">
-                      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round">
-                        <path d="M9 3H3v6M15 3h6v6M9 21H3v-6M15 21h6v-6" />
-                      </svg>
-                    </span>
-                    <span className="absolute top-3 left-3 font-display text-[22px] font-semibold text-white drop-shadow-[0_2px_6px_rgba(0,0,0,.5)] ltr-content">
-                      {c.num}
-                    </span>
-                  </button>
-                ) : (
-                  <div className="relative h-[210px] w-full overflow-hidden bg-gradient-to-br from-paper2 to-paper flex items-center justify-center border-b border-ink/[.06]">
-                    <svg width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" className="text-flame1/30">
-                      <path d="M12 2l2.4 4.86 5.36.78-3.88 3.78.92 5.34L12 14.27l-4.8 2.49.92-5.34-3.88-3.78 5.36-.78L12 2z" />
+          return (
+            <div
+              key={c.num}
+              className="group relative bg-white border border-ink/[.08] rounded-md overflow-hidden flex flex-col transition-all duration-300 hover:border-flame1/40 hover:-translate-y-1 hover:shadow-[0_20px_40px_-18px_rgba(238,108,47,.35)]"
+            >
+              {c.image ? (
+                <button
+                  type="button"
+                  onClick={() => setActive(imgIndex)}
+                  className="relative h-[210px] w-full overflow-hidden bg-paper2 border-b border-ink/[.06]"
+                  aria-label={`${ar?.title || c.title} — enlarge certificate`}
+                >
+                  <img
+                    src={c.image}
+                    alt={`${ar?.title || c.title} certificate`}
+                    loading="lazy"
+                    className="absolute inset-0 w-full h-full object-cover object-top transition-transform duration-500 ease-[var(--ease)] group-hover:scale-[1.06]"
+                  />
+                  <span className="absolute inset-0 bg-gradient-to-t from-ink/55 via-ink/0 to-ink/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  <span className="absolute bottom-3 right-3 w-8 h-8 rounded-full bg-white/95 text-ink flex items-center justify-center opacity-0 translate-y-1.5 scale-90 transition-all duration-300 ease-[var(--ease)] group-hover:opacity-100 group-hover:translate-y-0 group-hover:scale-100 shadow-md">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round">
+                      <path d="M9 3H3v6M15 3h6v6M9 21H3v-6M15 21h6v-6" />
                     </svg>
-                    <span className="absolute top-3 left-3 font-display text-[22px] font-semibold text-flame1 ltr-content">
-                      {c.num}
-                    </span>
-                  </div>
-                )}
-
-                <div className="p-6 flex flex-col flex-grow">
-                  <h3 className="font-display text-[17px] uppercase tracking-wide mb-2.5">{ar?.title || c.title}</h3>
-                  <p className="svc-desc text-[13.5px] leading-[1.65] text-inksoft flex-grow">{ar?.desc || c.desc}</p>
+                  </span>
+                  <span className="absolute top-3 left-3 font-display text-[22px] font-semibold text-white drop-shadow-[0_2px_6px_rgba(0,0,0,.5)] ltr-content">
+                    {c.num}
+                  </span>
+                </button>
+              ) : (
+                <div className="relative h-[210px] w-full overflow-hidden bg-gradient-to-br from-paper2 to-paper flex items-center justify-center border-b border-ink/[.06]">
+                  <svg width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" className="text-flame1/30">
+                    <path d="M12 2l2.4 4.86 5.36.78-3.88 3.78.92 5.34L12 14.27l-4.8 2.49.92-5.34-3.88-3.78 5.36-.78L12 2z" />
+                  </svg>
+                  <span className="absolute top-3 left-3 font-display text-[22px] font-semibold text-flame1 ltr-content">
+                    {c.num}
+                  </span>
                 </div>
+              )}
+
+              <div className="p-6 flex flex-col flex-grow">
+                <h3 className="font-display text-[17px] uppercase tracking-wide mb-2.5">{ar?.title || c.title}</h3>
+                <p className="svc-desc text-[13.5px] leading-[1.65] text-inksoft flex-grow">{ar?.desc || c.desc}</p>
               </div>
-            );
-          })}
-        </div>
+            </div>
+          );
+        })}
       </div>
 
       {/* Lightbox */}
@@ -159,6 +147,6 @@ export default function Certifications() {
           </div>
         )}
       </div>
-    </section>
+    </>
   );
 }

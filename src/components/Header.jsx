@@ -15,7 +15,7 @@ function useNav(t) {
         { title: t("nav.about_mission"), desc: t("nav.about_mission_desc"), to: "/about/mission" },
         { title: t("nav.about_founder"), desc: t("nav.about_founder_desc"), to: "/about/founder" },
         { title: t("nav.about_team"), desc: t("nav.about_team_desc"), to: "/about/team" },
-        { title: t("nav.about_certifications"), desc: t("nav.about_certifications_desc"), href: "#certifications" },
+        { title: t("nav.about_certifications"), desc: t("nav.about_certifications_desc"), to: "/about/certifications" },
       ],
     },
     {

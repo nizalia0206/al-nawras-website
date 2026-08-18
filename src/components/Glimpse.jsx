@@ -47,7 +47,8 @@ const GLIMPSES = [
     eyebrow: "Certifications",
     title: "Licensed & Compliant",
     desc: "ISO 9001:2015, Civil Defense licenses across Sharjah, Dubai and Abu Dhabi.",
-    href: "#certifications",
+    href: "/about/certifications",
+    internal: true,
     tag: "3 Emirates · ISO Certified",
   },
   {
