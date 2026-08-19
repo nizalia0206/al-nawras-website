@@ -31,10 +31,16 @@ export default function Footer() {
       <div className="max-w-[1280px] mx-auto px-8">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-[1.4fr_1fr_1fr_1fr] gap-x-10 gap-y-10 py-[60px] border-b border-white/[.1]">
           <div>
-            <div className="mb-5">
-              <div className="inline-block bg-white rounded-lg px-4 py-2.5">
-                <Logo size={34} />
-              </div>
+            <div className="relative mb-5 inline-block">
+              <span
+                aria-hidden="true"
+                className="pointer-events-none absolute -inset-4 rounded-full blur-2xl opacity-70"
+                style={{
+                  background:
+                    "radial-gradient(circle, rgba(238,108,47,.55), rgba(247,148,29,.25) 55%, transparent 75%)",
+                }}
+              />
+              <Logo size={64} light className="relative" />
             </div>
             <p className="text-[13.5px] leading-[1.75] text-steellight max-w-[34ch]">
               {t("footer.tagline")}

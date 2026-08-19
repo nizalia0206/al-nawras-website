@@ -40,12 +40,20 @@
 .product-card.is-hovering {
   transition: transform 0.08s linear, box-shadow 0.25s ease;
   transform: perspective(1000px) rotateX(var(--rx)) rotateY(var(--ry)) translateZ(0) scale(1.015);
-  border-color: rgba(10, 31, 61, 0.14);
+  border-color: rgba(226, 88, 15, 0.35);
   box-shadow:
     0 1px 2px rgba(10, 20, 40, 0.05),
-    0 10px 20px -6px rgba(10, 20, 40, 0.16),
-    0 34px 54px -18px rgba(10, 20, 40, 0.26);
+    0 10px 20px -6px rgba(226, 88, 15, 0.18),
+    0 34px 54px -18px rgba(226, 88, 15, 0.3);
 }
+
+.product-card .card-accent-line {
+  content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 3px; border-radius: 0 0 var(--card-radius) var(--card-radius);
+  background: linear-gradient(90deg, var(--flame-500), var(--flame-400));
+  transform: scaleX(0); transform-origin: left; transition: transform 0.35s var(--tilt-ease);
+  z-index: 3; pointer-events: none;
+}
+.product-card.is-hovering .card-accent-line { transform: scaleX(1); }
 
 /* Quick View overlay — fades over the thumb on hover */
 .product-card .quick-view {

@@ -20,7 +20,7 @@ export default function About() {
   }, []);
 
   return (
-    <section className="bg-white py-[90px] md:py-[110px]">
+    <section className="bg-white py-[34px] md:py-[46px]">
       <div ref={ref} className="reveal max-w-[1280px] mx-auto px-6 sm:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           {/* copy */}

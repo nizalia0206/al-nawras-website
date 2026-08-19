@@ -24,9 +24,9 @@ export default function Certifications() {
   }, [active, withImages.length]);
 
   return (
-    <section id="certifications" className="bg-white py-[90px] md:py-[110px] border-t border-ink/[.06]">
+    <section id="certifications" className="bg-white py-[34px] md:py-[46px] border-t border-ink/[.06]">
       <div className="max-w-[1280px] mx-auto px-8">
-        <div className="max-w-[680px] mb-14">
+        <div className="max-w-[680px] mb-7">
           <div className="sec-eyebrow">{t("certifications.eyebrow")}</div>
           <h2 className="font-display font-semibold uppercase text-[28px] md:text-[40px] leading-[1.08] text-ink">
             {t("certifications.title")}

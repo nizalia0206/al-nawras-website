@@ -8,7 +8,7 @@ export default function Industries({ id }) {
   const track = [...industries, ...industries];
 
   return (
-    <section id={id} className="bg-white py-[90px] md:py-[110px] overflow-hidden border-t border-ink/[.06]">
+    <section id={id} className="bg-white py-[34px] md:py-[46px] overflow-hidden border-t border-ink/[.06]">
       <div className="max-w-[1280px] mx-auto px-8">
         <div className="flex items-center gap-3 mb-[18px]">
           <span className="inline-flex items-center justify-center px-2.5 py-1 text-[11px] font-bold tracking-[.08em] uppercase text-flame1 border border-flame1/40 bg-flame1/[.06] rounded ltr-content">

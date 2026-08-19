@@ -70,6 +70,29 @@ html.lang-ar .counter-number {
 .svc-card.is-active .svc-desc{ @apply text-white/85; }
 .svc-card.is-active .svc-learn{ @apply text-white; }
 
+/* orange underline + glow accent, reused on Brands and Projects tiles so
+   every tile grid on the site shares the Systems & Solutions hover language */
+.accent-tile{ position: relative; overflow: hidden; }
+.accent-tile::after{
+  content:''; position:absolute; left:0; right:0; bottom:0; height:3px;
+  background: linear-gradient(90deg,#ff5b1e,#ffb020);
+  transform: scaleX(0); transform-origin: left;
+  transition: transform .35s var(--ease);
+}
+.accent-tile:hover::after{ transform: scaleX(1); }
+.accent-tile:hover{
+  border-color: rgba(238,108,47,.4);
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px -18px rgba(238,108,47,.35);
+}
+/* dark-background variant (project teaser tiles) — same underline + a glow
+   suited to a dark card instead of a light one */
+.accent-tile-dark:hover{
+  border-color: rgba(238,108,47,.55);
+  transform: translateY(-4px);
+  box-shadow: 0 22px 46px -16px rgba(238,108,47,.5);
+}
+
 .arrow{ @apply w-3.5 h-3.5 transition-transform duration-300; }
 .btn:hover .arrow{ transform: translateX(3px); }
 
@@ -101,8 +124,8 @@ html.lang-ar .counter-number {
 
 /* slow hue drift across the Ask AI glow */
 @keyframes askaiGlowShift {
-  0%, 100% { box-shadow: 0 0 22px 4px rgba(238,108,47,.55), 0 0 44px 14px rgba(247,148,29,.28); }
-  50% { box-shadow: 0 0 30px 8px rgba(247,148,29,.65), 0 0 56px 20px rgba(238,108,47,.35); }
+  0%, 100% { box-shadow: 0 0 22px 4px rgba(47,111,237,.55), 0 0 44px 14px rgba(91,147,255,.28); }
+  50% { box-shadow: 0 0 30px 8px rgba(91,147,255,.65), 0 0 56px 20px rgba(47,111,237,.35); }
 }
 
 @keyframes floatY {

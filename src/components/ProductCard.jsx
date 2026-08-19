@@ -63,6 +63,7 @@ export default function ProductCard({ product }) {
           </button>
         </div>
       </div>
+      <span className="card-accent-line" aria-hidden="true" />
     </div>
   );
 }
