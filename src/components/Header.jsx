@@ -85,7 +85,7 @@ export default function Header({ overlayOnHero = false }) {
     <>
       <header
         ref={headerRef}
-        className={`${overlayOnHero ? "fixed" : "sticky"} top-0 left-0 right-0 z-[200] transition-all duration-300 ${
+        className={`${overlayOnHero ? "fixed top-[38px]" : "sticky top-0"} left-0 right-0 z-[200] transition-all duration-300 ${
           overlay
             ? "bg-transparent border-b border-transparent"
             : "bg-white/95 backdrop-blur-md border-b border-ink/[.08] shadow-[0_2px_20px_-8px_rgba(0,0,0,.08)]"
@@ -198,9 +198,6 @@ export default function Header({ overlayOnHero = false }) {
           </nav>
 
           <div className="flex items-center gap-3.5">
-            {overlayOnHero && (
-              <LanguageToggle overlay={overlay} className="hidden [@media(min-width:1080px)]:inline-flex" />
-            )}
             <Link
               to="/contact"
               className={`hidden [@media(min-width:1080px)]:inline-flex items-center gap-1.5 rounded-full border px-5 py-2.5 text-[13px] font-semibold transition-all duration-300 ${

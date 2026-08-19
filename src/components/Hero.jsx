@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import EmberCanvas from "./EmberCanvas";
 import Counter from "./Counter";
+import TopBar from "./TopBar";
 import { useLanguage } from "../context/LanguageContext";
 import {
   IconArrow,
@@ -196,6 +197,11 @@ export default function Hero() {
       id="home"
       className="relative bg-bgdark text-white overflow-hidden"
     >
+      {/* top bar — email, socials & language toggle, pinned above the nav bar */}
+      <div className="fixed top-0 left-0 right-0 z-[210]">
+        <TopBar />
+      </div>
+
       {/* radial glow backdrop — shared across the whole section */}
       <div
         className="absolute inset-0 z-0"
@@ -393,7 +399,7 @@ export default function Hero() {
           </a>
 
           {/* headline content */}
-          <div className="relative z-[2] h-full flex flex-col items-center justify-center text-center max-w-[1280px] w-full mx-auto px-6 sm:px-8 pt-[138px] pb-8 md:pt-[156px] md:pb-10">
+          <div className="relative z-[2] h-full flex flex-col items-center justify-center text-center max-w-[1280px] w-full mx-auto px-6 sm:px-8 pt-[176px] pb-8 md:pt-[194px] md:pb-10">
             <div className="max-w-[720px] flex flex-col items-center">
               <div
                 key={"eyebrow-" + active}
