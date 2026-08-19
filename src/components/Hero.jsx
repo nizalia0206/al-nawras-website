@@ -81,51 +81,121 @@ function useCategories(t) {
 // English/Arabic per-slide headline copy, keyed by slide index (1-6 = product slides).
 const SLIDE_COPY = {
   en: {
-    1: { line1: "Rapid Response,", line2: "Total Suppression", tagline: "Pumps, sprinklers, hydrants & risers engineered for total suppression coverage." },
-    2: { line1: "Early Warning,", line2: "Zero Delay", tagline: "Addressable detection networks that catch a threat before it spreads." },
-    3: { line1: "Clear Direction,", line2: "Safe Evacuation", tagline: "Life-safety audio and ECS systems that guide occupants to safety, clearly." },
-    4: { line1: "Guided Path,", line2: "Always Lit", tagline: "Central battery & DALI systems that keep exit paths lit when it matters most." },
-    5: { line1: "Connected Building,", line2: "Constant Watch", tagline: "Access control, CCTV and low-voltage infrastructure across every building." },
-    6: { line1: "Clean Air,", line2: "Clear Escape", tagline: "Ventilation and smoke control systems engineered for safe evacuation." },
+    1: {
+      line1: "Rapid Response,",
+      line2: "Total Suppression",
+      tagline:
+        "Pumps, sprinklers, hydrants & risers engineered for total suppression coverage.",
+    },
+    2: {
+      line1: "Early Warning,",
+      line2: "Zero Delay",
+      tagline:
+        "Addressable detection networks that catch a threat before it spreads.",
+    },
+    3: {
+      line1: "Clear Direction,",
+      line2: "Safe Evacuation",
+      tagline:
+        "Life-safety audio and ECS systems that guide occupants to safety, clearly.",
+    },
+    4: {
+      line1: "Guided Path,",
+      line2: "Always Lit",
+      tagline:
+        "Central battery & DALI systems that keep exit paths lit when it matters most.",
+    },
+    5: {
+      line1: "Connected Building,",
+      line2: "Constant Watch",
+      tagline:
+        "Access control, CCTV and low-voltage infrastructure across every building.",
+    },
+    6: {
+      line1: "Clean Air,",
+      line2: "Clear Escape",
+      tagline:
+        "Ventilation and smoke control systems engineered for safe evacuation.",
+    },
   },
   ar: {
-    1: { line1: "استجابة سريعة،", line2: "إخماد كامل", tagline: "مضخات ورشاشات وحنفيات ومواسير رأسية مصمّمة لتغطية إخماد شاملة." },
-    2: { line1: "إنذار مبكر،", line2: "بلا تأخير", tagline: "شبكات كشف قابلة للعنونة ترصد الخطر قبل انتشاره." },
-    3: { line1: "توجيه واضح،", line2: "إخلاء آمن", tagline: "أنظمة صوت السلامة والاتصال الطارئ التي ترشد الشاغلين إلى الأمان بوضوح." },
-    4: { line1: "مسار مُضاء،", line2: "دائم الإضاءة", tagline: "أنظمة بطارية مركزية وDALI تُبقي مسارات الخروج مضاءة عند الحاجة." },
-    5: { line1: "مبنى متصل،", line2: "مراقبة دائمة", tagline: "التحكم بالدخول وكاميرات المراقبة والبنية التحتية منخفضة الجهد في كل مبنى." },
-    6: { line1: "هواء نظيف،", line2: "مخرج آمن", tagline: "أنظمة تهوية وتحكم بالدخان مصمّمة لإخلاء آمن." },
+    1: {
+      line1: "استجابة سريعة،",
+      line2: "إخماد كامل",
+      tagline:
+        "مضخات ورشاشات وحنفيات ومواسير رأسية مصمّمة لتغطية إخماد شاملة.",
+    },
+    2: {
+      line1: "إنذار مبكر،",
+      line2: "بلا تأخير",
+      tagline: "شبكات كشف قابلة للعنونة ترصد الخطر قبل انتشاره.",
+    },
+    3: {
+      line1: "توجيه واضح،",
+      line2: "إخلاء آمن",
+      tagline:
+        "أنظمة صوت السلامة والاتصال الطارئ التي ترشد الشاغلين إلى الأمان بوضوح.",
+    },
+    4: {
+      line1: "مسار مُضاء،",
+      line2: "دائم الإضاءة",
+      tagline:
+        "أنظمة بطارية مركزية وDALI تُبقي مسارات الخروج مضاءة عند الحاجة.",
+    },
+    5: {
+      line1: "مبنى متصل،",
+      line2: "مراقبة دائمة",
+      tagline:
+        "التحكم بالدخول وكاميرات المراقبة والبنية التحتية منخفضة الجهد في كل مبنى.",
+    },
+    6: {
+      line1: "هواء نظيف،",
+      line2: "مخرج آمن",
+      tagline: "أنظمة تهوية وتحكم بالدخان مصمّمة لإخلاء آمن.",
+    },
   },
 };
 
 export default function Hero() {
   const { t, lang } = useLanguage();
   const CATEGORIES = useCategories(t);
+
   const [active, setActive] = useState(0);
   const [prev, setPrev] = useState(null);
   const [paused, setPaused] = useState(false);
+
   const timerRef = useRef(null);
 
   useEffect(() => {
     if (paused) return;
+
     timerRef.current = setTimeout(() => {
       setPrev(active);
       setActive((i) => (i + 1) % CATEGORIES.length);
     }, AUTOPLAY_MS);
+
     return () => clearTimeout(timerRef.current);
-  }, [active, paused]);
+  }, [active, paused, CATEGORIES.length]);
 
   const current = CATEGORIES[active];
+
   const goTo = (i) => {
     if (i === active) return;
+
     setPrev(active);
     setActive(i);
   };
-  const goPrev = () => goTo((active - 1 + CATEGORIES.length) % CATEGORIES.length);
+
+  const goPrev = () =>
+    goTo((active - 1 + CATEGORIES.length) % CATEGORIES.length);
+
   const goNext = () => goTo((active + 1) % CATEGORIES.length);
 
   return (
-    <section id="home" className="relative bg-bgdark text-white overflow-hidden">
+    <section
+      id="home"
+      className="relative bg-bgdark text-white overflow-hidden"
+    >
       {/* radial glow backdrop — shared across the whole section */}
       <div
         className="absolute inset-0 z-0"
@@ -142,12 +212,14 @@ export default function Hero() {
           backgroundImage:
             "linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px)",
           backgroundSize: "64px 64px",
-          maskImage: "radial-gradient(ellipse 80% 60% at 50% 20%, black, transparent)",
-          WebkitMaskImage: "radial-gradient(ellipse 80% 60% at 50% 20%, black, transparent)",
+          maskImage:
+            "radial-gradient(ellipse 80% 60% at 50% 20%, black, transparent)",
+          WebkitMaskImage:
+            "radial-gradient(ellipse 80% 60% at 50% 20%, black, transparent)",
         }}
       />
 
-      {/* ===== single rotating hero carousel — slide 1 is the brand intro, slides 2+ are products, all auto-advancing ===== */}
+      {/* ===== single rotating hero carousel ===== */}
       <div
         className="relative z-[2]"
         onMouseEnter={() => setPaused(true)}
@@ -164,6 +236,7 @@ export default function Hero() {
               }`}
             >
               <div className="absolute inset-0 bg-[linear-gradient(180deg,#1a2c56_0%,#152447_25%,#0c1c3d_100%)]" />
+
               <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_80%_at_25%_55%,rgba(29,58,112,.55)_0%,transparent_70%)]" />
 
               {cat.intro ? (
@@ -174,7 +247,10 @@ export default function Hero() {
                     style={{
                       background:
                         "radial-gradient(circle, rgba(238,108,47,.32), rgba(247,148,29,.10) 60%, transparent 75%)",
-                      animation: i === active ? "pulseGlow 5s ease-in-out infinite" : "none",
+                      animation:
+                        i === active
+                          ? "pulseGlow 5s ease-in-out infinite"
+                          : "none",
                     }}
                   />
                 </>
@@ -187,14 +263,21 @@ export default function Hero() {
                       alt={cat.label}
                       className="w-full h-full object-cover"
                       style={{
-                        objectPosition: cat.imagePosition || "center center",
-                        animation: i === active ? "kenBurns 6.5s ease-out forwards" : "none",
-                        transformOrigin: cat.imagePosition || "center center",
+                        objectPosition:
+                          cat.imagePosition || "center center",
+                        animation:
+                          i === active
+                            ? "kenBurns 6.5s ease-out forwards"
+                            : "none",
+                        transformOrigin:
+                          cat.imagePosition || "center center",
                       }}
                     />
                   </div>
+
                   {/* light, neutral scrim — keeps the photo's real colour, just enough for text contrast */}
                   <div className="absolute inset-0 bg-black/30" />
+
                   <div className="absolute inset-0 bg-gradient-to-t from-[#0c1c3d]/70 via-transparent to-[#0c1c3d]/25" />
                 </>
               )}
@@ -220,26 +303,54 @@ export default function Hero() {
             />
           )}
 
-          {/* prev / next arrow navigation */}
+          {/* prev arrow navigation */}
           <button
             type="button"
             onClick={goPrev}
-            aria-label={lang === "ar" ? "الشريحة السابقة" : "Previous slide"}
+            aria-label={
+              lang === "ar" ? "الشريحة السابقة" : "Previous slide"
+            }
             className="hidden sm:flex absolute top-1/2 -translate-y-1/2 z-[3] h-11 w-11 items-center justify-center rounded-full border border-white/25 bg-white/10 text-white backdrop-blur-sm transition-all duration-300 hover:bg-white/20 hover:border-white/40"
-            style={{ [lang === "ar" ? "right" : "left"]: "1.25rem" }}
+            style={{
+              [lang === "ar" ? "right" : "left"]: "1.25rem",
+            }}
           >
-            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+            <svg
+              viewBox="0 0 24 24"
+              width="18"
+              height="18"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
               <path d="M15 18l-6-6 6-6" />
             </svg>
           </button>
+
+          {/* next arrow navigation */}
           <button
             type="button"
             onClick={goNext}
-            aria-label={lang === "ar" ? "الشريحة التالية" : "Next slide"}
+            aria-label={
+              lang === "ar" ? "الشريحة التالية" : "Next slide"
+            }
             className="hidden sm:flex absolute top-1/2 -translate-y-1/2 z-[3] h-11 w-11 items-center justify-center rounded-full border border-white/25 bg-white/10 text-white backdrop-blur-sm transition-all duration-300 hover:bg-white/20 hover:border-white/40"
-            style={{ [lang === "ar" ? "left" : "right"]: "4.5rem" }}
+            style={{
+              [lang === "ar" ? "left" : "right"]: "4.5rem",
+            }}
           >
-            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+            <svg
+              viewBox="0 0 24 24"
+              width="18"
+              height="18"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
               <path d="M9 6l6 6-6 6" />
             </svg>
           </button>
@@ -251,9 +362,15 @@ export default function Hero() {
                 key={cat.label}
                 type="button"
                 onClick={() => goTo(i)}
-                aria-label={`${lang === "ar" ? "الانتقال إلى الشريحة" : "Go to slide"} ${i + 1}`}
+                aria-label={`${
+                  lang === "ar"
+                    ? "الانتقال إلى الشريحة"
+                    : "Go to slide"
+                } ${i + 1}`}
                 className={`h-2 rounded-full transition-all duration-300 ${
-                  i === active ? "w-6 bg-flame1" : "w-2 bg-white/35 hover:bg-white/60"
+                  i === active
+                    ? "w-6 bg-flame1"
+                    : "w-2 bg-white/35 hover:bg-white/60"
                 }`}
               />
             ))}
@@ -268,23 +385,22 @@ export default function Hero() {
               top: "50%",
               transform: "translateY(-50%) rotate(180deg)",
               writingMode: "vertical-rl",
-              borderRadius: lang === "ar" ? "0 8px 8px 0" : "8px 0 0 8px",
+              borderRadius:
+                lang === "ar" ? "0 8px 8px 0" : "8px 0 0 8px",
             }}
           >
             {lang === "ar" ? "استشارة مجانية" : "Free Consultation"}
           </a>
 
           {/* headline content */}
-<<<<<<< HEAD
           <div className="relative z-[2] h-full flex flex-col items-center justify-center text-center max-w-[1280px] w-full mx-auto px-6 sm:px-8 pt-[138px] pb-8 md:pt-[156px] md:pb-10">
-=======
-          <div className="relative z-[2] h-full flex flex-col items-center justify-center text-center max-w-[1280px] w-full mx-auto px-6 sm:px-8 pt-[118px] pb-8 md:pt-[132px] md:pb-10">
->>>>>>> b21716eceb12eca9d9ab3054b24d0c0910c58e1f
             <div className="max-w-[720px] flex flex-col items-center">
               <div
                 key={"eyebrow-" + active}
                 className="sec-eyebrow !text-flame2 !mb-3"
-                style={{ animation: "slideIn .5s var(--ease)" }}
+                style={{
+                  animation: "slideIn .5s var(--ease)",
+                }}
               >
                 {current.label}
               </div>
@@ -294,7 +410,10 @@ export default function Hero() {
                   <h1
                     key={"h-" + active}
                     className="font-display font-bold uppercase leading-[1.06] text-[28px] sm:text-[38px] md:text-[46px] max-w-[16ch]"
-                    style={{ animation: "slideIn .55s var(--ease) .05s backwards" }}
+                    style={{
+                      animation:
+                        "slideIn .55s var(--ease) .05s backwards",
+                    }}
                   >
                     {t("hero.h1line1")}
                     <br />
@@ -303,34 +422,63 @@ export default function Hero() {
                       {t("hero.h1brand")}
                     </span>
                   </h1>
+
                   <p
                     key={"p-" + active}
                     className="mt-4 text-[14px] sm:text-[15.5px] leading-[1.6] text-steellight max-w-[46ch]"
-                    style={{ animation: "slideIn .55s var(--ease) .1s backwards" }}
+                    style={{
+                      animation:
+                        "slideIn .55s var(--ease) .1s backwards",
+                    }}
                   >
                     {t("hero.subtitle")}
                   </p>
+
                   <div
                     key={"b-" + active}
                     className="flex justify-center gap-4 mt-6 flex-wrap"
-                    style={{ animation: "slideIn .55s var(--ease) .16s backwards" }}
+                    style={{
+                      animation:
+                        "slideIn .55s var(--ease) .16s backwards",
+                    }}
                   >
                     <a href="#projects" className="btn btn-flame">
                       {t("hero.viewProjects")} <IconArrow />
                     </a>
+
                     <a href="#contact" className="btn btn-ghost">
                       {t("hero.getConsultation")}
                     </a>
                   </div>
+
                   <div
                     key={"c-" + active}
                     className="flex justify-center mt-6 border-t border-white/[.08] flex-wrap"
-                    style={{ animation: "slideIn .55s var(--ease) .22s backwards" }}
+                    style={{
+                      animation:
+                        "slideIn .55s var(--ease) .22s backwards",
+                    }}
                   >
-                    <Counter target={1000} suffix="+" label={t("hero.statProjects")} />
-                    <Counter target={20} suffix="+" label={t("hero.statYears")} />
-                    <Counter target={3} suffix="" label={t("hero.statOffices")} />
-                    <Counter target={6} suffix="" label={t("hero.statBrands")} />
+                    <Counter
+                      target={1000}
+                      suffix="+"
+                      label={t("hero.statProjects")}
+                    />
+                    <Counter
+                      target={20}
+                      suffix="+"
+                      label={t("hero.statYears")}
+                    />
+                    <Counter
+                      target={3}
+                      suffix=""
+                      label={t("hero.statOffices")}
+                    />
+                    <Counter
+                      target={6}
+                      suffix=""
+                      label={t("hero.statBrands")}
+                    />
                   </div>
                 </>
               ) : (
@@ -339,23 +487,60 @@ export default function Hero() {
                     key={"h-" + active}
                     className="font-display font-bold uppercase leading-[1.06] text-[28px] sm:text-[38px] md:text-[46px]"
                     style={{
-                      animation: "slideIn .55s var(--ease) .05s backwards",
+                      animation:
+                        "slideIn .55s var(--ease) .05s backwards",
                       textShadow: "0 4px 24px rgba(0,0,0,.45)",
                     }}
                   >
-                    <span className="block text-white">{(SLIDE_COPY[lang][active] || SLIDE_COPY.en[active])?.line1}</span>
-                    <span className="block text-steellight">{(SLIDE_COPY[lang][active] || SLIDE_COPY.en[active])?.line2}</span>
+                    <span className="block text-white">
+                      {
+                        (
+                          SLIDE_COPY[lang][active] ||
+                          SLIDE_COPY.en[active]
+                        )?.line1
+                      }
+                    </span>
+
+                    <span className="block text-steellight">
+                      {
+                        (
+                          SLIDE_COPY[lang][active] ||
+                          SLIDE_COPY.en[active]
+                        )?.line2
+                      }
+                    </span>
                   </h2>
+
                   <p
                     key={"p-" + active}
                     className="mt-4 text-[14px] sm:text-[15.5px] leading-[1.6] text-steellight max-w-[42ch]"
-                    style={{ animation: "slideIn .55s var(--ease) .1s backwards", textShadow: "0 2px 12px rgba(0,0,0,.5)" }}
+                    style={{
+                      animation:
+                        "slideIn .55s var(--ease) .1s backwards",
+                      textShadow: "0 2px 12px rgba(0,0,0,.5)",
+                    }}
                   >
-                    {(SLIDE_COPY[lang][active] || SLIDE_COPY.en[active])?.tagline}
+                    {
+                      (
+                        SLIDE_COPY[lang][active] ||
+                        SLIDE_COPY.en[active]
+                      )?.tagline
+                    }
                   </p>
-                  <div key={"b-" + active} style={{ animation: "slideIn .55s var(--ease) .16s backwards" }}>
-                    <Link to={current.to} className="btn btn-flame mt-6 w-fit">
-                      {t("hero.exploreLabel")} {current.label} <IconArrow />
+
+                  <div
+                    key={"b-" + active}
+                    style={{
+                      animation:
+                        "slideIn .55s var(--ease) .16s backwards",
+                    }}
+                  >
+                    <Link
+                      to={current.to}
+                      className="btn btn-flame mt-6 w-fit"
+                    >
+                      {t("hero.exploreLabel")} {current.label}{" "}
+                      <IconArrow />
                     </Link>
                   </div>
                 </>
@@ -370,20 +555,26 @@ export default function Hero() {
             {CATEGORIES.map((cat, i) => {
               const Icon = cat.icon;
               const isActive = i === active;
+
               return (
                 <button
                   key={cat.label}
                   type="button"
                   onClick={() => goTo(i)}
                   className={`relative flex items-center justify-center gap-2 min-w-[110px] sm:min-w-0 sm:w-full px-2 sm:px-2.5 py-3 text-center shrink-0 sm:shrink transition-colors duration-300 ${
-                    isActive ? "text-white" : "text-steel hover:text-steellight"
+                    isActive
+                      ? "text-white"
+                      : "text-steel hover:text-steellight"
                   }`}
                 >
                   <Icon
                     className={`w-[18px] h-[18px] shrink-0 transition-all duration-300 ${
-                      isActive ? "text-flame2 scale-110" : "text-steel"
+                      isActive
+                        ? "text-flame2 scale-110"
+                        : "text-steel"
                     }`}
                   />
+
                   <span className="text-[11px] sm:text-[11.5px] font-semibold leading-tight text-center">
                     {cat.intro ? cat.tabLabel : cat.label}
                   </span>
@@ -396,7 +587,9 @@ export default function Hero() {
                         className="block h-full bg-gradient-to-r from-flame1 to-gold"
                         style={{
                           animation: `fillBar ${AUTOPLAY_MS}ms linear forwards`,
-                          animationPlayState: paused ? "paused" : "running",
+                          animationPlayState: paused
+                            ? "paused"
+                            : "running",
                         }}
                       />
                     )}
