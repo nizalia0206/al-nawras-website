@@ -16,9 +16,9 @@ export default function Brands() {
   const { t, lang } = useLanguage();
 
   return (
-    <section id="brands" className="bg-white py-[90px] md:py-[110px] border-t border-ink/[.06]">
+    <section id="brands" className="bg-white py-[34px] md:py-[46px] border-t border-ink/[.06]">
       <div className="max-w-[1280px] mx-auto px-8">
-        <div className="flex flex-wrap items-end justify-between gap-6 mb-14">
+        <div className="flex flex-wrap items-end justify-between gap-6 mb-7">
           <div className="max-w-[680px]">
             <div className="sec-eyebrow">{t("brands.eyebrow")}</div>
             <h2 className="font-display font-semibold uppercase text-[28px] md:text-[40px] leading-[1.08] text-ink">
@@ -37,7 +37,11 @@ export default function Brands() {
           {brands.map((b) => {
             const ar = lang === "ar" ? brandsAr[b.id] : null;
             return (
-              <Link key={b.id} to={`/products?supplier=${BRAND_TO_SUPPLIER[b.id] || ""}`} className="svc-card">
+              <Link
+                key={b.id}
+                to={`/products?supplier=${BRAND_TO_SUPPLIER[b.id] || ""}`}
+                className="group relative overflow-hidden bg-white border border-ink/[.08] rounded-md p-8 flex flex-col transition-all duration-300 hover:border-flame1/40 hover:-translate-y-1 hover:shadow-[0_20px_40px_-18px_rgba(238,108,47,.4)]"
+              >
                 <h3 className="font-display text-[18px] uppercase tracking-wide mb-1.5">{ar?.name || b.name}</h3>
                 <div className="text-[11.5px] font-semibold uppercase tracking-[.1em] text-flame1 mb-3">
                   {ar?.tag || b.tag}
@@ -46,6 +50,7 @@ export default function Brands() {
                 <span className="svc-learn mt-4 text-[12.5px] font-semibold uppercase tracking-[.06em] text-flame1">
                   {t("brands.shopPrefix")} {ar?.name || b.name} {t("brands.shopSuffix")} →
                 </span>
+                <span className="pointer-events-none absolute left-0 right-0 bottom-0 h-[3px] origin-left scale-x-0 bg-gradient-to-r from-flame1 to-gold transition-transform duration-300 group-hover:scale-x-100" />
               </Link>
             );
           })}

@@ -55,12 +55,12 @@ export default function AskAI() {
           <>
             <span
               aria-hidden="true"
-              className="pointer-events-none absolute inset-0 rounded-full bg-flame1/70"
+              className="pointer-events-none absolute inset-0 rounded-full bg-aiBlue1/70"
               style={{ animation: "askaiRing 2.2s ease-out infinite" }}
             />
             <span
               aria-hidden="true"
-              className="pointer-events-none absolute inset-0 rounded-full bg-gold/60"
+              className="pointer-events-none absolute inset-0 rounded-full bg-aiBlue2/60"
               style={{ animation: "askaiRing 2.2s ease-out infinite", animationDelay: "0.7s" }}
             />
           </>
@@ -68,7 +68,7 @@ export default function AskAI() {
         <button
           onClick={() => setOpen((v) => !v)}
           aria-label={open ? "Close Ask AI" : "Ask AI a question"}
-          className="relative flex items-center gap-2 rounded-full bg-gradient-to-br from-flame1 to-flame2 text-white pl-3.5 pr-4 py-3 font-body text-[13.5px] font-semibold tracking-wide"
+          className="relative flex items-center gap-2 rounded-full bg-gradient-to-br from-aiBlue1 to-aiBlue2 text-white pl-3.5 pr-4 py-3 font-body text-[13.5px] font-semibold tracking-wide"
           style={{ animation: "askaiGlowShift 2.6s ease-in-out infinite" }}
         >
           <SparkleIcon width="18" height="18" />
@@ -89,7 +89,7 @@ export default function AskAI() {
         >
           {/* Header */}
           <div className="flex items-center gap-2.5 bg-navy px-4 py-3.5 text-white">
-            <span className="flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-br from-flame1 to-flame2">
+            <span className="flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-br from-aiBlue1 to-aiBlue2">
               <SparkleIcon width="16" height="16" />
             </span>
             <div className="flex-1 min-w-0">
@@ -122,9 +122,9 @@ export default function AskAI() {
                     item.a
                   ) : (
                     <span className="inline-flex gap-1 py-0.5">
-                      <span className="h-1.5 w-1.5 rounded-full bg-flame1/70 animate-bounce [animation-delay:-0.3s]" />
-                      <span className="h-1.5 w-1.5 rounded-full bg-flame1/70 animate-bounce [animation-delay:-0.15s]" />
-                      <span className="h-1.5 w-1.5 rounded-full bg-flame1/70 animate-bounce" />
+                      <span className="h-1.5 w-1.5 rounded-full bg-aiBlue1/70 animate-bounce [animation-delay:-0.3s]" />
+                      <span className="h-1.5 w-1.5 rounded-full bg-aiBlue1/70 animate-bounce [animation-delay:-0.15s]" />
+                      <span className="h-1.5 w-1.5 rounded-full bg-aiBlue1/70 animate-bounce" />
                     </span>
                   )}
                 </div>
@@ -140,7 +140,7 @@ export default function AskAI() {
                   <button
                     key={f.i}
                     onClick={() => askQuestion(f, f.i)}
-                    className="rounded-full border border-flame1/30 bg-flame1/[.06] text-flame1 text-[11.5px] font-medium px-3 py-1.5 hover:bg-flame1/[.12] transition-colors text-left"
+                    className="rounded-full border border-aiBlue1/30 bg-aiBlue1/[.06] text-aiBlue1 text-[11.5px] font-medium px-3 py-1.5 hover:bg-aiBlue1/[.12] transition-colors text-left"
                   >
                     {f.q}
                   </button>
@@ -151,7 +151,7 @@ export default function AskAI() {
                 <p className="text-[11.5px] text-inksoft">That's everything I know — for anything else, WhatsApp us.</p>
                 <button
                   onClick={resetThread}
-                  className="shrink-0 text-[11.5px] font-semibold text-flame1 hover:underline"
+                  className="shrink-0 text-[11.5px] font-semibold text-aiBlue1 hover:underline"
                 >
                   Reset
                 </button>

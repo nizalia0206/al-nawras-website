@@ -57,8 +57,8 @@ function useNav(t) {
   ];
 }
 
-export default function Header() {
-  const { t } = useLanguage();
+export default function Header({ overlayOnHero = false }) {
+  const { t, lang } = useLanguage();
   const NAV = useNav(t);
   const [shrink, setShrink] = useState(false);
   const [openIdx, setOpenIdx] = useState(null);
@@ -66,9 +66,12 @@ export default function Header() {
   const [drawerGroup, setDrawerGroup] = useState(null);
   const headerRef = useRef(null);
 
+  const overlay = overlayOnHero && !shrink;
+
   useEffect(() => {
     const onScroll = () => setShrink(window.scrollY > 40);
     window.addEventListener("scroll", onScroll);
+    onScroll();
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
@@ -82,19 +85,31 @@ export default function Header() {
     <>
       <header
         ref={headerRef}
-        className="sticky top-0 z-[200] bg-white/95 backdrop-blur-md border-b border-ink/[.08] shadow-[0_2px_20px_-8px_rgba(0,0,0,.08)]"
+        className={`${overlayOnHero ? "fixed" : "sticky"} top-0 left-0 right-0 z-[200] transition-all duration-300 ${
+          overlay
+            ? "bg-transparent border-b border-transparent"
+            : "bg-white/95 backdrop-blur-md border-b border-ink/[.08] shadow-[0_2px_20px_-8px_rgba(0,0,0,.08)]"
+        }`}
       >
+        {overlay && (
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-x-0 top-0 h-full"
+            style={{ background: "linear-gradient(180deg, rgba(0,0,0,.4) 0%, transparent 100%)" }}
+          />
+        )}
         <div
-          className={`max-w-[1280px] mx-auto px-8 flex items-center justify-between transition-[height] duration-300 ${
-            shrink ? "h-[92px]" : "h-[104px]"
+          className={`relative max-w-[1280px] mx-auto px-8 flex items-center justify-between transition-[height] duration-300 ${
+            shrink ? "h-[108px]" : "h-[124px]"
           }`}
         >
           <Link to="/" className="flex items-center">
-            <Logo size={84} />
+            <Logo size={overlay ? 82 : 104} light={overlay} />
           </Link>
 
           <nav className="hidden [@media(min-width:1080px)]:flex items-center gap-0.5">
-            {NAV.map((item, idx) => (
+            {NAV.map((item, idx) => {
+              return (
               <div
                 key={item.label}
                 className="relative"
@@ -105,7 +120,9 @@ export default function Header() {
                     <button
                       type="button"
                       onClick={() => setOpenIdx(openIdx === idx ? null : idx)}
-                      className="flex items-center gap-1.5 px-3 py-3.5 text-[13px] font-semibold uppercase tracking-[.06em] text-ink whitespace-nowrap hover:text-flame1 transition-colors"
+                      className={`flex items-center gap-1.5 px-3 py-3.5 rounded-full text-[13px] font-semibold uppercase tracking-[.06em] whitespace-nowrap transition-all duration-300 ${
+                        overlay ? "text-white hover:text-flame2" : "text-ink hover:text-flame1"
+                      }`}
                     >
                       {item.label}
                       <IconChevron
@@ -158,7 +175,9 @@ export default function Header() {
                 ) : item.to ? (
                   <Link
                     to={item.to}
-                    className="relative flex items-center px-3 py-3.5 text-[13px] font-semibold uppercase tracking-[.06em] text-ink whitespace-nowrap hover:text-flame1 transition-colors group"
+                    className={`relative flex items-center px-3 py-3.5 text-[13px] font-semibold uppercase tracking-[.06em] whitespace-nowrap transition-colors group ${
+                      overlay ? "text-white hover:text-flame2" : "text-ink hover:text-flame1"
+                    }`}
                   >
                     {item.label}
                     <span className="absolute left-3 right-3 bottom-2 h-[2px] bg-gradient-to-r from-flame1 to-gold origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-300" />
@@ -166,29 +185,45 @@ export default function Header() {
                 ) : (
                   <a
                     href={item.href}
-                    className="relative flex items-center px-3 py-3.5 text-[13px] font-semibold uppercase tracking-[.06em] text-ink whitespace-nowrap hover:text-flame1 transition-colors group"
+                    className={`relative flex items-center px-3 py-3.5 text-[13px] font-semibold uppercase tracking-[.06em] whitespace-nowrap transition-colors group ${
+                      overlay ? "text-white hover:text-flame2" : "text-ink hover:text-flame1"
+                    }`}
                   >
                     {item.label}
                     <span className="absolute left-3 right-3 bottom-2 h-[2px] bg-gradient-to-r from-flame1 to-gold origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-300" />
                   </a>
                 )}
               </div>
-            ))}
+            );})}
           </nav>
 
           <div className="flex items-center gap-3.5">
-            <LanguageToggle className="hidden [@media(min-width:1080px)]:inline-flex" />
-            <a href="#contact" className="btn btn-flame hidden [@media(min-width:1080px)]:inline-flex !py-2.5">
-              {t("header.getInTouch")}
-            </a>
+            {overlayOnHero && (
+              <LanguageToggle overlay={overlay} className="hidden [@media(min-width:1080px)]:inline-flex" />
+            )}
+            <Link
+              to="/contact"
+              className={`hidden [@media(min-width:1080px)]:inline-flex items-center gap-1.5 rounded-full border px-5 py-2.5 text-[13px] font-semibold transition-all duration-300 ${
+                overlay
+                  ? "border-white/40 text-white hover:border-white hover:bg-white/10"
+                  : "border-ink/[.16] text-ink hover:border-flame1 hover:text-flame1"
+              }`}
+            >
+              <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4" />
+                <path d="M10 17l5-5-5-5" />
+                <path d="M15 12H3" />
+              </svg>
+              {lang === "ar" ? "تسجيل الدخول" : "Sign In"}
+            </Link>
             <button
               aria-label="Open menu"
               onClick={() => setDrawerOpen(true)}
               className="[@media(min-width:1080px)]:hidden w-10 h-10 flex items-center justify-center flex-col gap-[5px]"
             >
-              <span className="w-[22px] h-0.5 bg-ink" />
-              <span className="w-[22px] h-0.5 bg-ink" />
-              <span className="w-[22px] h-0.5 bg-ink" />
+              <span className={`w-[22px] h-0.5 ${overlay ? "bg-white" : "bg-ink"}`} />
+              <span className={`w-[22px] h-0.5 ${overlay ? "bg-white" : "bg-ink"}`} />
+              <span className={`w-[22px] h-0.5 ${overlay ? "bg-white" : "bg-ink"}`} />
             </button>
           </div>
         </div>
@@ -201,7 +236,7 @@ export default function Header() {
         }`}
       >
         <div className="flex justify-between items-center px-6 py-5 border-b border-ink/[.08]">
-          <Logo size={34} />
+          <Logo size={44} />
           <div className="flex items-center gap-3">
             <LanguageToggle />
             <button

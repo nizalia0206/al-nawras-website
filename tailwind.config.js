@@ -20,6 +20,8 @@ export default {
         inksoft: "#4b5670",
         navy: "#122a52",
         navydeep: "#0c1c3d",
+        aiBlue1: "#2f6fed",
+        aiBlue2: "#5b93ff",
       },
       fontFamily: {
         display: ["Oswald", "sans-serif"],

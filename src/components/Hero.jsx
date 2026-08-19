@@ -121,6 +121,8 @@ export default function Hero() {
     setPrev(active);
     setActive(i);
   };
+  const goPrev = () => goTo((active - 1 + CATEGORIES.length) % CATEGORIES.length);
+  const goNext = () => goTo((active + 1) % CATEGORIES.length);
 
   return (
     <section id="home" className="relative bg-bgdark text-white overflow-hidden">
@@ -151,7 +153,7 @@ export default function Hero() {
         onMouseEnter={() => setPaused(true)}
         onMouseLeave={() => setPaused(false)}
       >
-        <div className="relative overflow-hidden min-h-[400px] sm:min-h-[440px] md:min-h-[480px]">
+        <div className="relative overflow-hidden min-h-[480px] sm:min-h-[520px] md:min-h-[580px]">
           {/* stacked slide backdrops (crossfade) */}
           {CATEGORIES.map((cat, i) => (
             <div
@@ -218,8 +220,62 @@ export default function Hero() {
             />
           )}
 
+          {/* prev / next arrow navigation */}
+          <button
+            type="button"
+            onClick={goPrev}
+            aria-label={lang === "ar" ? "الشريحة السابقة" : "Previous slide"}
+            className="hidden sm:flex absolute top-1/2 -translate-y-1/2 z-[3] h-11 w-11 items-center justify-center rounded-full border border-white/25 bg-white/10 text-white backdrop-blur-sm transition-all duration-300 hover:bg-white/20 hover:border-white/40"
+            style={{ [lang === "ar" ? "right" : "left"]: "1.25rem" }}
+          >
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M15 18l-6-6 6-6" />
+            </svg>
+          </button>
+          <button
+            type="button"
+            onClick={goNext}
+            aria-label={lang === "ar" ? "الشريحة التالية" : "Next slide"}
+            className="hidden sm:flex absolute top-1/2 -translate-y-1/2 z-[3] h-11 w-11 items-center justify-center rounded-full border border-white/25 bg-white/10 text-white backdrop-blur-sm transition-all duration-300 hover:bg-white/20 hover:border-white/40"
+            style={{ [lang === "ar" ? "left" : "right"]: "4.5rem" }}
+          >
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M9 6l6 6-6 6" />
+            </svg>
+          </button>
+
+          {/* slide dot indicators */}
+          <div className="absolute left-1/2 -translate-x-1/2 bottom-5 z-[3] flex items-center gap-2">
+            {CATEGORIES.map((cat, i) => (
+              <button
+                key={cat.label}
+                type="button"
+                onClick={() => goTo(i)}
+                aria-label={`${lang === "ar" ? "الانتقال إلى الشريحة" : "Go to slide"} ${i + 1}`}
+                className={`h-2 rounded-full transition-all duration-300 ${
+                  i === active ? "w-6 bg-flame1" : "w-2 bg-white/35 hover:bg-white/60"
+                }`}
+              />
+            ))}
+          </div>
+
+          {/* vertical "Free Consultation" tab */}
+          <a
+            href="#contact"
+            className="hidden md:flex absolute z-[3] items-center justify-center gap-2 bg-gradient-to-b from-flame1 to-flame2 text-white font-display text-[12.5px] font-semibold tracking-[.18em] uppercase px-3 py-5 shadow-flame"
+            style={{
+              [lang === "ar" ? "left" : "right"]: 0,
+              top: "50%",
+              transform: "translateY(-50%) rotate(180deg)",
+              writingMode: "vertical-rl",
+              borderRadius: lang === "ar" ? "0 8px 8px 0" : "8px 0 0 8px",
+            }}
+          >
+            {lang === "ar" ? "استشارة مجانية" : "Free Consultation"}
+          </a>
+
           {/* headline content */}
-          <div className="relative z-[2] h-full flex flex-col items-center justify-center text-center max-w-[1280px] w-full mx-auto px-6 sm:px-8 py-10">
+          <div className="relative z-[2] h-full flex flex-col items-center justify-center text-center max-w-[1280px] w-full mx-auto px-6 sm:px-8 pt-[138px] pb-8 md:pt-[156px] md:pb-10">
             <div className="max-w-[720px] flex flex-col items-center">
               <div
                 key={"eyebrow-" + active}
@@ -306,7 +362,7 @@ export default function Hero() {
 
         {/* tab bar */}
         <div className="relative z-[2] border-t border-white/[.08] bg-[#122a52]/70 backdrop-blur-sm">
-          <div className="max-w-[1280px] mx-auto px-4 sm:px-8 flex overflow-x-auto sm:justify-between">
+          <div className="max-w-[1280px] mx-auto px-4 sm:px-8 flex overflow-x-auto sm:grid sm:grid-cols-7 sm:overflow-visible">
             {CATEGORIES.map((cat, i) => {
               const Icon = cat.icon;
               const isActive = i === active;
@@ -315,7 +371,7 @@ export default function Hero() {
                   key={cat.label}
                   type="button"
                   onClick={() => goTo(i)}
-                  className={`relative flex items-center gap-2 px-3 sm:px-4 py-3 shrink-0 text-left transition-colors duration-300 ${
+                  className={`relative flex items-center justify-center gap-2 min-w-[110px] sm:min-w-0 sm:w-full px-2 sm:px-2.5 py-3 text-center shrink-0 sm:shrink transition-colors duration-300 ${
                     isActive ? "text-white" : "text-steel hover:text-steellight"
                   }`}
                 >
@@ -324,7 +380,7 @@ export default function Hero() {
                       isActive ? "text-flame2 scale-110" : "text-steel"
                     }`}
                   />
-                  <span className="text-[11.5px] sm:text-[12.5px] font-semibold leading-tight whitespace-nowrap">
+                  <span className="text-[11px] sm:text-[11.5px] font-semibold leading-tight text-center">
                     {cat.intro ? cat.tabLabel : cat.label}
                   </span>
 

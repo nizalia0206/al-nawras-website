@@ -1,5 +1,6 @@
 import { IconLinkedIn, IconInstagram, IconX } from "./Icons";
 import { useLanguage } from "../context/LanguageContext";
+import LanguageToggle from "./LanguageToggle";
 
 export default function TopBar() {
   const { t } = useLanguage();
@@ -16,8 +17,8 @@ export default function TopBar() {
           <span className="ltr-content">{t("topbar.email")}</span>
           <span className="hidden md:inline">{t("topbar.cities")}</span>
         </div>
-        <div className="flex items-center gap-5">
-          <div className="flex items-center gap-3 pl-4 border-l border-ink/[.1]">
+        <div className="flex items-center gap-4">
+          <div className="flex items-center gap-3">
             {socials.map(({ label, Icon, href }) => (
               <a
                 key={label}
@@ -31,6 +32,7 @@ export default function TopBar() {
               </a>
             ))}
           </div>
+          <LanguageToggle className="!bg-white !p-[2px]" />
         </div>
       </div>
     </div>

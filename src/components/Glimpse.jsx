@@ -122,9 +122,9 @@ export default function Glimpse() {
   }, []);
 
   return (
-    <section className="bg-paper py-[90px] md:py-[110px]">
+    <section className="bg-paper py-[34px] md:py-[46px]">
       <div className="max-w-[1280px] mx-auto px-8">
-        <div ref={headRef} className="reveal max-w-[640px] mb-14">
+        <div ref={headRef} className="reveal max-w-[640px] mb-7">
           <div className="sec-eyebrow">Explore Al Nawras</div>
           <h2 className="font-display text-[30px] md:text-[42px] font-semibold uppercase leading-[1.05] text-ink">
             Everything Al Nawras Delivers
