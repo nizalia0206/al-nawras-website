@@ -100,11 +100,19 @@ export default function Header({ overlayOnHero = false }) {
         )}
         <div
           className={`relative max-w-[1280px] mx-auto px-8 flex items-center justify-between transition-[height] duration-300 ${
+<<<<<<< HEAD
             shrink ? "h-[108px]" : "h-[124px]"
           }`}
         >
           <Link to="/" className="flex items-center">
             <Logo size={overlay ? 82 : 104} light={overlay} />
+=======
+            shrink ? "h-[92px]" : "h-[104px]"
+          }`}
+        >
+          <Link to="/" className="flex items-center">
+            <Logo size={overlay ? 64 : 84} light={overlay} />
+>>>>>>> b21716eceb12eca9d9ab3054b24d0c0910c58e1f
           </Link>
 
           <nav className="hidden [@media(min-width:1080px)]:flex items-center gap-0.5">
@@ -198,9 +206,12 @@ export default function Header({ overlayOnHero = false }) {
           </nav>
 
           <div className="flex items-center gap-3.5">
+<<<<<<< HEAD
             {overlayOnHero && (
               <LanguageToggle overlay={overlay} className="hidden [@media(min-width:1080px)]:inline-flex" />
             )}
+=======
+>>>>>>> b21716eceb12eca9d9ab3054b24d0c0910c58e1f
             <Link
               to="/contact"
               className={`hidden [@media(min-width:1080px)]:inline-flex items-center gap-1.5 rounded-full border px-5 py-2.5 text-[13px] font-semibold transition-all duration-300 ${

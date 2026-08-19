@@ -275,7 +275,11 @@ export default function Hero() {
           </a>
 
           {/* headline content */}
+<<<<<<< HEAD
           <div className="relative z-[2] h-full flex flex-col items-center justify-center text-center max-w-[1280px] w-full mx-auto px-6 sm:px-8 pt-[138px] pb-8 md:pt-[156px] md:pb-10">
+=======
+          <div className="relative z-[2] h-full flex flex-col items-center justify-center text-center max-w-[1280px] w-full mx-auto px-6 sm:px-8 pt-[118px] pb-8 md:pt-[132px] md:pb-10">
+>>>>>>> b21716eceb12eca9d9ab3054b24d0c0910c58e1f
             <div className="max-w-[720px] flex flex-col items-center">
               <div
                 key={"eyebrow-" + active}
