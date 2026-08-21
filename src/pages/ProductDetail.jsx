@@ -1,18 +1,37 @@
 import { useState, useEffect } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Navigate, Link } from "react-router-dom";
 import { Icon } from "../components/CatalogIcons.jsx";
 import Reveal from "../components/Reveal.jsx";
 import ProductCard from "../components/ProductCard.jsx";
-import { PRODUCTS, CATEGORIES, SUPPLIERS, CatalogAPI } from "../data/products.js";
+import { CATEGORIES, SUPPLIERS } from "../data/products.js";
 import { useLanguage } from "../context/LanguageContext";
 import { productDetailPage } from "../i18n/pagesAr";
+import useProducts from "../hooks/useProducts";
+
+function suggestionsFor(product, PRODUCTS, count = 4) {
+  const sameCat = PRODUCTS.filter((p) => p.id !== product.id && p.category === product.category);
+  const sameSup = PRODUCTS.filter(
+    (p) => p.id !== product.id && p.supplier === product.supplier && p.category !== product.category
+  );
+  const pool = [...sameCat, ...sameSup];
+  const seen = new Set();
+  const out = [];
+  for (const p of pool) {
+    if (seen.has(p.id)) continue;
+    seen.add(p.id);
+    out.push(p);
+    if (out.length >= count) break;
+  }
+  return out;
+}
 
 export default function ProductDetail() {
   const { lang } = useLanguage();
   const ar = productDetailPage;
   const { id } = useParams();
+  const { products: PRODUCTS, loading } = useProducts();
 
-  const product = CatalogAPI.byId(id) || PRODUCTS[0];
+  const product = PRODUCTS.find((p) => p.id === id);
   const [imgIdx, setImgIdx] = useState(0);
   const [qty, setQty] = useState(1);
   const [tab, setTab] = useState("overview");
@@ -25,6 +44,7 @@ export default function ProductDetail() {
   }, [id]);
 
   if (!product) {
+    if (loading) return null;
     return (
       <div className="container" style={{ padding: "100px 20px", textAlign: "center" }}>
         <h2>{lang === "ar" ? ar.productNotFound : "Product not found"}</h2>
@@ -34,7 +54,7 @@ export default function ProductDetail() {
   }
 
   const categoryName = CATEGORIES.find((c) => c.id === product.category)?.name;
-  const suggestions = CatalogAPI.suggestions(product, 4);
+  const suggestions = suggestionsFor(product, PRODUCTS, 4);
 
   return (
     <>

@@ -1,15 +1,16 @@
 import PageHeader from "../../components/PageHeader";
 import AboutSubNav from "../../components/AboutSubNav";
 import { IconPerson, IconHardHat } from "../../components/Icons";
-import { team } from "../../data/content";
 import useReveal from "../../hooks/useReveal";
 import { useLanguage } from "../../context/LanguageContext";
 import { aboutPages, teamRolesAr } from "../../i18n/pagesAr";
+import useTeam from "../../hooks/useTeam";
 
 export default function Team() {
   const { lang } = useLanguage();
   const ar = aboutPages.team;
   const ref = useReveal();
+  const { team } = useTeam();
 
   return (
     <>

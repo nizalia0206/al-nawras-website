@@ -2,8 +2,8 @@ import { useEffect } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import { Icon } from "../components/CatalogIcons.jsx";
 import Reveal from "../components/Reveal.jsx";
-import { getProjectBySlug, getRelatedProjects } from "../data/projects.js";
 import { useLanguage } from "../context/LanguageContext";
+import useProjects from "../hooks/useProjects";
 import { projectDetailPage, projectCategoriesAr, projectsPage } from "../i18n/pagesAr";
 
 // Break a long scope sentence into distinct system/scope bullet points for a
@@ -25,13 +25,15 @@ export default function ProjectDetail() {
   const ar = projectDetailPage;
   const { slug } = useParams();
   const navigate = useNavigate();
-  const project = getProjectBySlug(slug);
+  const { projects: PROJECTS, loading } = useProjects();
+  const project = PROJECTS.find((p) => p.slug === slug);
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [slug]);
 
   if (!project) {
+    if (loading) return null;
     return (
       <div className="container" style={{ padding: "100px 20px", textAlign: "center" }}>
         <h2>{lang === "ar" ? ar.projectNotFound : "Project not found"}</h2>
@@ -40,7 +42,7 @@ export default function ProjectDetail() {
     );
   }
 
-  const related = getRelatedProjects(project, 3);
+  const related = PROJECTS.filter((p) => p.category === project.category && p.slug !== project.slug).slice(0, 3);
   const bullets = scopeToBullets(project.scope);
   const catLabel = lang === "ar" ? projectCategoriesAr[project.category] || project.category : project.category;
 

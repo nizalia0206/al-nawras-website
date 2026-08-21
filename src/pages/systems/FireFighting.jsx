@@ -5,6 +5,7 @@ import useReveal from "../../hooks/useReveal";
 import { IconPump, IconHoseReel, IconSmoke } from "../../components/Icons";
 import { fireFightingGroups } from "../../data/systemImages";
 import { useLanguage } from "../../context/LanguageContext";
+import useSystemImages from "../../hooks/useSystemImages";
 import { systemsCommon, systemsPages, systemImageCaptionsAr } from "../../i18n/pagesAr";
 
 const PRODUCTS_EN = [
@@ -20,13 +21,14 @@ export default function FireFighting() {
   const introRef = useReveal();
 
   const PRODUCTS = lang === "ar" ? ar.products.map((p, i) => ({ ...p, icon: ICONS[i] })) : PRODUCTS_EN;
+  const { groups: liveGroups } = useSystemImages("fire-fighting", fireFightingGroups);
   const groups =
     lang === "ar"
-      ? fireFightingGroups.map((g) => ({
+      ? liveGroups.map((g) => ({
           title: ar.groups[g.title] || g.title,
           items: g.items.map((it) => ({ ...it, name: systemImageCaptionsAr[it.name] || it.name })),
         }))
-      : fireFightingGroups;
+      : liveGroups;
 
   return (
     <>

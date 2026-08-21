@@ -5,6 +5,7 @@ import useReveal from "../../hooks/useReveal";
 import { IconCable, IconSwitch, IconWifi } from "../../components/Icons";
 import { elvImages } from "../../data/systemImages";
 import { useLanguage } from "../../context/LanguageContext";
+import useSystemImages from "../../hooks/useSystemImages";
 import { systemsCommon, systemsPages, systemImageCaptionsAr } from "../../i18n/pagesAr";
 
 const PRODUCTS_EN = [
@@ -20,9 +21,11 @@ export default function Elv() {
   const introRef = useReveal();
 
   const PRODUCTS = lang === "ar" ? ar.products.map((p, i) => ({ ...p, icon: ICONS[i] })) : PRODUCTS_EN;
+  const { groups: liveGroups } = useSystemImages("elv", [{ title: "", items: elvImages }]);
+  const liveImages = liveGroups[0]?.items || [];
   const images = lang === "ar"
-    ? elvImages.map((it) => ({ ...it, name: systemImageCaptionsAr[it.name] || it.name }))
-    : elvImages;
+    ? liveImages.map((it) => ({ ...it, name: systemImageCaptionsAr[it.name] || it.name }))
+    : liveImages;
 
   return (
     <>

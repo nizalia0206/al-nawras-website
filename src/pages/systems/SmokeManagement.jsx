@@ -5,6 +5,7 @@ import useReveal from "../../hooks/useReveal";
 import { IconSmoke, IconGateway, IconPanel } from "../../components/Icons";
 import { smokeManagementImages } from "../../data/systemImages";
 import { useLanguage } from "../../context/LanguageContext";
+import useSystemImages from "../../hooks/useSystemImages";
 import { systemsCommon, systemsPages, systemImageCaptionsAr } from "../../i18n/pagesAr";
 
 const PRODUCTS_EN = [
@@ -20,9 +21,11 @@ export default function SmokeManagement() {
   const introRef = useReveal();
 
   const PRODUCTS = lang === "ar" ? ar.products.map((p, i) => ({ ...p, icon: ICONS[i] })) : PRODUCTS_EN;
+  const { groups: liveGroups } = useSystemImages("smoke-management", [{ title: "", items: smokeManagementImages }]);
+  const liveImages = liveGroups[0]?.items || [];
   const images = lang === "ar"
-    ? smokeManagementImages.map((it) => ({ ...it, name: systemImageCaptionsAr[it.name] || it.name }))
-    : smokeManagementImages;
+    ? liveImages.map((it) => ({ ...it, name: systemImageCaptionsAr[it.name] || it.name }))
+    : liveImages;
 
   return (
     <>

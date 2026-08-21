@@ -19,6 +19,9 @@ import ProjectDetail from "./pages/ProjectDetail";
 import Careers from "./pages/Careers";
 import Contact from "./pages/Contact";
 import CatalogStyleScope from "./components/CatalogStyleScope";
+import SignIn from "./pages/account/SignIn";
+import Register from "./pages/account/Register";
+import Account from "./pages/account/Account";
 
 export default function App() {
   return (
@@ -42,6 +45,9 @@ export default function App() {
         <Route path="/projects/:slug" element={<CatalogStyleScope><ProjectDetail /></CatalogStyleScope>} />
         <Route path="/careers" element={<CatalogStyleScope><Careers /></CatalogStyleScope>} />
         <Route path="/contact" element={<CatalogStyleScope><Contact /></CatalogStyleScope>} />
+        <Route path="/account/sign-in" element={<SignIn />} />
+        <Route path="/account/register" element={<Register />} />
+        <Route path="/account" element={<Account />} />
       </Route>
     </Routes>
   );

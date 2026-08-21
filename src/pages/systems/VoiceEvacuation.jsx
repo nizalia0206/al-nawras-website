@@ -5,6 +5,7 @@ import useReveal from "../../hooks/useReveal";
 import { IconSpeaker, IconPanel, IconGateway } from "../../components/Icons";
 import { voiceEvacImages } from "../../data/systemImages";
 import { useLanguage } from "../../context/LanguageContext";
+import useSystemImages from "../../hooks/useSystemImages";
 import { systemsCommon, systemsPages, systemImageCaptionsAr } from "../../i18n/pagesAr";
 
 const PRODUCTS_EN = [
@@ -20,9 +21,11 @@ export default function VoiceEvacuation() {
   const introRef = useReveal();
 
   const PRODUCTS = lang === "ar" ? ar.products.map((p, i) => ({ ...p, icon: ICONS[i] })) : PRODUCTS_EN;
+  const { groups: liveGroups } = useSystemImages("voice-evacuation", [{ title: "", items: voiceEvacImages }]);
+  const liveImages = liveGroups[0]?.items || [];
   const images = lang === "ar"
-    ? voiceEvacImages.map((it) => ({ ...it, name: systemImageCaptionsAr[it.name] || it.name }))
-    : voiceEvacImages;
+    ? liveImages.map((it) => ({ ...it, name: systemImageCaptionsAr[it.name] || it.name }))
+    : liveImages;
 
   return (
     <>

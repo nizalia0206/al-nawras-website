@@ -5,6 +5,7 @@ import useReveal from "../../hooks/useReveal";
 import { IconBattery, IconExitSign, IconGateway } from "../../components/Icons";
 import { emergencyLightImages } from "../../data/systemImages";
 import { useLanguage } from "../../context/LanguageContext";
+import useSystemImages from "../../hooks/useSystemImages";
 import { systemsCommon, systemsPages, systemImageCaptionsAr } from "../../i18n/pagesAr";
 
 const PRODUCTS_EN = [
@@ -20,9 +21,11 @@ export default function EmergencyLighting() {
   const introRef = useReveal();
 
   const PRODUCTS = lang === "ar" ? ar.products.map((p, i) => ({ ...p, icon: ICONS[i] })) : PRODUCTS_EN;
+  const { groups: liveGroups } = useSystemImages("emergency-lighting", [{ title: "", items: emergencyLightImages }]);
+  const liveImages = liveGroups[0]?.items || [];
   const images = lang === "ar"
-    ? emergencyLightImages.map((it) => ({ ...it, name: systemImageCaptionsAr[it.name] || it.name }))
-    : emergencyLightImages;
+    ? liveImages.map((it) => ({ ...it, name: systemImageCaptionsAr[it.name] || it.name }))
+    : liveImages;
 
   return (
     <>

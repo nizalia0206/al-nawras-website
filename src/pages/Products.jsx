@@ -4,8 +4,9 @@ import { Icon } from "../components/CatalogIcons.jsx";
 import ProductCard from "../components/ProductCard.jsx";
 import Dropdown from "../components/Dropdown.jsx";
 import PageHeader from "../components/PageHeader";
-import { PRODUCTS, CATEGORIES, SUPPLIERS, CatalogAPI } from "../data/products.js";
+import { CATEGORIES, SUPPLIERS } from "../data/products.js";
 import { useLanguage } from "../context/LanguageContext";
+import useProducts from "../hooks/useProducts";
 import { productsPage } from "../i18n/pagesAr";
 
 const BRAND_WORDMARK = {
@@ -20,6 +21,7 @@ const BRAND_WORDMARK = {
 export default function Products() {
   const { lang } = useLanguage();
   const ar = productsPage;
+  const { products: PRODUCTS } = useProducts();
   const [params, setParams] = useSearchParams();
   const [state, setState] = useState({
     category: params.get("cat") || "all",
@@ -38,14 +40,23 @@ export default function Products() {
   }, [state]);
 
   const list = useMemo(() => {
-    let l = state.q ? CatalogAPI.search(state.q) : PRODUCTS;
+    const query = state.q.toLowerCase().trim();
+    let l = !query
+      ? PRODUCTS
+      : PRODUCTS.filter(
+          (p) =>
+            p.name.toLowerCase().includes(query) ||
+            (p.short || "").toLowerCase().includes(query) ||
+            (p.tags || []).some((t) => t.toLowerCase().includes(query)) ||
+            (SUPPLIERS[p.supplier]?.name || "").toLowerCase().includes(query)
+        );
     if (state.category !== "all") l = l.filter((p) => p.category === state.category);
     if (state.supplier !== "all") l = l.filter((p) => p.supplier === state.supplier);
     if (state.sort === "price-asc") l = [...l].sort((a, b) => a.price - b.price);
     else if (state.sort === "price-desc") l = [...l].sort((a, b) => b.price - a.price);
     else if (state.sort === "name-asc") l = [...l].sort((a, b) => a.name.localeCompare(b.name));
     return l;
-  }, [state]);
+  }, [state, PRODUCTS]);
 
   return (
     <>

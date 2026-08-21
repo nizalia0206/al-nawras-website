@@ -4,6 +4,7 @@ import Logo from "./Logo";
 import { IconChevron } from "./Icons";
 import { useLanguage } from "../context/LanguageContext";
 import LanguageToggle from "./LanguageToggle";
+import { useCustomerAuth } from "../context/CustomerAuthContext";
 
 function useNav(t) {
   return [
@@ -59,6 +60,7 @@ function useNav(t) {
 
 export default function Header({ overlayOnHero = false }) {
   const { t, lang } = useLanguage();
+  const { session } = useCustomerAuth();
   const NAV = useNav(t);
   const [shrink, setShrink] = useState(false);
   const [openIdx, setOpenIdx] = useState(null);
@@ -107,7 +109,7 @@ export default function Header({ overlayOnHero = false }) {
             <Logo size={overlay ? 104 : 128} light={overlay} />
           </Link>
 
-          <nav className="hidden [@media(min-width:1080px)]:flex items-center gap-0.5">
+          <nav className="hidden lg:flex items-center gap-0.5">
             {NAV.map((item, idx) => {
               return (
               <div
@@ -199,8 +201,8 @@ export default function Header({ overlayOnHero = false }) {
 
           <div className="flex items-center gap-3.5">
             <Link
-              to="/contact"
-              className={`hidden [@media(min-width:1080px)]:inline-flex items-center gap-1.5 rounded-full border px-5 py-2.5 text-[13px] font-semibold transition-all duration-300 ${
+              to={session ? "/account" : "/account/sign-in"}
+              className={`hidden lg:inline-flex items-center gap-1.5 rounded-full border px-5 py-2.5 text-[13px] font-semibold transition-all duration-300 ${
                 overlay
                   ? "border-white/40 text-white hover:border-white hover:bg-white/10"
                   : "border-ink/[.16] text-ink hover:border-flame1 hover:text-flame1"
@@ -211,12 +213,14 @@ export default function Header({ overlayOnHero = false }) {
                 <path d="M10 17l5-5-5-5" />
                 <path d="M15 12H3" />
               </svg>
-              {lang === "ar" ? "تسجيل الدخول" : "Sign In"}
+              {session
+                ? lang === "ar" ? "حسابي" : "My Account"
+                : lang === "ar" ? "تسجيل الدخول" : "Sign In"}
             </Link>
             <button
               aria-label="Open menu"
               onClick={() => setDrawerOpen(true)}
-              className="[@media(min-width:1080px)]:hidden w-10 h-10 flex items-center justify-center flex-col gap-[5px]"
+              className="lg:hidden w-10 h-10 flex items-center justify-center flex-col gap-[5px]"
             >
               <span className={`w-[22px] h-0.5 ${overlay ? "bg-white" : "bg-ink"}`} />
               <span className={`w-[22px] h-0.5 ${overlay ? "bg-white" : "bg-ink"}`} />
@@ -228,7 +232,7 @@ export default function Header({ overlayOnHero = false }) {
 
       {/* Mobile Drawer */}
       <div
-        className={`fixed inset-0 z-[300] bg-white overflow-y-auto transition-transform duration-400 [@media(min-width:1080px)]:hidden ${
+        className={`fixed inset-0 z-[300] bg-white overflow-y-auto transition-transform duration-400 lg:hidden ${
           drawerOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >

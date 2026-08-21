@@ -4,6 +4,7 @@ import EmberCanvas from "./EmberCanvas";
 import Counter from "./Counter";
 import TopBar from "./TopBar";
 import { useLanguage } from "../context/LanguageContext";
+import useHeroSlides from "../hooks/useHeroSlides";
 import {
   IconArrow,
   IconFlame,
@@ -36,6 +37,7 @@ function useCategories(t) {
     },
     {
       icon: IconPump,
+      key: "fire-fighting",
       label: t("nav.systems_fire"),
       to: "/systems/fire-fighting",
       image: fireFightingEnv,
@@ -43,6 +45,7 @@ function useCategories(t) {
     },
     {
       icon: IconDetector,
+      key: "fire-alarm",
       label: t("nav.systems_alarm"),
       to: "/systems/fire-alarm",
       image: fireAlarmEnv,
@@ -50,6 +53,7 @@ function useCategories(t) {
     },
     {
       icon: IconSpeaker,
+      key: "voice-evacuation",
       label: t("nav.systems_voice"),
       to: "/systems/voice-evacuation",
       image: voiceEvacEnv,
@@ -57,6 +61,7 @@ function useCategories(t) {
     },
     {
       icon: IconBattery,
+      key: "emergency-lighting",
       label: t("nav.systems_light"),
       to: "/systems/emergency-lighting",
       image: emergencyLightEnv,
@@ -64,6 +69,7 @@ function useCategories(t) {
     },
     {
       icon: IconELV,
+      key: "elv",
       label: t("nav.systems_elv"),
       to: "/systems/elv",
       image: elvCctv,
@@ -71,6 +77,7 @@ function useCategories(t) {
     },
     {
       icon: IconSmoke,
+      key: "smoke-management",
       label: t("nav.systems_smoke"),
       to: "/systems/smoke-management",
       image: smokeFan,
@@ -159,7 +166,11 @@ const SLIDE_COPY = {
 
 export default function Hero() {
   const { t, lang } = useLanguage();
-  const CATEGORIES = useCategories(t);
+  const CATEGORIES_BASE = useCategories(t);
+  const heroOverrides = useHeroSlides();
+  const CATEGORIES = CATEGORIES_BASE.map((cat) =>
+    cat.key && heroOverrides[cat.key] ? { ...cat, image: heroOverrides[cat.key] } : cat
+  );
 
   const [active, setActive] = useState(0);
   const [prev, setPrev] = useState(null);

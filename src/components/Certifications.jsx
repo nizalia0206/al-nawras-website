@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
-import { certifications } from "../data/content";
 import { certificationsAr } from "../i18n/arabicContent";
 import { useLanguage } from "../context/LanguageContext";
+import useCertifications from "../hooks/useCertifications";
 
 export default function Certifications() {
   const { t, lang } = useLanguage();
+  const { certifications } = useCertifications();
   const withImages = certifications.filter((c) => c.image);
   const [active, setActive] = useState(null);
 

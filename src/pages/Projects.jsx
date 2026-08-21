@@ -1,15 +1,17 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import { Icon } from "../components/CatalogIcons.jsx";
 import Reveal from "../components/Reveal.jsx";
 import PageHeader from "../components/PageHeader";
-import { PROJECTS, PROJECT_CATS } from "../data/projects.js";
 import { useLanguage } from "../context/LanguageContext";
+import useProjects from "../hooks/useProjects";
 import { projectsPage, projectCategoriesAr } from "../i18n/pagesAr";
 
 export default function Projects() {
   const { lang } = useLanguage();
   const ar = projectsPage;
+  const { projects: PROJECTS } = useProjects();
+  const PROJECT_CATS = useMemo(() => ["All", ...new Set(PROJECTS.map((p) => p.category))], [PROJECTS]);
   const [filter, setFilter] = useState("All");
   const navigate = useNavigate();
   const list = filter === "All" ? PROJECTS : PROJECTS.filter((p) => p.category === filter);
