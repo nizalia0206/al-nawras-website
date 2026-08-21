@@ -1,26 +1,20 @@
-import { useState, useRef } from "react";
+import { useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import { Icon } from "./CatalogIcons.jsx";
-import { useCart } from "../context/CartContext.jsx";
-import { CatalogAPI, SUPPLIERS } from "../data/products.js";
+import { SUPPLIERS } from "../data/products.js";
 import { useTilt } from "../hooks/useTilt.js";
 import { useLanguage } from "../context/LanguageContext";
 import { productsPage } from "../i18n/pagesAr";
 
 export default function ProductCard({ product }) {
   const { lang } = useLanguage();
-  const { addToCart } = useCart();
   const navigate = useNavigate();
   const { ref, onMouseMove, onMouseEnter, onMouseLeave, onTouchStart, onTouchEnd } = useTilt({ max: 10 });
-  const [pulsing, setPulsing] = useState(false);
   const addBtnRef = useRef(null);
 
-  function handleAdd(e) {
+  function handleEnquire(e) {
     e.preventDefault();
     e.stopPropagation();
-    addToCart(product, 1);
-    setPulsing(true);
-    setTimeout(() => setPulsing(false), 620);
+    navigate(`/product/${product.id}`);
   }
 
   function handleCardClick() {
@@ -52,14 +46,14 @@ export default function ProductCard({ product }) {
         <h3>{product.name}</h3>
         <p className="short">{product.short}</p>
         <div className="price-row">
-          <div className="price">{CatalogAPI.formatPrice(product)}</div>
           <button
             ref={addBtnRef}
-            className={`add-btn ${pulsing ? "pulsing" : ""}`}
-            aria-label={`Add ${product.name} to cart`}
-            onClick={handleAdd}
+            className="btn btn-primary btn-block"
+            style={{ background: "var(--navy-900)" }}
+            aria-label={`Enquire about ${product.name}`}
+            onClick={handleEnquire}
           >
-            <Icon.plus />
+            {lang === "ar" ? productsPage.enquireNow || "استفسر الآن" : "Enquire Now"}
           </button>
         </div>
       </div>

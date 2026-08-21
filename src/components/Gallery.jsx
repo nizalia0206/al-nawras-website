@@ -117,31 +117,43 @@ export default function Gallery({ items, columns = "sm:grid-cols-2 lg:grid-cols-
               />
             </div>
 
-            <div className="px-7 py-5 border-t border-black/[.07] flex items-center justify-between gap-4">
+            <div className="px-7 py-5 border-t border-black/[.07] flex flex-col sm:flex-row sm:items-center justify-between gap-4">
               <div>
                 <div className="sec-eyebrow !mb-1">{lang === "ar" ? systemsCommon.lightboxLabel : "Al Nawras Systems & Solutions"}</div>
                 <h3 className="font-display uppercase text-[19px] tracking-wide text-ink">
                   {items[active].name}
                 </h3>
               </div>
-              {items.length > 1 && (
-                <div className="flex items-center gap-2 shrink-0">
-                  <button
-                    onClick={() => setActive((active - 1 + items.length) % items.length)}
-                    aria-label="Previous"
-                    className="w-9 h-9 rounded-full border border-black/[.12] flex items-center justify-center text-ink hover:border-flame1 hover:text-flame1 transition-colors duration-300"
-                  >
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round"><path d="M15 6l-6 6 6 6" /></svg>
-                  </button>
-                  <button
-                    onClick={() => setActive((active + 1) % items.length)}
-                    aria-label="Next"
-                    className="w-9 h-9 rounded-full border border-black/[.12] flex items-center justify-center text-ink hover:border-flame1 hover:text-flame1 transition-colors duration-300"
-                  >
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round"><path d="M9 6l6 6-6 6" /></svg>
-                  </button>
-                </div>
-              )}
+              <div className="flex items-center gap-3 shrink-0">
+                <a
+                  href={`https://wa.me/971551099885?text=${encodeURIComponent(
+                    `Hi Al Nawras, I'd like to get a quote for ${items[active].name}.`
+                  )}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn btn-flame !py-2.5 !px-5 !text-[12.5px]"
+                >
+                  {lang === "ar" ? "احصل على عرض سعر" : "Get Quote"}
+                </a>
+                {items.length > 1 && (
+                  <div className="flex items-center gap-2">
+                    <button
+                      onClick={() => setActive((active - 1 + items.length) % items.length)}
+                      aria-label="Previous"
+                      className="w-9 h-9 rounded-full border border-black/[.12] flex items-center justify-center text-ink hover:border-flame1 hover:text-flame1 transition-colors duration-300"
+                    >
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round"><path d="M15 6l-6 6 6 6" /></svg>
+                    </button>
+                    <button
+                      onClick={() => setActive((active + 1) % items.length)}
+                      aria-label="Next"
+                      className="w-9 h-9 rounded-full border border-black/[.12] flex items-center justify-center text-ink hover:border-flame1 hover:text-flame1 transition-colors duration-300"
+                    >
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round"><path d="M9 6l6 6-6 6" /></svg>
+                    </button>
+                  </div>
+                )}
+              </div>
             </div>
           </div>
         )}

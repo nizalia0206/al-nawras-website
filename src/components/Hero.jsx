@@ -361,8 +361,8 @@ export default function Hero() {
             </svg>
           </button>
 
-          {/* slide dot indicators */}
-          <div className="absolute left-1/2 -translate-x-1/2 bottom-5 z-[3] flex items-center gap-2">
+          {/* slide dot indicators (mobile/tablet only) */}
+          <div className="sm:hidden absolute left-1/2 -translate-x-1/2 bottom-5 z-[3] flex items-center gap-2">
             {CATEGORIES.map((cat, i) => (
               <button
                 key={cat.label}

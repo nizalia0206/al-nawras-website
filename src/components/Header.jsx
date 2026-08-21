@@ -100,11 +100,11 @@ export default function Header({ overlayOnHero = false }) {
         )}
         <div
           className={`relative max-w-[1280px] mx-auto px-8 flex items-center justify-between transition-[height] duration-300 ${
-            shrink ? "h-[108px]" : "h-[124px]"
+            shrink ? "h-[124px]" : "h-[144px]"
           }`}
         >
           <Link to="/" className="flex items-center">
-            <Logo size={overlay ? 82 : 104} light={overlay} />
+            <Logo size={overlay ? 104 : 128} light={overlay} />
           </Link>
 
           <nav className="hidden [@media(min-width:1080px)]:flex items-center gap-0.5">
@@ -233,7 +233,7 @@ export default function Header({ overlayOnHero = false }) {
         }`}
       >
         <div className="flex justify-between items-center px-6 py-5 border-b border-ink/[.08]">
-          <Logo size={44} />
+          <Logo size={56} />
           <div className="flex items-center gap-3">
             <LanguageToggle />
             <button

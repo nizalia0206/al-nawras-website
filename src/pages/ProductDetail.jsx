@@ -1,9 +1,8 @@
 import { useState, useEffect } from "react";
-import { useParams, useNavigate, Link } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { Icon } from "../components/CatalogIcons.jsx";
 import Reveal from "../components/Reveal.jsx";
 import ProductCard from "../components/ProductCard.jsx";
-import { useCart } from "../context/CartContext.jsx";
 import { PRODUCTS, CATEGORIES, SUPPLIERS, CatalogAPI } from "../data/products.js";
 import { useLanguage } from "../context/LanguageContext";
 import { productDetailPage } from "../i18n/pagesAr";
@@ -12,8 +11,6 @@ export default function ProductDetail() {
   const { lang } = useLanguage();
   const ar = productDetailPage;
   const { id } = useParams();
-  const navigate = useNavigate();
-  const { addToCart } = useCart();
 
   const product = CatalogAPI.byId(id) || PRODUCTS[0];
   const [imgIdx, setImgIdx] = useState(0);
@@ -38,14 +35,6 @@ export default function ProductDetail() {
 
   const categoryName = CATEGORIES.find((c) => c.id === product.category)?.name;
   const suggestions = CatalogAPI.suggestions(product, 4);
-
-  function handleAddToCart() {
-    addToCart(product, qty);
-  }
-  function handleRequestQuote() {
-    addToCart(product, qty);
-    navigate("/cart?mode=quote");
-  }
 
   return (
     <>
@@ -86,10 +75,6 @@ export default function ProductDetail() {
               </div>
               <h1>{product.name}</h1>
               <p className="short-desc">{product.short}</p>
-              <div className="price-block">
-                <span className="amount">{CatalogAPI.formatPrice(product)}</span>
-                <span className="unit">{lang === "ar" ? ar.excludingVat : "excl. VAT · installation quoted separately"}</span>
-              </div>
               <div className="stock-row"><span className="stock-dot" /> {lang === "ar" ? ar.inStock : "In stock — ships from UAE warehouse"}</div>
 
               <div className="qty-row">
@@ -102,14 +87,13 @@ export default function ProductDetail() {
               </div>
 
               <div className="action-row">
-                <button className="btn btn-outline-navy" onClick={handleAddToCart}><Icon.cart /> {lang === "ar" ? ar.addToCart : "Add to Cart"}</button>
-                <button className="btn btn-primary" style={{ background: "var(--navy-900)" }} onClick={handleRequestQuote}><Icon.phone /> {lang === "ar" ? ar.enquireNow : "Enquire Now"}</button>
                 <a
-                  className="btn btn-whatsapp"
-                  href={`https://wa.me/?text=${encodeURIComponent(`Hi, I'd like a quote for ${product.name} (${qty} unit${qty > 1 ? "s" : ""}).`)}`}
+                  className="btn btn-primary"
+                  style={{ background: "var(--navy-900)" }}
+                  href={`https://wa.me/971551099885?text=${encodeURIComponent(`Hi Al Nawras, I'd like to enquire about ${product.name} (${qty} unit${qty > 1 ? "s" : ""}).`)}`}
                   target="_blank" rel="noopener noreferrer"
                 >
-                  <Icon.mail /> {lang === "ar" ? ar.whatsappQuote : "WhatsApp Quote"}
+                  <Icon.phone /> {lang === "ar" ? ar.enquireNow : "Enquire Now"}
                 </a>
               </div>
 

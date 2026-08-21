@@ -40,7 +40,7 @@ export default function Footer() {
                     "radial-gradient(circle, rgba(238,108,47,.55), rgba(247,148,29,.25) 55%, transparent 75%)",
                 }}
               />
-              <Logo size={64} light className="relative" />
+              <Logo size={96} light className="relative" />
             </div>
             <p className="text-[13.5px] leading-[1.75] text-steellight max-w-[34ch]">
               {t("footer.tagline")}

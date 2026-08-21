@@ -129,7 +129,7 @@ export const translations = {
       sharjahHQ: "Sharjah HQ · +971 6 562 5425",
       dubai: "Dubai · +971 4 333 5373",
       copyright: "© 2026 Al Nawras Safety & Security Systems LLC. All rights reserved.",
-      note: "Concept design — for internal review.",
+      note: "Powered by Zetacoding",
     },
     lang: {
       switchTo: "Switch to Arabic",
@@ -267,7 +267,7 @@ export const translations = {
       sharjahHQ: "المقر الرئيسي، الشارقة · 5425 562 6 971+",
       dubai: "دبي · 5373 333 4 971+",
       copyright: "© 2026 شركة الأنوار للأنظمة الأمنية وأنظمة السلامة ذ.م.م. جميع الحقوق محفوظة.",
-      note: "تصميم مبدئي — للمراجعة الداخلية.",
+      note: "بواسطة Zetacoding",
     },
     lang: {
       switchTo: "Switch to English",
