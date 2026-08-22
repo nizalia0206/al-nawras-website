@@ -4,15 +4,7 @@ import Reveal from "../components/Reveal.jsx";
 import PageHeader from "../components/PageHeader";
 import { useLanguage } from "../context/LanguageContext";
 import { careersPage } from "../i18n/pagesAr";
-
-const JOBS = [
-  { title: "Fire Alarm Systems Engineer", dept: "Engineering", type: "Full-time", location: "Sharjah" },
-  { title: "ICT Network Engineer", dept: "ICT", type: "Full-time", location: "Dubai" },
-  { title: "Fire Protection Project Manager", dept: "Project Management", type: "Full-time", location: "Sharjah" },
-  { title: "Site Supervisor \u2014 Fire Pumps", dept: "Engineering", type: "Full-time", location: "Sharjah" },
-  { title: "Sales Engineer \u2014 Fire & Safety", dept: "Sales", type: "Full-time", location: "Dubai" },
-  { title: "Junior CAD Draftsman", dept: "Engineering", type: "Full-time", location: "Sharjah" },
-];
+import useJobPostings from "../hooks/useJobPostings";
 
 const VALUES = [
   { icon: "shield", title: "Safety First", body: "Every project we deliver protects lives \u2014 that responsibility shapes how we hire, train and work." },
@@ -33,7 +25,8 @@ const BENEFITS = [
 export default function Careers() {
   const { lang } = useLanguage();
   const ar = careersPage;
-  const depts = useMemo(() => ["All", ...new Set(JOBS.map((j) => j.dept))], []);
+  const { jobs: JOBS } = useJobPostings();
+  const depts = useMemo(() => ["All", ...new Set(JOBS.map((j) => j.dept))], [JOBS]);
   const [dept, setDept] = useState("All");
   const [modalJob, setModalJob] = useState(null);
   const [submitted, setSubmitted] = useState(false);
