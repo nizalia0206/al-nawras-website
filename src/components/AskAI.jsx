@@ -49,7 +49,7 @@ export default function AskAI() {
       {/* Launcher */}
       <div
         className="fixed z-40"
-        style={{ right: "24px", bottom: "94px" }}
+        style={{ left: "24px", bottom: "94px" }}
       >
         {!open && (
           <>
@@ -81,7 +81,7 @@ export default function AskAI() {
         <div
           className="fixed z-40 flex flex-col rounded-2xl bg-white shadow-[0_24px_60px_-16px_rgba(12,28,61,0.45)] border border-black/[.06] overflow-hidden"
           style={{
-            right: "24px",
+            left: "24px",
             bottom: "158px",
             width: "min(360px, 88vw)",
             maxHeight: "min(480px, 65vh)",

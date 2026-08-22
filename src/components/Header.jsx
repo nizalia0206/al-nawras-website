@@ -3,7 +3,6 @@ import { Link, NavLink } from "react-router-dom";
 import Logo from "./Logo";
 import { IconChevron } from "./Icons";
 import { useLanguage } from "../context/LanguageContext";
-import LanguageToggle from "./LanguageToggle";
 import { useCustomerAuth } from "../context/CustomerAuthContext";
 
 function useNav(t) {
@@ -64,8 +63,6 @@ export default function Header({ overlayOnHero = false }) {
   const NAV = useNav(t);
   const [shrink, setShrink] = useState(false);
   const [openIdx, setOpenIdx] = useState(null);
-  const [drawerOpen, setDrawerOpen] = useState(false);
-  const [drawerGroup, setDrawerGroup] = useState(null);
   const headerRef = useRef(null);
 
   const overlay = overlayOnHero && !shrink;
@@ -101,15 +98,15 @@ export default function Header({ overlayOnHero = false }) {
           />
         )}
         <div
-          className={`relative max-w-[1280px] mx-auto px-8 flex items-center justify-between transition-[height] duration-300 ${
-            shrink ? "h-[124px]" : "h-[144px]"
+          className={`relative max-w-[1280px] mx-auto px-4 sm:px-8 flex flex-wrap lg:flex-nowrap items-center justify-between gap-y-2 py-3 lg:py-0 transition-[height] duration-300 ${
+            shrink ? "lg:h-[124px]" : "lg:h-[144px]"
           }`}
         >
           <Link to="/" className="flex items-center">
             <Logo size={overlay ? 104 : 128} light={overlay} />
           </Link>
 
-          <nav className="hidden lg:flex items-center gap-0.5">
+          <nav className="order-3 w-full lg:order-none lg:w-auto flex flex-wrap items-center justify-center lg:justify-end gap-0.5">
             {NAV.map((item, idx) => {
               return (
               <div
@@ -122,7 +119,7 @@ export default function Header({ overlayOnHero = false }) {
                     <button
                       type="button"
                       onClick={() => setOpenIdx(openIdx === idx ? null : idx)}
-                      className={`flex items-center gap-1.5 px-3 py-3.5 rounded-full text-[13px] font-semibold uppercase tracking-[.06em] whitespace-nowrap transition-all duration-300 ${
+                      className={`flex items-center gap-1.5 px-2.5 lg:px-3 py-3.5 rounded-full text-[12px] lg:text-[13px] font-semibold uppercase tracking-[.06em] whitespace-nowrap transition-all duration-300 ${
                         overlay ? "text-white hover:text-flame2" : "text-ink hover:text-flame1"
                       }`}
                     >
@@ -177,7 +174,7 @@ export default function Header({ overlayOnHero = false }) {
                 ) : item.to ? (
                   <Link
                     to={item.to}
-                    className={`relative flex items-center px-3 py-3.5 text-[13px] font-semibold uppercase tracking-[.06em] whitespace-nowrap transition-colors group ${
+                    className={`relative flex items-center px-2.5 lg:px-3 py-3.5 text-[12px] lg:text-[13px] font-semibold uppercase tracking-[.06em] whitespace-nowrap transition-colors group ${
                       overlay ? "text-white hover:text-flame2" : "text-ink hover:text-flame1"
                     }`}
                   >
@@ -187,7 +184,7 @@ export default function Header({ overlayOnHero = false }) {
                 ) : (
                   <a
                     href={item.href}
-                    className={`relative flex items-center px-3 py-3.5 text-[13px] font-semibold uppercase tracking-[.06em] whitespace-nowrap transition-colors group ${
+                    className={`relative flex items-center px-2.5 lg:px-3 py-3.5 text-[12px] lg:text-[13px] font-semibold uppercase tracking-[.06em] whitespace-nowrap transition-colors group ${
                       overlay ? "text-white hover:text-flame2" : "text-ink hover:text-flame1"
                     }`}
                   >
@@ -202,7 +199,7 @@ export default function Header({ overlayOnHero = false }) {
           <div className="flex items-center gap-3.5">
             <Link
               to={session ? "/account" : "/account/sign-in"}
-              className={`hidden lg:inline-flex items-center gap-1.5 rounded-full border px-5 py-2.5 text-[13px] font-semibold transition-all duration-300 ${
+              className={`inline-flex items-center gap-1.5 rounded-full border px-3.5 lg:px-5 py-2.5 text-[12px] lg:text-[13px] font-semibold transition-all duration-300 ${
                 overlay
                   ? "border-white/40 text-white hover:border-white hover:bg-white/10"
                   : "border-ink/[.16] text-ink hover:border-flame1 hover:text-flame1"
@@ -217,103 +214,9 @@ export default function Header({ overlayOnHero = false }) {
                 ? lang === "ar" ? "حسابي" : "My Account"
                 : lang === "ar" ? "تسجيل الدخول" : "Sign In"}
             </Link>
-            <button
-              aria-label="Open menu"
-              onClick={() => setDrawerOpen(true)}
-              className="lg:hidden w-10 h-10 flex items-center justify-center flex-col gap-[5px]"
-            >
-              <span className={`w-[22px] h-0.5 ${overlay ? "bg-white" : "bg-ink"}`} />
-              <span className={`w-[22px] h-0.5 ${overlay ? "bg-white" : "bg-ink"}`} />
-              <span className={`w-[22px] h-0.5 ${overlay ? "bg-white" : "bg-ink"}`} />
-            </button>
           </div>
         </div>
       </header>
-
-      {/* Mobile Drawer */}
-      <div
-        className={`fixed inset-0 z-[300] bg-white overflow-y-auto transition-transform duration-400 lg:hidden ${
-          drawerOpen ? "translate-x-0" : "translate-x-full"
-        }`}
-      >
-        <div className="flex justify-between items-center px-6 py-5 border-b border-ink/[.08]">
-          <Logo size={56} />
-          <div className="flex items-center gap-3">
-            <LanguageToggle />
-            <button
-              onClick={() => setDrawerOpen(false)}
-              className="w-10 h-10 flex items-center justify-center text-ink text-2xl"
-            >
-              &times;
-            </button>
-          </div>
-        </div>
-        <div className="px-3.5 pb-14 pt-2.5">
-          {NAV.map((item, idx) => (
-            <div key={item.label} className="border-b border-ink/[.08]">
-              {item.items ? (
-                <>
-                  <button
-                    type="button"
-                    onClick={() => setDrawerGroup(drawerGroup === idx ? null : idx)}
-                    className="w-full flex justify-between items-center px-2.5 py-[18px] text-ink text-[17px] font-medium font-display tracking-wide"
-                  >
-                    {item.label}
-                    <IconChevron
-                      className={`w-3 h-3 transition-transform duration-300 ${
-                        drawerGroup === idx ? "rotate-180" : ""
-                      }`}
-                    />
-                  </button>
-                  <div
-                    className={`overflow-hidden transition-[max-height] duration-400 ${
-                      drawerGroup === idx ? "max-h-[600px]" : "max-h-0"
-                    }`}
-                  >
-                    {item.items.map((sub) =>
-                      sub.to ? (
-                        <Link
-                          key={sub.title}
-                          to={sub.to}
-                          onClick={() => setDrawerOpen(false)}
-                          className="block px-2.5 py-2.5 pl-5 text-[14.5px] text-inksoft border-l-2 border-ink/[.08] hover:text-flame1"
-                        >
-                          {sub.title}
-                        </Link>
-                      ) : (
-                        <a
-                          key={sub.title}
-                          href={sub.href}
-                          onClick={() => setDrawerOpen(false)}
-                          className="block px-2.5 py-2.5 pl-5 text-[14.5px] text-inksoft border-l-2 border-ink/[.08] hover:text-flame1"
-                        >
-                          {sub.title}
-                        </a>
-                      )
-                    )}
-                  </div>
-                </>
-              ) : item.to ? (
-                <Link
-                  to={item.to}
-                  onClick={() => setDrawerOpen(false)}
-                  className="block px-2.5 py-[18px] text-ink text-[17px] font-medium font-display tracking-wide"
-                >
-                  {item.label}
-                </Link>
-              ) : (
-                <a
-                  href={item.href}
-                  onClick={() => setDrawerOpen(false)}
-                  className="block px-2.5 py-[18px] text-ink text-[17px] font-medium font-display tracking-wide"
-                >
-                  {item.label}
-                </a>
-              )}
-            </div>
-          ))}
-        </div>
-      </div>
     </>
   );
 }
