@@ -98,20 +98,20 @@ export default function Header({ overlayOnHero = false }) {
           />
         )}
         <div
-          className={`relative max-w-[1280px] mx-auto px-4 sm:px-8 flex flex-wrap lg:flex-nowrap items-center justify-between gap-y-2 py-3 lg:py-0 transition-[height] duration-300 ${
-            shrink ? "lg:h-[124px]" : "lg:h-[144px]"
+          className={`relative max-w-[1280px] mx-auto px-4 sm:px-8 flex items-center justify-between gap-3 transition-[height] duration-300 ${
+            shrink ? "h-[124px]" : "h-[144px]"
           }`}
         >
-          <Link to="/" className="flex items-center">
+          <Link to="/" className="flex items-center shrink-0">
             <Logo size={overlay ? 104 : 128} light={overlay} />
           </Link>
 
-          <nav className="order-3 w-full lg:order-none lg:w-auto flex flex-wrap items-center justify-center lg:justify-end gap-0.5">
+          <nav className="nav-scroll flex-1 min-w-0 flex items-center gap-0.5 overflow-x-auto lg:justify-end lg:overflow-visible">
             {NAV.map((item, idx) => {
               return (
               <div
                 key={item.label}
-                className="relative"
+                className="relative shrink-0"
                 onClick={(e) => e.stopPropagation()}
               >
                 {item.items ? (
@@ -196,7 +196,7 @@ export default function Header({ overlayOnHero = false }) {
             );})}
           </nav>
 
-          <div className="flex items-center gap-3.5">
+          <div className="flex items-center gap-3.5 shrink-0">
             <Link
               to={session ? "/account" : "/account/sign-in"}
               className={`inline-flex items-center gap-1.5 rounded-full border px-3.5 lg:px-5 py-2.5 text-[12px] lg:text-[13px] font-semibold transition-all duration-300 ${

@@ -1,6 +1,5 @@
-import { useRef } from "react";
-import { useNavigate } from "react-router-dom";
 import { SUPPLIERS } from "../data/products.js";
+import { useNavigate } from "react-router-dom";
 import { useTilt } from "../hooks/useTilt.js";
 import { useLanguage } from "../context/LanguageContext";
 import { productsPage } from "../i18n/pagesAr";
@@ -9,13 +8,6 @@ export default function ProductCard({ product }) {
   const { lang } = useLanguage();
   const navigate = useNavigate();
   const { ref, onMouseMove, onMouseEnter, onMouseLeave, onTouchStart, onTouchEnd } = useTilt({ max: 10 });
-  const addBtnRef = useRef(null);
-
-  function handleEnquire(e) {
-    e.preventDefault();
-    e.stopPropagation();
-    navigate(`/product/${product.id}`);
-  }
 
   function handleCardClick() {
     navigate(`/product/${product.id}`);
@@ -46,15 +38,18 @@ export default function ProductCard({ product }) {
         <h3>{product.name}</h3>
         <p className="short">{product.short}</p>
         <div className="price-row">
-          <button
-            ref={addBtnRef}
-            className="btn btn-primary btn-block"
-            style={{ background: "var(--navy-900)" }}
-            aria-label={`Enquire about ${product.name}`}
-            onClick={handleEnquire}
+          <a
+            href={`https://wa.me/971551099885?text=${encodeURIComponent(
+              `Hi Al Nawras, I'd like to get a quote for ${product.name}.`
+            )}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn btn-flame btn-block"
+            aria-label={`Get a quote for ${product.name}`}
+            onClick={(e) => e.stopPropagation()}
           >
-            {lang === "ar" ? productsPage.enquireNow || "استفسر الآن" : "Enquire Now"}
-          </button>
+            {lang === "ar" ? "احصل على عرض سعر" : "Get Quote"}
+          </a>
         </div>
       </div>
       <span className="card-accent-line" aria-hidden="true" />

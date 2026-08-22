@@ -108,12 +108,11 @@ export default function ProductDetail() {
 
               <div className="action-row">
                 <a
-                  className="btn btn-primary"
-                  style={{ background: "var(--navy-900)" }}
-                  href={`https://wa.me/971551099885?text=${encodeURIComponent(`Hi Al Nawras, I'd like to enquire about ${product.name} (${qty} unit${qty > 1 ? "s" : ""}).`)}`}
+                  className="btn btn-flame"
+                  href={`https://wa.me/971551099885?text=${encodeURIComponent(`Hi Al Nawras, I'd like to get a quote for ${product.name} (${qty} unit${qty > 1 ? "s" : ""}).`)}`}
                   target="_blank" rel="noopener noreferrer"
                 >
-                  <Icon.phone /> {lang === "ar" ? ar.enquireNow : "Enquire Now"}
+                  <Icon.phone /> {lang === "ar" ? "احصل على عرض سعر" : "Get Quote"}
                 </a>
               </div>
 

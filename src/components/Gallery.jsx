@@ -4,14 +4,17 @@ import { useLanguage } from "../context/LanguageContext";
 import { systemsCommon } from "../i18n/pagesAr";
 
 function GalleryCard({ item, onOpen }) {
+  const { lang } = useLanguage();
   return (
-    <button
-      type="button"
-      onClick={onOpen}
+    <div
       className="group relative bg-white rounded-sm border border-black/[.08] overflow-hidden text-left transition-all duration-500 ease-[var(--ease)] hover:-translate-y-1.5 hover:border-flame1/40 hover:shadow-[0_24px_50px_-20px_rgba(255,91,30,.4)]"
     >
       {/* image stage */}
-      <div className="relative h-56 flex items-center justify-center p-8 overflow-hidden bg-paper2">
+      <button
+        type="button"
+        onClick={onOpen}
+        className="relative w-full h-56 flex items-center justify-center p-8 overflow-hidden bg-paper2"
+      >
         {/* glow that blooms in behind the product on hover */}
         <span
           className="pointer-events-none absolute w-40 h-40 rounded-full bg-gradient-to-br from-flame1/25 to-gold/20 blur-2xl scale-0 opacity-0 transition-all duration-500 ease-[var(--ease)] group-hover:scale-125 group-hover:opacity-100"
@@ -30,27 +33,32 @@ function GalleryCard({ item, onOpen }) {
             <path d="M9 3H3v6M15 3h6v6M9 21H3v-6M15 21h6v-6" />
           </svg>
         </span>
-      </div>
+      </button>
 
       {/* label bar */}
       <div className="relative px-4 py-3.5 border-t border-black/[.07] flex items-center justify-between gap-2">
-        <span className="text-[12.5px] font-semibold uppercase tracking-wide text-ink leading-tight">
-          {item.name}
-        </span>
-        <svg
-          className="w-3.5 h-3.5 shrink-0 text-flame1 -translate-x-1 opacity-0 transition-all duration-400 ease-[var(--ease)] group-hover:translate-x-0 group-hover:opacity-100"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2.6"
-          strokeLinecap="round"
+        <button
+          type="button"
+          onClick={onOpen}
+          className="text-[12.5px] font-semibold uppercase tracking-wide text-ink leading-tight text-left hover:text-flame1 transition-colors"
         >
-          <path d="M5 12h14M13 6l6 6-6 6" />
-        </svg>
+          {item.name}
+        </button>
+        <a
+          href={`https://wa.me/971551099885?text=${encodeURIComponent(
+            `Hi Al Nawras, I'd like to get a quote for ${item.name}.`
+          )}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          onClick={(e) => e.stopPropagation()}
+          className="btn btn-flame !py-2 !px-4 !text-[11px] shrink-0"
+        >
+          {lang === "ar" ? "احصل على عرض سعر" : "Get Quote"}
+        </a>
         {/* animated underline accent */}
         <span className="absolute left-0 bottom-0 h-[2px] w-full bg-gradient-to-r from-flame1 to-gold origin-left scale-x-0 transition-transform duration-500 ease-[var(--ease)] group-hover:scale-x-100" />
       </div>
-    </button>
+    </div>
   );
 }
 

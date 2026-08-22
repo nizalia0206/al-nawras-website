@@ -229,3 +229,14 @@ html.lang-ar .counter-number {
   .wf-line{ animation: none; }
 }
 
+/* Hide the scrollbar on the horizontally-scrollable main nav (mobile/tablet)
+   while keeping it scrollable — the nav never wraps, so the header height
+   (and therefore the hero's top padding) stays constant at every width. */
+.nav-scroll{
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.nav-scroll::-webkit-scrollbar{
+  display: none;
+}
+
