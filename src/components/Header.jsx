@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import Logo from "./Logo";
 import { IconChevron } from "./Icons";
+import LanguageToggle from "./LanguageToggle";
 import { useLanguage } from "../context/LanguageContext";
 import { useCustomerAuth } from "../context/CustomerAuthContext";
 
@@ -63,9 +64,11 @@ export default function Header({ overlayOnHero = false }) {
   const NAV = useNav(t);
   const [shrink, setShrink] = useState(false);
   const [openIdx, setOpenIdx] = useState(null);
+  const [drawerOpen, setDrawerOpen] = useState(false);
+  const [drawerGroup, setDrawerGroup] = useState(null);
   const headerRef = useRef(null);
 
-  const overlay = overlayOnHero && !shrink;
+  const overlay = overlayOnHero && !shrink && !drawerOpen;
 
   useEffect(() => {
     const onScroll = () => setShrink(window.scrollY > 40);
@@ -79,6 +82,17 @@ export default function Header({ overlayOnHero = false }) {
     document.addEventListener("click", closeAll);
     return () => document.removeEventListener("click", closeAll);
   }, []);
+
+  // Lock body scroll while the mobile drawer is open.
+  useEffect(() => {
+    document.body.style.overflow = drawerOpen ? "hidden" : "";
+    return () => { document.body.style.overflow = ""; };
+  }, [drawerOpen]);
+
+  function closeDrawer() {
+    setDrawerOpen(false);
+    setDrawerGroup(null);
+  }
 
   return (
     <>
@@ -98,15 +112,16 @@ export default function Header({ overlayOnHero = false }) {
           />
         )}
         <div
-          className={`relative max-w-[1280px] mx-auto px-4 sm:px-8 flex items-center justify-between gap-3 transition-[height] duration-300 ${
-            shrink ? "h-[124px]" : "h-[144px]"
+          className={`relative max-w-[1280px] mx-auto px-4 sm:px-8 flex items-center justify-between gap-3 transition-[height] duration-300 h-[72px] ${
+            shrink ? "lg:h-[124px]" : "lg:h-[144px]"
           }`}
         >
           <Link to="/" className="flex items-center shrink-0">
-            <Logo size={overlay ? 104 : 128} light={overlay} />
+            <Logo size={overlay ? 104 : 128} light={overlay} responsive />
           </Link>
 
-          <nav className="nav-scroll flex-1 min-w-0 flex items-center gap-0.5 overflow-x-auto lg:justify-end lg:overflow-visible">
+          {/* Desktop nav — hidden below lg, unchanged above it */}
+          <nav className="hidden lg:flex flex-1 min-w-0 items-center gap-0.5 justify-end">
             {NAV.map((item, idx) => {
               return (
               <div
@@ -196,10 +211,10 @@ export default function Header({ overlayOnHero = false }) {
             );})}
           </nav>
 
-          <div className="flex items-center gap-3.5 shrink-0">
+          <div className="flex items-center gap-2 sm:gap-3.5 shrink-0">
             <Link
               to={session ? "/account" : "/account/sign-in"}
-              className={`inline-flex items-center gap-1.5 rounded-full border px-3.5 lg:px-5 py-2.5 text-[12px] lg:text-[13px] font-semibold transition-all duration-300 ${
+              className={`hidden sm:inline-flex items-center gap-1.5 rounded-full border px-3.5 lg:px-5 py-2.5 text-[12px] lg:text-[13px] font-semibold transition-all duration-300 ${
                 overlay
                   ? "border-white/40 text-white hover:border-white hover:bg-white/10"
                   : "border-ink/[.16] text-ink hover:border-flame1 hover:text-flame1"
@@ -214,9 +229,118 @@ export default function Header({ overlayOnHero = false }) {
                 ? lang === "ar" ? "حسابي" : "My Account"
                 : lang === "ar" ? "تسجيل الدخول" : "Sign In"}
             </Link>
+
+            {/* Mobile hamburger — hidden at lg and above */}
+            <button
+              type="button"
+              aria-label="Open menu"
+              onClick={() => setDrawerOpen(true)}
+              className="lg:hidden w-10 h-10 flex items-center justify-center flex-col gap-[5px] shrink-0"
+            >
+              <span className={`w-[22px] h-0.5 transition-colors ${overlay ? "bg-white" : "bg-ink"}`} />
+              <span className={`w-[22px] h-0.5 transition-colors ${overlay ? "bg-white" : "bg-ink"}`} />
+              <span className={`w-[22px] h-0.5 transition-colors ${overlay ? "bg-white" : "bg-ink"}`} />
+            </button>
           </div>
         </div>
       </header>
+
+      {/* Mobile drawer */}
+      <div
+        className={`fixed inset-0 z-[300] bg-white overflow-y-auto transition-transform duration-400 lg:hidden ${
+          drawerOpen ? "translate-x-0" : "translate-x-full"
+        }`}
+      >
+        <div className="flex justify-between items-center px-5 py-4 border-b border-ink/[.08]">
+          <Logo size={48} />
+          <div className="flex items-center gap-3">
+            <LanguageToggle />
+            <button
+              onClick={closeDrawer}
+              aria-label="Close menu"
+              className="w-10 h-10 flex items-center justify-center text-ink text-2xl leading-none"
+            >
+              &times;
+            </button>
+          </div>
+        </div>
+
+        <div className="px-3 pb-10 pt-2">
+          {NAV.map((item, idx) => (
+            <div key={item.label} className="border-b border-ink/[.08]">
+              {item.items ? (
+                <>
+                  <button
+                    type="button"
+                    onClick={() => setDrawerGroup(drawerGroup === idx ? null : idx)}
+                    className="w-full flex justify-between items-center px-2.5 py-4 text-ink text-[16px] font-semibold uppercase tracking-wide"
+                  >
+                    {item.label}
+                    <IconChevron
+                      className={`w-3 h-3 transition-transform duration-300 ${
+                        drawerGroup === idx ? "rotate-180" : ""
+                      }`}
+                    />
+                  </button>
+                  <div
+                    className={`overflow-hidden transition-[max-height] duration-400 ${
+                      drawerGroup === idx ? "max-h-[600px]" : "max-h-0"
+                    }`}
+                  >
+                    {item.items.map((sub) =>
+                      sub.to ? (
+                        <Link
+                          key={sub.title}
+                          to={sub.to}
+                          onClick={closeDrawer}
+                          className="block px-2.5 py-2.5 pl-5 text-[14px] text-inksoft border-l-2 border-ink/[.08] hover:text-flame1"
+                        >
+                          {sub.title}
+                        </Link>
+                      ) : (
+                        <a
+                          key={sub.title}
+                          href={sub.href}
+                          onClick={closeDrawer}
+                          className="block px-2.5 py-2.5 pl-5 text-[14px] text-inksoft border-l-2 border-ink/[.08] hover:text-flame1"
+                        >
+                          {sub.title}
+                        </a>
+                      )
+                    )}
+                  </div>
+                </>
+              ) : item.to ? (
+                <Link
+                  to={item.to}
+                  onClick={closeDrawer}
+                  className="block px-2.5 py-4 text-ink text-[16px] font-semibold uppercase tracking-wide"
+                >
+                  {item.label}
+                </Link>
+              ) : (
+                <a
+                  href={item.href}
+                  onClick={closeDrawer}
+                  className="block px-2.5 py-4 text-ink text-[16px] font-semibold uppercase tracking-wide"
+                >
+                  {item.label}
+                </a>
+              )}
+            </div>
+          ))}
+
+          <Link
+            to={session ? "/account" : "/account/sign-in"}
+            onClick={closeDrawer}
+            className="mt-5 flex items-center justify-center gap-1.5 rounded-full border border-ink/[.16] text-ink px-5 py-3 text-[14px] font-semibold mx-2.5"
+          >
+            {session
+              ? lang === "ar" ? "حسابي" : "My Account"
+              : lang === "ar" ? "تسجيل الدخول" : "Sign In"}
+          </Link>
+        </div>
+      </div>
     </>
   );
 }

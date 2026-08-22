@@ -12,13 +12,13 @@ export default function TopBar() {
 
   return (
     <div className="bg-paper2 text-inksoft text-[12px] tracking-wide border-b border-ink/[.06]">
-      <div className="max-w-[1280px] mx-auto px-8 h-[38px] flex items-center justify-between">
-        <div className="flex items-center gap-5 md:gap-6">
-          <span className="ltr-content">{t("topbar.email")}</span>
-          <span className="hidden md:inline">{t("topbar.cities")}</span>
+      <div className="max-w-[1280px] mx-auto px-4 sm:px-8 h-[38px] flex items-center justify-between gap-3 overflow-hidden">
+        <div className="flex items-center gap-5 md:gap-6 min-w-0">
+          <span className="ltr-content truncate">{t("topbar.email")}</span>
+          <span className="hidden md:inline whitespace-nowrap">{t("topbar.cities")}</span>
         </div>
-        <div className="flex items-center gap-4">
-          <div className="flex items-center gap-3">
+        <div className="flex items-center gap-4 shrink-0">
+          <div className="hidden sm:flex items-center gap-3">
             {socials.map(({ label, Icon, href }) => (
               <a
                 key={label}
