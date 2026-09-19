@@ -3,6 +3,7 @@ import AboutSubNav from "../../components/AboutSubNav";
 import useReveal from "../../hooks/useReveal";
 import { useLanguage } from "../../context/LanguageContext";
 import { aboutPages } from "../../i18n/pagesAr";
+import headerImage from "../../assets/page-headers/founder.png";
 
 export default function Founder() {
   const { lang } = useLanguage();
@@ -23,6 +24,7 @@ export default function Founder() {
           { label: lang === "ar" ? ar.crumbAbout : "About", href: "/about/overview" },
           { label: lang === "ar" ? ar.crumbCurrent : "Founder" },
         ]}
+        image={headerImage}
       />
       <AboutSubNav />
 
@@ -76,7 +78,7 @@ export default function Founder() {
                     efficient experience possible to our loyal customers.
                   </p>
                   <p className="text-[16px] md:text-[17px] leading-[1.85] text-inksoft mb-6">
-                    Our reputation is built on the successful completion of more than 400 projects, each
+                    Our reputation is built on the successful completion of more than 1,250 projects, each
                     delivered with the highest possible quality — by embracing new technologies, following
                     the latest industry standards and meeting the safety regulations of the UAE. Our
                     well-trained engineers, project managers and skilled technicians provide the proper

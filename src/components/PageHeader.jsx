@@ -1,8 +1,7 @@
 import { Link } from "react-router-dom";
-import WaveField from "./WaveField";
 import { useLanguage } from "../context/LanguageContext";
 
-export default function PageHeader({ eyebrow, title, desc, crumbs = [] }) {
+export default function PageHeader({ eyebrow, title, desc, crumbs = [], image }) {
   const { t } = useLanguage();
   return (
     <div className="relative bg-bgdark text-white overflow-hidden">
@@ -24,7 +23,12 @@ export default function PageHeader({ eyebrow, title, desc, crumbs = [] }) {
           WebkitMaskImage: "radial-gradient(ellipse 80% 70% at 50% 20%, black, transparent)",
         }}
       />
-      <WaveField className="opacity-70 mix-blend-screen" />
+      {image && (
+        <div className="absolute inset-0 z-0">
+          <img src={image} alt="" className="absolute inset-0 w-full h-full object-cover opacity-70" />
+          <div className="absolute inset-0 bg-gradient-to-t from-bgdark/85 via-bgdark/40 to-bgdark/15" />
+        </div>
+      )}
 
       <div className="relative z-[1] max-w-[1280px] mx-auto px-8 pt-14 pb-14 md:pt-[72px] md:pb-16">
         <div className="flex items-center gap-2 text-[12.5px] text-steellight mb-6">

@@ -153,6 +153,30 @@ export const IconServer = ({ className = "w-6 h-6" }) => (
   </svg>
 );
 
+export const IconBuilding = ({ className = "w-6 h-6" }) => (
+  <svg viewBox="0 0 48 48" fill="none" className={className}>
+    <rect x="12" y="6" width="24" height="36" rx="1" stroke="currentColor" strokeWidth="2" />
+    <path d="M18 14h4M26 14h4M18 22h4M26 22h4M18 30h4M26 30h4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+    <path d="M20 42v-8h8v8" stroke="currentColor" strokeWidth="2" />
+  </svg>
+);
+
+export const IconCross = ({ className = "w-6 h-6" }) => (
+  <svg viewBox="0 0 48 48" fill="none" className={className}>
+    <rect x="8" y="8" width="32" height="32" rx="6" stroke="currentColor" strokeWidth="2" />
+    <path d="M24 16v16M16 24h16" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" />
+  </svg>
+);
+
+export const IconBed = ({ className = "w-6 h-6" }) => (
+  <svg viewBox="0 0 48 48" fill="none" className={className}>
+    <path d="M6 38V16M6 30h36v8M6 22h16v8" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+    <path d="M22 22h20v8" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+    <circle cx="13" cy="19" r="2.4" stroke="currentColor" strokeWidth="2" />
+    <path d="M42 30v8" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+  </svg>
+);
+
 export const IconSearch = ({ className = "w-5 h-5" }) => (
   <svg viewBox="0 0 48 48" fill="none" className={className}>
     <circle cx="21" cy="21" r="13" stroke="currentColor" strokeWidth="2" />

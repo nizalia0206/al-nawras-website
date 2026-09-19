@@ -8,6 +8,7 @@ import { CATEGORIES, SUPPLIERS } from "../data/products.js";
 import { useLanguage } from "../context/LanguageContext";
 import useProducts from "../hooks/useProducts";
 import { productsPage } from "../i18n/pagesAr";
+import headerImage from "../assets/page-headers/products.jpg";
 
 const BRAND_WORDMARK = {
   honeywell: "HW",
@@ -69,6 +70,7 @@ export default function Products() {
             : "Certified equipment from Honeywell, Waterfall, H3C, Teknoware, Uranus Cable and KD Pipes — supplied, engineered and supported by Al Nawras Safety & Security Systems LLC."
         }
         crumbs={[{ label: lang === "ar" ? ar.crumb : "Products" }]}
+        image={headerImage}
       />
       <section className="bg-ambient products-hero" style={{ paddingTop: 32, paddingBottom: 32 }}>
         <div className="container">

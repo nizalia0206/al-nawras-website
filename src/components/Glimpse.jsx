@@ -37,7 +37,7 @@ const GLIMPSES = [
   {
     icon: IconFlame,
     eyebrow: "Projects",
-    title: "1,000+ Delivered",
+    title: "1,250+ Delivered",
     desc: "Danube Properties, Ellington, Saudi German Hospital and more, executed since 2005.",
     href: "#projects",
     tag: "Residential · Healthcare · Hospitality",

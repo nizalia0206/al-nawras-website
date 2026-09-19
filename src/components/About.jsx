@@ -2,8 +2,7 @@ import { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import Counter from "./Counter";
 import { useLanguage } from "../context/LanguageContext";
-
-const YOUTUBE_ID = "vMQSlLgoxgw";
+import aboutPhoto from "../assets/about-firefighters.jpg";
 
 export default function About() {
   const { t } = useLanguage();
@@ -37,22 +36,19 @@ export default function About() {
             </Link>
           </div>
 
-          {/* video */}
-          <div className="relative w-full aspect-video overflow-hidden rounded-xl border border-ink/[.08] shadow-[0_20px_50px_-20px_rgba(0,0,0,.25)] bg-bgdark">
-            <iframe
-              className="absolute inset-0 w-full h-full"
-              src={`https://www.youtube.com/embed/${YOUTUBE_ID}`}
-              title="Al Nawras — Think Safety, Think Al Nawras"
-              frameBorder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              allowFullScreen
+          {/* picture */}
+          <div className="relative w-full aspect-[4/3] overflow-hidden rounded-xl border border-ink/[.08] shadow-[0_20px_50px_-20px_rgba(0,0,0,.25)] bg-bgdark">
+            <img
+              src={aboutPhoto}
+              alt="Firefighters in protective gear carrying fire hoses and equipment to a response site"
+              className="absolute inset-0 w-full h-full object-cover"
             />
           </div>
         </div>
 
         {/* stats */}
         <div className="flex flex-wrap mt-16 md:mt-20 pt-10 border-t border-ink/[.08]">
-          <Counter theme="light" target={1000} suffix="+" label={t("about.statProjects")} />
+          <Counter theme="light" target={1250} suffix="+" label={t("about.statProjects")} />
           <Counter theme="light" target={20} suffix="+" label={t("about.statYears")} />
           <Counter theme="light" target={3} suffix="" label={t("about.statOffices")} />
           <Counter theme="light" target={6} suffix="" label={t("about.statBrands")} />

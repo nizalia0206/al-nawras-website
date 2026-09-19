@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import EmberCanvas from "./EmberCanvas";
 import Counter from "./Counter";
 import TopBar from "./TopBar";
 import { useLanguage } from "../context/LanguageContext";
@@ -29,12 +28,6 @@ const AUTOPLAY_MS = 5500;
 // and the carousel advances automatically, exactly like it did before.
 function useCategories(t) {
   return [
-    {
-      intro: true,
-      icon: IconFlame,
-      label: t("hero.eyebrowIntro"),
-      tabLabel: t("hero.tabIntro"),
-    },
     {
       icon: IconPump,
       key: "fire-fighting",
@@ -86,40 +79,40 @@ function useCategories(t) {
   ];
 }
 
-// English/Arabic per-slide headline copy, keyed by slide index (1-6 = product slides).
+// English/Arabic per-slide headline copy, keyed by slide index (0-5 = product slides).
 const SLIDE_COPY = {
   en: {
-    1: {
+    0: {
       line1: "Rapid Response,",
       line2: "Total Suppression",
       tagline:
         "Pumps, sprinklers, hydrants & risers engineered for total suppression coverage.",
     },
-    2: {
+    1: {
       line1: "Early Warning,",
       line2: "Zero Delay",
       tagline:
         "Addressable detection networks that catch a threat before it spreads.",
     },
-    3: {
+    2: {
       line1: "Clear Direction,",
       line2: "Safe Evacuation",
       tagline:
         "Life-safety audio and ECS systems that guide occupants to safety, clearly.",
     },
-    4: {
+    3: {
       line1: "Guided Path,",
       line2: "Always Lit",
       tagline:
         "Central battery & DALI systems that keep exit paths lit when it matters most.",
     },
-    5: {
+    4: {
       line1: "Connected Building,",
       line2: "Constant Watch",
       tagline:
         "Access control, CCTV and low-voltage infrastructure across every building.",
     },
-    6: {
+    5: {
       line1: "Clean Air,",
       line2: "Clear Escape",
       tagline:
@@ -127,36 +120,36 @@ const SLIDE_COPY = {
     },
   },
   ar: {
-    1: {
+    0: {
       line1: "استجابة سريعة،",
       line2: "إخماد كامل",
       tagline:
         "مضخات ورشاشات وحنفيات ومواسير رأسية مصمّمة لتغطية إخماد شاملة.",
     },
-    2: {
+    1: {
       line1: "إنذار مبكر،",
       line2: "بلا تأخير",
       tagline: "شبكات كشف قابلة للعنونة ترصد الخطر قبل انتشاره.",
     },
-    3: {
+    2: {
       line1: "توجيه واضح،",
       line2: "إخلاء آمن",
       tagline:
         "أنظمة صوت السلامة والاتصال الطارئ التي ترشد الشاغلين إلى الأمان بوضوح.",
     },
-    4: {
+    3: {
       line1: "مسار مُضاء،",
       line2: "دائم الإضاءة",
       tagline:
         "أنظمة بطارية مركزية وDALI تُبقي مسارات الخروج مضاءة عند الحاجة.",
     },
-    5: {
+    4: {
       line1: "مبنى متصل،",
       line2: "مراقبة دائمة",
       tagline:
         "التحكم بالدخول وكاميرات المراقبة والبنية التحتية منخفضة الجهد في كل مبنى.",
     },
-    6: {
+    5: {
       line1: "هواء نظيف،",
       line2: "مخرج آمن",
       tagline: "أنظمة تهوية وتحكم بالدخان مصمّمة لإخلاء آمن.",
@@ -252,7 +245,7 @@ export default function Hero() {
                 i === active ? "opacity-100" : "opacity-0"
               }`}
             >
-              <div className="absolute inset-0 bg-[linear-gradient(180deg,#1a2c56_0%,#152447_25%,#0c1c3d_100%)]" />
+              <div className="absolute inset-0 bg-[linear-gradient(180deg,#8ec2dd_0%,#78b0d0_25%,#5c93b3_100%)]" />
 
               <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_80%_at_25%_55%,rgba(29,58,112,.55)_0%,transparent_70%)]" />
 
@@ -295,21 +288,13 @@ export default function Hero() {
                   {/* light, neutral scrim — keeps the photo's real colour, just enough for text contrast */}
                   <div className="absolute inset-0 bg-black/30" />
 
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#0c1c3d]/70 via-transparent to-[#0c1c3d]/25" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#5c93b3]/70 via-transparent to-[#5c93b3]/25" />
                 </>
               )}
 
-              <div className="absolute inset-x-0 bottom-0 h-[30%] bg-gradient-to-t from-[#0c1c3d] to-transparent" />
+              <div className="absolute inset-x-0 bottom-0 h-[30%] bg-gradient-to-t from-[#5c93b3] to-transparent" />
             </div>
           ))}
-
-          {/* embers — only on the Think Nawras slide; other slides stay static */}
-          {active === 0 && (
-            <EmberCanvas
-              boost
-              className="absolute inset-0 w-full h-full z-[1] pointer-events-none"
-            />
-          )}
 
           {/* transition flash */}
           {prev !== null && (
@@ -393,22 +378,6 @@ export default function Hero() {
             ))}
           </div>
 
-          {/* vertical "Free Consultation" tab */}
-          <a
-            href="#contact"
-            className="hidden md:flex absolute z-[3] items-center justify-center gap-2 bg-gradient-to-b from-flame1 to-flame2 text-white font-display text-[12.5px] font-semibold tracking-[.18em] uppercase px-3 py-5 shadow-flame"
-            style={{
-              [lang === "ar" ? "left" : "right"]: 0,
-              top: "50%",
-              transform: "translateY(-50%) rotate(180deg)",
-              writingMode: "vertical-rl",
-              borderRadius:
-                lang === "ar" ? "0 8px 8px 0" : "8px 0 0 8px",
-            }}
-          >
-            {lang === "ar" ? "استشارة مجانية" : "Free Consultation"}
-          </a>
-
           {/* headline content */}
           <div className="relative z-[2] h-full flex flex-col items-center justify-center text-center max-w-[1280px] w-full mx-auto px-6 sm:px-8 pt-[176px] pb-8 md:pt-[194px] md:pb-10">
             <div className="max-w-[720px] flex flex-col items-center">
@@ -477,7 +446,7 @@ export default function Hero() {
                     }}
                   >
                     <Counter
-                      target={1000}
+                      target={1250}
                       suffix="+"
                       label={t("hero.statProjects")}
                     />
@@ -566,10 +535,11 @@ export default function Hero() {
           </div>
         </div>
 
-        {/* tab bar */}
-        <div className="relative z-[2] border-t border-white/[.08] bg-[#122a52]/70 backdrop-blur-sm">
-          <div className="max-w-[1280px] mx-auto px-4 sm:px-8 flex overflow-x-auto sm:grid sm:grid-cols-7 sm:overflow-visible">
+        {/* tab bar — intro "Think Al Nawras" tab is intentionally omitted, product tabs only */}
+        <div className="relative z-[2] border-t border-white/[.08] bg-[#78b0d0]/70 backdrop-blur-sm">
+          <div className="max-w-[1280px] mx-auto px-4 sm:px-8 flex overflow-x-auto sm:grid sm:grid-cols-6 sm:overflow-visible">
             {CATEGORIES.map((cat, i) => {
+              if (cat.intro) return null;
               const Icon = cat.icon;
               const isActive = i === active;
 

@@ -5,6 +5,7 @@ import PageHeader from "../components/PageHeader";
 import { useLanguage } from "../context/LanguageContext";
 import { careersPage } from "../i18n/pagesAr";
 import useJobPostings from "../hooks/useJobPostings";
+import headerImage from "../assets/page-headers/careers-stairs.png";
 
 const VALUES = [
   { icon: "shield", title: "Safety First", body: "Every project we deliver protects lives \u2014 that responsibility shapes how we hire, train and work." },
@@ -63,6 +64,7 @@ export default function Careers() {
             : "We're growing our team of fire protection engineers, ICT specialists and project managers. Help us secure lives and buildings across the UAE."
         }
         crumbs={[{ label: lang === "ar" ? ar.crumb : "Careers" }]}
+        image={headerImage}
       />
 
       <Reveal as="section" className="section" style={{ paddingBottom: 20 }}>

@@ -66,7 +66,7 @@ export default function ProjectsPage() {
       <Reveal as="section" className="stats-strip">
         <div className="container">
           <div className="stats-grid">
-            <div className="stat-box"><div className="num">1000+</div><div className="lbl">Projects Completed</div></div>
+            <div className="stat-box"><div className="num">1250+</div><div className="lbl">Projects Completed</div></div>
             <div className="stat-box"><div className="num">20+</div><div className="lbl">Years of Operation</div></div>
             <div className="stat-box"><div className="num">10</div><div className="lbl">Sectors Served</div></div>
             <div className="stat-box"><div className="num">7</div><div className="lbl">Emirates Covered</div></div>

@@ -5,6 +5,7 @@ import useReveal from "../../hooks/useReveal";
 import { useLanguage } from "../../context/LanguageContext";
 import { aboutPages, teamRolesAr } from "../../i18n/pagesAr";
 import useTeam from "../../hooks/useTeam";
+import headerImage from "../../assets/page-headers/team.jpg";
 
 export default function Team() {
   const { lang } = useLanguage();
@@ -26,6 +27,7 @@ export default function Team() {
           { label: lang === "ar" ? ar.crumbAbout : "About", href: "/about/overview" },
           { label: lang === "ar" ? ar.crumbCurrent : "Our Team" },
         ]}
+        image={headerImage}
       />
       <AboutSubNav />
 

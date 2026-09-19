@@ -55,12 +55,12 @@ export default function AskAI() {
           <>
             <span
               aria-hidden="true"
-              className="pointer-events-none absolute inset-0 rounded-full bg-aiBlue1/70"
+              className="pointer-events-none absolute inset-0 rounded-full bg-flame1/70"
               style={{ animation: "askaiRing 2.2s ease-out infinite" }}
             />
             <span
               aria-hidden="true"
-              className="pointer-events-none absolute inset-0 rounded-full bg-aiBlue2/60"
+              className="pointer-events-none absolute inset-0 rounded-full bg-flame2/60"
               style={{ animation: "askaiRing 2.2s ease-out infinite", animationDelay: "0.7s" }}
             />
           </>
@@ -68,7 +68,7 @@ export default function AskAI() {
         <button
           onClick={() => setOpen((v) => !v)}
           aria-label={open ? "Close Ask AI" : "Ask AI a question"}
-          className="relative flex items-center gap-2 rounded-full bg-gradient-to-br from-aiBlue1 to-aiBlue2 text-white pl-3.5 pr-4 py-3 font-body text-[13.5px] font-semibold tracking-wide"
+          className="relative flex items-center gap-2 rounded-full bg-gradient-to-br from-flame1 to-flame2 text-white pl-3.5 pr-4 py-3 font-body text-[13.5px] font-semibold tracking-wide"
           style={{ animation: "askaiGlowShift 2.6s ease-in-out infinite" }}
         >
           <SparkleIcon width="18" height="18" />

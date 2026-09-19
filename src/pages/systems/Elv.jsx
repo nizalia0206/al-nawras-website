@@ -7,6 +7,7 @@ import { elvImages } from "../../data/systemImages";
 import { useLanguage } from "../../context/LanguageContext";
 import useSystemImages from "../../hooks/useSystemImages";
 import { systemsCommon, systemsPages, systemImageCaptionsAr } from "../../i18n/pagesAr";
+import elvCctv from "../../assets/hero/elv-cctv.jpg";
 
 const PRODUCTS_EN = [
   { icon: IconCable, name: "Structured Cabling", desc: "Data, voice and building-automation cabling infrastructure." },
@@ -30,6 +31,7 @@ export default function Elv() {
   return (
     <>
       <PageHeader
+        image={elvCctv}
         eyebrow={lang === "ar" ? "الأنظمة والحلول" : "Systems & Solutions"}
         title={lang === "ar" ? ar.title : "ELV Systems"}
         desc={lang === "ar" ? ar.desc : "Structured cabling, CCTV, access control and BMS integration delivered as a single low-voltage infrastructure, so every building system reports back through one manageable network."}
@@ -65,7 +67,7 @@ export default function Elv() {
             <span className="w-6 h-[2px] bg-gradient-to-r from-flame1 to-gold" />
             {lang === "ar" ? ar.galleryHeading : "Access Control & CCTV"}
           </h2>
-          <Gallery items={images} />
+          <Gallery items={images} category={lang === "ar" ? "أنظمة ELV" : "ELV & SECURITY"} />
         </div>
       </section>
     </>

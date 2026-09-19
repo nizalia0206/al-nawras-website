@@ -7,6 +7,7 @@ import { emergencyLightImages } from "../../data/systemImages";
 import { useLanguage } from "../../context/LanguageContext";
 import useSystemImages from "../../hooks/useSystemImages";
 import { systemsCommon, systemsPages, systemImageCaptionsAr } from "../../i18n/pagesAr";
+import emergencyLightEnv from "../../assets/hero/emergency-light-env.png";
 
 const PRODUCTS_EN = [
   { icon: IconBattery, name: "Central Battery Systems", desc: "8–72 output circuit central battery panels for site-wide emergency power." },
@@ -30,6 +31,7 @@ export default function EmergencyLighting() {
   return (
     <>
       <PageHeader
+        image={emergencyLightEnv}
         eyebrow={lang === "ar" ? "الأنظمة والحلول" : "Systems & Solutions"}
         title={lang === "ar" ? ar.title : "Emergency Lighting"}
         desc={lang === "ar" ? ar.desc : "Central battery systems and DALI-addressable emergency and exit luminaires from Teknoware ESCALUX, monitored end-to-end through IntelliPanel and ESC-GATE gateways for consistent, code-compliant coverage."}
@@ -65,7 +67,7 @@ export default function EmergencyLighting() {
             <span className="w-6 h-[2px] bg-gradient-to-r from-flame1 to-gold" />
             {lang === "ar" ? ar.galleryHeading : "Panels & Luminaires"}
           </h2>
-          <Gallery items={images} />
+          <Gallery items={images} category={lang === "ar" ? "الإضاءة الطارئة" : "EMERGENCY LIGHTING"} />
         </div>
       </section>
     </>

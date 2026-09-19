@@ -7,6 +7,7 @@ import { voiceEvacImages } from "../../data/systemImages";
 import { useLanguage } from "../../context/LanguageContext";
 import useSystemImages from "../../hooks/useSystemImages";
 import { systemsCommon, systemsPages, systemImageCaptionsAr } from "../../i18n/pagesAr";
+import voiceEvacEnv from "../../assets/hero/voice-evac-env.png";
 
 const PRODUCTS_EN = [
   { icon: IconSpeaker, name: "ECS Amplifiers & Speakers", desc: "Distributed amplifiers and ceiling/wall speakers for clear voice paging." },
@@ -30,6 +31,7 @@ export default function VoiceEvacuation() {
   return (
     <>
       <PageHeader
+        image={voiceEvacEnv}
         eyebrow={lang === "ar" ? "الأنظمة والحلول" : "Systems & Solutions"}
         title={lang === "ar" ? ar.title : "Voice Evacuation Systems"}
         desc={lang === "ar" ? ar.desc : "Integrated emergency communication and public address networks, engineered to deliver clear, prioritized evacuation instructions across a building of any scale."}
@@ -65,7 +67,7 @@ export default function VoiceEvacuation() {
             <span className="w-6 h-[2px] bg-gradient-to-r from-flame1 to-gold" />
             {lang === "ar" ? ar.galleryHeading : "Speakers, Amplifiers & Paging"}
           </h2>
-          <Gallery items={images} columns="sm:grid-cols-2" />
+          <Gallery items={images} columns="sm:grid-cols-2" category={lang === "ar" ? "إخلاء صوتي" : "VOICE EVACUATION"} />
         </div>
       </section>
     </>

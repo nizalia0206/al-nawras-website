@@ -221,6 +221,11 @@ export const industries = [
     title: "Residential Towers",
     image: "https://images.unsplash.com/photo-1521208059781-bcf3fd4d1245?auto=format&fit=crop&w=800&q=80",
   },
+  {
+    id: "ind-education",
+    title: "Schools & Education",
+    image: "https://images.unsplash.com/photo-1580582932707-520aed937b7b?auto=format&fit=crop&w=800&q=80",
+  },
 ];
 
 export const team = [

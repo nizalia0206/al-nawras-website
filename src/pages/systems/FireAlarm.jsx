@@ -7,6 +7,7 @@ import { fireAlarmImages } from "../../data/systemImages";
 import { useLanguage } from "../../context/LanguageContext";
 import useSystemImages from "../../hooks/useSystemImages";
 import { systemsCommon, systemsPages, systemImageCaptionsAr } from "../../i18n/pagesAr";
+import fireAlarmEnv from "../../assets/hero/fire-alarm-env.png";
 
 const PRODUCTS_EN = [
   { icon: IconPanel, name: "Addressable Control Panels", desc: "1–4 loop networkable analogue addressable fire alarm panels." },
@@ -30,6 +31,7 @@ export default function FireAlarm() {
   return (
     <>
       <PageHeader
+        image={fireAlarmEnv}
         eyebrow={lang === "ar" ? "الأنظمة والحلول" : "Systems & Solutions"}
         title={lang === "ar" ? ar.title : "Fire Alarm Systems"}
         desc={lang === "ar" ? ar.desc : "Multi-loop addressable detection and control, designed around Honeywell's Morley and Farenhyt platforms and commissioned by our qualified engineering team to give occupants the earliest possible warning."}
@@ -65,7 +67,7 @@ export default function FireAlarm() {
             <span className="w-6 h-[2px] bg-gradient-to-r from-flame1 to-gold" />
             {lang === "ar" ? ar.galleryHeading : "Panels & Detection Devices"}
           </h2>
-          <Gallery items={images} columns="sm:grid-cols-2" />
+          <Gallery items={images} columns="sm:grid-cols-2" category={lang === "ar" ? "إنذار الحريق" : "FIRE ALARM"} />
         </div>
       </section>
     </>

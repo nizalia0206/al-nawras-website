@@ -7,6 +7,7 @@ import { fireFightingGroups } from "../../data/systemImages";
 import { useLanguage } from "../../context/LanguageContext";
 import useSystemImages from "../../hooks/useSystemImages";
 import { systemsCommon, systemsPages, systemImageCaptionsAr } from "../../i18n/pagesAr";
+import fireFightingEnv from "../../assets/hero/fire-fighting-env.png";
 
 const PRODUCTS_EN = [
   { icon: IconPump, name: "Fire Pump Sets", desc: "Horizontal & vertical inline pump sets, 750–1000+ GPM, UL/FM approved." },
@@ -33,6 +34,7 @@ export default function FireFighting() {
   return (
     <>
       <PageHeader
+        image={fireFightingEnv}
         eyebrow={lang === "ar" ? "الأنظمة والحلول" : "Systems & Solutions"}
         title={lang === "ar" ? ar.title : "Fire Fighting Systems"}
         desc={
@@ -76,7 +78,7 @@ export default function FireFighting() {
                 <span className="w-6 h-[2px] bg-gradient-to-r from-flame1 to-gold" />
                 {group.title}
               </h2>
-              <Gallery items={group.items} />
+              <Gallery items={group.items} category={group.title} />
             </div>
           ))}
         </div>

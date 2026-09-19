@@ -1,5 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 import Layout from "./components/Layout";
+import LoadingScreen from "./components/LoadingScreen";
 import Home from "./pages/Home";
 import Overview from "./pages/about/Overview";
 import Mission from "./pages/about/Mission";
@@ -25,6 +26,8 @@ import Account from "./pages/account/Account";
 
 export default function App() {
   return (
+    <>
+    <LoadingScreen />
     <Routes>
       <Route element={<Layout />}>
         <Route path="/" element={<Home />} />
@@ -50,5 +53,6 @@ export default function App() {
         <Route path="/account" element={<Account />} />
       </Route>
     </Routes>
+    </>
   );
 }

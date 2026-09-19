@@ -3,7 +3,7 @@ import useReveal from "../hooks/useReveal";
 import { useLanguage } from "../context/LanguageContext";
 import { systemsCommon } from "../i18n/pagesAr";
 
-function GalleryCard({ item, onOpen }) {
+function GalleryCard({ item, category, onOpen }) {
   const { lang } = useLanguage();
   return (
     <div
@@ -20,6 +20,13 @@ function GalleryCard({ item, onOpen }) {
           className="pointer-events-none absolute w-40 h-40 rounded-full bg-gradient-to-br from-flame1/25 to-gold/20 blur-2xl scale-0 opacity-0 transition-all duration-500 ease-[var(--ease)] group-hover:scale-125 group-hover:opacity-100"
           aria-hidden="true"
         />
+
+        {item.brand && (
+          <span className="absolute top-3 left-3 z-[1] bg-ink/85 text-white text-[10.5px] font-semibold uppercase tracking-wide px-3 py-1.5 rounded-full">
+            {item.brand}
+          </span>
+        )}
+
         <img
           src={item.src}
           alt={item.name}
@@ -35,26 +42,36 @@ function GalleryCard({ item, onOpen }) {
         </span>
       </button>
 
-      {/* label bar */}
-      <div className="relative px-4 py-3.5 border-t border-black/[.07] flex items-center justify-between gap-2">
+      {/* body */}
+      <div className="relative px-4 pt-3.5 pb-4 border-t border-black/[.07]">
+        {category && (
+          <div className="text-[10.5px] font-bold uppercase tracking-wider text-flame1 mb-1.5">
+            {category}
+          </div>
+        )}
         <button
           type="button"
           onClick={onOpen}
-          className="text-[12.5px] font-semibold uppercase tracking-wide text-ink leading-tight text-left hover:text-flame1 transition-colors"
+          className="block text-[14px] font-semibold text-ink leading-snug text-left hover:text-flame1 transition-colors mb-1.5"
         >
           {item.name}
         </button>
-        <a
-          href={`https://wa.me/971551099885?text=${encodeURIComponent(
-            `Hi Al Nawras, I'd like to get a quote for ${item.name}.`
-          )}`}
-          target="_blank"
-          rel="noopener noreferrer"
-          onClick={(e) => e.stopPropagation()}
-          className="btn btn-flame !py-2 !px-4 !text-[11px] shrink-0"
-        >
-          {lang === "ar" ? "احصل على عرض سعر" : "Get Quote"}
-        </a>
+        {item.desc && (
+          <p className="text-[12.5px] leading-[1.55] text-inksoft mb-3.5">{item.desc}</p>
+        )}
+        <div className="border-t border-dashed border-black/[.12] pt-3.5">
+          <a
+            href={`https://wa.me/971551099885?text=${encodeURIComponent(
+              `Hi Al Nawras, I'd like to get a quote for ${item.name}.`
+            )}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={(e) => e.stopPropagation()}
+            className="btn btn-flame !py-2.5 !text-[11.5px] w-full text-center"
+          >
+            {lang === "ar" ? "احصل على عرض سعر" : "Get Quote"}
+          </a>
+        </div>
         {/* animated underline accent */}
         <span className="absolute left-0 bottom-0 h-[2px] w-full bg-gradient-to-r from-flame1 to-gold origin-left scale-x-0 transition-transform duration-500 ease-[var(--ease)] group-hover:scale-x-100" />
       </div>
@@ -62,7 +79,7 @@ function GalleryCard({ item, onOpen }) {
   );
 }
 
-export default function Gallery({ items, columns = "sm:grid-cols-2 lg:grid-cols-3" }) {
+export default function Gallery({ items, columns = "sm:grid-cols-2 lg:grid-cols-3", category }) {
   const { lang } = useLanguage();
   const [active, setActive] = useState(null);
   const ref = useReveal();
@@ -86,7 +103,7 @@ export default function Gallery({ items, columns = "sm:grid-cols-2 lg:grid-cols-
     <>
       <div ref={ref} className={`reveal-stagger grid grid-cols-1 ${columns} gap-5`}>
         {items.map((item, i) => (
-          <GalleryCard key={item.name + i} item={item} onOpen={() => setActive(i)} />
+          <GalleryCard key={item.name + i} item={item} category={category} onOpen={() => setActive(i)} />
         ))}
       </div>
 
@@ -127,10 +144,17 @@ export default function Gallery({ items, columns = "sm:grid-cols-2 lg:grid-cols-
 
             <div className="px-7 py-5 border-t border-black/[.07] flex flex-col sm:flex-row sm:items-center justify-between gap-4">
               <div>
-                <div className="sec-eyebrow !mb-1">{lang === "ar" ? systemsCommon.lightboxLabel : "Al Nawras Systems & Solutions"}</div>
+                <div className="sec-eyebrow !mb-1">
+                  {items[active].brand
+                    ? items[active].brand
+                    : lang === "ar" ? systemsCommon.lightboxLabel : "Al Nawras Systems & Solutions"}
+                </div>
                 <h3 className="font-display uppercase text-[19px] tracking-wide text-ink">
                   {items[active].name}
                 </h3>
+                {items[active].desc && (
+                  <p className="text-[13px] leading-[1.6] text-inksoft mt-1.5 max-w-[46ch]">{items[active].desc}</p>
+                )}
               </div>
               <div className="flex items-center gap-3 shrink-0">
                 <a

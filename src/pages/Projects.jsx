@@ -6,6 +6,7 @@ import PageHeader from "../components/PageHeader";
 import { useLanguage } from "../context/LanguageContext";
 import useProjects from "../hooks/useProjects";
 import { projectsPage, projectCategoriesAr } from "../i18n/pagesAr";
+import headerImage from "../assets/page-headers/projects.jpg";
 
 export default function Projects() {
   const { lang } = useLanguage();
@@ -27,12 +28,13 @@ export default function Projects() {
             : "From malls and high-rise towers to hospitals, schools and oil & gas facilities — a selection of the fire protection, life safety and ELV projects Al Nawras has delivered."
         }
         crumbs={[{ label: lang === "ar" ? ar.crumb : "Projects" }]}
+        image={headerImage}
       />
 
       <Reveal as="section" className="stats-strip">
         <div className="container">
           <div className="stats-grid">
-            <div className="stat-box"><div className="num ltr-content">1000+</div><div className="lbl">{lang === "ar" ? ar.statCompleted : "Projects Completed"}</div></div>
+            <div className="stat-box"><div className="num ltr-content">1250+</div><div className="lbl">{lang === "ar" ? ar.statCompleted : "Projects Completed"}</div></div>
             <div className="stat-box"><div className="num ltr-content">20+</div><div className="lbl">{lang === "ar" ? ar.statYears : "Years of Operation"}</div></div>
             <div className="stat-box"><div className="num ltr-content">10</div><div className="lbl">{lang === "ar" ? ar.statSectors : "Sectors Served"}</div></div>
             <div className="stat-box"><div className="num ltr-content">7</div><div className="lbl">{lang === "ar" ? ar.statEmirates : "Emirates Covered"}</div></div>

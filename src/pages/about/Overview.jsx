@@ -3,6 +3,7 @@ import AboutSubNav from "../../components/AboutSubNav";
 import useReveal from "../../hooks/useReveal";
 import { useLanguage } from "../../context/LanguageContext";
 import { aboutPages } from "../../i18n/pagesAr";
+import headerImage from "../../assets/page-headers/who-we-are.png";
 
 export default function Overview() {
   const { lang } = useLanguage();
@@ -14,13 +15,13 @@ export default function Overview() {
     lang === "ar"
       ? [
           { n: "2005", l: ar.statYear },
-          { n: "+1,000", l: ar.statProjects },
+          { n: "+1,250", l: ar.statProjects },
           { n: "3", l: ar.statOffices },
           { n: "6", l: ar.statBrands },
         ]
       : [
           { n: "2005", l: "Year Founded" },
-          { n: "1,000+", l: "Projects Executed" },
+          { n: "1,250+", l: "Projects Executed" },
           { n: "3", l: "UAE Offices" },
           { n: "6", l: "Global Brand Partners" },
         ];
@@ -36,6 +37,7 @@ export default function Overview() {
             : "A UAE-based fire, life-safety, ELV and ICT solutions provider, delivering consultancy, products and support to the highest standards since 2005."
         }
         crumbs={[{ label: lang === "ar" ? ar.crumb : "About" }]}
+        image={headerImage}
       />
       <AboutSubNav />
 

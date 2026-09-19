@@ -3,6 +3,7 @@ import AboutSubNav from "../../components/AboutSubNav";
 import useReveal from "../../hooks/useReveal";
 import { useLanguage } from "../../context/LanguageContext";
 import { aboutPages } from "../../i18n/pagesAr";
+import headerImage from "../../assets/page-headers/mission-vision.png";
 
 const CARDS_EN = [
   {
@@ -52,6 +53,7 @@ export default function Mission() {
           { label: lang === "ar" ? ar.crumbAbout : "About", href: "/about/overview" },
           { label: lang === "ar" ? ar.crumbCurrent : "Mission & Vision" },
         ]}
+        image={headerImage}
       />
       <AboutSubNav />
 

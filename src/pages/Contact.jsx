@@ -3,16 +3,42 @@ import { Icon } from "../components/CatalogIcons.jsx";
 import PageHeader from "../components/PageHeader";
 import { useLanguage } from "../context/LanguageContext";
 import { contactPage } from "../i18n/pagesAr";
+import headerImage from "../assets/page-headers/contact.png";
+
+const FORMSUBMIT_ENDPOINT = "https://formsubmit.co/ajax/info@nawrassystems.com";
 
 export default function Contact() {
   const { lang } = useLanguage();
   const ar = contactPage;
   const [submitted, setSubmitted] = useState(false);
+  const [error, setError] = useState(false);
+  const [sending, setSending] = useState(false);
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
-    setSubmitted(true);
-    setTimeout(() => setSubmitted(false), 5000);
+    setError(false);
+    setSending(true);
+    const form = e.target;
+    const data = new FormData(form);
+    data.append("_subject", "New enquiry from nawrassystems.com contact form");
+    data.append("_template", "table");
+    data.append("_captcha", "false");
+
+    try {
+      const res = await fetch(FORMSUBMIT_ENDPOINT, {
+        method: "POST",
+        body: data,
+        headers: { Accept: "application/json" },
+      });
+      if (!res.ok) throw new Error("Request failed");
+      form.reset();
+      setSubmitted(true);
+      setTimeout(() => setSubmitted(false), 5000);
+    } catch (err) {
+      setError(true);
+    } finally {
+      setSending(false);
+    }
   }
 
   return (
@@ -26,6 +52,7 @@ export default function Contact() {
             : "Whether it's a fire protection retrofit, a new ICT network, or a full building safety upgrade — our engineering team is ready to help."
         }
         crumbs={[{ label: lang === "ar" ? ar.crumb : "Contact" }]}
+        image={headerImage}
       />
       <section className="bg-ambient contact-hero" style={{ paddingTop: 32, paddingBottom: 32 }}>
         <div className="container">
@@ -59,18 +86,23 @@ export default function Contact() {
                 <Icon.check />
                 <span>{lang === "ar" ? ar.successNote : "Thank you — your message has been received. Our team will contact you shortly."}</span>
               </div>
+              {error && (
+                <div className="success-note show" style={{ background: "#fdecea", borderColor: "#f5c2c0" }}>
+                  <span>{lang === "ar" ? "تعذّر الإرسال، يرجى المحاولة مرة أخرى." : "Something went wrong sending your message — please try again, or email us directly."}</span>
+                </div>
+              )}
               <form onSubmit={handleSubmit}>
                 <div className="field-row">
-                  <div className="field"><label>{lang === "ar" ? ar.fullName : "Full Name *"}</label><input type="text" required placeholder={lang === "ar" ? ar.fullNamePlaceholder : "Your full name"} /></div>
-                  <div className="field"><label>{lang === "ar" ? ar.company : "Company"}</label><input type="text" placeholder={lang === "ar" ? ar.companyPlaceholder : "Company name"} /></div>
+                  <div className="field"><label>{lang === "ar" ? ar.fullName : "Full Name *"}</label><input type="text" name="Full Name" required placeholder={lang === "ar" ? ar.fullNamePlaceholder : "Your full name"} /></div>
+                  <div className="field"><label>{lang === "ar" ? ar.company : "Company"}</label><input type="text" name="Company" placeholder={lang === "ar" ? ar.companyPlaceholder : "Company name"} /></div>
                 </div>
                 <div className="field-row">
-                  <div className="field"><label>{lang === "ar" ? ar.email : "Email *"}</label><input type="email" required placeholder={lang === "ar" ? ar.emailPlaceholder : "you@company.com"} /></div>
-                  <div className="field"><label>{lang === "ar" ? ar.phone : "Phone"}</label><input type="tel" placeholder={lang === "ar" ? ar.phonePlaceholder : "+971 5X XXX XXXX"} /></div>
+                  <div className="field"><label>{lang === "ar" ? ar.email : "Email *"}</label><input type="email" name="Email" required placeholder={lang === "ar" ? ar.emailPlaceholder : "you@company.com"} /></div>
+                  <div className="field"><label>{lang === "ar" ? ar.phone : "Phone"}</label><input type="tel" name="Phone" placeholder={lang === "ar" ? ar.phonePlaceholder : "+971 5X XXX XXXX"} /></div>
                 </div>
                 <div className="field">
                   <label>{lang === "ar" ? ar.helpWith : "What can we help with?"}</label>
-                  <select defaultValue={lang === "ar" ? ar.helpOptions[0] : "Fire Alarm & Detection"}>
+                  <select name="Help With" defaultValue={lang === "ar" ? ar.helpOptions[0] : "Fire Alarm & Detection"}>
                     {(lang === "ar" ? ar.helpOptions : [
                       "Fire Alarm & Detection",
                       "Fire Pumps",
@@ -84,8 +116,12 @@ export default function Contact() {
                     ))}
                   </select>
                 </div>
-                <div className="field"><label>{lang === "ar" ? ar.message : "Message *"}</label><textarea required placeholder={lang === "ar" ? ar.messagePlaceholder : "Tell us about your project…"} /></div>
-                <button type="submit" className="btn btn-primary btn-block">{lang === "ar" ? ar.sendMessageBtn : "Send Message"}</button>
+                <div className="field"><label>{lang === "ar" ? ar.message : "Message *"}</label><textarea name="Message" required placeholder={lang === "ar" ? ar.messagePlaceholder : "Tell us about your project…"} /></div>
+                <button type="submit" className="btn btn-primary btn-block" disabled={sending}>
+                  {sending
+                    ? (lang === "ar" ? "جارٍ الإرسال…" : "Sending…")
+                    : (lang === "ar" ? ar.sendMessageBtn : "Send Message")}
+                </button>
               </form>
             </div>
 

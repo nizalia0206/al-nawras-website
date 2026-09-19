@@ -3,6 +3,7 @@ import AboutSubNav from "../../components/AboutSubNav";
 import CertificationsGrid from "../../components/CertificationsGrid";
 import { useLanguage } from "../../context/LanguageContext";
 import { aboutPages } from "../../i18n/pagesAr";
+import headerImage from "../../assets/page-headers/certifications.jpg";
 
 export default function Certifications() {
   const { t, lang } = useLanguage();
@@ -18,6 +19,7 @@ export default function Certifications() {
           { label: lang === "ar" ? ar.crumbAbout : "About", href: "/about/overview" },
           { label: lang === "ar" ? ar.crumbCurrent : "Certifications" },
         ]}
+        image={headerImage}
       />
       <AboutSubNav />
 

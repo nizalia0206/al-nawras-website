@@ -12,6 +12,13 @@ body { @apply bg-paper text-ink font-body antialiased; overflow-x: hidden; }
 
 .display { @apply font-display uppercase tracking-wide; }
 
+/* Hard failsafe: guarantee the mobile hamburger never shows on desktop widths,
+   regardless of Tailwind class generation/caching. Mobile drawer still opens
+   below 1280px via the xl:hidden Tailwind class on the same button. */
+@media (min-width: 1280px) {
+  .mobile-menu-toggle { display: none !important; }
+}
+
 /* ===== Arabic language support ===== */
 html.lang-ar body,
 html.lang-ar .font-body {
@@ -32,18 +39,12 @@ html.lang-ar .counter-number {
   direction: ltr;
 }
 
-/* reveal-on-scroll */
-.reveal{ opacity:0; transform:translateY(28px); transition:opacity .8s var(--ease), transform .8s var(--ease); }
-.reveal.in{ opacity:1; transform:translateY(0); }
+/* reveal-on-scroll — disabled per client request (item 20); content now shows immediately */
+.reveal{ opacity:1; transform:none; }
+.reveal.in{ opacity:1; transform:none; }
 
-.reveal-stagger > * { opacity:0; transform:translateY(24px); transition:opacity .7s var(--ease), transform .7s var(--ease); }
-.reveal-stagger.in > *{ opacity:1; transform:translateY(0); }
-.reveal-stagger.in > *:nth-child(1){ transition-delay: .02s }
-.reveal-stagger.in > *:nth-child(2){ transition-delay: .10s }
-.reveal-stagger.in > *:nth-child(3){ transition-delay: .18s }
-.reveal-stagger.in > *:nth-child(4){ transition-delay: .26s }
-.reveal-stagger.in > *:nth-child(5){ transition-delay: .34s }
-.reveal-stagger.in > *:nth-child(6){ transition-delay: .42s }
+.reveal-stagger > * { opacity:1; transform:none; }
+.reveal-stagger.in > *{ opacity:1; transform:none; }
 
 .sec-eyebrow{
   @apply flex items-center gap-[10px] text-[12.5px] tracking-[.2em] uppercase text-flame1 font-bold mb-[18px];
@@ -69,6 +70,18 @@ html.lang-ar .counter-number {
 .svc-card.is-active .svc-icon{ @apply text-white; }
 .svc-card.is-active .svc-desc{ @apply text-white/85; }
 .svc-card.is-active .svc-learn{ @apply text-white; }
+
+/* header mega-menu dropdown cards (About / Systems / Brands / Projects) —
+   same card language as the Systems & Solutions grid, but the darker-orange
+   "active" look triggers on hover instead of being forced on one tile */
+.nav-mega-card{
+  @apply relative flex flex-col gap-0.5 rounded-md p-4 border border-transparent transition-all duration-300;
+}
+.nav-mega-card:hover{ @apply bg-gradient-to-br from-flame1 to-ember border-transparent shadow-flame -translate-y-0.5; }
+.nav-mega-card:hover .nav-mega-icon{ @apply text-white; }
+.nav-mega-card:hover .nav-mega-title{ @apply text-white; }
+.nav-mega-card:hover .nav-mega-desc{ @apply text-white/85; }
+.nav-mega-card:hover .nav-mega-learn{ @apply text-white; }
 
 /* orange underline + glow accent, reused on Brands and Projects tiles so
    every tile grid on the site shares the Systems & Solutions hover language */
@@ -149,17 +162,22 @@ html.lang-ar .counter-number {
 /* Industries sector strip — infinite sliding marquee of cards */
 .industries-marquee{
   width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
   -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 64px, #000 calc(100% - 64px), transparent 100%);
   mask-image: linear-gradient(90deg, transparent 0, #000 64px, #000 calc(100% - 64px), transparent 100%);
 }
+.industries-marquee::-webkit-scrollbar{ display: none; }
 .industries-track{
   display: flex;
   align-items: stretch;
   gap: 22px;
   width: max-content;
-  animation: industriesScroll 34s linear infinite;
+  animation: industriesScroll 20s linear infinite;
 }
-.industries-marquee:hover .industries-track{ animation-play-state: paused; }
+.industries-marquee:hover .industries-track,
+.industries-marquee:active .industries-track{ animation-play-state: paused; }
 @keyframes industriesScroll {
   from { transform: translateX(0); }
   to { transform: translateX(-50%); }
@@ -240,3 +258,83 @@ html.lang-ar .counter-number {
   display: none;
 }
 
+
+/* ===== Footer brand-partners strip — endless sliding logo row ===== */
+.partners-marquee{
+  --k: 1;                       /* logo size multiplier (reduced on small screens) */
+  --gap: 76px;
+  position: relative;
+  overflow: hidden;
+  /* soft fade at both edges so logos glide in/out instead of being clipped */
+  -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 7%, #000 93%, transparent 100%);
+          mask-image: linear-gradient(90deg, transparent 0, #000 7%, #000 93%, transparent 100%);
+}
+.partners-track{
+  display: flex;
+  align-items: center;
+  width: max-content;
+  animation: partnersScroll 42s linear infinite;
+  will-change: transform;
+}
+/* Pause while the visitor is hovering/pressing or keyboard-focusing a logo */
+.partners-marquee:hover .partners-track,
+.partners-marquee:active .partners-track,
+.partners-marquee:focus-within .partners-track{ animation-play-state: paused; }
+@keyframes partnersScroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }   /* two identical lists => seamless loop */
+}
+/* padding-right == gap, so both lists are exactly the same width and the
+   -50% shift lands precisely on the start of the second list */
+.partners-list{
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  gap: var(--gap);
+  padding: 0 var(--gap) 0 0;
+  margin: 0;
+  list-style: none;
+}
+.partners-item{ flex: 0 0 auto; }
+.partners-link{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: calc(64px * var(--k));
+  opacity: .92;
+  transition: transform .3s var(--ease), opacity .3s var(--ease), filter .3s var(--ease);
+}
+.partners-link:hover,
+.partners-link:focus-visible{ opacity: 1; transform: scale(1.08); }
+.partners-link:focus-visible{ outline: 2px solid #ee6c2f; outline-offset: 6px; border-radius: 4px; }
+/* each logo sets its own height via --h so wide wordmarks and compact marks
+   carry a similar visual weight */
+.partners-img{
+  display: block;
+  height: calc(var(--h, 40) * 1px * var(--k));
+  width: auto;
+  max-width: none;
+  object-fit: contain;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+.partners-wordmark{
+  font-family: theme('fontFamily.display');
+  font-size: calc(22px * var(--k));
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: #131c33;
+}
+@media (max-width: 640px){
+  .partners-marquee{ --k: .78; --gap: 46px; }
+  .partners-track{ animation-duration: 32s; }
+}
+/* Accessibility: no motion => a static, wrapped row showing each partner once */
+@media (prefers-reduced-motion: reduce){
+  .partners-marquee{ -webkit-mask-image: none; mask-image: none; }
+  .partners-track{ animation: none; width: auto; flex-wrap: wrap; justify-content: center; padding: 0 24px; }
+  .partners-list{ flex-wrap: wrap; justify-content: center; gap: 28px var(--gap); padding: 0; }
+  .partners-list[aria-hidden="true"],
+  .partners-item[aria-hidden="true"]{ display: none; }
+}

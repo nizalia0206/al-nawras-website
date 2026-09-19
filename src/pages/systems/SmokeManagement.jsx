@@ -7,6 +7,7 @@ import { smokeManagementImages } from "../../data/systemImages";
 import { useLanguage } from "../../context/LanguageContext";
 import useSystemImages from "../../hooks/useSystemImages";
 import { systemsCommon, systemsPages, systemImageCaptionsAr } from "../../i18n/pagesAr";
+import smokeFan from "../../assets/hero/smoke-fan.jpg";
 
 const PRODUCTS_EN = [
   { icon: IconSmoke, name: "Fire/Smoke Dampers", desc: "Duct-mounted dampers that inhibit smoke spread between zones." },
@@ -30,6 +31,7 @@ export default function SmokeManagement() {
   return (
     <>
       <PageHeader
+        image={smokeFan}
         eyebrow={lang === "ar" ? "الأنظمة والحلول" : "Systems & Solutions"}
         title={lang === "ar" ? ar.title : "Smoke Management"}
         desc={lang === "ar" ? ar.desc : "Fire and smoke dampers, extraction fans and electronic control units, specified and installed to keep stairwells and escape routes clear for the duration of an event."}
@@ -65,7 +67,7 @@ export default function SmokeManagement() {
             <span className="w-6 h-[2px] bg-gradient-to-r from-flame1 to-gold" />
             {lang === "ar" ? ar.galleryHeading : "Dampers, Fans & Controls"}
           </h2>
-          <Gallery items={images} />
+          <Gallery items={images} category={lang === "ar" ? "إدارة الدخان" : "SMOKE MANAGEMENT"} />
         </div>
       </section>
     </>
