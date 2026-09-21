@@ -1,88 +1,72 @@
 import { useEffect, useState } from "react";
-import useReveal from "../hooks/useReveal";
 import { useLanguage } from "../context/LanguageContext";
 import { systemsCommon } from "../i18n/pagesAr";
+import { useTilt } from "../hooks/useTilt";
 
-function GalleryCard({ item, category, onOpen }) {
+/**
+ * Systems & Solutions picture card — same card as the Brands / Products page
+ * (see .sys-card in index.css): 3D-tilt tile, square white thumbnail, brand tag,
+ * category chip, 2-line title + description, dashed divider, Get Quote button.
+ * Clicking the card opens the lightbox below.
+ */
+function SystemCard({ item, category, onOpen }) {
   const { lang } = useLanguage();
+  const { ref, onMouseMove, onMouseEnter, onMouseLeave, onTouchStart, onTouchEnd } = useTilt({ max: 10 });
+
   return (
     <div
-      className="group relative bg-white rounded-sm border border-black/[.08] overflow-hidden text-left transition-all duration-500 ease-[var(--ease)] hover:-translate-y-1.5 hover:border-flame1/40 hover:shadow-[0_24px_50px_-20px_rgba(255,91,30,.4)]"
+      ref={ref}
+      className="sys-card"
+      onMouseMove={onMouseMove}
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
+      onTouchStart={onTouchStart}
+      onTouchEnd={onTouchEnd}
+      onClick={onOpen}
+      role="button"
+      tabIndex={0}
+      aria-label={`${lang === "ar" ? "عرض" : "View"} ${item.name}`}
+      onKeyDown={(e) => {
+        if (e.target !== e.currentTarget) return; // ignore keys pressed on the Get Quote link
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          onOpen();
+        }
+      }}
     >
-      {/* image stage */}
-      <button
-        type="button"
-        onClick={onOpen}
-        className="relative w-full h-56 flex items-center justify-center p-8 overflow-hidden bg-paper2"
-      >
-        {/* glow that blooms in behind the product on hover */}
-        <span
-          className="pointer-events-none absolute w-40 h-40 rounded-full bg-gradient-to-br from-flame1/25 to-gold/20 blur-2xl scale-0 opacity-0 transition-all duration-500 ease-[var(--ease)] group-hover:scale-125 group-hover:opacity-100"
-          aria-hidden="true"
-        />
+      <div className="thumb">
+        {item.brand && <span className="supplier-tag">{item.brand}</span>}
+        <img src={item.src} alt={item.name} loading="lazy" />
+        <span className="quick-view">{lang === "ar" ? "اضغط للتكبير ←" : "Tap to enlarge →"}</span>
+      </div>
 
-        {item.brand && (
-          <span className="absolute top-3 left-3 z-[1] bg-ink/85 text-white text-[10.5px] font-semibold uppercase tracking-wide px-3 py-1.5 rounded-full">
-            {item.brand}
-          </span>
-        )}
-
-        <img
-          src={item.src}
-          alt={item.name}
-          loading="lazy"
-          className="relative max-h-full max-w-full object-contain transition-transform duration-700 ease-[var(--ease)] group-hover:scale-[1.12] drop-shadow-[0_10px_18px_rgba(0,0,0,.12)]"
-        />
-
-        {/* expand hint */}
-        <span className="absolute top-3 right-3 w-8 h-8 rounded-full bg-ink/85 text-white flex items-center justify-center opacity-0 -translate-y-1.5 scale-90 transition-all duration-400 ease-[var(--ease)] group-hover:opacity-100 group-hover:translate-y-0 group-hover:scale-100">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round">
-            <path d="M9 3H3v6M15 3h6v6M9 21H3v-6M15 21h6v-6" />
-          </svg>
-        </span>
-      </button>
-
-      {/* body */}
-      <div className="relative px-4 pt-3.5 pb-4 border-t border-black/[.07]">
-        {category && (
-          <div className="text-[10.5px] font-bold uppercase tracking-wider text-flame1 mb-1.5">
-            {category}
-          </div>
-        )}
-        <button
-          type="button"
-          onClick={onOpen}
-          className="block text-[14px] font-semibold text-ink leading-snug text-left hover:text-flame1 transition-colors mb-1.5"
-        >
-          {item.name}
-        </button>
-        {item.desc && (
-          <p className="text-[12.5px] leading-[1.55] text-inksoft mb-3.5">{item.desc}</p>
-        )}
-        <div className="border-t border-dashed border-black/[.12] pt-3.5">
+      <div className="body">
+        {category && <span className="cat-chip">{category}</span>}
+        <h3>{item.name}</h3>
+        {item.desc && <p className="short">{item.desc}</p>}
+        <div className="price-row">
           <a
             href={`https://wa.me/971551099885?text=${encodeURIComponent(
               `Hi Al Nawras, I'd like to get a quote for ${item.name}.`
             )}`}
             target="_blank"
             rel="noopener noreferrer"
+            aria-label={`${lang === "ar" ? "احصل على عرض سعر" : "Get a quote for"} ${item.name}`}
             onClick={(e) => e.stopPropagation()}
-            className="btn btn-flame !py-2.5 !text-[11.5px] w-full text-center"
+            className="btn btn-flame !py-2.5 !text-[11.5px] w-full justify-center"
           >
             {lang === "ar" ? "احصل على عرض سعر" : "Get Quote"}
           </a>
         </div>
-        {/* animated underline accent */}
-        <span className="absolute left-0 bottom-0 h-[2px] w-full bg-gradient-to-r from-flame1 to-gold origin-left scale-x-0 transition-transform duration-500 ease-[var(--ease)] group-hover:scale-x-100" />
       </div>
+      <span className="card-accent-line" aria-hidden="true" />
     </div>
   );
 }
 
-export default function Gallery({ items, columns = "sm:grid-cols-2 lg:grid-cols-3", category }) {
+export default function Gallery({ items, category }) {
   const { lang } = useLanguage();
   const [active, setActive] = useState(null);
-  const ref = useReveal();
 
   useEffect(() => {
     if (active === null) return;
@@ -101,9 +85,9 @@ export default function Gallery({ items, columns = "sm:grid-cols-2 lg:grid-cols-
 
   return (
     <>
-      <div ref={ref} className={`reveal-stagger grid grid-cols-1 ${columns} gap-5`}>
+      <div className="sys-grid" data-count={items.length}>
         {items.map((item, i) => (
-          <GalleryCard key={item.name + i} item={item} category={category} onOpen={() => setActive(i)} />
+          <SystemCard key={item.name + i} item={item} category={category} onOpen={() => setActive(i)} />
         ))}
       </div>
 
@@ -132,8 +116,8 @@ export default function Gallery({ items, columns = "sm:grid-cols-2 lg:grid-cols-
               &times;
             </button>
 
-            <div className="h-[360px] md:h-[440px] flex items-center justify-center p-10 bg-paper2 relative overflow-hidden">
-              <span className="absolute w-64 h-64 rounded-full bg-gradient-to-br from-flame1/15 to-gold/15 blur-3xl" />
+            {/* pictures are white-background product shots, so the stage is white too */}
+            <div className="h-[360px] md:h-[440px] flex items-center justify-center p-6 md:p-8 bg-white relative overflow-hidden">
               <img
                 key={active}
                 src={items[active].src}

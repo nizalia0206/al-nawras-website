@@ -67,7 +67,7 @@ export default function VoiceEvacuation() {
             <span className="w-6 h-[2px] bg-gradient-to-r from-flame1 to-gold" />
             {lang === "ar" ? ar.galleryHeading : "Speakers, Amplifiers & Paging"}
           </h2>
-          <Gallery items={images} columns="sm:grid-cols-2" category={lang === "ar" ? "إخلاء صوتي" : "VOICE EVACUATION"} />
+          <Gallery items={images} category={lang === "ar" ? "إخلاء صوتي" : "VOICE EVACUATION"} />
         </div>
       </section>
     </>

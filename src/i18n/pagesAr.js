@@ -194,7 +194,7 @@ export const systemImageCaptionsAr = {
   "Suppression Cylinders": "أسطوانات الإخماد",
   "Nozzles & Manifolds": "الفوهات والمشعّبات",
   "Suppression Control Panel": "لوحة تحكّم الإخماد",
-  "Detection & Release Devices": "أجهزة الكشف والتحرير",
+  "Agent Storage Cylinder": "أسطوانة تخزين مادة الإخماد",
   "Portable Fire Extinguishers": "طفايات حريق محمولة",
   "Addressable Fire Alarm Control Panel": "لوحة تحكّم إنذار حريق قابلة للعنونة",
   "Smoke Detectors & Notification Devices": "كاشفات دخان وأجهزة إخطار",

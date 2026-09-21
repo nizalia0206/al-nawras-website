@@ -67,7 +67,7 @@ export default function FireAlarm() {
             <span className="w-6 h-[2px] bg-gradient-to-r from-flame1 to-gold" />
             {lang === "ar" ? ar.galleryHeading : "Panels & Detection Devices"}
           </h2>
-          <Gallery items={images} columns="sm:grid-cols-2" category={lang === "ar" ? "إنذار الحريق" : "FIRE ALARM"} />
+          <Gallery items={images} category={lang === "ar" ? "إنذار الحريق" : "FIRE ALARM"} />
         </div>
       </section>
     </>
