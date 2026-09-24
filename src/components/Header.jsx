@@ -115,17 +115,17 @@ export default function Header({ overlayOnHero = false }) {
           />
         )}
         <div
-          className={`relative max-w-[1280px] mx-auto px-4 sm:px-8 flex items-center justify-between gap-3 transition-[height] duration-300 h-[72px] ${
+          className={`relative max-w-[1280px] mx-auto px-4 sm:px-8 flex items-center justify-between gap-4 xl:gap-8 transition-[height] duration-300 h-[72px] ${
             shrink ? "xl:h-[124px]" : "xl:h-[144px]"
           }`}
         >
-          <Link to="/" className="flex items-center shrink-0">
+          <Link to="/" className="flex items-center shrink min-w-0 max-w-[46vw] xl:max-w-none">
             <Logo
               light={overlay}
               sizeClasses={
                 overlay
-                  ? "h-11 sm:h-12 md:h-[52px] xl:h-[96px]"
-                  : "h-11 sm:h-12 md:h-[52px] xl:h-[88px]"
+                  ? "h-11 sm:h-12 md:h-[52px] xl:h-[64px] 2xl:h-[76px]"
+                  : "h-11 sm:h-12 md:h-[52px] xl:h-[60px] 2xl:h-[70px]"
               }
             />
           </Link>
@@ -144,7 +144,7 @@ export default function Header({ overlayOnHero = false }) {
                     <button
                       type="button"
                       onClick={() => setOpenIdx(openIdx === idx ? null : idx)}
-                      className={`flex items-center gap-1.5 px-2.5 xl:px-3 py-3.5 rounded-full text-[12px] xl:text-[13px] font-semibold uppercase tracking-[.06em] whitespace-nowrap transition-all duration-300 ${
+                      className={`flex items-center gap-1.5 px-2 2xl:px-3 py-3.5 rounded-full text-[12px] 2xl:text-[13px] font-semibold uppercase tracking-[.06em] whitespace-nowrap transition-all duration-300 ${
                         overlay ? "text-white hover:text-flame2" : "text-ink hover:text-flame1"
                       }`}
                     >
@@ -218,7 +218,7 @@ export default function Header({ overlayOnHero = false }) {
                 ) : item.to ? (
                   <Link
                     to={item.to}
-                    className={`relative flex items-center px-2.5 xl:px-3 py-3.5 text-[12px] xl:text-[13px] font-semibold uppercase tracking-[.06em] whitespace-nowrap transition-colors group ${
+                    className={`relative flex items-center px-2 2xl:px-3 py-3.5 text-[12px] 2xl:text-[13px] font-semibold uppercase tracking-[.06em] whitespace-nowrap transition-colors group ${
                       overlay ? "text-white hover:text-flame2" : "text-ink hover:text-flame1"
                     }`}
                   >
@@ -228,7 +228,7 @@ export default function Header({ overlayOnHero = false }) {
                 ) : (
                   <a
                     href={item.href}
-                    className={`relative flex items-center px-2.5 xl:px-3 py-3.5 text-[12px] xl:text-[13px] font-semibold uppercase tracking-[.06em] whitespace-nowrap transition-colors group ${
+                    className={`relative flex items-center px-2 2xl:px-3 py-3.5 text-[12px] 2xl:text-[13px] font-semibold uppercase tracking-[.06em] whitespace-nowrap transition-colors group ${
                       overlay ? "text-white hover:text-flame2" : "text-ink hover:text-flame1"
                     }`}
                   >
@@ -243,7 +243,7 @@ export default function Header({ overlayOnHero = false }) {
           <div className="flex items-center gap-2 sm:gap-3.5 shrink-0">
             <Link
               to={session ? "/account" : "/account/sign-in"}
-              className={`hidden sm:inline-flex items-center gap-1.5 rounded-full border px-3.5 xl:px-5 py-2.5 text-[12px] xl:text-[13px] font-semibold transition-all duration-300 ${
+              className={`hidden sm:inline-flex items-center gap-1.5 rounded-full border px-3.5 2xl:px-5 py-2.5 text-[12px] 2xl:text-[13px] font-semibold transition-all duration-300 ${
                 overlay
                   ? "border-white/40 text-white hover:border-white hover:bg-white/10"
                   : "border-ink/[.16] text-ink hover:border-flame1 hover:text-flame1"

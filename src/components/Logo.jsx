@@ -1,5 +1,6 @@
 import logoFull from "../assets/brand/logo-full.png";
 import logoMark from "../assets/brand/logo-mark.png";
+import logoFullLight from "../assets/brand/logo-full-light.png";
 
 /**
  * size = rendered height in px. Width follows the artwork's own aspect ratio.
@@ -20,7 +21,7 @@ export default function Logo({ size = 48, showText = true, light = false, classN
   // and visually "merge" into whatever section sits below the nav bar).
   const style = sizeClasses ? undefined : { height: responsive ? `clamp(40px, 9vw, ${size}px)` : size, width: "auto" };
   const sizingClasses = sizeClasses ? `${sizeClasses} w-auto` : "";
-  const shadow = light ? "drop-shadow-[0_0_1.5px_rgba(255,255,255,.95)] drop-shadow-[0_0_10px_rgba(255,255,255,.75)]" : "";
+  const shadow = light ? "drop-shadow-[0_2px_10px_rgba(0,0,0,.45)]" : "";
 
   if (!showText) {
     return (
@@ -35,7 +36,7 @@ export default function Logo({ size = 48, showText = true, light = false, classN
 
   return (
     <img
-      src={logoFull}
+      src={light ? logoFullLight : logoFull}
       alt="Al Nawras Safety & Security Systems LLC"
       style={style}
       className={`block shrink-0 object-contain ${sizingClasses} ${shadow} ${className}`}
