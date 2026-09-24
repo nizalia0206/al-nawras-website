@@ -3,7 +3,7 @@
 export const ASK_AI_FAQS = [
   {
     q: "What systems does Al Nawras install?",
-    a: "We design, supply, install and commission six core systems: Fire Fighting (pumps, hose reels, sprinklers), Fire Alarm, Voice Evacuation, Emergency Lighting, ELV (CCTV, access control, structured cabling) and Smoke Management — all delivered as a single, coordinated fire & life safety package.",
+    a: "We design, supply, install and commission six core systems: Firefighting (pumps, hose reels, sprinklers), Fire Alarm, Voice Evacuation, Emergency Lighting, ELV (CCTV, access control, structured cabling) and Smoke Management — all delivered as a single, coordinated fire & life safety package.",
   },
   {
     q: "Which brands do you represent?",

@@ -105,9 +105,6 @@ export default function Footer() {
               <Link to="/systems/fire-alarm" className="text-[14px] text-white/60 hover:text-white transition-colors">
                 {t("nav.systems_alarm")}
               </Link>
-              <Link to="/systems/voice-evacuation" className="text-[14px] text-white/60 hover:text-white transition-colors">
-                {t("nav.systems_voice")}
-              </Link>
               <Link to="/systems/emergency-lighting" className="text-[14px] text-white/60 hover:text-white transition-colors">
                 {t("nav.systems_light")}
               </Link>
@@ -127,6 +124,7 @@ export default function Footer() {
             <div className="flex flex-col gap-[13px] text-[14px] text-white/60 leading-[1.5]">
               <span>{t("footer.sharjahHQ")}</span>
               <span>{t("footer.dubai")}</span>
+              <span>{t("footer.abuDhabi")}</span>
               <span className="ltr-content">info@nawrassystems.com</span>
               <span className="ltr-content">www.nawrassystems.com</span>
             </div>

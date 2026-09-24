@@ -9,14 +9,12 @@ import {
   IconFlame,
   IconPump,
   IconDetector,
-  IconSpeaker,
   IconBattery,
   IconELV,
   IconSmoke,
 } from "./Icons";
 import fireFightingEnv from "../assets/hero/fire-fighting-env.png";
 import fireAlarmEnv from "../assets/hero/fire-alarm-env.png";
-import voiceEvacEnv from "../assets/hero/voice-evac-env.png";
 import emergencyLightEnv from "../assets/hero/emergency-light-env.png";
 import elvCctv from "../assets/hero/elv-cctv.jpg";
 import smokeFan from "../assets/hero/smoke-fan.jpg";
@@ -45,14 +43,6 @@ function useCategories(t) {
       imagePosition: "center 22%",
     },
     {
-      icon: IconSpeaker,
-      key: "voice-evacuation",
-      label: t("nav.systems_voice"),
-      to: "/systems/voice-evacuation",
-      image: voiceEvacEnv,
-      imagePosition: "right center",
-    },
-    {
       icon: IconBattery,
       key: "emergency-lighting",
       label: t("nav.systems_light"),
@@ -79,7 +69,7 @@ function useCategories(t) {
   ];
 }
 
-// English/Arabic per-slide headline copy, keyed by slide index (0-5 = product slides).
+// English/Arabic per-slide headline copy, keyed by slide index (0-4 = product slides).
 const SLIDE_COPY = {
   en: {
     0: {
@@ -92,27 +82,21 @@ const SLIDE_COPY = {
       line1: "Early Warning,",
       line2: "Zero Delay",
       tagline:
-        "Addressable detection networks that catch a threat before it spreads.",
+        "Addressable detection and voice evacuation that warn early and guide everyone out.",
     },
     2: {
-      line1: "Clear Direction,",
-      line2: "Safe Evacuation",
-      tagline:
-        "Life-safety audio and ECS systems that guide occupants to safety, clearly.",
-    },
-    3: {
       line1: "Guided Path,",
       line2: "Always Lit",
       tagline:
         "Central battery & DALI systems that keep exit paths lit when it matters most.",
     },
-    4: {
+    3: {
       line1: "Connected Building,",
       line2: "Constant Watch",
       tagline:
         "Access control, CCTV and low-voltage infrastructure across every building.",
     },
-    5: {
+    4: {
       line1: "Clean Air,",
       line2: "Clear Escape",
       tagline:
@@ -129,27 +113,21 @@ const SLIDE_COPY = {
     1: {
       line1: "إنذار مبكر،",
       line2: "بلا تأخير",
-      tagline: "شبكات كشف قابلة للعنونة ترصد الخطر قبل انتشاره.",
+      tagline: "كشف قابل للعنونة وإخلاء صوتي يُنذر مبكرًا ويرشد الجميع إلى الأمان.",
     },
     2: {
-      line1: "توجيه واضح،",
-      line2: "إخلاء آمن",
-      tagline:
-        "أنظمة صوت السلامة والاتصال الطارئ التي ترشد الشاغلين إلى الأمان بوضوح.",
-    },
-    3: {
       line1: "مسار مُضاء،",
       line2: "دائم الإضاءة",
       tagline:
         "أنظمة بطارية مركزية وDALI تُبقي مسارات الخروج مضاءة عند الحاجة.",
     },
-    4: {
+    3: {
       line1: "مبنى متصل،",
       line2: "مراقبة دائمة",
       tagline:
         "التحكم بالدخول وكاميرات المراقبة والبنية التحتية منخفضة الجهد في كل مبنى.",
     },
-    5: {
+    4: {
       line1: "هواء نظيف،",
       line2: "مخرج آمن",
       tagline: "أنظمة تهوية وتحكم بالدخان مصمّمة لإخلاء آمن.",
@@ -446,7 +424,7 @@ export default function Hero() {
                     }}
                   >
                     <Counter
-                      target={1250}
+                      target={1300}
                       suffix="+"
                       label={t("hero.statProjects")}
                     />
@@ -537,7 +515,7 @@ export default function Hero() {
 
         {/* tab bar — intro "Think Al Nawras" tab is intentionally omitted, product tabs only */}
         <div className="relative z-[2] border-t border-white/[.08] bg-[#78b0d0]/70 backdrop-blur-sm">
-          <div className="max-w-[1280px] mx-auto px-4 sm:px-8 flex overflow-x-auto sm:grid sm:grid-cols-6 sm:overflow-visible">
+          <div className="max-w-[1280px] mx-auto px-4 sm:px-8 flex overflow-x-auto sm:grid sm:grid-cols-5 sm:overflow-visible">
             {CATEGORIES.map((cat, i) => {
               if (cat.intro) return null;
               const Icon = cat.icon;

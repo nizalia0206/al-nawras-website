@@ -165,7 +165,7 @@ ul { margin: 0; padding: 0; list-style: none; }
   font-size: 12px; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase;
   color: var(--flame-500);
 }
-.eyebrow::before { content: ''; width: 22px; height: 2px; background: var(--flame-500); border-radius: 2px; }
+.eyebrow::before { content: none; }
 .section { padding: 88px 0; }
 @media (max-width: 780px) { .section { padding: 56px 0; } }
 .section-head { max-width: 640px; margin-bottom: 44px; }

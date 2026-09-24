@@ -48,7 +48,7 @@ export default function About() {
 
         {/* stats */}
         <div className="flex flex-wrap mt-16 md:mt-20 pt-10 border-t border-ink/[.08]">
-          <Counter theme="light" target={1250} suffix="+" label={t("about.statProjects")} />
+          <Counter theme="light" target={1300} suffix="+" label={t("about.statProjects")} />
           <Counter theme="light" target={20} suffix="+" label={t("about.statYears")} />
           <Counter theme="light" target={3} suffix="" label={t("about.statOffices")} />
           <Counter theme="light" target={6} suffix="" label={t("about.statBrands")} />

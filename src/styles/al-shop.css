@@ -165,7 +165,7 @@
   font-size: 12px; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase;
   color: var(--flame-500);
 }
-.al-shop-scope .eyebrow::before { content: ''; width: 22px; height: 2px; background: var(--flame-500); border-radius: 2px; }
+.al-shop-scope .eyebrow::before { content: none; }
 .al-shop-scope .section { padding: 88px 0; }
 @media (max-width: 780px) { .al-shop-scope .section { padding: 56px 0; } }
 .al-shop-scope .section-head { max-width: 640px; margin-bottom: 44px; }

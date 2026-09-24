@@ -64,7 +64,6 @@ export default function Elv() {
           </div>
 
           <h2 className="font-display uppercase text-[22px] md:text-[26px] tracking-wide text-ink mb-6 flex items-center gap-3">
-            <span className="w-6 h-[2px] bg-gradient-to-r from-flame1 to-gold" />
             {lang === "ar" ? ar.galleryHeading : "Access Control & CCTV"}
           </h2>
           <Gallery items={images} category={lang === "ar" ? "أنظمة ELV" : "ELV & SECURITY"} />

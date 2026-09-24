@@ -9,7 +9,7 @@ const CARDS_EN = [
   {
     num: "01",
     title: "Our Mission",
-    desc: "To safeguard lives and property across the UAE by engineering, supplying and maintaining fire, life-safety and ELV systems of uncompromising reliability — delivered on time, to code, every time.",
+    desc: "To protect life and property through our high dedication to enhance the safety standards, along with a positive contribution to the community we live in and operate at. To reduce and eliminate risk from fire in the community we serve, and to be the first choice provider for safety and security solutions within the UAE market.",
   },
   {
     num: "02",
@@ -19,7 +19,7 @@ const CARDS_EN = [
   {
     num: "03",
     title: "Quality Commitment",
-    desc: "ISO 9001:2015 certified, with civil defense approvals across three Emirates and an in-house team of licensed engineers and technicians who stand behind every installation.",
+    desc: "ISO 9001:2015 certified, with Class A civil defense approvals across three Emirates (SHJ, DXB & ADH) and an in-house team of licensed engineers and technicians who stand behind every installation.",
   },
 ];
 

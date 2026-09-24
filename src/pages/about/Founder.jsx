@@ -18,7 +18,7 @@ export default function Founder() {
         desc={
           lang === "ar"
             ? ar.desc
-            : "A personal assurance that every project is delivered safely, to specification and to the international standard."
+            : "A commitment to delivering superior and professional safety & security services to the UAE community."
         }
         crumbs={[
           { label: lang === "ar" ? ar.crumbAbout : "About", href: "/about/overview" },
@@ -34,7 +34,6 @@ export default function Founder() {
             <span className="inline-flex items-center justify-center px-2.5 py-1 text-[11px] font-bold tracking-[.08em] uppercase text-flame1 border border-flame1/40 bg-flame1/[.06] rounded ltr-content">
               {lang === "ar" ? ar.badge : "MD-01"}
             </span>
-            <span className="w-[26px] h-px bg-ink/15" />
             <span className="text-[11.5px] font-semibold tracking-[.22em] uppercase text-inksoft">
               {lang === "ar" ? ar.badgeLabel : "Message from the Managing Director"}
             </span>
@@ -67,28 +66,21 @@ export default function Founder() {
                 <>
                   <p className="text-[16px] md:text-[17px] leading-[1.85] text-inksoft mb-6">{ar.p1}</p>
                   <p className="text-[16px] md:text-[17px] leading-[1.85] text-inksoft mb-6">{ar.p2}</p>
-                  <p className="text-[16px] md:text-[17px] leading-[1.85] text-inksoft">{ar.p3}</p>
+                  {ar.p3 && <p className="text-[16px] md:text-[17px] leading-[1.85] text-inksoft">{ar.p3}</p>}
                 </>
               ) : (
                 <>
                   <p className="text-[16px] md:text-[17px] leading-[1.85] text-inksoft mb-6">
-                    "Welcome to Al Nawras. As Managing Director, I can confidently assert that the range
-                    and quality of our services are unmatched in the UAE marketplace. Since 2005, we have
-                    continually refined our systems, our processes and our people to deliver the most
-                    efficient experience possible to our loyal customers.
-                  </p>
-                  <p className="text-[16px] md:text-[17px] leading-[1.85] text-inksoft mb-6">
-                    Our reputation is built on the successful completion of more than 1,250 projects, each
-                    delivered with the highest possible quality — by embracing new technologies, following
-                    the latest industry standards and meeting the safety regulations of the UAE. Our
-                    well-trained engineers, project managers and skilled technicians provide the proper
-                    design, installation and service our customers have grown to expect at every stage of a
-                    project.
+                    "The UAE has undergone an unprecedented phase of expansion in the construction market over
+                    the last decades, and we are glad to be participating in the UAE's renaissance period.
+                    Considering the importance of this, it has become imperative that we operate Al Nawras S&amp;S
+                    as a company that specializes in delivering superior and professional safety &amp; security
+                    services.
                   </p>
                   <p className="text-[16px] md:text-[17px] leading-[1.85] text-inksoft">
-                    We are committed to conducting our business professionally with every client. Our main
-                    aim is to enhance the overall safety standards of the UAE community that we are proud to
-                    live and work in."
+                    At Al Nawras, we are committed to conducting our business professionally with all clients.
+                    Our main aim is to enhance the overall safety standards in the UAE community that we enjoy
+                    living and working in."
                   </p>
                 </>
               )}

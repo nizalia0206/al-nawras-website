@@ -20,7 +20,7 @@ export default function Logo({ size = 48, showText = true, light = false, classN
   // and visually "merge" into whatever section sits below the nav bar).
   const style = sizeClasses ? undefined : { height: responsive ? `clamp(40px, 9vw, ${size}px)` : size, width: "auto" };
   const sizingClasses = sizeClasses ? `${sizeClasses} w-auto` : "";
-  const shadow = light ? "drop-shadow-[0_2px_8px_rgba(255,255,255,.55)]" : "";
+  const shadow = light ? "drop-shadow-[0_0_1.5px_rgba(255,255,255,.95)] drop-shadow-[0_0_10px_rgba(255,255,255,.75)]" : "";
 
   if (!showText) {
     return (

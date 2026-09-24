@@ -21,7 +21,7 @@ const GLIMPSES = [
     icon: IconPanel,
     eyebrow: "Systems & Solutions",
     title: "Full Life-Safety Stack",
-    desc: "Fire fighting, fire alarm, voice evacuation, emergency lighting, ELV and smoke management.",
+    desc: "Firefighting, fire alarm, voice evacuation, emergency lighting, ELV and smoke management.",
     href: "/systems/fire-fighting",
     internal: true,
     tag: "6 Solution Categories",
@@ -37,7 +37,7 @@ const GLIMPSES = [
   {
     icon: IconFlame,
     eyebrow: "Projects",
-    title: "1,250+ Delivered",
+    title: "1,300+ Delivered",
     desc: "Danube Properties, Ellington, Saudi German Hospital and more, executed since 2005.",
     href: "#projects",
     tag: "Residential · Healthcare · Hospitality",

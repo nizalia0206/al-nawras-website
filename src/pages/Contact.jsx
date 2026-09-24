@@ -60,7 +60,7 @@ export default function Contact() {
             <div className="contact-card">
               <div className="icon-wrap"><Icon.phone /></div>
               <h4>{lang === "ar" ? ar.callUs : "Call Us"}</h4>
-              <p className="ltr-content"><a href="tel:+97165625425">06-5625425</a> {lang === "ar" ? ar.sharjahLabel : "(Sharjah)"}<br /><a href="tel:+97143335373">04-3335373</a> {lang === "ar" ? ar.dubaiLabel : "(Dubai)"}</p>
+              <p className="ltr-content"><a href="tel:+97165625425">06-5625425</a> {lang === "ar" ? ar.sharjahLabel : "(Sharjah)"}<br /><a href="tel:+97143335373">04-3335373</a> {lang === "ar" ? ar.dubaiLabel : "(Dubai)"}<br /><a href="tel:+971551099886">055-1099886</a> {lang === "ar" ? "(أبوظبي)" : "(Abu Dhabi)"}</p>
             </div>
             <div className="contact-card">
               <div className="icon-wrap"><Icon.mail /></div>

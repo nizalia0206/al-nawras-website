@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import Layout from "./components/Layout";
 import LoadingScreen from "./components/LoadingScreen";
 import Home from "./pages/Home";
@@ -9,7 +9,6 @@ import Team from "./pages/about/Team";
 import AboutCertifications from "./pages/about/Certifications";
 import FireFighting from "./pages/systems/FireFighting";
 import FireAlarm from "./pages/systems/FireAlarm";
-import VoiceEvacuation from "./pages/systems/VoiceEvacuation";
 import EmergencyLighting from "./pages/systems/EmergencyLighting";
 import Elv from "./pages/systems/Elv";
 import SmokeManagement from "./pages/systems/SmokeManagement";
@@ -38,7 +37,7 @@ export default function App() {
         <Route path="/about/certifications" element={<AboutCertifications />} />
         <Route path="/systems/fire-fighting" element={<FireFighting />} />
         <Route path="/systems/fire-alarm" element={<FireAlarm />} />
-        <Route path="/systems/voice-evacuation" element={<VoiceEvacuation />} />
+        <Route path="/systems/voice-evacuation" element={<Navigate to="/systems/fire-alarm" replace />} />
         <Route path="/systems/emergency-lighting" element={<EmergencyLighting />} />
         <Route path="/systems/elv" element={<Elv />} />
         <Route path="/systems/smoke-management" element={<SmokeManagement />} />

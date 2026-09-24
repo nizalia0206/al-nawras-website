@@ -34,7 +34,7 @@ export default function Projects() {
       <Reveal as="section" className="stats-strip">
         <div className="container">
           <div className="stats-grid">
-            <div className="stat-box"><div className="num ltr-content">1250+</div><div className="lbl">{lang === "ar" ? ar.statCompleted : "Projects Completed"}</div></div>
+            <div className="stat-box"><div className="num ltr-content">1300+</div><div className="lbl">{lang === "ar" ? ar.statCompleted : "Projects Completed"}</div></div>
             <div className="stat-box"><div className="num ltr-content">20+</div><div className="lbl">{lang === "ar" ? ar.statYears : "Years of Operation"}</div></div>
             <div className="stat-box"><div className="num ltr-content">10</div><div className="lbl">{lang === "ar" ? ar.statSectors : "Sectors Served"}</div></div>
             <div className="stat-box"><div className="num ltr-content">7</div><div className="lbl">{lang === "ar" ? ar.statEmirates : "Emirates Covered"}</div></div>

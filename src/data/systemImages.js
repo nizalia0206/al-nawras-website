@@ -7,7 +7,7 @@
 // as the product cards on the Brands / Products page.
 const S = "/assets/systems/";
 
-// Fire Fighting
+// Firefighting
 const dryWetRiser   = S + "fire-fighting/dry-wet-riser-systems.jpg";
 const hoseReel      = S + "fire-fighting/fire-hose-reel-cabinets.jpg";
 const hydrant       = S + "fire-fighting/fire-hydrants.jpg";

@@ -15,14 +15,14 @@ export default function Overview() {
     lang === "ar"
       ? [
           { n: "2005", l: ar.statYear },
-          { n: "+1,250", l: ar.statProjects },
+          { n: "+1,300", l: ar.statProjects },
           { n: "3", l: ar.statOffices },
           { n: "6", l: ar.statBrands },
         ]
       : [
           { n: "2005", l: "Year Founded" },
-          { n: "1,250+", l: "Projects Executed" },
-          { n: "3", l: "UAE Offices" },
+          { n: "1,300+", l: "Projects Executed" },
+          { n: "3", l: "UAE Branches" },
           { n: "6", l: "Global Brand Partners" },
         ];
 
@@ -34,7 +34,7 @@ export default function Overview() {
         desc={
           lang === "ar"
             ? ar.desc
-            : "A UAE-based fire, life-safety, ELV and ICT solutions provider, delivering consultancy, products and support to the highest standards since 2005."
+            : "A UAE-based fire, life-safety and ELV solutions provider, delivering consultancy, products and support to the highest standards since 2005."
         }
         crumbs={[{ label: lang === "ar" ? ar.crumb : "About" }]}
         image={headerImage}
@@ -56,9 +56,10 @@ export default function Overview() {
             ) : (
               <>
                 <p className="text-[16px] leading-[1.85] text-inksoft mb-5">
-                  Al Nawras Safety &amp; Security Systems LLC was founded in Sharjah in 2005 and has grown into
-                  one of the UAE's trusted names in fire &amp; life safety, extra-low-voltage (ELV) and ICT
-                  infrastructure. With offices in{" "}
+                  Al Nawras Safety &amp; Security Systems LLC was founded in Sharjah in 2005 by Eng. Mohammed
+                  Ghazy, bringing with him over thirty (30) years of experience in the safety and security
+                  industry in the UAE. The company has grown into one of the UAE's trusted names in fire &amp;
+                  life safety and extra-low-voltage (ELV) systems. With branches in{" "}
                   <b className="text-ink font-semibold">Sharjah, Dubai and Abu Dhabi</b>, plus a dedicated
                   warehouse and workshop, the company offers a genuine one-stop shop for developers,
                   contractors and consultants across the Emirates.
@@ -72,7 +73,7 @@ export default function Overview() {
                 <p className="text-[16px] leading-[1.85] text-inksoft">
                   Today, the company operates as an authorized distributor and sub-distributor for globally
                   certified manufacturers — Honeywell, Teknoware, Waterfall, KD Industries, Uranus and H3C —
-                  bringing internationally recognized equipment to every fire, life-safety, ELV and ICT
+                  bringing internationally recognized equipment to every fire, life-safety and ELV
                   project it delivers.
                 </p>
               </>

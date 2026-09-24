@@ -49,7 +49,7 @@ html.lang-ar .counter-number {
 .sec-eyebrow{
   @apply flex items-center gap-[10px] text-[12.5px] tracking-[.2em] uppercase text-flame1 font-bold mb-[18px];
 }
-.sec-eyebrow::before{ content:''; width:26px; height:2px; background: linear-gradient(90deg,#ff5b1e,#ffb020); }
+.sec-eyebrow::before{ content:none; }
 
 .btn{
   @apply inline-flex items-center gap-2 px-[26px] py-3 text-[13.5px] font-semibold tracking-[.02em] rounded-full transition-all duration-300 whitespace-nowrap;
@@ -172,18 +172,15 @@ html.lang-ar .counter-number {
 .industries-track{
   display: flex;
   align-items: stretch;
-  gap: 22px;
   width: max-content;
-  animation: industriesScroll 20s linear infinite;
 }
-.industries-marquee:hover .industries-track,
-.industries-marquee:active .industries-track{ animation-play-state: paused; }
 @keyframes industriesScroll {
   from { transform: translateX(0); }
   to { transform: translateX(-50%); }
 }
 .industries-card{
   flex: 0 0 auto;
+  margin-inline-end: 22px;
   width: 260px;
   border-radius: 10px;
   overflow: hidden;

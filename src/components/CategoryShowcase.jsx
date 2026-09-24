@@ -23,7 +23,7 @@ const AUTOPLAY_MS = 5500;
 const CATEGORIES = [
   {
     icon: IconPump,
-    label: "Fire Fighting Systems",
+    label: "Firefighting Systems",
     line1: "Rapid Response,",
     line2: "Total Suppression",
     tagline: "Pumps, sprinklers, hydrants & risers engineered for total suppression coverage.",
@@ -47,7 +47,7 @@ const CATEGORIES = [
     line1: "Clear Direction,",
     line2: "Safe Evacuation",
     tagline: "Life-safety audio and ECS systems that guide occupants to safety, clearly.",
-    to: "/systems/voice-evacuation",
+    to: "/systems/fire-alarm",
     image: voiceEvacImages[0].src,
     imageName: "Speakers & PA System",
   },

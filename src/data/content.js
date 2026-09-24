@@ -2,7 +2,7 @@ export const systems = [
   {
     id: "sys-fire",
     icon: "IconFlame",
-    title: "Fire Fighting Systems",
+    title: "Firefighting Systems",
     desc: "A complete firefighting scope engineered, supplied and installed to the highest standards — UL-listed and FM-approved fire pump sets, hose reels, wet risers, sprinkler, foam and deluge systems, hydrants and portable extinguishers.",
     products: [
       { icon: "IconPump", name: "Fire Pump Sets", desc: "Horizontal & vertical inline pump sets, 750–1000+ GPM, UL/FM approved." },
@@ -191,98 +191,30 @@ export const certifications = [
 ];
 
 export const industries = [
-  {
-    id: "ind-hotels",
-    title: "Hotels & Hospitality",
-    image: "https://images.unsplash.com/photo-1536269404660-0a8d4e88bf1b?auto=format&fit=crop&w=800&q=80",
-  },
-  {
-    id: "ind-government",
-    title: "Government Buildings",
-    image: "https://images.unsplash.com/photo-1703641852060-dc7e63d83978?auto=format&fit=crop&w=800&q=80",
-  },
-  {
-    id: "ind-offices",
-    title: "Offices & Towers",
-    image: "https://images.unsplash.com/photo-1745015446589-7ee6f702d8c1?auto=format&fit=crop&w=800&q=80",
-  },
-  {
-    id: "ind-manufacturing",
-    title: "Manufacturing Plants",
-    image: "https://images.unsplash.com/photo-1727870752423-4d51d5b500c7?auto=format&fit=crop&w=800&q=80",
-  },
-  {
-    id: "ind-healthcare",
-    title: "Healthcare Facilities",
-    image: "https://images.unsplash.com/photo-1764885517847-79d62138cc58?auto=format&fit=crop&w=800&q=80",
-  },
-  {
-    id: "ind-residential",
-    title: "Residential Towers",
-    image: "https://images.unsplash.com/photo-1521208059781-bcf3fd4d1245?auto=format&fit=crop&w=800&q=80",
-  },
-  {
-    id: "ind-education",
-    title: "Schools & Education",
-    image: "https://images.unsplash.com/photo-1580582932707-520aed937b7b?auto=format&fit=crop&w=800&q=80",
-  },
+  { id: "ind-hotels", title: "Hotels & Hospitality", image: "/assets/industries/hotels.jpg" },
+  { id: "ind-government", title: "Government Buildings", image: "/assets/industries/government.jpg" },
+  { id: "ind-offices", title: "Offices & Towers", image: "/assets/industries/offices.jpg" },
+  { id: "ind-manufacturing", title: "Manufacturing Plants", image: "/assets/industries/manufacturing.jpg" },
+  { id: "ind-healthcare", title: "Healthcare Facilities", image: "/assets/industries/healthcare.jpg" },
+  { id: "ind-residential", title: "Residential Towers", image: "/assets/industries/residential.jpg" },
+  { id: "ind-education", title: "Schools & Universities", image: "/assets/industries/education.jpg" },
 ];
 
 export const team = [
-  {
-    id: "mg",
-    initials: "MG",
-    name: "Eng. Mohammed Ghazy",
-    role: "Managing Director",
-    phone: "+971 50 4544361",
-    icon: "person",
-  },
-  {
-    id: "yg",
-    initials: "YG",
-    name: "Eng. Yasser Mohammed Ghazy",
-    role: "General Manager",
-    phone: "+971 55 1099879",
-    icon: "hardhat",
-  },
-  {
-    id: "ag",
-    initials: "AG",
-    name: "Eng. Amr Mohammed Ghazy",
-    role: "Sales & Business Development Manager",
-    phone: "+971 55 1099885",
-    icon: "person",
-  },
-  {
-    id: "am",
-    initials: "AM",
-    name: "Eng. Ahmed Morsy",
-    role: "Project Manager",
-    phone: "+971 55 1099886",
-    icon: "person",
-    highlight: true,
-  },
-  {
-    id: "sg",
-    initials: "SG",
-    name: "Eng. Sayed Gamal",
-    role: "Engineering Manager",
-    phone: "info@nawrassystems.com",
-    icon: "hardhat",
-  },
-  {
-    id: "th",
-    initials: "TH",
-    name: "Mr. Tarek Haikal",
-    role: "Purchase Manager",
-    phone: "+971 55 1099884",
-    icon: "person",
-  },
+  { id: "mg", initials: "MG", name: "Eng. Mohammed Ghazy", role: "Managing Director", phone: "+971 50 4544361", icon: "person" },
+  { id: "yg", initials: "YG", name: "Eng. Yasser Mohammed Ghazy", role: "General Manager", phone: "+971 55 1099879", icon: "hardhat" },
+  { id: "ag", initials: "AG", name: "Eng. Amr Mohammed Ghazy", role: "Sales & Business Development Manager", phone: "+971 55 1099885", icon: "person" },
+  { id: "agm", initials: "AG", name: "Mr. Amr Gamal", role: "Chief Accountant", phone: "+971 55 1099883", icon: "person" },
+  { id: "th", initials: "TH", name: "Mr. Tarek Haikal", role: "Purchase Manager", phone: "+971 55 1099884", icon: "person" },
+  { id: "ir", initials: "IR", name: "Eng. Ibrahim Rafaat", role: "Abu Dhabi Branch Manager", phone: "+971 55 1099886", icon: "hardhat" },
+  { id: "at", initials: "AT", name: "Eng. Ayman Tarek", role: "Operation Manager", phone: "+971 50 1995676", icon: "hardhat" },
+  { id: "kf", initials: "KF", name: "Eng. Kamal Fathy", role: "PMO & Engineering", phone: "+971 55 838 7748", icon: "hardhat" },
+  { id: "sm", initials: "SM", name: "Mr. Sherif Mosaad", role: "PRO & Civil Defense Representative", phone: "+971 52 637 8275", icon: "person" },
 ];
 
 export const locations = [
   { tag: "HQ", title: "Sharjah — Head Office", desc: "Office 905, Al Baker Tower 5, Al Khan · Tel +971 6 562 5425" },
   { tag: "Branch", title: "Dubai Office", desc: "Barsha Valley Building, Al Barsha First · Tel +971 4 333 5373" },
-  { tag: "Branch", title: "Abu Dhabi Office", desc: "Office 13, 9th Floor, Tower 1, Mazyad Mall, MBZ City" },
+  { tag: "Branch", title: "Abu Dhabi Office", desc: "Office 13, 9th Floor, Tower 1, Mazyad Mall, MBZ City · Mob +971 55 109 9886" },
   { tag: "Warehouse", title: "Sharjah Warehouse", desc: "Shed No. 8, Industrial Area No. 11" },
 ];

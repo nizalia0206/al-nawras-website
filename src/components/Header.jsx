@@ -27,7 +27,6 @@ function useNav(t) {
       items: [
         { icon: "IconFlame", title: t("nav.systems_fire"), desc: t("nav.systems_fire_desc"), to: "/systems/fire-fighting" },
         { icon: "IconPanel", title: t("nav.systems_alarm"), desc: t("nav.systems_alarm_desc"), to: "/systems/fire-alarm" },
-        { icon: "IconSpeaker", title: t("nav.systems_voice"), desc: t("nav.systems_voice_desc"), to: "/systems/voice-evacuation" },
         { icon: "IconLightbulb", title: t("nav.systems_light"), desc: t("nav.systems_light_desc"), to: "/systems/emergency-lighting" },
         { icon: "IconELV", title: t("nav.systems_elv"), desc: t("nav.systems_elv_desc"), to: "/systems/elv" },
         { icon: "IconSmoke", title: t("nav.systems_smoke"), desc: t("nav.systems_smoke_desc"), to: "/systems/smoke-management" },

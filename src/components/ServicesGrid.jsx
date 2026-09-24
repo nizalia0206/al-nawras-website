@@ -9,7 +9,7 @@ import { useLanguage } from "../context/LanguageContext";
 const SYSTEM_ROUTES = {
   "sys-fire": "/systems/fire-fighting",
   "sys-alarm": "/systems/fire-alarm",
-  "sys-voice": "/systems/voice-evacuation",
+  "sys-voice": "/systems/fire-alarm",
   "sys-light": "/systems/emergency-lighting",
   "sys-elv": "/systems/elv",
   "sys-smoke": "/systems/smoke-management",

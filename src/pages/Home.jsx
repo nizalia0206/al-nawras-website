@@ -1,5 +1,6 @@
 import Hero from "../components/Hero";
 import About from "../components/About";
+import SystemsShowcase from "../components/SystemsShowcase";
 import Industries from "../components/Industries";
 
 export default function Home() {
@@ -7,6 +8,7 @@ export default function Home() {
     <>
       <Hero />
       <About />
+      <SystemsShowcase id="systems" />
       <Industries id="industries" />
     </>
   );

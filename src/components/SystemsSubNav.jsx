@@ -6,7 +6,6 @@ export default function SystemsSubNav() {
   const TABS = [
     { label: t("nav.systems_fire"), to: "/systems/fire-fighting" },
     { label: t("nav.systems_alarm"), to: "/systems/fire-alarm" },
-    { label: t("nav.systems_voice"), to: "/systems/voice-evacuation" },
     { label: t("nav.systems_light"), to: "/systems/emergency-lighting" },
     { label: t("nav.systems_elv"), to: "/systems/elv" },
     { label: t("nav.systems_smoke"), to: "/systems/smoke-management" },

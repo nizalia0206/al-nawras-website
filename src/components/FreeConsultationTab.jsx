@@ -1,6 +1,6 @@
 import { useLanguage } from "../context/LanguageContext";
 
-// Vertical "Free Consultation" tab, pinned to the viewport edge on every page.
+// Vertical "Get a Quote" tab, pinned to the viewport edge on every page.
 export default function FreeConsultationTab() {
   const { lang } = useLanguage();
 
@@ -16,7 +16,7 @@ export default function FreeConsultationTab() {
         borderRadius: lang === "ar" ? "0 8px 8px 0" : "8px 0 0 8px",
       }}
     >
-      {lang === "ar" ? "استشارة مجانية" : "Free Consultation"}
+      {lang === "ar" ? "احصل على عرض سعر" : "Get a Quote"}
     </a>
   );
 }

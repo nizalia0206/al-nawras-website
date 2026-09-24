@@ -65,6 +65,7 @@ export const industriesAr = {
   "ind-manufacturing": "منشآت التصنيع",
   "ind-healthcare": "المرافق الصحية",
   "ind-residential": "الأبراج السكنية",
+  "ind-education": "المدارس والجامعات",
 };
 
 export const certificationsAr = {
