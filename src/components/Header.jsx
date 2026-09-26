@@ -6,8 +6,50 @@ import { IconChevron, IconArrow } from "./Icons";
 import LanguageToggle from "./LanguageToggle";
 import { useLanguage } from "../context/LanguageContext";
 import { useCustomerAuth } from "../context/CustomerAuthContext";
+import { PROJECT_CATS } from "../data/projects";
+import { projectCategoriesAr } from "../i18n/pagesAr";
 
-function useNav(t) {
+// Icon + short description for every real project category (data/projects.js is the
+// source of truth for the category strings themselves, so this list can't drift out
+// of sync with what the Projects page actually filters on).
+const PROJECT_CAT_ICON = {
+  "Malls & Shopping Centers": "IconBuilding",
+  "Residential / Commercial & High-Rise": "IconHardHat",
+  Hospitality: "IconBed",
+  Educational: "IconPerson",
+  "Industrial & Oil and Gas": "IconPipe",
+  "Fire Hydrant Network": "IconHoseReel",
+  "Warehouse & Logistics": "IconBuilding",
+  "Smoke Management System": "IconSmoke",
+  Healthcare: "IconCross",
+  "ELV Section": "IconELV",
+};
+const PROJECT_CAT_DESC_EN = {
+  "Malls & Shopping Centers": "Retail malls & shopping centers",
+  "Residential / Commercial & High-Rise": "Towers & mixed-use developments",
+  Hospitality: "Hotels & hospitality buildings",
+  Educational: "Schools & educational campuses",
+  "Industrial & Oil and Gas": "Factories & industrial facilities",
+  "Fire Hydrant Network": "External hydrant & pipe networks",
+  "Warehouse & Logistics": "Warehouses & logistics facilities",
+  "Smoke Management System": "Dedicated smoke management systems",
+  Healthcare: "Hospitals & medical facilities",
+  "ELV Section": "Extra low voltage installations",
+};
+const PROJECT_CAT_DESC_AR = {
+  "Malls & Shopping Centers": "مولات ومراكز تسوق",
+  "Residential / Commercial & High-Rise": "أبراج ومشاريع متعددة الاستخدامات",
+  Hospitality: "فنادق ومنشآت ضيافة",
+  Educational: "مدارس وحرم تعليمي",
+  "Industrial & Oil and Gas": "مصانع ومنشآت صناعية",
+  "Fire Hydrant Network": "شبكات حنفيات وأنابيب خارجية",
+  "Warehouse & Logistics": "مستودعات ومرافق لوجستية",
+  "Smoke Management System": "أنظمة إدارة دخان مخصصة",
+  Healthcare: "مستشفيات ومرافق طبية",
+  "ELV Section": "تركيبات الجهد المنخفض للغاية",
+};
+
+function useNav(t, lang) {
   return [
     { label: t("nav.home"), to: "/" },
     {
@@ -50,10 +92,15 @@ function useNav(t) {
       wide: true,
       items: [
         { icon: "IconTag", title: t("nav.projects_all"), desc: t("nav.projects_all_desc"), to: "/projects" },
-        { icon: "IconBuilding", title: t("nav.projects_residential"), desc: t("nav.projects_residential_desc"), to: "/projects?type=Residential" },
-        { icon: "IconHardHat", title: t("nav.projects_commercial"), desc: t("nav.projects_commercial_desc"), to: "/projects?type=Commercial" },
-        { icon: "IconCross", title: t("nav.projects_healthcare"), desc: t("nav.projects_healthcare_desc"), to: "/projects?type=Healthcare" },
-        { icon: "IconBed", title: t("nav.projects_hospitality"), desc: t("nav.projects_hospitality_desc"), to: "/projects?type=Hospitality" },
+        // Every real category from data/projects.js, so nothing is missing from
+        // the dropdown — and each link's ?type= matches an actual category string,
+        // so the Projects page filter (below) resolves it instead of showing "All".
+        ...PROJECT_CATS.filter((c) => c !== "All").map((c) => ({
+          icon: PROJECT_CAT_ICON[c] || "IconTag",
+          title: lang === "ar" ? projectCategoriesAr[c] || c : c,
+          desc: lang === "ar" ? PROJECT_CAT_DESC_AR[c] || "" : PROJECT_CAT_DESC_EN[c] || "",
+          to: `/projects?type=${encodeURIComponent(c)}`,
+        })),
       ],
     },
     { label: t("nav.careers"), to: "/careers" },
@@ -64,7 +111,7 @@ function useNav(t) {
 export default function Header({ overlayOnHero = false }) {
   const { t, lang } = useLanguage();
   const { session } = useCustomerAuth();
-  const NAV = useNav(t);
+  const NAV = useNav(t, lang);
   const [shrink, setShrink] = useState(false);
   const [openIdx, setOpenIdx] = useState(null);
   const [drawerOpen, setDrawerOpen] = useState(false);
@@ -163,7 +210,7 @@ export default function Header({ overlayOnHero = false }) {
                     <div
                       className={`absolute top-full ${
                         item.wide
-                          ? `${idx >= 3 ? "right-0" : "left-1/2 -translate-x-1/2"} min-w-[640px] xl:min-w-[720px] grid grid-cols-2 lg:grid-cols-3 gap-1.5`
+                          ? `${idx >= 3 ? "right-0" : "left-1/2 -translate-x-1/2"} min-w-[640px] xl:min-w-[720px] grid grid-cols-2 lg:grid-cols-3 gap-1.5 max-h-[min(70vh,620px)] overflow-y-auto`
                           : idx >= 3
                           ? "right-0 min-w-[340px]"
                           : "left-1/2 -translate-x-1/2 min-w-[340px]"

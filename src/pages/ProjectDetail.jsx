@@ -32,6 +32,17 @@ export default function ProjectDetail() {
     window.scrollTo(0, 0);
   }, [slug]);
 
+  // Show the project's own name in the browser tab (mirrors the brand name shown for
+  // partner links on /products) instead of the generic site title on every project page.
+  useEffect(() => {
+    if (!project) return;
+    const prevTitle = document.title;
+    document.title = `${project.title} | Al Nawras Safety & Security Systems LLC`;
+    return () => {
+      document.title = prevTitle;
+    };
+  }, [project]);
+
   if (!project) {
     if (loading) return null;
     return (

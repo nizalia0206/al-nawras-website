@@ -30,7 +30,17 @@ export default function Contact() {
         body: data,
         headers: { Accept: "application/json" },
       });
-      if (!res.ok) throw new Error("Request failed");
+      // FormSubmit can answer HTTP 200 with a JSON body reporting failure — most importantly
+      // {"success":"false", "message":"This form needs Activation..."} when info@nawrassystems.com
+      // hasn't clicked the one-time confirmation link FormSubmit emails on first use. Checking only
+      // res.ok would show "message sent" while the message was actually silently discarded, so the
+      // response body's own success flag (a string "true"/"false", not a boolean) has to be checked too.
+      const body = await res.json().catch(() => null);
+      const ok = res.ok && body && (body.success === "true" || body.success === true);
+      if (!ok) {
+        if (body?.message) console.error("FormSubmit rejected the submission:", body.message);
+        throw new Error(body?.message || "Request failed");
+      }
       form.reset();
       setSubmitted(true);
       setTimeout(() => setSubmitted(false), 5000);

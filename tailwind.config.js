@@ -9,7 +9,7 @@ export default {
         panel: "#8ec2dd",
         panel2: "#6ea3c4",
         steel: "#3d6a89",
-        steellight: "#153349",
+        steellight: "#d7e6f2",
         flame1: "#ee6c2f",
         flame2: "#f28a45",
         ember: "#c8501c",

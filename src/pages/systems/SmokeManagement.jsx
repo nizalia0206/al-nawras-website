@@ -33,6 +33,7 @@ export default function SmokeManagement() {
       <PageHeader
         image={smokeFan}
         eyebrow={lang === "ar" ? "الأنظمة والحلول" : "Systems & Solutions"}
+        eyebrowClassName="!text-[16px] sm:!text-[17px] !font-extrabold"
         title={lang === "ar" ? ar.title : "Smoke Management"}
         desc={lang === "ar" ? ar.desc : "Fire and smoke dampers, extraction fans and electronic control units, specified and installed to keep stairwells and escape routes clear for the duration of an event."}
         crumbs={[

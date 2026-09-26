@@ -27,6 +27,12 @@ const AUTOPLAY_MS = 5500;
 function useCategories(t) {
   return [
     {
+      intro: true,
+      key: "intro",
+      label: t("hero.eyebrowIntro"),
+      tabLabel: t("hero.tabIntro"),
+    },
+    {
       icon: IconPump,
       key: "fire-fighting",
       label: t("nav.systems_fire"),
@@ -69,34 +75,35 @@ function useCategories(t) {
   ];
 }
 
-// English/Arabic per-slide headline copy, keyed by slide index (0-4 = product slides).
+// English/Arabic per-slide headline copy, keyed by category key (not slide index —
+// the intro slide sits at index 0, so an index-based lookup would be off by one).
 const SLIDE_COPY = {
   en: {
-    0: {
+    "fire-fighting": {
       line1: "Rapid Response,",
       line2: "Total Suppression",
       tagline:
         "Pumps, sprinklers, hydrants & risers engineered for total suppression coverage.",
     },
-    1: {
+    "fire-alarm": {
       line1: "Early Warning,",
       line2: "Zero Delay",
       tagline:
         "Addressable detection and voice evacuation that warn early and guide everyone out.",
     },
-    2: {
+    "emergency-lighting": {
       line1: "Guided Path,",
       line2: "Always Lit",
       tagline:
         "Central battery & DALI systems that keep exit paths lit when it matters most.",
     },
-    3: {
+    elv: {
       line1: "Connected Building,",
       line2: "Constant Watch",
       tagline:
         "Access control, CCTV and low-voltage infrastructure across every building.",
     },
-    4: {
+    "smoke-management": {
       line1: "Clean Air,",
       line2: "Clear Escape",
       tagline:
@@ -104,30 +111,30 @@ const SLIDE_COPY = {
     },
   },
   ar: {
-    0: {
+    "fire-fighting": {
       line1: "استجابة سريعة،",
       line2: "إخماد كامل",
       tagline:
         "مضخات ورشاشات وحنفيات ومواسير رأسية مصمّمة لتغطية إخماد شاملة.",
     },
-    1: {
+    "fire-alarm": {
       line1: "إنذار مبكر،",
       line2: "بلا تأخير",
       tagline: "كشف قابل للعنونة وإخلاء صوتي يُنذر مبكرًا ويرشد الجميع إلى الأمان.",
     },
-    2: {
+    "emergency-lighting": {
       line1: "مسار مُضاء،",
       line2: "دائم الإضاءة",
       tagline:
         "أنظمة بطارية مركزية وDALI تُبقي مسارات الخروج مضاءة عند الحاجة.",
     },
-    3: {
+    elv: {
       line1: "مبنى متصل،",
       line2: "مراقبة دائمة",
       tagline:
         "التحكم بالدخول وكاميرات المراقبة والبنية التحتية منخفضة الجهد في كل مبنى.",
     },
-    4: {
+    "smoke-management": {
       line1: "هواء نظيف،",
       line2: "مخرج آمن",
       tagline: "أنظمة تهوية وتحكم بالدخان مصمّمة لإخلاء آمن.",
@@ -263,8 +270,8 @@ export default function Hero() {
                     />
                   </div>
 
-                  {/* light, neutral scrim — keeps the photo's real colour, just enough for text contrast */}
-                  <div className="absolute inset-0 bg-black/30" />
+                  {/* neutral scrim — keeps the photo's real colour, enough for text contrast */}
+                  <div className="absolute inset-0 bg-black/38" />
 
                   <div className="absolute inset-0 bg-gradient-to-t from-[#5c93b3]/70 via-transparent to-[#5c93b3]/25" />
                 </>
@@ -373,7 +380,7 @@ export default function Hero() {
                 <>
                   <h1
                     key={"h-" + active}
-                    className="font-display font-bold uppercase leading-[1.06] text-[28px] sm:text-[38px] md:text-[46px] max-w-[16ch]"
+                    className="font-display font-bold uppercase leading-[1.05] text-[34px] sm:text-[46px] md:text-[58px] lg:text-[64px] max-w-[16ch] text-ink"
                     style={{
                       animation:
                         "slideIn .55s var(--ease) .05s backwards",
@@ -406,13 +413,13 @@ export default function Hero() {
                         "slideIn .55s var(--ease) .16s backwards",
                     }}
                   >
-                    <a href="#projects" className="btn btn-flame">
-                      {t("hero.viewProjects")} <IconArrow />
+                    <a href="#contact" className="btn btn-flame">
+                      {t("hero.getConsultation")} <IconArrow />
                     </a>
 
-                    <a href="#contact" className="btn btn-ghost">
-                      {t("hero.getConsultation")}
-                    </a>
+                    <Link to="/products" className="btn btn-ghost">
+                      {t("hero.exploreProducts")}
+                    </Link>
                   </div>
 
                   <div
@@ -459,8 +466,8 @@ export default function Hero() {
                     <span className="block text-white">
                       {
                         (
-                          SLIDE_COPY[lang][active] ||
-                          SLIDE_COPY.en[active]
+                          SLIDE_COPY[lang][current.key] ||
+                          SLIDE_COPY.en[current.key]
                         )?.line1
                       }
                     </span>
@@ -468,8 +475,8 @@ export default function Hero() {
                     <span className="block text-steellight">
                       {
                         (
-                          SLIDE_COPY[lang][active] ||
-                          SLIDE_COPY.en[active]
+                          SLIDE_COPY[lang][current.key] ||
+                          SLIDE_COPY.en[current.key]
                         )?.line2
                       }
                     </span>
@@ -486,8 +493,8 @@ export default function Hero() {
                   >
                     {
                       (
-                        SLIDE_COPY[lang][active] ||
-                        SLIDE_COPY.en[active]
+                        SLIDE_COPY[lang][current.key] ||
+                        SLIDE_COPY.en[current.key]
                       )?.tagline
                     }
                   </p>

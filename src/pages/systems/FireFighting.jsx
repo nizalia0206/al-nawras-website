@@ -23,6 +23,7 @@ export default function FireFighting() {
       <PageHeader
         image={fireFightingEnv}
         eyebrow={isAr ? "الأنظمة والحلول" : "Systems & Solutions"}
+        eyebrowClassName="!text-[16px] sm:!text-[17px] !font-extrabold"
         title={isAr ? "أنظمة مكافحة الحريق" : "Firefighting Systems"}
         desc={
           isAr

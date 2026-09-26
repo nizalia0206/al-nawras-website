@@ -1,5 +1,5 @@
-import { useState, useMemo } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState, useMemo, useEffect } from "react";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { Icon } from "../components/CatalogIcons.jsx";
 import Reveal from "../components/Reveal.jsx";
 import PageHeader from "../components/PageHeader";
@@ -13,21 +13,55 @@ export default function Projects() {
   const ar = projectsPage;
   const { projects: PROJECTS } = useProjects();
   const PROJECT_CATS = useMemo(() => ["All", ...new Set(PROJECTS.map((p) => p.category))], [PROJECTS]);
-  const [filter, setFilter] = useState("All");
+  const [params] = useSearchParams();
+  const typeParam = params.get("type");
+  const [filter, setFilter] = useState(() => (typeParam && PROJECT_CATS.includes(typeParam) ? typeParam : "All"));
   const navigate = useNavigate();
+
+  // The header's Projects dropdown (and the Partners/brand links elsewhere) link here
+  // with ?type=<category> — react-router doesn't remount this component for a query-string
+  // change alone, so without this the filter stayed on whatever it was initialised to
+  // (always "All") no matter which category was clicked.
+  useEffect(() => {
+    if (typeParam && PROJECT_CATS.includes(typeParam)) setFilter(typeParam);
+    else if (!typeParam) setFilter("All");
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [typeParam, PROJECT_CATS.length]);
+
   const list = filter === "All" ? PROJECTS : PROJECTS.filter((p) => p.category === filter);
+
+  // When a category pill (or the header's Projects dropdown, which sets the same ?type=
+  // filter) is active, show that category's name in the banner instead of the generic
+  // catalog title — the same pattern used for a brand's name on /products.
+  const catLabel = filter !== "All" ? (lang === "ar" ? projectCategoriesAr[filter] || filter : filter) : null;
 
   return (
     <>
       <PageHeader
-        eyebrow={lang === "ar" ? ar.eyebrow : "Our Track Record"}
-        title={lang === "ar" ? ar.title : "Projects Delivered Across the UAE"}
+        eyebrow={lang === "ar" ? ar.eyebrow : catLabel ? "Project Category" : "Our Track Record"}
+        title={
+          catLabel
+            ? lang === "ar"
+              ? `مشاريع ${catLabel}`
+              : `${catLabel} Projects`
+            : lang === "ar"
+            ? ar.title
+            : "Projects Delivered Across the UAE"
+        }
         desc={
-          lang === "ar"
+          catLabel
+            ? lang === "ar"
+              ? `تصفح مشاريع الأنوار المنجزة في قطاع ${catLabel}.`
+              : `Browse Al Nawras projects delivered in the ${catLabel} sector.`
+            : lang === "ar"
             ? ar.desc
             : "From malls and high-rise towers to hospitals, schools and oil & gas facilities — a selection of the fire protection, life safety and ELV projects Al Nawras has delivered."
         }
-        crumbs={[{ label: lang === "ar" ? ar.crumb : "Projects" }]}
+        crumbs={
+          catLabel
+            ? [{ label: lang === "ar" ? ar.crumb : "Projects", href: "/projects" }, { label: catLabel }]
+            : [{ label: lang === "ar" ? ar.crumb : "Projects" }]
+        }
         image={headerImage}
       />
 

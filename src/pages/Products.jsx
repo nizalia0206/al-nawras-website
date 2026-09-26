@@ -22,7 +22,7 @@ const BRAND_WORDMARK = {
 export default function Products() {
   const { lang } = useLanguage();
   const ar = productsPage;
-  const { products: PRODUCTS } = useProducts();
+  const { products: PRODUCTS, loading: productsLoading } = useProducts();
   const [params, setParams] = useSearchParams();
   const [state, setState] = useState({
     category: params.get("cat") || "all",
@@ -59,17 +59,47 @@ export default function Products() {
     return l;
   }, [state, PRODUCTS]);
 
+  // When a partner logo (footer strip) or the header's Partners dropdown was clicked,
+  // the page arrives with ?supplier=<brand> — show that brand's name in the banner
+  // instead of the generic catalog title.
+  const activeBrand = state.supplier !== "all" ? SUPPLIERS[state.supplier]?.name : null;
+
+  // Show the brand's name in the browser tab when a partner link brought the visitor here.
+  useEffect(() => {
+    const prevTitle = document.title;
+    if (activeBrand) document.title = `${activeBrand} Products | Al Nawras Safety & Security Systems LLC`;
+    return () => {
+      document.title = prevTitle;
+    };
+  }, [activeBrand]);
+
   return (
     <>
       <PageHeader
-        eyebrow={lang === "ar" ? ar.eyebrow : "Full Catalog"}
-        title={lang === "ar" ? ar.title : "Fire, Life Safety & ICT Products"}
+        eyebrow={lang === "ar" ? ar.eyebrow : activeBrand ? "Brand Partner" : "Full Catalog"}
+        title={
+          activeBrand
+            ? lang === "ar"
+              ? `منتجات ${activeBrand}`
+              : `${activeBrand} Products`
+            : lang === "ar"
+            ? ar.title
+            : "Fire, Life Safety & ICT Products"
+        }
         desc={
-          lang === "ar"
+          activeBrand
+            ? lang === "ar"
+              ? `تصفح كافة منتجات ${activeBrand} المتوفرة والمدعومة من قبل الأنوار للأنظمة الآمنة والأمنية.`
+              : `Browse the full range of ${activeBrand} products, supplied, engineered and supported by Al Nawras Safety & Security Systems LLC.`
+            : lang === "ar"
             ? ar.desc
             : "Certified equipment from Honeywell, Waterfall, H3C, Teknoware, Uranus Cable and KD Pipes — supplied, engineered and supported by Al Nawras Safety & Security Systems LLC."
         }
-        crumbs={[{ label: lang === "ar" ? ar.crumb : "Products" }]}
+        crumbs={
+          activeBrand
+            ? [{ label: lang === "ar" ? ar.crumb : "Products", href: "/products" }, { label: activeBrand }]
+            : [{ label: lang === "ar" ? ar.crumb : "Products" }]
+        }
         image={headerImage}
       />
       <section className="bg-ambient products-hero" style={{ paddingTop: 32, paddingBottom: 32 }}>
@@ -152,13 +182,16 @@ export default function Products() {
           </div>
         </div>
 
-        {list.length === 0 ? (
+        {/* Wait for the CMS catalog to finish loading before showing "No matching products" —
+            otherwise, while Supabase is still fetching, the list can briefly be empty and this
+            big search-icon empty-state flashes on screen for a moment before real results land. */}
+        {list.length === 0 && !productsLoading ? (
           <div className="empty-state">
             <Icon.search />
             <h3>{lang === "ar" ? ar.noResultsTitle : "No matching products"}</h3>
             <p>{lang === "ar" ? ar.noResultsBody : "Try a different search term or clear your filters."}</p>
           </div>
-        ) : (
+        ) : list.length === 0 ? null : (
           <div className="product-grid">
             {list.map((p) => <ProductCard key={p.id} product={p} />)}
           </div>

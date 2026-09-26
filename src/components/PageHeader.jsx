@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { useLanguage } from "../context/LanguageContext";
 
-export default function PageHeader({ eyebrow, title, desc, crumbs = [], image }) {
+export default function PageHeader({ eyebrow, eyebrowClassName = "", title, desc, crumbs = [], image }) {
   const { t } = useLanguage();
   return (
     <div className="relative bg-bgdark text-white overflow-hidden">
@@ -26,7 +26,10 @@ export default function PageHeader({ eyebrow, title, desc, crumbs = [], image })
       {image && (
         <div className="absolute inset-0 z-0">
           <img src={image} alt="" className="absolute inset-0 w-full h-full object-cover opacity-70" />
-          <div className="absolute inset-0 bg-gradient-to-t from-bgdark/85 via-bgdark/40 to-bgdark/15" />
+          {/* uniform wash so text stays readable no matter how bright the photo is,
+              plus a top-anchored gradient for extra depth right behind the text */}
+          <div className="absolute inset-0 bg-bgdarker/55" />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/10 to-transparent" />
         </div>
       )}
 
@@ -48,7 +51,7 @@ export default function PageHeader({ eyebrow, title, desc, crumbs = [], image })
             </span>
           ))}
         </div>
-        <div className="sec-eyebrow !text-flame2">{eyebrow}</div>
+        <div className={`sec-eyebrow !text-flame2 ${eyebrowClassName}`}>{eyebrow}</div>
         <h1 className="font-display font-semibold uppercase text-[34px] md:text-[52px] leading-[1.05] max-w-[20ch] !text-white">
           {title}
         </h1>

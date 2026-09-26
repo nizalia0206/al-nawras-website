@@ -22,6 +22,7 @@ export default function FireAlarm() {
       <PageHeader
         image={fireAlarmEnv}
         eyebrow={isAr ? "الأنظمة والحلول" : "Systems & Solutions"}
+        eyebrowClassName="!text-[16px] sm:!text-[17px] !font-extrabold"
         title={isAr ? "أنظمة إنذار الحريق والإخلاء الصوتي" : "Fire Alarm & Voice Evacuation Systems"}
         desc={
           isAr
