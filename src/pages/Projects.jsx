@@ -6,7 +6,7 @@ import PageHeader from "../components/PageHeader";
 import { useLanguage } from "../context/LanguageContext";
 import useProjects from "../hooks/useProjects";
 import { projectsPage, projectCategoriesAr } from "../i18n/pagesAr";
-import headerImage from "../assets/page-headers/projects.jpg";
+import { projectHeaderImage } from "../data/headerImages";
 
 export default function Projects() {
   const { lang } = useLanguage();
@@ -62,7 +62,7 @@ export default function Projects() {
             ? [{ label: lang === "ar" ? ar.crumb : "Projects", href: "/projects" }, { label: catLabel }]
             : [{ label: lang === "ar" ? ar.crumb : "Projects" }]
         }
-        image={headerImage}
+        image={projectHeaderImage(filter)}
       />
 
       <Reveal as="section" className="stats-strip">

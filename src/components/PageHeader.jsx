@@ -25,7 +25,7 @@ export default function PageHeader({ eyebrow, eyebrowClassName = "", title, desc
       />
       {image && (
         <div className="absolute inset-0 z-0">
-          <img src={image} alt="" className="absolute inset-0 w-full h-full object-cover opacity-70" />
+          <img key={image} src={image} alt="" className="absolute inset-0 w-full h-full object-cover opacity-70" />
           {/* uniform wash so text stays readable no matter how bright the photo is,
               plus a top-anchored gradient for extra depth right behind the text */}
           <div className="absolute inset-0 bg-bgdarker/55" />

@@ -8,7 +8,7 @@ import { CATEGORIES, SUPPLIERS } from "../data/products.js";
 import { useLanguage } from "../context/LanguageContext";
 import useProducts from "../hooks/useProducts";
 import { productsPage } from "../i18n/pagesAr";
-import headerImage from "../assets/page-headers/products.jpg";
+import { brandHeaderImage } from "../data/headerImages";
 
 const BRAND_WORDMARK = {
   honeywell: "HW",
@@ -100,7 +100,7 @@ export default function Products() {
             ? [{ label: lang === "ar" ? ar.crumb : "Products", href: "/products" }, { label: activeBrand }]
             : [{ label: lang === "ar" ? ar.crumb : "Products" }]
         }
-        image={headerImage}
+        image={brandHeaderImage(state.supplier)}
       />
       <section className="bg-ambient products-hero" style={{ paddingTop: 32, paddingBottom: 32 }}>
         <div className="container">
