@@ -2,7 +2,8 @@ import { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import Counter from "./Counter";
 import { useLanguage } from "../context/LanguageContext";
-import aboutPhoto from "../assets/about-firefighters.jpg";
+import aboutVideo from "../assets/about-video.mp4";
+import aboutPoster from "../assets/about-video-poster.jpg";
 
 export default function About() {
   const { t } = useLanguage();
@@ -36,12 +37,19 @@ export default function About() {
             </Link>
           </div>
 
-          {/* picture */}
-          <div className="relative w-full aspect-[4/3] overflow-hidden rounded-xl border border-ink/[.08] shadow-[0_20px_50px_-20px_rgba(0,0,0,.25)] bg-bgdark">
-            <img
-              src={aboutPhoto}
-              alt="Firefighters in protective gear carrying fire hoses and equipment to a response site"
+          {/* video */}
+          <div className="relative w-full aspect-video overflow-hidden rounded-xl border border-ink/[.08] shadow-[0_20px_50px_-20px_rgba(0,0,0,.25)] bg-bgdark">
+            <video
+              src={aboutVideo}
+              poster={aboutPoster}
               className="absolute inset-0 w-full h-full object-cover"
+              autoPlay
+              muted
+              loop
+              playsInline
+              controls
+              preload="metadata"
+              aria-label="Al Nawras Safety & Security Systems company video, since 2005"
             />
           </div>
         </div>
