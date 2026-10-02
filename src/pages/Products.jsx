@@ -31,6 +31,20 @@ export default function Products() {
     sort: "relevance",
   });
 
+  // Keep state in sync when the URL changes while already on /products
+  // (e.g. header Partners dropdown or footer partner logos -> ?supplier=<brand>).
+  // Without this the page is not remounted, so the brand and banner never update.
+  useEffect(() => {
+    const category = params.get("cat") || "all";
+    const supplier = params.get("supplier") || "all";
+    const q = params.get("q") || "";
+    setState((s) =>
+      s.category === category && s.supplier === supplier && s.q === q
+        ? s
+        : { ...s, category, supplier, q }
+    );
+  }, [params]);
+
   useEffect(() => {
     const next = {};
     if (state.category !== "all") next.cat = state.category;
