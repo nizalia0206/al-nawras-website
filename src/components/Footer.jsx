@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import PartnersStrip from "./PartnersStrip";
-import logoFooter from "../assets/brand/logo-footer.png";
+import logoFooterLight from "../assets/brand/logo-full-light.png";
 import { IconLinkedIn, IconInstagram, IconX, IconArrow } from "./Icons";
 import { useLanguage } from "../context/LanguageContext";
 import { useSiteSettings, telHref, siteHref } from "../context/SiteSettingsContext";
@@ -39,12 +39,12 @@ export default function Footer() {
             <Link
               to="/"
               aria-label="Al Nawras Safety & Security Systems LLC"
-              className="mb-5 inline-block rounded-xl bg-white p-3.5 shadow-[0_10px_30px_-10px_rgba(0,0,0,.5)]"
+              className="mb-5 inline-block"
             >
               <img
-                src={logoFooter}
+                src={s.logo_footer || logoFooterLight}
                 alt="Al Nawras Safety & Security Systems LLC"
-                className="block h-auto w-[210px] max-w-full"
+                className="block h-auto w-[240px] max-w-full"
               />
             </Link>
             <p className="text-[13.5px] leading-[1.75] text-white/60 max-w-[34ch]">

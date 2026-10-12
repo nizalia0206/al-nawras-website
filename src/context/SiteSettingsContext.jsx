@@ -24,6 +24,10 @@ export const DEFAULT_SETTINGS = {
   stat_brands: 6,
   stat_sectors: 10,
   stat_emirates: 7,
+  // Logos — empty = the original logo files bundled with the website
+  logo_header: "",       // header on white (scrolled header, inner pages, menus)
+  logo_header_light: "", // header over the home-page hero photo
+  logo_footer: "",       // footer (dark navy background, no white box)
 };
 
 const SiteSettingsContext = createContext(DEFAULT_SETTINGS);

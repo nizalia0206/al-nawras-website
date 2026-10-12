@@ -1,6 +1,7 @@
 import logoFull from "../assets/brand/logo-full.png";
 import logoMark from "../assets/brand/logo-mark.png";
 import logoFullLight from "../assets/brand/logo-full-light.png";
+import { useSiteSettings } from "../context/SiteSettingsContext";
 
 /**
  * size = rendered height in px. Width follows the artwork's own aspect ratio.
@@ -19,6 +20,7 @@ export default function Logo({ size = 48, showText = true, light = false, classN
   // over sizing completely — this is what keeps the logo from ever growing taller
   // than the header row at a given breakpoint (which was causing it to spill over
   // and visually "merge" into whatever section sits below the nav bar).
+  const site = useSiteSettings();
   const style = sizeClasses ? undefined : { height: responsive ? `clamp(40px, 9vw, ${size}px)` : size, width: "auto" };
   const sizingClasses = sizeClasses ? `${sizeClasses} w-auto` : "";
   const shadow = light ? "drop-shadow-[0_2px_10px_rgba(0,0,0,.45)]" : "";
@@ -36,7 +38,7 @@ export default function Logo({ size = 48, showText = true, light = false, classN
 
   return (
     <img
-      src={light ? logoFullLight : logoFull}
+      src={light ? site.logo_header_light || logoFullLight : site.logo_header || logoFull}
       alt="Al Nawras Safety & Security Systems LLC"
       style={style}
       className={`block shrink-0 object-contain ${sizingClasses} ${shadow} ${className}`}
