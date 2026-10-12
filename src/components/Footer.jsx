@@ -133,7 +133,14 @@ export default function Footer() {
 
         <div className="flex flex-col sm:flex-row justify-between items-center gap-2.5 py-7 text-[12.5px] text-white/60">
           <span>{t("footer.copyright")}</span>
-          <span>{t("footer.note")}</span>
+          <a
+            href="https://zetacoding.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-white/80 underline decoration-white/30 underline-offset-4 hover:text-flame2 hover:decoration-flame2 transition-colors"
+          >
+            {t("footer.note")}
+          </a>
         </div>
       </div>
     </footer>

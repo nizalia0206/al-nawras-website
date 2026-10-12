@@ -157,6 +157,15 @@ export default function Hero() {
   const [active, setActive] = useState(0);
   const [prev, setPrev] = useState(null);
   const [paused, setPaused] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  // hide the top contact strip once the visitor scrolls, so the sticky header sits flush at the top
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 40);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   const timerRef = useRef(null);
 
@@ -191,7 +200,7 @@ export default function Hero() {
       className="relative bg-bgdark text-white overflow-hidden"
     >
       {/* top bar — email, socials & language toggle, pinned above the nav bar */}
-      <div className="fixed top-0 left-0 right-0 z-[210]">
+      <div className={`fixed top-0 left-0 right-0 z-[210] transition-transform duration-300 ${scrolled ? "-translate-y-full" : "translate-y-0"}`}>
         <TopBar />
       </div>
 
@@ -401,7 +410,7 @@ export default function Hero() {
                 <>
                   <h1
                     key={"h-" + active}
-                    className="font-display font-bold uppercase leading-[1.05] text-[34px] sm:text-[46px] md:text-[58px] lg:text-[64px] max-w-[16ch] text-white"
+                    className="font-display font-bold uppercase leading-[1.05] text-[26px] sm:text-[34px] md:text-[42px] lg:text-[46px] max-w-[16ch] text-white"
                     style={{
                       animation:
                         "slideIn .55s var(--ease) .05s backwards",

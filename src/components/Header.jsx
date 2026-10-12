@@ -148,7 +148,7 @@ export default function Header({ overlayOnHero = false }) {
     <>
       <header
         ref={headerRef}
-        className={`${overlayOnHero ? "fixed top-[38px]" : "sticky top-0"} left-0 right-0 z-[200] transition-all duration-300 ${
+        className={`${overlayOnHero ? (shrink ? "fixed top-0" : "fixed top-[38px]") : "sticky top-0"} left-0 right-0 z-[200] transition-all duration-300 ${
           overlay
             ? "bg-transparent border-b border-transparent"
             : "bg-white/95 backdrop-blur-md border-b border-ink/[.08] shadow-[0_2px_20px_-8px_rgba(0,0,0,.08)]"
@@ -163,7 +163,7 @@ export default function Header({ overlayOnHero = false }) {
         )}
         <div
           className={`relative max-w-[1280px] mx-auto px-4 sm:px-8 flex items-center justify-between gap-4 xl:gap-8 transition-[height] duration-300 h-[72px] ${
-            shrink ? "xl:h-[124px]" : "xl:h-[144px]"
+            shrink ? "xl:h-[76px]" : "xl:h-[144px]"
           }`}
         >
           <Link to="/" className="flex items-center shrink min-w-0 max-w-[46vw] xl:max-w-none">
@@ -172,6 +172,8 @@ export default function Header({ overlayOnHero = false }) {
               sizeClasses={
                 overlay
                   ? "h-11 sm:h-12 md:h-[52px] xl:h-[64px] 2xl:h-[76px]"
+                  : shrink
+                  ? "h-11 sm:h-12 md:h-[46px] xl:h-[48px] 2xl:h-[52px]"
                   : "h-11 sm:h-12 md:h-[52px] xl:h-[60px] 2xl:h-[70px]"
               }
             />

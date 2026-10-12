@@ -3,7 +3,7 @@ import { industries } from "../data/content";
 import { industriesAr } from "../i18n/arabicContent";
 import { useLanguage } from "../context/LanguageContext";
 
-const AUTO_SPEED = 0.45; // px per frame for the slow auto-scroll
+const AUTO_SPEED = 0.85; // px per frame for the slow auto-scroll
 
 export default function Industries({ id }) {
   const { t, lang } = useLanguage();
