@@ -100,6 +100,7 @@ export default function Contact() {
         }
         crumbs={[{ label: tx("pages.contact.crumb", lang, "Contact", ar.crumb) }]}
         image={headerImage}
+        vivid
       />
       <section className="bg-ambient contact-hero" style={{ paddingTop: 32, paddingBottom: 32 }}>
         <div className="container">
@@ -134,7 +135,7 @@ export default function Contact() {
                 <span>{tx("pages.contact.successNote", lang, "Thank you — your message has been received. Our team will contact you shortly.", ar.successNote)}</span>
               </div>
               {error && (
-                <div className="success-note show" style={{ background: "#fdecea", borderColor: "#f5c2c0" }}>
+                <div className="success-note show" style={{ background: "#fdecea", borderColor: "#f5c2c0", color: "#b42318" }}>
                   <span>{tx("pages.contact.something_went_wrong_sending_your_messag", lang, "Something went wrong sending your message — please try again, or email us directly.", "تعذّر الإرسال، يرجى المحاولة مرة أخرى.")}</span>
                 </div>
               )}
