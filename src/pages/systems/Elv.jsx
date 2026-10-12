@@ -1,3 +1,4 @@
+import { tx } from "../../i18n/tx";
 import PageHeader from "../../components/PageHeader";
 import SystemsSubNav from "../../components/SystemsSubNav";
 import SystemSections from "../../components/SystemSections";
@@ -27,13 +28,13 @@ export default function Elv() {
     <>
       <PageHeader
         image={elvCctv}
-        eyebrow={lang === "ar" ? "الأنظمة والحلول" : "Systems & Solutions"}
+        eyebrow={tx("pages.systems.elv.systems_solutions", lang, "Systems & Solutions", "الأنظمة والحلول")}
         eyebrowClassName="!text-[16px] sm:!text-[17px] !font-extrabold"
-        title={lang === "ar" ? ar.title : "ELV Systems"}
-        desc={lang === "ar" ? ar.desc : "Structured cabling, CCTV, access control and BMS integration delivered as a single low-voltage infrastructure, so every building system reports back through one manageable network."}
+        title={tx("pages.systems.elv.title", lang, "ELV Systems", ar.title)}
+        desc={tx("pages.systems.elv.desc", lang, "Structured cabling, CCTV, access control and BMS integration delivered as a single low-voltage infrastructure, so every building system reports back through one manageable network.", ar.desc)}
         crumbs={[
-          { label: lang === "ar" ? "الأنظمة والحلول" : "Systems & Solutions" },
-          { label: lang === "ar" ? ar.breadcrumb : "ELV Systems" },
+          { label: tx("pages.systems.elv.systems_solutions", lang, "Systems & Solutions", "الأنظمة والحلول") },
+          { label: tx("pages.systems.elv.breadcrumb", lang, "ELV Systems", ar.breadcrumb) },
         ]}
       />
       <SystemsSubNav />

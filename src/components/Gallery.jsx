@@ -1,3 +1,5 @@
+import { tx } from "../i18n/tx";
+import { useSiteSettings, waNumber } from "../context/SiteSettingsContext";
 import { useEffect, useState } from "react";
 import { useLanguage } from "../context/LanguageContext";
 import { systemsCommon } from "../i18n/pagesAr";
@@ -11,6 +13,7 @@ import { useTilt } from "../hooks/useTilt";
  */
 function SystemCard({ item, category, onOpen }) {
   const { lang } = useLanguage();
+  const { whatsapp } = useSiteSettings();
   const { ref, onMouseMove, onMouseEnter, onMouseLeave, onTouchStart, onTouchEnd } = useTilt({ max: 10 });
 
   return (
@@ -25,7 +28,7 @@ function SystemCard({ item, category, onOpen }) {
       onClick={onOpen}
       role="button"
       tabIndex={0}
-      aria-label={`${lang === "ar" ? "عرض" : "View"} ${item.name}`}
+      aria-label={`${tx("components.gallery.view", lang, "View", "عرض")} ${item.name}`}
       onKeyDown={(e) => {
         if (e.target !== e.currentTarget) return; // ignore keys pressed on the Get Quote link
         if (e.key === "Enter" || e.key === " ") {
@@ -37,7 +40,7 @@ function SystemCard({ item, category, onOpen }) {
       <div className="thumb">
         {item.brand && <span className="supplier-tag">{item.brand}</span>}
         <img src={item.src} alt={item.name} loading="lazy" />
-        <span className="quick-view">{lang === "ar" ? "اضغط للتكبير ←" : "Tap to enlarge →"}</span>
+        <span className="quick-view">{tx("components.gallery.tap_to_enlarge", lang, "Tap to enlarge →", "اضغط للتكبير ←")}</span>
       </div>
 
       <div className="body">
@@ -46,16 +49,16 @@ function SystemCard({ item, category, onOpen }) {
         {item.desc && <p className="short">{item.desc}</p>}
         <div className="price-row">
           <a
-            href={`https://wa.me/971551099885?text=${encodeURIComponent(
+            href={`https://wa.me/${waNumber(whatsapp)}?text=${encodeURIComponent(
               `Hi Al Nawras, I'd like to get a quote for ${item.name}.`
             )}`}
             target="_blank"
             rel="noopener noreferrer"
-            aria-label={`${lang === "ar" ? "احصل على عرض سعر" : "Get a quote for"} ${item.name}`}
+            aria-label={`${tx("components.gallery.get_a_quote_for", lang, "Get a quote for", "احصل على عرض سعر")} ${item.name}`}
             onClick={(e) => e.stopPropagation()}
             className="btn btn-flame !py-2.5 !text-[11.5px] w-full justify-center"
           >
-            {lang === "ar" ? "احصل على عرض سعر" : "Get Quote"}
+            {tx("components.gallery.get_quote", lang, "Get Quote", "احصل على عرض سعر")}
           </a>
         </div>
       </div>
@@ -66,6 +69,7 @@ function SystemCard({ item, category, onOpen }) {
 
 export default function Gallery({ items, category }) {
   const { lang } = useLanguage();
+  const { whatsapp } = useSiteSettings();
   const [active, setActive] = useState(null);
 
   useEffect(() => {
@@ -142,14 +146,14 @@ export default function Gallery({ items, category }) {
               </div>
               <div className="flex items-center gap-3 shrink-0">
                 <a
-                  href={`https://wa.me/971551099885?text=${encodeURIComponent(
+                  href={`https://wa.me/${waNumber(whatsapp)}?text=${encodeURIComponent(
                     `Hi Al Nawras, I'd like to get a quote for ${items[active].name}.`
                   )}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="btn btn-flame !py-2.5 !px-5 !text-[12.5px]"
                 >
-                  {lang === "ar" ? "احصل على عرض سعر" : "Get Quote"}
+                  {tx("components.gallery.get_quote", lang, "Get Quote", "احصل على عرض سعر")}
                 </a>
                 {items.length > 1 && (
                   <div className="flex items-center gap-2">

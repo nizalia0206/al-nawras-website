@@ -1,3 +1,4 @@
+import { tx } from "../../i18n/tx";
 import PageHeader from "../../components/PageHeader";
 import SystemsSubNav from "../../components/SystemsSubNav";
 import SystemSections from "../../components/SystemSections";
@@ -22,17 +23,15 @@ export default function FireFighting() {
     <>
       <PageHeader
         image={fireFightingEnv}
-        eyebrow={isAr ? "الأنظمة والحلول" : "Systems & Solutions"}
+        eyebrow={tx("pages.systems.fireFighting.systems_solutions", (isAr ? "ar" : "en"), "Systems & Solutions", "الأنظمة والحلول")}
         eyebrowClassName="!text-[16px] sm:!text-[17px] !font-extrabold"
-        title={isAr ? "أنظمة مكافحة الحريق" : "Firefighting Systems"}
+        title={tx("pages.systems.fireFighting.firefighting_systems", (isAr ? "ar" : "en"), "Firefighting Systems", "أنظمة مكافحة الحريق")}
         desc={
-          isAr
-            ? "منظومة متكاملة لمكافحة الحريق، مصمّمة ومورّدة ومركّبة وفق أعلى المعايير."
-            : "A complete firefighting scope designed, supplied and installed to the highest standards."
+          tx("pages.systems.fireFighting.a_complete_firefighting_scope_designed_s", (isAr ? "ar" : "en"), "A complete firefighting scope designed, supplied and installed to the highest standards.", "منظومة متكاملة لمكافحة الحريق، مصمّمة ومورّدة ومركّبة وفق أعلى المعايير.")
         }
         crumbs={[
-          { label: isAr ? "الأنظمة والحلول" : "Systems & Solutions" },
-          { label: isAr ? "مكافحة الحريق" : "Firefighting" },
+          { label: tx("pages.systems.fireFighting.systems_solutions", (isAr ? "ar" : "en"), "Systems & Solutions", "الأنظمة والحلول") },
+          { label: tx("pages.systems.fireFighting.firefighting", (isAr ? "ar" : "en"), "Firefighting", "مكافحة الحريق") },
         ]}
       />
       <SystemsSubNav />

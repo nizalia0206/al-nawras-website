@@ -1,3 +1,7 @@
 {
+  "redirects": [
+    { "source": "/admin", "destination": "https://al-nawras-cms.vercel.app/admin", "permanent": false },
+    { "source": "/admin/:path*", "destination": "https://al-nawras-cms.vercel.app/admin/:path*", "permanent": false }
+  ],
   "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
 }

@@ -1,3 +1,4 @@
+import { tx } from "../i18n/tx";
 import { useEffect, useState } from "react";
 import { certificationsAr } from "../i18n/arabicContent";
 import { useLanguage } from "../context/LanguageContext";
@@ -125,8 +126,8 @@ export default function CertificationsGrid() {
                       <path d="M12 3v12m0 0l-4-4m4 4l4-4M4 21h16" />
                     </svg>
                     {downloading === c.num
-                      ? lang === "ar" ? "جارٍ التنزيل…" : "Downloading…"
-                      : lang === "ar" ? "تنزيل الشهادة" : "Download Certificate"}
+                      ? tx("components.certificationsGrid.downloading", lang, "Downloading…", "جارٍ التنزيل…")
+                      : tx("components.certificationsGrid.download_certificate", lang, "Download Certificate", "تنزيل الشهادة")}
                   </button>
                 )}
               </div>
@@ -190,7 +191,7 @@ export default function CertificationsGrid() {
                     <button
                       onClick={(e) => downloadCertificate(e, item, arT || item.title)}
                       disabled={downloading === item.num}
-                      aria-label={lang === "ar" ? "تنزيل الشهادة" : "Download Certificate"}
+                      aria-label={tx("components.certificationsGrid.download_certificate", lang, "Download Certificate", "تنزيل الشهادة")}
                       className="w-9 h-9 rounded-full border border-black/[.12] flex items-center justify-center text-ink hover:border-flame1 hover:text-flame1 transition-colors duration-300 disabled:opacity-60"
                     >
                       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">

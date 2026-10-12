@@ -32,6 +32,11 @@ export default function Counter({ target, suffix = "", label, theme = "dark" }) 
     return () => io.disconnect();
   }, [target]);
 
+  // If the target changes later (e.g. CMS stats load after the count-up ran), jump to it.
+  useEffect(() => {
+    if (done.current) setValue(target);
+  }, [target]);
+
   const isLight = theme === "light";
 
   return (

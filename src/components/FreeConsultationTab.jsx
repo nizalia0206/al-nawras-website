@@ -1,3 +1,4 @@
+import { tx } from "../i18n/tx";
 import { useLanguage } from "../context/LanguageContext";
 
 // Vertical "Get a Quote" tab, pinned to the viewport edge on every page.
@@ -16,7 +17,7 @@ export default function FreeConsultationTab() {
         borderRadius: lang === "ar" ? "0 8px 8px 0" : "8px 0 0 8px",
       }}
     >
-      {lang === "ar" ? "احصل على عرض سعر" : "Get a Quote"}
+      {tx("components.freeConsultationTab.get_a_quote", lang, "Get a Quote", "احصل على عرض سعر")}
     </a>
   );
 }

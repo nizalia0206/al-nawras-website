@@ -1,9 +1,11 @@
+import { tx } from "../i18n/tx";
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import Counter from "./Counter";
 import TopBar from "./TopBar";
 import { useLanguage } from "../context/LanguageContext";
 import useHeroSlides from "../hooks/useHeroSlides";
+import { useSiteSettings } from "../context/SiteSettingsContext";
 import {
   IconArrow,
   IconFlame,
@@ -150,6 +152,7 @@ export default function Hero() {
   const { t, lang } = useLanguage();
   const CATEGORIES_BASE = useCategories(t);
   const heroOverrides = useHeroSlides();
+  const site = useSiteSettings();
   const CATEGORIES = CATEGORIES_BASE.map((cat) =>
     cat.key && heroOverrides[cat.key] ? { ...cat, image: heroOverrides[cat.key] } : cat
   );
@@ -325,7 +328,7 @@ export default function Hero() {
             type="button"
             onClick={goPrev}
             aria-label={
-              lang === "ar" ? "الشريحة السابقة" : "Previous slide"
+              tx("components.hero.previous_slide", lang, "Previous slide", "الشريحة السابقة")
             }
             className="hidden sm:flex absolute top-1/2 -translate-y-1/2 z-[3] h-11 w-11 items-center justify-center rounded-full border border-white/25 bg-white/10 text-white backdrop-blur-sm transition-all duration-300 hover:bg-white/20 hover:border-white/40"
             style={{
@@ -351,7 +354,7 @@ export default function Hero() {
             type="button"
             onClick={goNext}
             aria-label={
-              lang === "ar" ? "الشريحة التالية" : "Next slide"
+              tx("components.hero.next_slide", lang, "Next slide", "الشريحة التالية")
             }
             className="hidden sm:flex absolute top-1/2 -translate-y-1/2 z-[3] h-11 w-11 items-center justify-center rounded-full border border-white/25 bg-white/10 text-white backdrop-blur-sm transition-all duration-300 hover:bg-white/20 hover:border-white/40"
             style={{
@@ -380,9 +383,7 @@ export default function Hero() {
                 type="button"
                 onClick={() => goTo(i)}
                 aria-label={`${
-                  lang === "ar"
-                    ? "الانتقال إلى الشريحة"
-                    : "Go to slide"
+                  tx("components.hero.go_to_slide", lang, "Go to slide", "الانتقال إلى الشريحة")
                 } ${i + 1}`}
                 className={`h-2 rounded-full transition-all duration-300 ${
                   i === active
@@ -462,22 +463,22 @@ export default function Hero() {
                     }}
                   >
                     <Counter
-                      target={1300}
+                      target={Number(site.stat_projects)}
                       suffix="+"
                       label={t("hero.statProjects")}
                     />
                     <Counter
-                      target={20}
+                      target={Number(site.stat_years)}
                       suffix="+"
                       label={t("hero.statYears")}
                     />
                     <Counter
-                      target={3}
+                      target={Number(site.stat_offices)}
                       suffix=""
                       label={t("hero.statOffices")}
                     />
                     <Counter
-                      target={6}
+                      target={Number(site.stat_brands)}
                       suffix=""
                       label={t("hero.statBrands")}
                     />

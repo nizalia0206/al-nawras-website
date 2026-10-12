@@ -1,3 +1,4 @@
+import { tx } from "../i18n/tx";
 import { useEffect, useRef, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import Logo from "./Logo";
@@ -304,8 +305,8 @@ export default function Header({ overlayOnHero = false }) {
                 <path d="M15 12H3" />
               </svg>
               {session
-                ? lang === "ar" ? "حسابي" : "My Account"
-                : lang === "ar" ? "تسجيل الدخول" : "Sign In"}
+                ? tx("components.header.my_account", lang, "My Account", "حسابي")
+                : tx("components.header.sign_in", lang, "Sign In", "تسجيل الدخول")}
             </Link>
 
             {/* Mobile hamburger — hidden at xl and above (mobile-menu-toggle is a hard CSS failsafe, see index.css) */}
@@ -414,8 +415,8 @@ export default function Header({ overlayOnHero = false }) {
             className="mt-5 flex items-center justify-center gap-1.5 rounded-full border border-ink/[.16] text-ink px-5 py-3 text-[14px] font-semibold mx-2.5"
           >
             {session
-              ? lang === "ar" ? "حسابي" : "My Account"
-              : lang === "ar" ? "تسجيل الدخول" : "Sign In"}
+              ? tx("components.header.my_account", lang, "My Account", "حسابي")
+              : tx("components.header.sign_in", lang, "Sign In", "تسجيل الدخول")}
           </Link>
         </div>
       </div>

@@ -1,3 +1,4 @@
+import { tx } from "../i18n/tx";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import * as Icons from "./Icons";
@@ -45,7 +46,6 @@ export default function ServicesGrid({
             const Icon = Icons[item.icon] || Icons.IconFlame;
             const to = SYSTEM_ROUTES[item.id];
             const isActive = hovered === item.id;
-            const arVersion = lang === "ar" ? systemsAr[item.id] : null;
             const card = (
               <div
                 onMouseEnter={() => setHovered(item.id)}
@@ -55,10 +55,10 @@ export default function ServicesGrid({
                   <Icon className="w-full h-full" />
                 </div>
                 <h3 className="font-display text-[18px] uppercase tracking-wide mb-2.5">
-                  {arVersion?.title || item.title}
+                  {tx(`content.systems.${item.id}.title`, lang, item.title, systemsAr[item.id]?.title)}
                 </h3>
                 <p className="svc-desc text-[13.5px] leading-[1.65] text-inksoft flex-grow">
-                  {arVersion?.desc || item.desc}
+                  {tx(`content.systems.${item.id}.desc`, lang, item.desc, systemsAr[item.id]?.desc)}
                 </p>
                 <span className="svc-learn mt-5 inline-flex items-center gap-1.5 text-[12.5px] font-semibold uppercase tracking-wide text-flame1">
                   {t("services.learnMore")} <IconArrow className="w-3 h-3" />

@@ -1,3 +1,5 @@
+import { tx } from "../i18n/tx";
+import { useSiteSettings, waNumber } from "../context/SiteSettingsContext";
 import { useState, useEffect } from "react";
 import { useParams, Navigate, Link } from "react-router-dom";
 import { Icon } from "../components/CatalogIcons.jsx";
@@ -29,6 +31,7 @@ export default function ProductDetail() {
   const { lang } = useLanguage();
   const ar = productDetailPage;
   const { id } = useParams();
+  const { whatsapp } = useSiteSettings();
   const { products: PRODUCTS, loading } = useProducts();
 
   const product = PRODUCTS.find((p) => p.id === id);
@@ -47,8 +50,8 @@ export default function ProductDetail() {
     if (loading) return null;
     return (
       <div className="container" style={{ padding: "100px 20px", textAlign: "center" }}>
-        <h2>{lang === "ar" ? ar.productNotFound : "Product not found"}</h2>
-        <Link to="/products" className="btn btn-primary" style={{ marginTop: 16 }}>{lang === "ar" ? ar.backToProducts : "Back to Products"}</Link>
+        <h2>{tx("pages.productDetail.productNotFound", lang, "Product not found", ar.productNotFound)}</h2>
+        <Link to="/products" className="btn btn-primary" style={{ marginTop: 16 }}>{tx("pages.productDetail.backToProducts", lang, "Back to Products", ar.backToProducts)}</Link>
       </div>
     );
   }
@@ -60,7 +63,7 @@ export default function ProductDetail() {
     <>
       <div className="container" style={{ paddingTop: 22 }}>
         <div className="breadcrumb">
-          <Link to="/products">{lang === "ar" ? ar.breadcrumbProducts : "Products"}</Link><span className="sep">/</span>
+          <Link to="/products">{tx("pages.productDetail.breadcrumbProducts", lang, "Products", ar.breadcrumbProducts)}</Link><span className="sep">/</span>
           <span style={{ color: "var(--slate-700)" }}>{categoryName}</span><span className="sep">/</span>
           <span style={{ color: "var(--navy-900)", fontWeight: 700 }}>{product.name}</span>
         </div>
@@ -95,7 +98,7 @@ export default function ProductDetail() {
               </div>
               <h1>{product.name}</h1>
               <p className="short-desc">{product.short}</p>
-              <div className="stock-row"><span className="stock-dot" /> {lang === "ar" ? ar.inStock : "In stock — ships from UAE warehouse"}</div>
+              <div className="stock-row"><span className="stock-dot" /> {tx("pages.productDetail.inStock", lang, "In stock — ships from UAE warehouse", ar.inStock)}</div>
 
               <div className="qty-row">
                 <div className="qty-control">
@@ -103,33 +106,33 @@ export default function ProductDetail() {
                   <span>{qty}</span>
                   <button aria-label="Increase quantity" onClick={() => setQty((q) => q + 1)}><Icon.plus /></button>
                 </div>
-                <span style={{ fontSize: 13, color: "var(--slate-500)" }}>{lang === "ar" ? ar.units : "units"}</span>
+                <span style={{ fontSize: 13, color: "var(--slate-500)" }}>{tx("pages.productDetail.units", lang, "units", ar.units)}</span>
               </div>
 
               <div className="action-row">
                 <a
                   className="btn btn-flame"
-                  href={`https://wa.me/971551099885?text=${encodeURIComponent(`Hi Al Nawras, I'd like to get a quote for ${product.name} (${qty} unit${qty > 1 ? "s" : ""}).`)}`}
+                  href={`https://wa.me/${waNumber(whatsapp)}?text=${encodeURIComponent(`Hi Al Nawras, I'd like to get a quote for ${product.name} (${qty} unit${qty > 1 ? "s" : ""}).`)}`}
                   target="_blank" rel="noopener noreferrer"
                 >
-                  <Icon.phone /> {lang === "ar" ? "احصل على عرض سعر" : "Get Quote"}
+                  <Icon.phone /> {tx("pages.productDetail.get_quote", lang, "Get Quote", "احصل على عرض سعر")}
                 </a>
               </div>
 
               <ul className="assurance-list">
-                <li><Icon.check /> {lang === "ar" ? ar.assurance1 : "Genuine products, backed by Al Nawras support"}</li>
-                <li><Icon.check /> {lang === "ar" ? ar.assurance2 : "Bulk & project pricing available"}</li>
-                <li><Icon.check /> {lang === "ar" ? ar.assurance3 : "Delivery & installation across the UAE"}</li>
+                <li><Icon.check /> {tx("pages.productDetail.assurance1", lang, "Genuine products, backed by Al Nawras support", ar.assurance1)}</li>
+                <li><Icon.check /> {tx("pages.productDetail.assurance2", lang, "Bulk & project pricing available", ar.assurance2)}</li>
+                <li><Icon.check /> {tx("pages.productDetail.assurance3", lang, "Delivery & installation across the UAE", ar.assurance3)}</li>
               </ul>
 
               <div className="trust-badges">
-                <div className="trust-badge"><Icon.shield /> {lang === "ar" ? ar.trust1 : "Certified & UL/FM listed"}</div>
-                <div className="trust-badge"><Icon.check /> {lang === "ar" ? ar.trust2 : "Local warranty support"}</div>
+                <div className="trust-badge"><Icon.shield /> {tx("pages.productDetail.trust1", lang, "Certified & UL/FM listed", ar.trust1)}</div>
+                <div className="trust-badge"><Icon.check /> {tx("pages.productDetail.trust2", lang, "Local warranty support", ar.trust2)}</div>
               </div>
 
               <div className="tabs">
-                <button className={`tab-btn ${tab === "overview" ? "active" : ""}`} onClick={() => setTab("overview")}>{lang === "ar" ? ar.tabOverview : "Overview"}</button>
-                <button className={`tab-btn ${tab === "specs" ? "active" : ""}`} onClick={() => setTab("specs")}>{lang === "ar" ? ar.tabSpecs : "Specifications"}</button>
+                <button className={`tab-btn ${tab === "overview" ? "active" : ""}`} onClick={() => setTab("overview")}>{tx("pages.productDetail.tabOverview", lang, "Overview", ar.tabOverview)}</button>
+                <button className={`tab-btn ${tab === "specs" ? "active" : ""}`} onClick={() => setTab("specs")}>{tx("pages.productDetail.tabSpecs", lang, "Specifications", ar.tabSpecs)}</button>
               </div>
               <div className={`tab-panel ${tab === "overview" ? "active" : ""}`}><p>{product.description}</p></div>
               <div className={`tab-panel ${tab === "specs" ? "active" : ""}`}>
@@ -147,8 +150,8 @@ export default function ProductDetail() {
       {suggestions.length > 0 && (
         <Reveal as="section" className="suggestions-section">
           <div className="container">
-            <span className="eyebrow">{lang === "ar" ? ar.youMayAlsoNeed : "YOU MAY ALSO NEED"}</span>
-            <h2 style={{ marginTop: 12 }}>{lang === "ar" ? ar.frequentlyPaired : "Frequently paired with this product"}</h2>
+            <span className="eyebrow">{tx("pages.productDetail.youMayAlsoNeed", lang, "YOU MAY ALSO NEED", ar.youMayAlsoNeed)}</span>
+            <h2 style={{ marginTop: 12 }}>{tx("pages.productDetail.frequentlyPaired", lang, "Frequently paired with this product", ar.frequentlyPaired)}</h2>
             <div className="product-grid sugg-grid">
               {suggestions.map((p) => (
                 <ProductCard product={p} key={p.id} />

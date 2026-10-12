@@ -1,3 +1,4 @@
+import { tx } from "../../i18n/tx";
 import { useState } from "react";
 import { Link, Navigate } from "react-router-dom";
 import PageHeader from "../../components/PageHeader";
@@ -33,14 +34,12 @@ export default function Register() {
   return (
     <>
       <PageHeader
-        eyebrow={lang === "ar" ? "حسابي" : "My Account"}
-        title={lang === "ar" ? "إنشاء حساب" : "Create an Account"}
+        eyebrow={tx("pages.account.register.my_account", lang, "My Account", "حسابي")}
+        title={tx("pages.account.register.create_an_account", lang, "Create an Account", "إنشاء حساب")}
         desc={
-          lang === "ar"
-            ? "أنشئ حسابًا لمتابعة استفساراتك مع الأنوار."
-            : "Create an account to track your enquiries with Al Nawras."
+          tx("pages.account.register.create_an_account_to_track_your_enquirie", lang, "Create an account to track your enquiries with Al Nawras.", "أنشئ حسابًا لمتابعة استفساراتك مع الأنوار.")
         }
-        crumbs={[{ label: lang === "ar" ? "إنشاء حساب" : "Register" }]}
+        crumbs={[{ label: tx("pages.account.register.register", lang, "Register", "إنشاء حساب") }]}
       />
 
       <section className="py-16 md:py-24 bg-paper">
@@ -48,9 +47,7 @@ export default function Register() {
           <div className="bg-white border border-ink/[.08] rounded-md p-8 md:p-10">
             {!supabaseConfigured && (
               <div className="mb-6 rounded-md border border-flame1/30 bg-flame1/[.06] px-4 py-3 text-[13px] text-inksoft">
-                {lang === "ar"
-                  ? "إنشاء الحساب غير متاح حاليًا."
-                  : "Registration isn't connected yet — please check back soon."}
+                {tx("pages.account.register.registration_isn_t_connected_yet_please_", lang, "Registration isn't connected yet — please check back soon.", "إنشاء الحساب غير متاح حاليًا.")}
               </div>
             )}
 
@@ -62,15 +59,13 @@ export default function Register() {
                   </svg>
                 </div>
                 <h3 className="font-display uppercase text-[16px] tracking-wide mb-2">
-                  {lang === "ar" ? "تحقّق من بريدك الإلكتروني" : "Check your email"}
+                  {tx("pages.account.register.check_your_email", lang, "Check your email", "تحقّق من بريدك الإلكتروني")}
                 </h3>
                 <p className="text-[13.5px] text-inksoft leading-relaxed">
-                  {lang === "ar"
-                    ? "أرسلنا رابط تأكيد إلى بريدك الإلكتروني. اضغط عليه لتفعيل حسابك ثم سجّل الدخول."
-                    : "We sent a confirmation link to your email. Click it to activate your account, then sign in."}
+                  {tx("pages.account.register.we_sent_a_confirmation_link_to_your_emai", lang, "We sent a confirmation link to your email. Click it to activate your account, then sign in.", "أرسلنا رابط تأكيد إلى بريدك الإلكتروني. اضغط عليه لتفعيل حسابك ثم سجّل الدخول.")}
                 </p>
                 <Link to="/account/sign-in" className="inline-block mt-6 text-flame1 font-semibold text-[13.5px] hover:underline">
-                  {lang === "ar" ? "الذهاب لتسجيل الدخول" : "Go to Sign In"}
+                  {tx("pages.account.register.go_to_sign_in", lang, "Go to Sign In", "الذهاب لتسجيل الدخول")}
                 </Link>
               </div>
             ) : (
@@ -78,7 +73,7 @@ export default function Register() {
                 <form onSubmit={handleSubmit}>
                   <div className="mb-4">
                     <label className="block text-[12.5px] font-semibold text-inksoft mb-1.5">
-                      {lang === "ar" ? "الاسم الكامل" : "Full Name"}
+                      {tx("pages.account.register.full_name", lang, "Full Name", "الاسم الكامل")}
                     </label>
                     <input
                       type="text"
@@ -90,7 +85,7 @@ export default function Register() {
                   </div>
                   <div className="mb-4">
                     <label className="block text-[12.5px] font-semibold text-inksoft mb-1.5">
-                      {lang === "ar" ? "البريد الإلكتروني" : "Email"}
+                      {tx("pages.account.register.email", lang, "Email", "البريد الإلكتروني")}
                     </label>
                     <input
                       type="email"
@@ -102,7 +97,7 @@ export default function Register() {
                   </div>
                   <div className="mb-6">
                     <label className="block text-[12.5px] font-semibold text-inksoft mb-1.5">
-                      {lang === "ar" ? "كلمة المرور" : "Password"}
+                      {tx("pages.account.register.password", lang, "Password", "كلمة المرور")}
                     </label>
                     <input
                       type="password"
@@ -113,7 +108,7 @@ export default function Register() {
                       className="w-full rounded-md border border-ink/[.14] px-3.5 py-2.5 text-[14px] outline-none focus:border-flame1 transition-colors"
                     />
                     <p className="mt-1.5 text-[11.5px] text-inksoft/70">
-                      {lang === "ar" ? "6 أحرف على الأقل" : "At least 6 characters"}
+                      {tx("pages.account.register.at_least_6_characters", lang, "At least 6 characters", "6 أحرف على الأقل")}
                     </p>
                   </div>
                   {error && <div className="mb-4 text-[13px] text-red-600">{error}</div>}
@@ -123,14 +118,14 @@ export default function Register() {
                     className="w-full rounded-full bg-flame1 text-white font-semibold text-[14px] py-3 hover:bg-flame2 transition-colors disabled:opacity-60"
                   >
                     {busy
-                      ? lang === "ar" ? "جارٍ الإنشاء…" : "Creating…"
-                      : lang === "ar" ? "إنشاء حساب" : "Create Account"}
+                      ? tx("pages.account.register.creating", lang, "Creating…", "جارٍ الإنشاء…")
+                      : tx("pages.account.register.create_account", lang, "Create Account", "إنشاء حساب")}
                   </button>
                 </form>
                 <p className="mt-6 text-center text-[13px] text-inksoft">
-                  {lang === "ar" ? "لديك حساب بالفعل؟" : "Already have an account?"}{" "}
+                  {tx("pages.account.register.already_have_an_account", lang, "Already have an account?", "لديك حساب بالفعل؟")}{" "}
                   <Link to="/account/sign-in" className="text-flame1 font-semibold hover:underline">
-                    {lang === "ar" ? "سجّل الدخول" : "Sign in"}
+                    {tx("pages.account.register.sign_in", lang, "Sign in", "سجّل الدخول")}
                   </Link>
                 </p>
               </>

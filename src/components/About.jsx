@@ -1,3 +1,4 @@
+import { useSiteSettings } from "../context/SiteSettingsContext";
 import { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import Counter from "./Counter";
@@ -7,6 +8,7 @@ import aboutPoster from "../assets/about-video-poster.jpg";
 
 export default function About() {
   const { t } = useLanguage();
+  const site = useSiteSettings();
   const ref = useRef(null);
   useEffect(() => {
     const el = ref.current;
@@ -56,10 +58,10 @@ export default function About() {
 
         {/* stats */}
         <div className="flex flex-wrap mt-16 md:mt-20 pt-10 border-t border-ink/[.08]">
-          <Counter theme="light" target={1300} suffix="+" label={t("about.statProjects")} />
-          <Counter theme="light" target={20} suffix="+" label={t("about.statYears")} />
-          <Counter theme="light" target={3} suffix="" label={t("about.statOffices")} />
-          <Counter theme="light" target={6} suffix="" label={t("about.statBrands")} />
+          <Counter theme="light" target={Number(site.stat_projects)} suffix="+" label={t("about.statProjects")} />
+          <Counter theme="light" target={Number(site.stat_years)} suffix="+" label={t("about.statYears")} />
+          <Counter theme="light" target={Number(site.stat_offices)} suffix="" label={t("about.statOffices")} />
+          <Counter theme="light" target={Number(site.stat_brands)} suffix="" label={t("about.statBrands")} />
         </div>
       </div>
     </section>

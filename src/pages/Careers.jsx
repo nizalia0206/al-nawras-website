@@ -1,3 +1,4 @@
+import { tx } from "../i18n/tx";
 import { useState, useMemo } from "react";
 import { Icon } from "../components/CatalogIcons.jsx";
 import Reveal from "../components/Reveal.jsx";
@@ -33,8 +34,15 @@ export default function Careers() {
   const [submitted, setSubmitted] = useState(false);
 
   const list = dept === "All" ? JOBS : JOBS.filter((j) => j.dept === dept);
-  const values = lang === "ar" ? VALUES.map((v, i) => ({ ...v, title: ar.values[i].title, body: ar.values[i].body })) : VALUES;
-  const benefits = lang === "ar" ? ar.benefits : BENEFITS;
+  const values = VALUES.map((v, i) => ({
+    ...v,
+    title: tx(`pages.careers.value${i + 1}.title`, lang, v.title, ar.values?.[i]?.title),
+    body: tx(`pages.careers.value${i + 1}.body`, lang, v.body, ar.values?.[i]?.body),
+  }));
+  const benefits = BENEFITS.map(([title, body], i) => [
+    tx(`pages.careers.benefit${i + 1}.title`, lang, title, ar.benefits?.[i]?.[0]),
+    tx(`pages.careers.benefit${i + 1}.body`, lang, body, ar.benefits?.[i]?.[1]),
+  ]);
 
   function closeModal() {
     setModalJob(null);
@@ -49,28 +57,26 @@ export default function Careers() {
     return lang === "ar" ? ar.jobTitles[j.title] || j.title : j.title;
   }
   function deptLabel(d) {
-    if (d === "All") return lang === "ar" ? ar.all : "All";
+    if (d === "All") return tx("pages.careers.all", lang, "All", ar.all);
     return lang === "ar" ? ar.jobDepts[d] || d : d;
   }
 
   return (
     <>
       <PageHeader
-        eyebrow={lang === "ar" ? ar.eyebrow : "Join Our Team"}
-        title={lang === "ar" ? ar.title : "Build Your Career at Al Nawras"}
+        eyebrow={tx("pages.careers.eyebrow", lang, "Join Our Team", ar.eyebrow)}
+        title={tx("pages.careers.title", lang, "Build Your Career at Al Nawras", ar.title)}
         desc={
-          lang === "ar"
-            ? ar.desc
-            : "We're growing our team of fire protection engineers, ICT specialists and project managers. Help us secure lives and buildings across the UAE."
+          tx("pages.careers.desc", lang, "We're growing our team of fire protection engineers, ICT specialists and project managers. Help us secure lives and buildings across the UAE.", ar.desc)
         }
-        crumbs={[{ label: lang === "ar" ? ar.crumb : "Careers" }]}
+        crumbs={[{ label: tx("pages.careers.crumb", lang, "Careers", ar.crumb) }]}
         image={headerImage}
       />
 
       <Reveal as="section" className="section" style={{ paddingBottom: 20 }}>
         <div className="container">
-          <span className="eyebrow">{lang === "ar" ? ar.whyUs : "WHY AL NAWRAS"}</span>
-          <h2 style={{ marginTop: 12, fontSize: 28 }}>{lang === "ar" ? ar.whatWeValue : "What We Value"}</h2>
+          <span className="eyebrow">{tx("pages.careers.whyUs", lang, "WHY AL NAWRAS", ar.whyUs)}</span>
+          <h2 style={{ marginTop: 12, fontSize: 28 }}>{tx("pages.careers.whatWeValue", lang, "What We Value", ar.whatWeValue)}</h2>
           <div className="values-grid">
             {values.map((v) => {
               const IconComp = Icon[v.icon];
@@ -88,8 +94,8 @@ export default function Careers() {
 
       <Reveal as="section" className="section benefits-section">
         <div className="container">
-          <span className="eyebrow">{lang === "ar" ? ar.benefitsLabel : "BENEFITS"}</span>
-          <h2 style={{ marginTop: 12, fontSize: 28 }}>{lang === "ar" ? ar.benefitsTitle : "What You'll Get"}</h2>
+          <span className="eyebrow">{tx("pages.careers.benefitsLabel", lang, "BENEFITS", ar.benefitsLabel)}</span>
+          <h2 style={{ marginTop: 12, fontSize: 28 }}>{tx("pages.careers.benefitsTitle", lang, "What You'll Get", ar.benefitsTitle)}</h2>
           <div className="benefits-grid">
             {benefits.map(([title, body]) => (
               <div className="benefit-item" key={title}>
@@ -103,8 +109,8 @@ export default function Careers() {
 
       <main className="section">
         <div className="container">
-          <span className="eyebrow">{lang === "ar" ? ar.openRoles : "OPEN ROLES"}</span>
-          <h2 style={{ marginTop: 12, fontSize: 28 }}>{lang === "ar" ? ar.currentOpenings : "Current Openings"}</h2>
+          <span className="eyebrow">{tx("pages.careers.openRoles", lang, "OPEN ROLES", ar.openRoles)}</span>
+          <h2 style={{ marginTop: 12, fontSize: 28 }}>{tx("pages.careers.currentOpenings", lang, "Current Openings", ar.currentOpenings)}</h2>
           <div className="jobs-toolbar">
             {depts.map((d) => (
               <button key={d} className={`pill ${dept === d ? "active" : ""}`} onClick={() => setDept(d)}>{deptLabel(d)}</button>
@@ -121,7 +127,7 @@ export default function Careers() {
                     <span><Icon.map /> {lang === "ar" ? (j.location === "Sharjah" ? ar.jobLocationSharjah : ar.jobLocationDubai) : j.location}</span>
                   </div>
                 </div>
-                <button className="btn btn-primary btn-sm" onClick={() => setModalJob(j)}>{lang === "ar" ? ar.applyNow : "Apply Now"}</button>
+                <button className="btn btn-primary btn-sm" onClick={() => setModalJob(j)}>{tx("pages.careers.applyNow", lang, "Apply Now", ar.applyNow)}</button>
               </div>
             ))}
           </div>
@@ -135,7 +141,7 @@ export default function Careers() {
           {submitted ? (
             <div style={{ textAlign: "center", padding: "20px 0" }}>
               <div className="icon-circle" style={{ margin: "0 auto 20px" }}><Icon.check /></div>
-              <h3 style={{ marginBottom: 8 }}>{lang === "ar" ? ar.applicationSubmitted : "Application Submitted"}</h3>
+              <h3 style={{ marginBottom: 8 }}>{tx("pages.careers.applicationSubmitted", lang, "Application Submitted", ar.applicationSubmitted)}</h3>
               <p style={{ color: "var(--slate-500)", fontSize: 14 }}>
                 {lang === "ar"
                   ? `${ar.thankYouApplying} ${jobTitle(modalJob || {})}. ${ar.hrWillContact}`
@@ -144,15 +150,15 @@ export default function Careers() {
             </div>
           ) : (
             <>
-              <h3 style={{ marginBottom: 6 }}>{lang === "ar" ? ar.applyNow : "Apply Now"}</h3>
+              <h3 style={{ marginBottom: 6 }}>{tx("pages.careers.applyNow", lang, "Apply Now", ar.applyNow)}</h3>
               <p style={{ color: "var(--slate-500)", fontSize: 13.5, marginBottom: 22 }}>{jobTitle(modalJob || {})} &mdash; {lang === "ar" ? (modalJob?.location === "Sharjah" ? ar.jobLocationSharjah : ar.jobLocationDubai) : modalJob?.location}</p>
               <form onSubmit={handleApply}>
-                <div className="field"><label>{lang === "ar" ? ar.fullName : "Full Name *"}</label><input type="text" required /></div>
-                <div className="field"><label>{lang === "ar" ? ar.email : "Email *"}</label><input type="email" required /></div>
-                <div className="field"><label>{lang === "ar" ? ar.phone : "Phone *"}</label><input type="tel" required /></div>
-                <div className="field"><label>{lang === "ar" ? ar.yearsExperience : "Years of Experience"}</label><input type="text" placeholder={lang === "ar" ? ar.yearsExperiencePlaceholder : "e.g. 5 years"} /></div>
-                <div className="field"><label>{lang === "ar" ? ar.coverNote : "Cover Note"}</label><textarea placeholder={lang === "ar" ? ar.coverNotePlaceholder : "Tell us why you're a great fit…"} /></div>
-                <button type="submit" className="btn btn-primary btn-block">{lang === "ar" ? ar.submitApplication : "Submit Application"}</button>
+                <div className="field"><label>{tx("pages.careers.fullName", lang, "Full Name *", ar.fullName)}</label><input type="text" required /></div>
+                <div className="field"><label>{tx("pages.careers.email", lang, "Email *", ar.email)}</label><input type="email" required /></div>
+                <div className="field"><label>{tx("pages.careers.phone", lang, "Phone *", ar.phone)}</label><input type="tel" required /></div>
+                <div className="field"><label>{tx("pages.careers.yearsExperience", lang, "Years of Experience", ar.yearsExperience)}</label><input type="text" placeholder={tx("pages.careers.yearsExperiencePlaceholder", lang, "e.g. 5 years", ar.yearsExperiencePlaceholder)} /></div>
+                <div className="field"><label>{tx("pages.careers.coverNote", lang, "Cover Note", ar.coverNote)}</label><textarea placeholder={tx("pages.careers.coverNotePlaceholder", lang, "Tell us why you're a great fit…", ar.coverNotePlaceholder)} /></div>
+                <button type="submit" className="btn btn-primary btn-block">{tx("pages.careers.submitApplication", lang, "Submit Application", ar.submitApplication)}</button>
               </form>
             </>
           )}

@@ -1,3 +1,5 @@
+import { tx } from "../i18n/tx";
+import { useSiteSettings } from "../context/SiteSettingsContext";
 import { useState, useMemo, useEffect } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { Icon } from "../components/CatalogIcons.jsx";
@@ -10,6 +12,7 @@ import { projectHeaderImage } from "../data/headerImages";
 
 export default function Projects() {
   const { lang } = useLanguage();
+  const site = useSiteSettings();
   const ar = projectsPage;
   const { projects: PROJECTS } = useProjects();
   const PROJECT_CATS = useMemo(() => ["All", ...new Set(PROJECTS.map((p) => p.category))], [PROJECTS]);
@@ -44,23 +47,19 @@ export default function Projects() {
             ? lang === "ar"
               ? `مشاريع ${catLabel}`
               : `${catLabel} Projects`
-            : lang === "ar"
-            ? ar.title
-            : "Projects Delivered Across the UAE"
+            : tx("pages.projects.title", lang, "Projects Delivered Across the UAE", ar.title)
         }
         desc={
           catLabel
             ? lang === "ar"
               ? `تصفح مشاريع الأنوار المنجزة في قطاع ${catLabel}.`
               : `Browse Al Nawras projects delivered in the ${catLabel} sector.`
-            : lang === "ar"
-            ? ar.desc
-            : "From malls and high-rise towers to hospitals, schools and oil & gas facilities — a selection of the fire protection, life safety and ELV projects Al Nawras has delivered."
+            : tx("pages.projects.desc", lang, "From malls and high-rise towers to hospitals, schools and oil & gas facilities — a selection of the fire protection, life safety and ELV projects Al Nawras has delivered.", ar.desc)
         }
         crumbs={
           catLabel
-            ? [{ label: lang === "ar" ? ar.crumb : "Projects", href: "/projects" }, { label: catLabel }]
-            : [{ label: lang === "ar" ? ar.crumb : "Projects" }]
+            ? [{ label: tx("pages.projects.crumb", lang, "Projects", ar.crumb), href: "/projects" }, { label: catLabel }]
+            : [{ label: tx("pages.projects.crumb", lang, "Projects", ar.crumb) }]
         }
         image={projectHeaderImage(filter)}
       />
@@ -68,10 +67,10 @@ export default function Projects() {
       <Reveal as="section" className="stats-strip">
         <div className="container">
           <div className="stats-grid">
-            <div className="stat-box"><div className="num ltr-content">1300+</div><div className="lbl">{lang === "ar" ? ar.statCompleted : "Projects Completed"}</div></div>
-            <div className="stat-box"><div className="num ltr-content">20+</div><div className="lbl">{lang === "ar" ? ar.statYears : "Years of Operation"}</div></div>
-            <div className="stat-box"><div className="num ltr-content">10</div><div className="lbl">{lang === "ar" ? ar.statSectors : "Sectors Served"}</div></div>
-            <div className="stat-box"><div className="num ltr-content">7</div><div className="lbl">{lang === "ar" ? ar.statEmirates : "Emirates Covered"}</div></div>
+            <div className="stat-box"><div className="num ltr-content">{site.stat_projects}+</div><div className="lbl">{tx("pages.projects.statCompleted", lang, "Projects Completed", ar.statCompleted)}</div></div>
+            <div className="stat-box"><div className="num ltr-content">{site.stat_years}+</div><div className="lbl">{tx("pages.projects.statYears", lang, "Years of Operation", ar.statYears)}</div></div>
+            <div className="stat-box"><div className="num ltr-content">{site.stat_sectors}</div><div className="lbl">{tx("pages.projects.statSectors", lang, "Sectors Served", ar.statSectors)}</div></div>
+            <div className="stat-box"><div className="num ltr-content">{site.stat_emirates}</div><div className="lbl">{tx("pages.projects.statEmirates", lang, "Emirates Covered", ar.statEmirates)}</div></div>
           </div>
         </div>
       </Reveal>
@@ -105,13 +104,13 @@ export default function Projects() {
                   <p>{p.scope}</p>
                   <div className="project-meta">
                     <span><Icon.map /> {p.location}</span>
-                    <span>{lang === "ar" ? ar.ref : "Ref"}: {p.ref}</span>
+                    <span>{tx("pages.projects.ref", lang, "Ref", ar.ref)}: {p.ref}</span>
                   </div>
                   <div className="project-ref">
                     <span>{p.client}</span>
                   </div>
                   <span className="project-view-link">
-                    {lang === "ar" ? ar.viewProject : "View Project"} <Icon.arrowRight />
+                    {tx("pages.projects.viewProject", lang, "View Project", ar.viewProject)} <Icon.arrowRight />
                   </span>
                 </div>
               </div>
@@ -122,15 +121,19 @@ export default function Projects() {
 
       <Reveal as="section" className="process-section section">
         <div className="container">
-          <span className="eyebrow">{lang === "ar" ? ar.howWeWork : "HOW WE WORK"}</span>
-          <h2 style={{ marginTop: 12, fontSize: 30 }}>{lang === "ar" ? ar.processTitle : "Our Project Delivery Process"}</h2>
+          <span className="eyebrow">{tx("pages.projects.howWeWork", lang, "HOW WE WORK", ar.howWeWork)}</span>
+          <h2 style={{ marginTop: 12, fontSize: 30 }}>{tx("pages.projects.processTitle", lang, "Our Project Delivery Process", ar.processTitle)}</h2>
           <div className="process-grid">
-            {(lang === "ar" ? ar.steps : [
+            {([
               { num: "01", title: "Site Assessment", desc: "Our engineers survey the site and review drawings to scope the right fire, life safety or ICT solution." },
               { num: "02", title: "Design & Proposal", desc: "We prepare a compliant system design and detailed proposal aligned with Civil Defense and NFPA requirements." },
               { num: "03", title: "Supply & Installation", desc: "Certified products are supplied and installed by our trained technical teams, on schedule and to code." },
               { num: "04", title: "Testing & Handover", desc: "Full system commissioning, authority approvals and handover documentation for long-term reliability." },
-            ]).map((s) => (
+            ]).map((s, i) => ({
+              num: s.num,
+              title: tx(`pages.projects.step${i + 1}.title`, lang, s.title, ar.steps?.[i]?.title),
+              desc: tx(`pages.projects.step${i + 1}.desc`, lang, s.desc, ar.steps?.[i]?.desc),
+            })).map((s) => (
               <div className="process-step" key={s.num}>
                 <span className="num ltr-content">{s.num}</span>
                 <h4>{s.title}</h4>

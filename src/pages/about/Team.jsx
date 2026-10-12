@@ -1,3 +1,4 @@
+import { tx } from "../../i18n/tx";
 import PageHeader from "../../components/PageHeader";
 import AboutSubNav from "../../components/AboutSubNav";
 import { IconPerson, IconHardHat } from "../../components/Icons";
@@ -16,16 +17,14 @@ export default function Team() {
   return (
     <>
       <PageHeader
-        eyebrow={lang === "ar" ? ar.eyebrow : "Al Nawras Overview"}
-        title={lang === "ar" ? ar.title : "Our Team"}
+        eyebrow={tx("pages.about.team.eyebrow", lang, "Al Nawras Overview", ar.eyebrow)}
+        title={tx("pages.about.team.title", lang, "Our Team", ar.title)}
         desc={
-          lang === "ar"
-            ? ar.desc
-            : "The engineers, managers and specialists who plan, deliver and support every Al Nawras project."
+          tx("pages.about.team.desc", lang, "The engineers, managers and specialists who plan, deliver and support every Al Nawras project.", ar.desc)
         }
         crumbs={[
-          { label: lang === "ar" ? ar.crumbAbout : "About", href: "/about/overview" },
-          { label: lang === "ar" ? ar.crumbCurrent : "Our Team" },
+          { label: tx("pages.about.team.crumbAbout", lang, "About", ar.crumbAbout), href: "/about/overview" },
+          { label: tx("pages.about.team.crumbCurrent", lang, "Our Team", ar.crumbCurrent) },
         ]}
         image={headerImage}
       />
@@ -34,9 +33,9 @@ export default function Team() {
       <section className="bg-paper py-16 md:py-24">
         <div className="max-w-[1280px] mx-auto px-8">
           <div className="max-w-[680px] mb-14">
-            <div className="sec-eyebrow">{lang === "ar" ? ar.leadership : "Leadership"}</div>
+            <div className="sec-eyebrow">{tx("pages.about.team.leadership", lang, "Leadership", ar.leadership)}</div>
             <h1 className="font-display font-semibold uppercase text-[28px] md:text-[40px] leading-[1.08] text-ink">
-              {lang === "ar" ? ar.heading : "The people behind Al Nawras"}
+              {tx("pages.about.team.heading", lang, "The people behind Al Nawras", ar.heading)}
             </h1>
           </div>
 

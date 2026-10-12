@@ -1,8 +1,9 @@
+import { tx } from "../i18n/tx";
 import useReveal from "../hooks/useReveal";
 import { useLanguage } from "../context/LanguageContext";
 import { IconArrow } from "./Icons";
 
-const WA_NUMBER = "971551099885";
+import { useSiteSettings, waNumber } from "../context/SiteSettingsContext";
 
 /**
  * Systems & Solutions sub-system layout:
@@ -14,6 +15,7 @@ const WA_NUMBER = "971551099885";
  */
 export default function SystemSections({ sections, system }) {
   const { lang } = useLanguage();
+  const WA_NUMBER = waNumber(useSiteSettings().whatsapp);
   const gridRef = useReveal();
   const isAr = lang === "ar";
   const systemName = isAr ? system.ar : system.en;
@@ -53,9 +55,7 @@ export default function SystemSections({ sections, system }) {
               {isAr ? `احصل على عرض سعر لـ${systemName}` : `Get a quote for ${systemName}`}
             </h3>
             <p className="mt-2 text-[14.5px] text-white/70 max-w-[56ch]">
-              {isAr
-                ? "أرسل لنا تفاصيل مشروعك وسيعود إليك فريقنا الهندسي بعرض متكامل."
-                : "Share your project details and our engineering team will come back with a complete proposal."}
+              {tx("components.systemSections.share_your_project_details_and_our_engin", (isAr ? "ar" : "en"), "Share your project details and our engineering team will come back with a complete proposal.", "أرسل لنا تفاصيل مشروعك وسيعود إليك فريقنا الهندسي بعرض متكامل.")}
             </p>
           </div>
           <a
@@ -64,7 +64,7 @@ export default function SystemSections({ sections, system }) {
             rel="noopener noreferrer"
             className="btn btn-flame shrink-0"
           >
-            {isAr ? "احصل على عرض سعر" : "Get Quote"} <IconArrow />
+            {tx("components.systemSections.get_quote", (isAr ? "ar" : "en"), "Get Quote", "احصل على عرض سعر")} <IconArrow />
           </a>
         </div>
       </div>

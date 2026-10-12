@@ -1,3 +1,5 @@
+import { tx } from "../i18n/tx";
+import { useSiteSettings } from "../context/SiteSettingsContext";
 import { useEffect } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import { Icon } from "../components/CatalogIcons.jsx";
@@ -21,6 +23,7 @@ function scopeToBullets(scope) {
 }
 
 export default function ProjectDetail() {
+  const siteEmail = useSiteSettings().email;
   const { lang } = useLanguage();
   const ar = projectDetailPage;
   const { slug } = useParams();
@@ -47,8 +50,8 @@ export default function ProjectDetail() {
     if (loading) return null;
     return (
       <div className="container" style={{ padding: "100px 20px", textAlign: "center" }}>
-        <h2>{lang === "ar" ? ar.projectNotFound : "Project not found"}</h2>
-        <Link to="/projects" className="btn btn-primary" style={{ marginTop: 16 }}>{lang === "ar" ? ar.backToProjects : "Back to Projects"}</Link>
+        <h2>{tx("pages.projectDetail.projectNotFound", lang, "Project not found", ar.projectNotFound)}</h2>
+        <Link to="/projects" className="btn btn-primary" style={{ marginTop: 16 }}>{tx("pages.projectDetail.backToProjects", lang, "Back to Projects", ar.backToProjects)}</Link>
       </div>
     );
   }
@@ -63,8 +66,8 @@ export default function ProjectDetail() {
         <div className="project-detail-hero-scrim" />
         <div className="container project-detail-hero-inner">
           <div className="breadcrumb" style={{ color: "rgba(255,255,255,.75)" }}>
-            <Link to="/">{lang === "ar" ? ar.breadcrumbHome : "Home"}</Link><span className="sep">/</span>
-            <Link to="/projects">{lang === "ar" ? ar.breadcrumbProjects : "Projects"}</Link><span className="sep">/</span>
+            <Link to="/">{tx("pages.projectDetail.breadcrumbHome", lang, "Home", ar.breadcrumbHome)}</Link><span className="sep">/</span>
+            <Link to="/projects">{tx("pages.projectDetail.breadcrumbProjects", lang, "Projects", ar.breadcrumbProjects)}</Link><span className="sep">/</span>
             <button
               type="button"
               className="breadcrumb-link"
@@ -84,8 +87,8 @@ export default function ProjectDetail() {
         <div className="container">
           <div className="project-detail-grid">
             <div className="project-detail-main">
-              <span className="eyebrow">{lang === "ar" ? ar.overviewLabel : "PROJECT OVERVIEW"}</span>
-              <h2 style={{ marginTop: 10, fontSize: 26 }}>{lang === "ar" ? ar.scopeOfWork : "Scope of Work"}</h2>
+              <span className="eyebrow">{tx("pages.projectDetail.overviewLabel", lang, "PROJECT OVERVIEW", ar.overviewLabel)}</span>
+              <h2 style={{ marginTop: 10, fontSize: 26 }}>{tx("pages.projectDetail.scopeOfWork", lang, "Scope of Work", ar.scopeOfWork)}</h2>
               <p className="project-detail-desc">{project.scope}</p>
 
               {bullets.length > 2 && (
@@ -97,15 +100,15 @@ export default function ProjectDetail() {
               )}
 
               <div className="project-detail-cta-row">
-                <a href="mailto:info@nawrassystems.com" className="btn btn-primary">
-                  {lang === "ar" ? ar.discussProject : "Discuss a Similar Project"} <Icon.arrowRight />
+                <a href={`mailto:${siteEmail}`} className="btn btn-primary">
+                  {tx("pages.projectDetail.discussProject", lang, "Discuss a Similar Project", ar.discussProject)} <Icon.arrowRight />
                 </a>
                 <a
                   href={`https://wa.me/?text=${encodeURIComponent(`Hi, I'd like to discuss a project similar to ${project.title}.`)}`}
                   target="_blank" rel="noopener noreferrer"
                   className="btn btn-whatsapp"
                 >
-                  <Icon.phone /> {lang === "ar" ? ar.whatsappUs : "WhatsApp Us"}
+                  <Icon.phone /> {tx("pages.projectDetail.whatsappUs", lang, "WhatsApp Us", ar.whatsappUs)}
                 </a>
               </div>
             </div>
@@ -113,19 +116,19 @@ export default function ProjectDetail() {
             <aside className="project-detail-sidebar">
               <div className="project-detail-card">
                 <div className="project-detail-card-row">
-                  <span className="lbl"><Icon.map /> {lang === "ar" ? ar.location : "Location"}</span>
+                  <span className="lbl"><Icon.map /> {tx("pages.projectDetail.location", lang, "Location", ar.location)}</span>
                   <span className="val">{project.location}</span>
                 </div>
                 <div className="project-detail-card-row">
-                  <span className="lbl"><Icon.briefcase /> {lang === "ar" ? ar.client : "Client"}</span>
+                  <span className="lbl"><Icon.briefcase /> {tx("pages.projectDetail.client", lang, "Client", ar.client)}</span>
                   <span className="val">{project.client}</span>
                 </div>
                 <div className="project-detail-card-row">
-                  <span className="lbl"><Icon.check /> {lang === "ar" ? ar.reference : "Reference"}</span>
+                  <span className="lbl"><Icon.check /> {tx("pages.projectDetail.reference", lang, "Reference", ar.reference)}</span>
                   <span className="val">{project.ref}</span>
                 </div>
                 <div className="project-detail-card-row">
-                  <span className="lbl"><Icon.shield /> {lang === "ar" ? ar.category : "Category"}</span>
+                  <span className="lbl"><Icon.shield /> {tx("pages.projectDetail.category", lang, "Category", ar.category)}</span>
                   <span className="val">{catLabel}</span>
                 </div>
               </div>
@@ -137,8 +140,8 @@ export default function ProjectDetail() {
       {related.length > 0 && (
         <Reveal as="section" className="section" style={{ paddingTop: 0 }}>
           <div className="container">
-            <span className="eyebrow">{lang === "ar" ? ar.moreInCategory : "MORE IN THIS CATEGORY"}</span>
-            <h2 style={{ marginTop: 12, marginBottom: 24, fontSize: 26 }}>{lang === "ar" ? ar.relatedProjects : "Related Projects"}</h2>
+            <span className="eyebrow">{tx("pages.projectDetail.moreInCategory", lang, "MORE IN THIS CATEGORY", ar.moreInCategory)}</span>
+            <h2 style={{ marginTop: 12, marginBottom: 24, fontSize: 26 }}>{tx("pages.projectDetail.relatedProjects", lang, "Related Projects", ar.relatedProjects)}</h2>
             <div className="project-grid">
               {related.map((p) => (
                 <div

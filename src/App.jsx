@@ -22,6 +22,7 @@ import CatalogStyleScope from "./components/CatalogStyleScope";
 import SignIn from "./pages/account/SignIn";
 import Register from "./pages/account/Register";
 import Account from "./pages/account/Account";
+import AdminRedirect from "./pages/AdminRedirect";
 
 export default function App() {
   return (
@@ -51,6 +52,9 @@ export default function App() {
         <Route path="/account/register" element={<Register />} />
         <Route path="/account" element={<Account />} />
       </Route>
+      {/* CMS is a separate deployment — send /admin there instead of a blank page */}
+      <Route path="/admin/*" element={<AdminRedirect />} />
+      <Route path="/admin" element={<AdminRedirect />} />
     </Routes>
     </>
   );

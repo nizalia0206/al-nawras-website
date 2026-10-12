@@ -1,12 +1,13 @@
 import { useState } from "react";
+import { useSiteSettings, waNumber } from "../context/SiteSettingsContext";
 
-const WHATSAPP_NUMBER = "971551099885"; // Al Nawras Head Office mobile (Sharjah)
 const DEFAULT_MESSAGE = "Hi Al Nawras, I'd like to enquire about your fire & life safety systems.";
 
 export default function WhatsAppButton() {
   const [hovered, setHovered] = useState(false);
+  const { whatsapp } = useSiteSettings();
 
-  const href = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(DEFAULT_MESSAGE)}`;
+  const href = `https://wa.me/${waNumber(whatsapp)}?text=${encodeURIComponent(DEFAULT_MESSAGE)}`;
 
   return (
     <a

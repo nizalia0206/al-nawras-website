@@ -1,3 +1,4 @@
+import { tx } from "../../i18n/tx";
 import { Navigate } from "react-router-dom";
 import PageHeader from "../../components/PageHeader";
 import { useLanguage } from "../../context/LanguageContext";
@@ -16,9 +17,9 @@ export default function Account() {
   return (
     <>
       <PageHeader
-        eyebrow={lang === "ar" ? "حسابي" : "My Account"}
+        eyebrow={tx("pages.account.account.my_account", lang, "My Account", "حسابي")}
         title={lang === "ar" ? `مرحبًا${name ? "، " + name : ""}` : `Welcome${name ? ", " + name : ""}`}
-        crumbs={[{ label: lang === "ar" ? "حسابي" : "My Account" }]}
+        crumbs={[{ label: tx("pages.account.account.my_account", lang, "My Account", "حسابي") }]}
       />
 
       <section className="py-16 md:py-24 bg-paper">
@@ -26,28 +27,26 @@ export default function Account() {
           <div className="bg-white border border-ink/[.08] rounded-md p-8 md:p-10">
             <div className="mb-6">
               <div className="text-[12.5px] font-semibold text-inksoft mb-1">
-                {lang === "ar" ? "البريد الإلكتروني" : "Email"}
+                {tx("pages.account.account.email", lang, "Email", "البريد الإلكتروني")}
               </div>
               <div className="text-[15px] text-ink ltr-content">{email}</div>
             </div>
             {name && (
               <div className="mb-6">
                 <div className="text-[12.5px] font-semibold text-inksoft mb-1">
-                  {lang === "ar" ? "الاسم" : "Name"}
+                  {tx("pages.account.account.name", lang, "Name", "الاسم")}
                 </div>
                 <div className="text-[15px] text-ink">{name}</div>
               </div>
             )}
             <p className="text-[13px] text-inksoft leading-relaxed mb-6">
-              {lang === "ar"
-                ? "لأي استفسار حول مشروعك، تواصل معنا عبر صفحة التواصل أو واتساب."
-                : "For any enquiries about your project, reach us via the Contact page or WhatsApp."}
+              {tx("pages.account.account.for_any_enquiries_about_your_project_rea", lang, "For any enquiries about your project, reach us via the Contact page or WhatsApp.", "لأي استفسار حول مشروعك، تواصل معنا عبر صفحة التواصل أو واتساب.")}
             </p>
             <button
               onClick={signOut}
               className="w-full rounded-full border border-ink/[.16] text-ink font-semibold text-[14px] py-3 hover:border-flame1 hover:text-flame1 transition-colors"
             >
-              {lang === "ar" ? "تسجيل الخروج" : "Sign Out"}
+              {tx("pages.account.account.sign_out", lang, "Sign Out", "تسجيل الخروج")}
             </button>
           </div>
         </div>

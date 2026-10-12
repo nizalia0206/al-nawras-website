@@ -1,3 +1,4 @@
+import { tx } from "../../i18n/tx";
 import PageHeader from "../../components/PageHeader";
 import AboutSubNav from "../../components/AboutSubNav";
 import useReveal from "../../hooks/useReveal";
@@ -37,21 +38,23 @@ function Card({ item }) {
 export default function Mission() {
   const { lang } = useLanguage();
   const ar = aboutPages.mission;
-  const CARDS = lang === "ar" ? ar.cards : CARDS_EN;
+  const CARDS = CARDS_EN.map((c, i) => ({
+    num: c.num,
+    title: tx(`pages.about.mission.card${i + 1}.title`, lang, c.title, ar.cards?.[i]?.title),
+    desc: tx(`pages.about.mission.card${i + 1}.desc`, lang, c.desc, ar.cards?.[i]?.desc),
+  }));
 
   return (
     <>
       <PageHeader
-        eyebrow={lang === "ar" ? ar.eyebrow : "Al Nawras Overview"}
-        title={lang === "ar" ? ar.title : "Mission & Vision"}
+        eyebrow={tx("pages.about.mission.eyebrow", lang, "Al Nawras Overview", ar.eyebrow)}
+        title={tx("pages.about.mission.title", lang, "Mission & Vision", ar.title)}
         desc={
-          lang === "ar"
-            ? ar.desc
-            : "Progressive thinking and a systematic approach to every project, so our clients keep coming back to us."
+          tx("pages.about.mission.desc", lang, "Progressive thinking and a systematic approach to every project, so our clients keep coming back to us.", ar.desc)
         }
         crumbs={[
-          { label: lang === "ar" ? ar.crumbAbout : "About", href: "/about/overview" },
-          { label: lang === "ar" ? ar.crumbCurrent : "Mission & Vision" },
+          { label: tx("pages.about.mission.crumbAbout", lang, "About", ar.crumbAbout), href: "/about/overview" },
+          { label: tx("pages.about.mission.crumbCurrent", lang, "Mission & Vision", ar.crumbCurrent) },
         ]}
         image={headerImage}
       />

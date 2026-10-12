@@ -1,3 +1,4 @@
+import { tx } from "../../i18n/tx";
 import PageHeader from "../../components/PageHeader";
 import SystemsSubNav from "../../components/SystemsSubNav";
 import SystemSections from "../../components/SystemSections";
@@ -27,13 +28,13 @@ export default function EmergencyLighting() {
     <>
       <PageHeader
         image={emergencyLightEnv}
-        eyebrow={lang === "ar" ? "الأنظمة والحلول" : "Systems & Solutions"}
+        eyebrow={tx("pages.systems.emergencyLighting.systems_solutions", lang, "Systems & Solutions", "الأنظمة والحلول")}
         eyebrowClassName="!text-[16px] sm:!text-[17px] !font-extrabold"
-        title={lang === "ar" ? ar.title : "Emergency Lighting"}
-        desc={lang === "ar" ? ar.desc : "Central battery systems and DALI-addressable emergency and exit luminaires from Teknoware ESCALUX, monitored end-to-end through IntelliPanel and ESC-GATE gateways for consistent, code-compliant coverage."}
+        title={tx("pages.systems.emergencyLighting.title", lang, "Emergency Lighting", ar.title)}
+        desc={tx("pages.systems.emergencyLighting.desc", lang, "Central battery systems and DALI-addressable emergency and exit luminaires from Teknoware ESCALUX, monitored end-to-end through IntelliPanel and ESC-GATE gateways for consistent, code-compliant coverage.", ar.desc)}
         crumbs={[
-          { label: lang === "ar" ? "الأنظمة والحلول" : "Systems & Solutions" },
-          { label: lang === "ar" ? ar.breadcrumb : "Emergency Lighting" },
+          { label: tx("pages.systems.emergencyLighting.systems_solutions", lang, "Systems & Solutions", "الأنظمة والحلول") },
+          { label: tx("pages.systems.emergencyLighting.breadcrumb", lang, "Emergency Lighting", ar.breadcrumb) },
         ]}
       />
       <SystemsSubNav />

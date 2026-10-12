@@ -1,3 +1,4 @@
+import { tx } from "../../i18n/tx";
 import { useState } from "react";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import PageHeader from "../../components/PageHeader";
@@ -32,14 +33,12 @@ export default function SignIn() {
   return (
     <>
       <PageHeader
-        eyebrow={lang === "ar" ? "حسابي" : "My Account"}
-        title={lang === "ar" ? "تسجيل الدخول" : "Sign In"}
+        eyebrow={tx("pages.account.signIn.my_account", lang, "My Account", "حسابي")}
+        title={tx("pages.account.signIn.sign_in", lang, "Sign In", "تسجيل الدخول")}
         desc={
-          lang === "ar"
-            ? "سجّل الدخول لمتابعة استفساراتك وطلباتك."
-            : "Sign in to track your enquiries and orders."
+          tx("pages.account.signIn.sign_in_to_track_your_enquiries_and_orde", lang, "Sign in to track your enquiries and orders.", "سجّل الدخول لمتابعة استفساراتك وطلباتك.")
         }
-        crumbs={[{ label: lang === "ar" ? "تسجيل الدخول" : "Sign In" }]}
+        crumbs={[{ label: tx("pages.account.signIn.sign_in", lang, "Sign In", "تسجيل الدخول") }]}
       />
 
       <section className="py-16 md:py-24 bg-paper">
@@ -47,15 +46,13 @@ export default function SignIn() {
           <div className="bg-white border border-ink/[.08] rounded-md p-8 md:p-10">
             {!supabaseConfigured && (
               <div className="mb-6 rounded-md border border-flame1/30 bg-flame1/[.06] px-4 py-3 text-[13px] text-inksoft">
-                {lang === "ar"
-                  ? "تسجيل الدخول غير متاح حاليًا."
-                  : "Sign-in isn't connected yet — please check back soon."}
+                {tx("pages.account.signIn.sign_in_isn_t_connected_yet_please_check", lang, "Sign-in isn't connected yet — please check back soon.", "تسجيل الدخول غير متاح حاليًا.")}
               </div>
             )}
             <form onSubmit={handleSubmit}>
               <div className="mb-4">
                 <label className="block text-[12.5px] font-semibold text-inksoft mb-1.5">
-                  {lang === "ar" ? "البريد الإلكتروني" : "Email"}
+                  {tx("pages.account.signIn.email", lang, "Email", "البريد الإلكتروني")}
                 </label>
                 <input
                   type="email"
@@ -67,7 +64,7 @@ export default function SignIn() {
               </div>
               <div className="mb-6">
                 <label className="block text-[12.5px] font-semibold text-inksoft mb-1.5">
-                  {lang === "ar" ? "كلمة المرور" : "Password"}
+                  {tx("pages.account.signIn.password", lang, "Password", "كلمة المرور")}
                 </label>
                 <input
                   type="password"
@@ -83,13 +80,13 @@ export default function SignIn() {
                 disabled={busy}
                 className="w-full rounded-full bg-flame1 text-white font-semibold text-[14px] py-3 hover:bg-flame2 transition-colors disabled:opacity-60"
               >
-                {busy ? (lang === "ar" ? "جارٍ الدخول…" : "Signing in…") : lang === "ar" ? "تسجيل الدخول" : "Sign In"}
+                {busy ? (tx("pages.account.signIn.signing_in", lang, "Signing in…", "جارٍ الدخول…")) : tx("pages.account.signIn.sign_in", lang, "Sign In", "تسجيل الدخول")}
               </button>
             </form>
             <p className="mt-6 text-center text-[13px] text-inksoft">
-              {lang === "ar" ? "ليس لديك حساب؟" : "Don't have an account?"}{" "}
+              {tx("pages.account.signIn.don_t_have_an_account", lang, "Don't have an account?", "ليس لديك حساب؟")}{" "}
               <Link to="/account/register" className="text-flame1 font-semibold hover:underline">
-                {lang === "ar" ? "أنشئ حسابًا" : "Create one"}
+                {tx("pages.account.signIn.create_one", lang, "Create one", "أنشئ حسابًا")}
               </Link>
             </p>
           </div>

@@ -3,9 +3,12 @@ import PartnersStrip from "./PartnersStrip";
 import logoFooter from "../assets/brand/logo-footer.png";
 import { IconLinkedIn, IconInstagram, IconX, IconArrow } from "./Icons";
 import { useLanguage } from "../context/LanguageContext";
+import { useSiteSettings, telHref, siteHref } from "../context/SiteSettingsContext";
 
 export default function Footer() {
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
+  const s = useSiteSettings();
+  const ar = lang === "ar";
   return (
     <footer id="contact" className="bg-footerdark text-white">
       {/* Brand partners — endless sliding logo strip (white band on every page) */}
@@ -49,7 +52,7 @@ export default function Footer() {
             </p>
             <div className="flex gap-2.5 mt-6">
               <a
-                href="https://ae.linkedin.com/in/al-nawras-91365b25b"
+                href={s.linkedin || "#"}
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="LinkedIn"
@@ -58,14 +61,18 @@ export default function Footer() {
                 <IconLinkedIn className="w-4.5 h-4.5" />
               </a>
               <a
-                href="#"
+                href={s.instagram || "#"}
+                target="_blank"
+                rel="noopener noreferrer"
                 aria-label="Instagram"
                 className="w-[40px] h-[40px] rounded-full border border-white/[.25] text-white flex items-center justify-center transition-all duration-300 hover:border-flame1 hover:bg-flame1"
               >
                 <IconInstagram className="w-4.5 h-4.5" />
               </a>
               <a
-                href="#"
+                href={s.x || "#"}
+                target="_blank"
+                rel="noopener noreferrer"
                 aria-label="X"
                 className="w-[40px] h-[40px] rounded-full border border-white/[.25] text-white flex items-center justify-center transition-all duration-300 hover:border-flame1 hover:bg-flame1"
               >
@@ -122,11 +129,11 @@ export default function Footer() {
               {t("footer.colContact")}
             </h4>
             <div className="flex flex-col gap-[13px] text-[14px] text-white/60 leading-[1.5]">
-              <span>{t("footer.sharjahHQ")}</span>
-              <span>{t("footer.dubai")}</span>
-              <span>{t("footer.abuDhabi")}</span>
-              <span className="ltr-content">info@nawrassystems.com</span>
-              <span className="ltr-content">www.nawrassystems.com</span>
+              <a href={telHref(s.phone_sharjah)} className="hover:text-white transition-colors">{ar ? "المقر الرئيسي، الشارقة" : "Sharjah HQ"} · <span className="ltr-content">{s.phone_sharjah}</span></a>
+              <a href={telHref(s.phone_dubai)} className="hover:text-white transition-colors">{ar ? "دبي" : "Dubai"} · <span className="ltr-content">{s.phone_dubai}</span></a>
+              <a href={telHref(s.phone_abudhabi)} className="hover:text-white transition-colors">{ar ? "أبوظبي" : "Abu Dhabi"} · <span className="ltr-content">{s.phone_abudhabi}</span></a>
+              <a href={`mailto:${s.email}`} className="ltr-content hover:text-white transition-colors">{s.email}</a>
+              <a href={siteHref(s.website)} target="_blank" rel="noopener noreferrer" className="ltr-content hover:text-white transition-colors">{s.website}</a>
             </div>
           </div>
         </div>

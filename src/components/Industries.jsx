@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import { industries } from "../data/content";
+import useIndustries from "../hooks/useIndustries";
 import { industriesAr } from "../i18n/arabicContent";
 import { useLanguage } from "../context/LanguageContext";
 
@@ -8,6 +8,7 @@ const AUTO_SPEED = 0.85; // px per frame for the slow auto-scroll
 export default function Industries({ id }) {
   const { t, lang } = useLanguage();
   const isRtl = lang === "ar";
+  const industries = useIndustries();
   // duplicated list so the track can loop seamlessly
   const track = [...industries, ...industries];
   const scrollerRef = useRef(null);

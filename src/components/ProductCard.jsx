@@ -1,3 +1,5 @@
+import { tx } from "../i18n/tx";
+import { useSiteSettings, waNumber } from "../context/SiteSettingsContext";
 import { SUPPLIERS } from "../data/products.js";
 import { useNavigate } from "react-router-dom";
 import { useTilt } from "../hooks/useTilt.js";
@@ -6,6 +8,7 @@ import { productsPage } from "../i18n/pagesAr";
 
 export default function ProductCard({ product }) {
   const { lang } = useLanguage();
+  const { whatsapp } = useSiteSettings();
   const navigate = useNavigate();
   const { ref, onMouseMove, onMouseEnter, onMouseLeave, onTouchStart, onTouchEnd } = useTilt({ max: 10 });
 
@@ -39,7 +42,7 @@ export default function ProductCard({ product }) {
         <p className="short">{product.short}</p>
         <div className="price-row">
           <a
-            href={`https://wa.me/971551099885?text=${encodeURIComponent(
+            href={`https://wa.me/${waNumber(whatsapp)}?text=${encodeURIComponent(
               `Hi Al Nawras, I'd like to get a quote for ${product.name}.`
             )}`}
             target="_blank"
@@ -48,7 +51,7 @@ export default function ProductCard({ product }) {
             aria-label={`Get a quote for ${product.name}`}
             onClick={(e) => e.stopPropagation()}
           >
-            {lang === "ar" ? "احصل على عرض سعر" : "Get Quote"}
+            {tx("components.productCard.get_quote", lang, "Get Quote", "احصل على عرض سعر")}
           </a>
         </div>
       </div>

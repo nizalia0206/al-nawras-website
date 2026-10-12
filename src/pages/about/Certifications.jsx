@@ -1,3 +1,4 @@
+import { tx } from "../../i18n/tx";
 import PageHeader from "../../components/PageHeader";
 import AboutSubNav from "../../components/AboutSubNav";
 import CertificationsGrid from "../../components/CertificationsGrid";
@@ -16,8 +17,8 @@ export default function Certifications() {
         title={t("certifications.title")}
         desc={t("certifications.body")}
         crumbs={[
-          { label: lang === "ar" ? ar.crumbAbout : "About", href: "/about/overview" },
-          { label: lang === "ar" ? ar.crumbCurrent : "Certifications" },
+          { label: tx("pages.about.certifications.crumbAbout", lang, "About", ar.crumbAbout), href: "/about/overview" },
+          { label: tx("pages.about.certifications.crumbCurrent", lang, "Certifications", ar.crumbCurrent) },
         ]}
         image={headerImage}
       />

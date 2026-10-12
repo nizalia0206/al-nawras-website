@@ -1,3 +1,4 @@
+import { tx } from "../../i18n/tx";
 import PageHeader from "../../components/PageHeader";
 import SystemsSubNav from "../../components/SystemsSubNav";
 import Gallery from "../../components/Gallery";
@@ -22,13 +23,13 @@ export default function SmokeManagement() {
     <>
       <PageHeader
         image={smokeFan}
-        eyebrow={lang === "ar" ? "الأنظمة والحلول" : "Systems & Solutions"}
+        eyebrow={tx("pages.systems.smokeManagement.systems_solutions", lang, "Systems & Solutions", "الأنظمة والحلول")}
         eyebrowClassName="!text-[16px] sm:!text-[17px] !font-extrabold"
-        title={lang === "ar" ? ar.title : "Smoke Management"}
-        desc={lang === "ar" ? ar.desc : "Fire and smoke dampers, extraction fans and electronic control units, specified and installed to keep stairwells and escape routes clear for the duration of an event."}
+        title={tx("pages.systems.smokeManagement.title", lang, "Smoke Management", ar.title)}
+        desc={tx("pages.systems.smokeManagement.desc", lang, "Fire and smoke dampers, extraction fans and electronic control units, specified and installed to keep stairwells and escape routes clear for the duration of an event.", ar.desc)}
         crumbs={[
-          { label: lang === "ar" ? "الأنظمة والحلول" : "Systems & Solutions" },
-          { label: lang === "ar" ? ar.breadcrumb : "Smoke Management" },
+          { label: tx("pages.systems.smokeManagement.systems_solutions", lang, "Systems & Solutions", "الأنظمة والحلول") },
+          { label: tx("pages.systems.smokeManagement.breadcrumb", lang, "Smoke Management", ar.breadcrumb) },
         ]}
       />
       <SystemsSubNav />
@@ -36,9 +37,9 @@ export default function SmokeManagement() {
       <section className="py-16 md:py-20">
         <div className="max-w-[1280px] mx-auto px-8">
           <h2 className="font-display uppercase text-[22px] md:text-[26px] tracking-wide text-ink mb-6 flex items-center gap-3">
-            {lang === "ar" ? ar.galleryHeading : "Dampers, Fans & Controls"}
+            {tx("pages.systems.smokeManagement.galleryHeading", lang, "Dampers, Fans & Controls", ar.galleryHeading)}
           </h2>
-          <Gallery items={images} category={lang === "ar" ? "إدارة الدخان" : "SMOKE MANAGEMENT"} />
+          <Gallery items={images} category={tx("pages.systems.smokeManagement.smoke_management", lang, "SMOKE MANAGEMENT", "إدارة الدخان")} />
         </div>
       </section>
     </>

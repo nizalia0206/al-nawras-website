@@ -1,12 +1,12 @@
 import { Link } from "react-router-dom";
-import { partners } from "../data/partnerLogos";
+import usePartners from "../hooks/usePartners";
 import { useLanguage } from "../context/LanguageContext";
 
 function PartnerItem({ p, hidden }) {
   return (
     <li className="partners-item" aria-hidden={hidden || undefined}>
       <Link
-        to={`/products?supplier=${p.supplier}`}
+        to={p.supplier ? `/products?supplier=${p.supplier}` : "/products"}
         tabIndex={hidden ? -1 : undefined}
         title={p.name}
         className="partners-link"
@@ -36,6 +36,7 @@ function PartnerItem({ p, hidden }) {
  */
 export default function PartnersStrip() {
   const { t } = useLanguage();
+  const partners = usePartners();
   if (!partners.length) return null;
   const run = [...partners, ...partners];
 

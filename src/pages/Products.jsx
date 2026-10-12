@@ -1,3 +1,4 @@
+import { tx } from "../i18n/tx";
 import { useState, useMemo, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 import { Icon } from "../components/CatalogIcons.jsx";
@@ -96,23 +97,19 @@ export default function Products() {
             ? lang === "ar"
               ? `منتجات ${activeBrand}`
               : `${activeBrand} Products`
-            : lang === "ar"
-            ? ar.title
-            : "Fire, Life Safety & ICT Products"
+            : tx("pages.products.title", lang, "Fire, Life Safety & ICT Products", ar.title)
         }
         desc={
           activeBrand
             ? lang === "ar"
               ? `تصفح كافة منتجات ${activeBrand} المتوفرة والمدعومة من قبل الأنوار للأنظمة الآمنة والأمنية.`
               : `Browse the full range of ${activeBrand} products, supplied, engineered and supported by Al Nawras Safety & Security Systems LLC.`
-            : lang === "ar"
-            ? ar.desc
-            : "Certified equipment from Honeywell, Waterfall, H3C, Teknoware, Uranus Cable and KD Pipes — supplied, engineered and supported by Al Nawras Safety & Security Systems LLC."
+            : tx("pages.products.desc", lang, "Certified equipment from Honeywell, Waterfall, H3C, Teknoware, Uranus Cable and KD Pipes — supplied, engineered and supported by Al Nawras Safety & Security Systems LLC.", ar.desc)
         }
         crumbs={
           activeBrand
-            ? [{ label: lang === "ar" ? ar.crumb : "Products", href: "/products" }, { label: activeBrand }]
-            : [{ label: lang === "ar" ? ar.crumb : "Products" }]
+            ? [{ label: tx("pages.products.crumb", lang, "Products", ar.crumb), href: "/products" }, { label: activeBrand }]
+            : [{ label: tx("pages.products.crumb", lang, "Products", ar.crumb) }]
         }
         image={brandHeaderImage(state.supplier)}
         vivid
@@ -123,11 +120,11 @@ export default function Products() {
             <Icon.search />
             <input
               type="text"
-              placeholder={lang === "ar" ? ar.searchPlaceholder : "Search products, brands, categories…"}
+              placeholder={tx("pages.products.searchPlaceholder", lang, "Search products, brands, categories…", ar.searchPlaceholder)}
               value={state.q}
               onChange={(e) => setState((s) => ({ ...s, q: e.target.value }))}
             />
-            <button type="button" onClick={() => {}}>{lang === "ar" ? ar.search : "Search"}</button>
+            <button type="button" onClick={() => {}}>{tx("pages.products.search", lang, "Search", ar.search)}</button>
           </div>
         </div>
       </section>
@@ -160,11 +157,11 @@ export default function Products() {
           </span>
           <div className="toolbar-dropdowns">
             <Dropdown
-              label={lang === "ar" ? ar.categoryLabel : "Category"}
+              label={tx("pages.products.categoryLabel", lang, "Category", ar.categoryLabel)}
               value={state.category}
               onChange={(v) => setState((s) => ({ ...s, category: v }))}
               options={[
-                { value: "all", label: `${lang === "ar" ? ar.allCategories : "All Categories"} (${PRODUCTS.length})` },
+                { value: "all", label: `${tx("pages.products.allCategories", lang, "All Categories", ar.allCategories)} (${PRODUCTS.length})` },
                 ...CATEGORIES.map((c) => ({
                   value: c.id,
                   label: `${c.name} (${PRODUCTS.filter((p) => p.category === c.id).length})`,
@@ -172,11 +169,11 @@ export default function Products() {
               ]}
             />
             <Dropdown
-              label={lang === "ar" ? ar.supplierLabel : "Supplier"}
+              label={tx("pages.products.supplierLabel", lang, "Supplier", ar.supplierLabel)}
               value={state.supplier}
               onChange={(v) => setState((st) => ({ ...st, supplier: v }))}
               options={[
-                { value: "all", label: `${lang === "ar" ? ar.allSuppliers : "All Suppliers"} (${PRODUCTS.length})` },
+                { value: "all", label: `${tx("pages.products.allSuppliers", lang, "All Suppliers", ar.allSuppliers)} (${PRODUCTS.length})` },
                 ...Object.entries(SUPPLIERS).map(([id, s]) => ({
                   value: id,
                   label: `${s.name} (${PRODUCTS.filter((p) => p.supplier === id).length})`,
@@ -188,10 +185,10 @@ export default function Products() {
               align="right"
               onChange={(v) => setState((s) => ({ ...s, sort: v }))}
               options={[
-                { value: "relevance", label: lang === "ar" ? ar.sortRelevance : "Sort: Relevance" },
-                { value: "price-asc", label: lang === "ar" ? ar.sortPriceAsc : "Price: Low to High" },
-                { value: "price-desc", label: lang === "ar" ? ar.sortPriceDesc : "Price: High to Low" },
-                { value: "name-asc", label: lang === "ar" ? ar.sortNameAsc : "Name: A\u2013Z" },
+                { value: "relevance", label: tx("pages.products.sortRelevance", lang, "Sort: Relevance", ar.sortRelevance) },
+                { value: "price-asc", label: tx("pages.products.sortPriceAsc", lang, "Price: Low to High", ar.sortPriceAsc) },
+                { value: "price-desc", label: tx("pages.products.sortPriceDesc", lang, "Price: High to Low", ar.sortPriceDesc) },
+                { value: "name-asc", label: tx("pages.products.sortNameAsc", lang, "Name: A\u2013Z", ar.sortNameAsc) },
               ]}
             />
           </div>
@@ -203,8 +200,8 @@ export default function Products() {
         {list.length === 0 && !productsLoading ? (
           <div className="empty-state">
             <Icon.search />
-            <h3>{lang === "ar" ? ar.noResultsTitle : "No matching products"}</h3>
-            <p>{lang === "ar" ? ar.noResultsBody : "Try a different search term or clear your filters."}</p>
+            <h3>{tx("pages.products.noResultsTitle", lang, "No matching products", ar.noResultsTitle)}</h3>
+            <p>{tx("pages.products.noResultsBody", lang, "Try a different search term or clear your filters.", ar.noResultsBody)}</p>
           </div>
         ) : list.length === 0 ? null : (
           <div className="product-grid">

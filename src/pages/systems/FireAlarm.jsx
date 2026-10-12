@@ -1,3 +1,4 @@
+import { tx } from "../../i18n/tx";
 import PageHeader from "../../components/PageHeader";
 import SystemsSubNav from "../../components/SystemsSubNav";
 import SystemSections from "../../components/SystemSections";
@@ -21,17 +22,15 @@ export default function FireAlarm() {
     <>
       <PageHeader
         image={fireAlarmEnv}
-        eyebrow={isAr ? "الأنظمة والحلول" : "Systems & Solutions"}
+        eyebrow={tx("pages.systems.fireAlarm.systems_solutions", (isAr ? "ar" : "en"), "Systems & Solutions", "الأنظمة والحلول")}
         eyebrowClassName="!text-[16px] sm:!text-[17px] !font-extrabold"
-        title={isAr ? "أنظمة إنذار الحريق والإخلاء الصوتي" : "Fire Alarm & Voice Evacuation Systems"}
+        title={tx("pages.systems.fireAlarm.fire_alarm_voice_evacuation_systems", (isAr ? "ar" : "en"), "Fire Alarm & Voice Evacuation Systems", "أنظمة إنذار الحريق والإخلاء الصوتي")}
         desc={
-          isAr
-            ? "حلول متقدمة لكشف الحريق والإنذار والإخلاء الصوتي، مصمّمة لتوفير إنذار مبكر موثوق واتصال واضح في حالات الطوارئ وسلامة أعلى للأرواح."
-            : "Advanced fire detection, alarm and voice evacuation solutions engineered to provide reliable early warning, clear emergency communication, and enhanced life safety."
+          tx("pages.systems.fireAlarm.advanced_fire_detection_alarm_and_voice_", (isAr ? "ar" : "en"), "Advanced fire detection, alarm and voice evacuation solutions engineered to provide reliable early warning, clear emergency communication, and enhanced life safety.", "حلول متقدمة لكشف الحريق والإنذار والإخلاء الصوتي، مصمّمة لتوفير إنذار مبكر موثوق واتصال واضح في حالات الطوارئ وسلامة أعلى للأرواح.")
         }
         crumbs={[
-          { label: isAr ? "الأنظمة والحلول" : "Systems & Solutions" },
-          { label: isAr ? "إنذار الحريق والإخلاء الصوتي" : "Fire Alarm & Voice Evacuation" },
+          { label: tx("pages.systems.fireAlarm.systems_solutions", (isAr ? "ar" : "en"), "Systems & Solutions", "الأنظمة والحلول") },
+          { label: tx("pages.systems.fireAlarm.fire_alarm_voice_evacuation", (isAr ? "ar" : "en"), "Fire Alarm & Voice Evacuation", "إنذار الحريق والإخلاء الصوتي") },
         ]}
       />
       <SystemsSubNav />

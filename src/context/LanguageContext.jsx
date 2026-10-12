@@ -1,5 +1,7 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { translations } from "../i18n/translations";
+import { supabase, supabaseConfigured } from "../lib/supabase";
+import { setTextOverrides, getOverride } from "../i18n/tx";
 
 const LanguageContext = createContext(null);
 
@@ -11,6 +13,22 @@ function getInitialLang() {
 
 export function LanguageProvider({ children }) {
   const [lang, setLang] = useState(getInitialLang);
+  // bumps when CMS text overrides arrive, so every page re-renders with them
+  const [textVersion, setTextVersion] = useState(0);
+
+  useEffect(() => {
+    if (!supabaseConfigured) return;
+    let cancelled = false;
+    supabase
+      .from("site_text")
+      .select("key, en, ar")
+      .then(({ data, error }) => {
+        if (cancelled || error || !data) return;
+        setTextOverrides(data);
+        setTextVersion((v) => v + 1);
+      });
+    return () => { cancelled = true; };
+  }, []);
 
   useEffect(() => {
     const dir = lang === "ar" ? "rtl" : "ltr";
@@ -30,6 +48,11 @@ export function LanguageProvider({ children }) {
   // Falls back to the English string, then to the key itself, so missing
   // translations never break the page.
   function t(path) {
+    const o = getOverride(path);
+    if (o) {
+      if (lang === "ar" && o.ar) return o.ar;
+      if (lang !== "ar" && o.en) return o.en;
+    }
     const parts = path.split(".");
     let en = translations.en;
     let ar = translations.ar;
@@ -42,7 +65,7 @@ export function LanguageProvider({ children }) {
   }
 
   return (
-    <LanguageContext.Provider value={{ lang, dir, setLang, toggleLang, t }}>
+    <LanguageContext.Provider value={{ lang, dir, setLang, toggleLang, t, textVersion }}>
       {children}
     </LanguageContext.Provider>
   );
