@@ -6,6 +6,7 @@ import PageHeader from "../components/PageHeader";
 import { useLanguage } from "../context/LanguageContext";
 import { contactPage } from "../i18n/pagesAr";
 import headerImage from "../assets/page-headers/contact-banner.jpg";
+import { supabase, supabaseConfigured } from "../lib/supabase";
 
 const FORMSUBMIT_ENDPOINT = "https://formsubmit.co/ajax/info@nawrassystems.com";
 
@@ -23,6 +24,34 @@ export default function Contact() {
     setSending(true);
     const form = e.target;
     const data = new FormData(form);
+    // Hidden "website" field: real visitors never fill it, spam bots usually do.
+    if (data.get("website")) { form.reset(); setSubmitted(true); setSending(false); return; }
+    data.delete("website");
+
+    // 1) Record the enquiry in the CMS (Admin → Enquiries). Linked to the customer's
+    //    account when they're signed in on the website.
+    let saved = false;
+    if (supabaseConfigured) {
+      try {
+        const { data: sess } = await supabase.auth.getSession();
+        const { error: dbErr } = await supabase.from("contact_messages").insert({
+          full_name: data.get("Full Name") || "",
+          company: data.get("Company") || null,
+          email: data.get("Email") || "",
+          phone: data.get("Phone") || null,
+          help_with: data.get("Help With") || null,
+          message: data.get("Message") || "",
+          language: lang,
+          customer_id: sess?.session?.user?.id || null,
+        });
+        saved = !dbErr;
+        if (dbErr) console.error("Could not save enquiry:", dbErr.message);
+      } catch (dbEx) {
+        console.error("Could not save enquiry:", dbEx);
+      }
+    }
+
+    // 2) Email notification to the office (FormSubmit), as before.
     data.append("_subject", "New enquiry from nawrassystems.com contact form");
     data.append("_template", "table");
     data.append("_captcha", "false");
@@ -47,8 +76,15 @@ export default function Contact() {
       form.reset();
       setSubmitted(true);
       setTimeout(() => setSubmitted(false), 5000);
-    } catch (err) {
-      setError(true);
+    } catch {
+      // The email failed, but if the enquiry was recorded in the CMS it isn't lost.
+      if (saved) {
+        form.reset();
+        setSubmitted(true);
+        setTimeout(() => setSubmitted(false), 5000);
+      } else {
+        setError(true);
+      }
     } finally {
       setSending(false);
     }
@@ -127,6 +163,7 @@ export default function Contact() {
                     ))}
                   </select>
                 </div>
+                <input type="text" name="website" tabIndex={-1} autoComplete="off" aria-hidden="true" style={{ position: "absolute", left: "-9999px", width: 1, height: 1, opacity: 0 }} />
                 <div className="field"><label>{tx("pages.contact.message", lang, "Message *", ar.message)}</label><textarea name="Message" required placeholder={tx("pages.contact.messagePlaceholder", lang, "Tell us about your project…", ar.messagePlaceholder)} /></div>
                 <button type="submit" className="btn btn-primary btn-block" disabled={sending}>
                   {sending
