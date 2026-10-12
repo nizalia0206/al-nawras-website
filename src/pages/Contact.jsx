@@ -3,7 +3,7 @@ import { Icon } from "../components/CatalogIcons.jsx";
 import PageHeader from "../components/PageHeader";
 import { useLanguage } from "../context/LanguageContext";
 import { contactPage } from "../i18n/pagesAr";
-import headerImage from "../assets/page-headers/contact.png";
+import headerImage from "../assets/page-headers/contact-banner.jpg";
 
 const FORMSUBMIT_ENDPOINT = "https://formsubmit.co/ajax/info@nawrassystems.com";
 

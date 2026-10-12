@@ -41,8 +41,8 @@ export default function PartnersStrip() {
 
   return (
     <section aria-label={t("brands.eyebrow")} className="bg-white border-b border-ink/[.08]">
-      <div className="pt-7 pb-6">
-        <div className="text-center font-display text-[12px] tracking-[.22em] uppercase text-inksoft mb-5 px-8">
+      <div className="pt-12 pb-12 md:pt-14 md:pb-14">
+        <div className="text-center font-display text-[13px] md:text-[14px] tracking-[.22em] uppercase text-inksoft mb-9 px-8">
           {t("brands.eyebrow")}
         </div>
         <div className="partners-marquee" dir="ltr">

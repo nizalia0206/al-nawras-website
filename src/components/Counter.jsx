@@ -49,7 +49,7 @@ export default function Counter({ target, suffix = "", label, theme = "dark" }) 
         <span>{value}</span>
         <span className="text-flame1 text-[18px] md:text-[22px]">{suffix}</span>
       </div>
-      <div className={`text-[12px] tracking-wide mt-1.5 uppercase ${isLight ? "text-inksoft" : "text-steel"}`}>
+      <div className={`text-[12px] tracking-wide mt-1.5 uppercase ${isLight ? "text-inksoft" : "text-white/85 font-semibold"}`}>
         {label}
       </div>
     </div>

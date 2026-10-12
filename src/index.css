@@ -258,8 +258,8 @@ html.lang-ar .counter-number {
 
 /* ===== Footer brand-partners strip — endless sliding logo row ===== */
 .partners-marquee{
-  --k: 1;                       /* logo size multiplier (reduced on small screens) */
-  --gap: 76px;
+  --k: 1.45;                    /* logo size multiplier (reduced on small screens) */
+  --gap: 120px;
   position: relative;
   overflow: hidden;
   /* soft fade at both edges so logos glide in/out instead of being clipped */
@@ -270,7 +270,7 @@ html.lang-ar .counter-number {
   display: flex;
   align-items: center;
   width: max-content;
-  animation: partnersScroll 42s linear infinite;
+  animation: partnersScroll 55s linear infinite;
   will-change: transform;
 }
 /* Pause while the visitor is hovering/pressing or keyboard-focusing a logo */
@@ -298,6 +298,7 @@ html.lang-ar .counter-number {
   align-items: center;
   justify-content: center;
   height: calc(64px * var(--k));
+  padding: 8px 0;
   opacity: .92;
   transition: transform .3s var(--ease), opacity .3s var(--ease), filter .3s var(--ease);
 }
@@ -324,8 +325,8 @@ html.lang-ar .counter-number {
   color: #131c33;
 }
 @media (max-width: 640px){
-  .partners-marquee{ --k: .78; --gap: 46px; }
-  .partners-track{ animation-duration: 32s; }
+  .partners-marquee{ --k: 1.05; --gap: 64px; }
+  .partners-track{ animation-duration: 38s; }
 }
 /* Accessibility: no motion => a static, wrapped row showing each partner once */
 @media (prefers-reduced-motion: reduce){

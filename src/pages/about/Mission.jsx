@@ -3,7 +3,7 @@ import AboutSubNav from "../../components/AboutSubNav";
 import useReveal from "../../hooks/useReveal";
 import { useLanguage } from "../../context/LanguageContext";
 import { aboutPages } from "../../i18n/pagesAr";
-import headerImage from "../../assets/page-headers/mission-vision.png";
+import headerImage from "../../assets/page-headers/mission-vision.jpg";
 
 const CARDS_EN = [
   {

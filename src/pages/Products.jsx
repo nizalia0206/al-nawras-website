@@ -115,6 +115,7 @@ export default function Products() {
             : [{ label: lang === "ar" ? ar.crumb : "Products" }]
         }
         image={brandHeaderImage(state.supplier)}
+        vivid
       />
       <section className="bg-ambient products-hero" style={{ paddingTop: 32, paddingBottom: 32 }}>
         <div className="container">

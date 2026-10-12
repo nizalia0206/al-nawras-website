@@ -5,18 +5,21 @@
 
 /* ---- from products.html ---- */
   .products-hero { padding: 46px 0 40px; }
+  .products-hero.bg-ambient { background: linear-gradient(180deg, #5c93b3 0%, #78b0d0 100%); }
   .products-hero .container { position: relative; z-index: 2; }
   .search-bar {
     margin-top: 28px; display: flex; align-items: center; gap: 12px;
-    background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.16);
-    border-radius: 100px; padding: 6px 8px 6px 20px; max-width: 560px;
+    background: #ffffff; border: 1px solid rgba(255,255,255,0.7);
+    border-radius: 100px; padding: 6px 8px 6px 20px; max-width: 640px;
+    margin-left: auto; margin-right: auto;
+    box-shadow: 0 14px 34px -14px rgba(19,28,51,0.45);
   }
-  .search-bar svg { width: 18px; height: 18px; color: var(--slate-300); flex-shrink: 0; }
+  .search-bar svg { width: 18px; height: 18px; color: #3d6a89; flex-shrink: 0; }
   .search-bar input {
-    flex: 1; background: none; border: none; outline: none; color: white;
+    flex: 1; background: none; border: none; outline: none; color: var(--ink);
     font-size: 15px; padding: 10px 0; font-family: var(--font-body);
   }
-  .search-bar input::placeholder { color: var(--slate-300); }
+  .search-bar input::placeholder { color: #6b84a0; }
   .search-bar button { background: var(--flame-500); color: white; border: none; border-radius: 100px; padding: 10px 20px; font-weight: 700; font-size: 13.5px; }
 
   .catalog-layout { display: grid; grid-template-columns: 260px 1fr; gap: 36px; padding: 48px 0 90px; align-items: start; }
@@ -243,12 +246,12 @@
   .success-note svg { width: 18px; height: 18px; flex-shrink: 0; }
 
 /* ---- from projects.html ---- */
-  .stats-strip { background: var(--navy-950); padding: 0 0 60px; margin-top: -1px; }
+  .stats-strip { background: linear-gradient(180deg, #5c93b3 0%, #78b0d0 100%); padding: 36px 0 44px; margin-top: -1px; }
   .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
   @media (max-width: 720px) { .stats-grid { grid-template-columns: 1fr 1fr; } }
-  .stat-box { text-align: center; padding: 26px 16px; background: rgba(255,255,255,0.05); border-radius: var(--radius-md); border: 1px solid rgba(255,255,255,0.08); }
-  .stat-box .num { font-family: var(--font-display); font-size: clamp(28px,4vw,38px); font-weight: 800; color: var(--flame-400); }
-  .stat-box .lbl { font-size: 12.5px; color: var(--slate-300); font-weight: 600; letter-spacing: .04em; text-transform: uppercase; margin-top: 6px; }
+  .stat-box { text-align: center; padding: 26px 16px; background: #ffffff; border-radius: var(--radius-md); border: 1px solid rgba(255,255,255,0.7); box-shadow: 0 14px 34px -16px rgba(19,28,51,0.4); }
+  .stat-box .num { font-family: var(--font-display); font-size: clamp(28px,4vw,38px); font-weight: 800; color: var(--flame-500); }
+  .stat-box .lbl { font-size: 12.5px; color: #3d6a89; font-weight: 600; letter-spacing: .04em; text-transform: uppercase; margin-top: 6px; }
 
   .filter-pills { display: flex; gap: 10px; flex-wrap: wrap; margin: 34px 0; }
   .pill { padding: 9px 18px; border-radius: 100px; background: white; border: 1.5px solid var(--line); font-size: 13.5px; font-weight: 700; color: var(--slate-700); }
@@ -297,24 +300,24 @@
   .value-card { padding: 26px 22px; border-radius: var(--radius-md); border: 1px solid var(--line); background: white; }
   .value-card .icon-wrap { width: 46px; height: 46px; border-radius: 12px; background: linear-gradient(135deg, var(--blue-500), var(--navy-800)); display: grid; place-items: center; margin-bottom: 16px; }
   .value-card .icon-wrap svg { width: 21px; height: 21px; color: white; }
-  .value-card h4 { font-size: 15px; margin-bottom: 8px; }
-  .value-card p { font-size: 13px; color: var(--slate-500); line-height: 1.55; }
+  .value-card h4 { font-size: 18px; margin-bottom: 10px; }
+  .value-card p { font-size: 15px; color: var(--slate-500); line-height: 1.6; }
 
-  .benefits-section { background: var(--navy-950); color: white; }
+  .benefits-section { background: white; color: var(--ink); border-top: 1px solid var(--line); }
   .benefits-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; margin-top: 40px; }
   @media (max-width: 780px) { .benefits-grid { grid-template-columns: 1fr 1fr; } }
   @media (max-width: 520px) { .benefits-grid { grid-template-columns: 1fr; } }
-  .benefit-item { display: flex; gap: 14px; align-items: flex-start; }
-  .benefit-item .ic { width: 38px; height: 38px; border-radius: 10px; background: rgba(255,255,255,0.08); display: grid; place-items: center; flex-shrink: 0; }
-  .benefit-item .ic svg { width: 17px; height: 17px; color: var(--flame-400); }
-  .benefit-item h5 { color: white; font-size: 14.5px; margin-bottom: 4px; }
-  .benefit-item p { font-size: 13px; color: var(--slate-300); line-height: 1.5; }
+  .benefit-item { display: flex; gap: 16px; align-items: flex-start; padding: 26px 22px; border-radius: var(--radius-md); border: 1px solid var(--line); background: white; }
+  .benefit-item .ic { width: 46px; height: 46px; border-radius: 12px; background: linear-gradient(135deg, var(--blue-500), var(--navy-800)); display: grid; place-items: center; flex-shrink: 0; }
+  .benefit-item .ic svg { width: 21px; height: 21px; color: white; }
+  .benefit-item h5 { font-family: var(--font-display); color: var(--navy-900); font-size: 18px; margin: 0 0 8px; }
+  .benefit-item p { font-size: 15px; color: var(--slate-500); line-height: 1.6; margin: 0; }
 
   .jobs-toolbar { display: flex; gap: 10px; flex-wrap: wrap; margin: 34px 0 30px; }
   .job-list { display: flex; flex-direction: column; gap: 14px; }
   .job-card { padding: 24px; border-radius: var(--radius-md); border: 1px solid var(--line); background: white; display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
-  .job-card .info h4 { font-size: 16.5px; margin-bottom: 8px; }
-  .job-meta { display: flex; gap: 14px; flex-wrap: wrap; font-size: 12.5px; color: var(--slate-500); font-weight: 600; }
+  .job-card .info h4 { font-size: 19px; margin-bottom: 8px; }
+  .job-meta { display: flex; gap: 14px; flex-wrap: wrap; font-size: 14px; color: var(--slate-500); font-weight: 600; }
   .job-meta span { display: flex; align-items: center; gap: 5px; }
 
   .apply-modal { position: fixed; inset: 0; z-index: 400; display: none; align-items: center; justify-content: center; padding: 20px; }

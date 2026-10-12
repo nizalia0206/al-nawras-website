@@ -21,121 +21,14 @@ export const SUPPLIERS = {
   kdpipes:    { name: "KD Pipes",            blurb: "Certified pipes and fittings for fire fighting network installations." },
 };
 
+import { PARTNER_PRODUCTS } from "./partnerProducts.js";
+
 const P = "/assets/products/";
 
 /* Helper to build a slug-safe id */
 function slug(s) { return s.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, ""); }
 
 export const PRODUCTS = [
-
-  /* ---------------- HONEYWELL — FIRE ALARM & DETECTION ---------------- */
-  {
-    id: "honeywell-morley-ias",
-    name: "Morley-IAS Intelligent Addressable Fire Panel",
-    supplier: "honeywell",
-    category: "fire-alarm",
-    price: 4250,
-    images: [P+"honeywell/real/morley-ias-honeywell-morley-ias-fire-alarm-panel.jpg"],
-    short: "Intelligent addressable fire alarm control panel with networking capability.",
-    description: "The Morley-IAS range delivers reliable, intelligent addressable fire detection for small to large-scale installations. Fully compatible with a wide range of detectors, sounders, and interface devices, it supports networking across multiple panels for campus-wide protection and centralized monitoring.",
-    specs: [
-      ["Panel type", "Intelligent Addressable"],
-      ["Loops", "1–4 loop configurations"],
-      ["Devices per loop", "Up to 200"],
-      ["Certification", "EN 54 Parts 2 & 4"],
-      ["Networking", "Up to 200 panels"],
-      ["Power supply", "24V DC, dual battery backup"],
-    ],
-    tags: ["fire panel", "addressable", "control panel"],
-  },
-  {
-    id: "honeywell-x-618",
-    name: "Honeywell X-618 Multi-Sensor Detector",
-    supplier: "honeywell",
-    category: "fire-alarm",
-    price: 185,
-    images: [P+"honeywell/real/fire-alarm-and-emergency-honeywell-idp-heat-detector.jpg"],
-    short: "Combined optical smoke and heat multi-sensor detector.",
-    description: "The X-618 multi-sensor combines optical smoke and thermal sensing in a single low-profile head, reducing false alarms while maintaining fast response to genuine fire conditions. Designed for addressable loop integration across commercial and residential applications.",
-    specs: [
-      ["Detection type", "Optical smoke + heat"],
-      ["Mounting", "Surface / flush base"],
-      ["Operating voltage", "17–28V DC (loop powered)"],
-      ["Certification", "EN 54-5 / EN 54-7"],
-      ["Indicator", "Dual-colour LED"],
-    ],
-    tags: ["detector", "smoke sensor", "multi-sensor"],
-  },
-  {
-    id: "honeywell-dxc-controller",
-    name: "Honeywell DXC Networked Fire Controller",
-    supplier: "honeywell",
-    category: "fire-alarm",
-    price: 3100,
-    images: [P+"honeywell/real/dxc-fire-panels-honeywell-morley-dxc1-fire-panel.jpg"],
-    short: "Networked fire alarm system controller for large sites.",
-    description: "The DXC controller extends fire alarm networking across large or multi-building sites, providing unified event management, graphical mapping and centralized cause-and-effect programming for complex fire strategies.",
-    specs: [
-      ["Function", "Network fire controller"],
-      ["Compatibility", "Morley-IAS / XLS network range"],
-      ["Display", "Graphical LCD"],
-      ["Interfaces", "RS-485, Ethernet"],
-      ["Certification", "EN 54-2"],
-    ],
-    tags: ["controller", "network panel"],
-  },
-  {
-    id: "honeywell-zxe-repeater",
-    name: "Honeywell ZXe Repeater Panel",
-    supplier: "honeywell",
-    category: "fire-alarm",
-    price: 780,
-    images: [P+"honeywell/real/zxse-honeywell-ziton-zx2se-fire-panel.jpg"],
-    short: "Remote repeater panel mirroring the main fire panel status.",
-    description: "The ZXe repeater panel gives security or facilities staff full visibility of fire alarm status from a remote location, mirroring alarms, faults and system status from the main control panel in real time.",
-    specs: [
-      ["Function", "Remote repeater / mimic panel"],
-      ["Display", "LCD status + LED indicators"],
-      ["Connection", "RS-485 loop link"],
-      ["Certification", "EN 54-2"],
-    ],
-    tags: ["repeater", "mimic panel"],
-  },
-  {
-    id: "honeywell-extend-notification",
-    name: "Honeywell Extend Voice Evacuation System",
-    supplier: "honeywell",
-    category: "fire-alarm",
-    price: 5600,
-    images: [P+"honeywell/real/extend-speakers-honeywell-l-pom40a-column-speaker.jpg"],
-    short: "Integrated voice alarm and public address evacuation system.",
-    description: "Extend combines fire alarm notification with clear voice evacuation messaging, allowing phased or building-wide evacuation instructions to be broadcast with pre-recorded or live announcements — essential for high-occupancy buildings.",
-    specs: [
-      ["Function", "Voice evacuation / PA"],
-      ["Certification", "EN 54-16 / EN 54-24"],
-      ["Zones", "Configurable multi-zone"],
-      ["Amplifier redundancy", "Dual redundant amplifiers"],
-    ],
-    tags: ["voice evacuation", "public address"],
-  },
-  {
-    id: "honeywell-fire-emergency-kit",
-    name: "Honeywell Fire Alarm & Emergency Device Set",
-    supplier: "honeywell",
-    category: "fire-alarm",
-    price: 620,
-    images: [P+"honeywell/real/fire-alarm-and-emergency-honeywell-fire-alarm-pull-station.jpg"],
-    short: "Manual call points, sounders and emergency field devices.",
-    description: "A complete range of field devices for fire alarm circuits — manual call points, sounder/beacons, and interface modules — built for reliable operation and rapid manual activation during an emergency.",
-    specs: [
-      ["Includes", "Call points, sounders, beacons"],
-      ["IP rating", "IP42 / IP65 variants"],
-      ["Certification", "EN 54-11 / EN 54-3"],
-      ["Colour", "Red, safety signal"],
-    ],
-    tags: ["call point", "sounder", "beacon"],
-  },
-
   /* ---------------- WATERFALL — FIRE PUMPS ---------------- */
   {
     id: "waterfall-horizontal-split-case",
@@ -189,60 +82,6 @@ export const PRODUCTS = [
     ],
     tags: ["fire pump", "vertical turbine"],
   },
-
-  /* ---------------- TEKNOWARE — EMERGENCY LIGHTING ---------------- */
-  {
-    id: "teknoware-escalux",
-    name: "Teknoware Escalux Escape Route Luminaire",
-    supplier: "teknoware",
-    category: "emergency-light",
-    price: 145,
-    images: [P+"teknoware/real/escalux-teknoware-escalux-emergency-lighting-control-system.jpg"],
-    short: "LED emergency escape route luminaire with self-test option.",
-    description: "The Escalux luminaire provides bright, uniform illumination of escape routes during a power failure. With an efficient LED engine and long-life battery backup, it's designed for corridors, stairwells and open escape areas in commercial buildings.",
-    specs: [
-      ["Light source", "LED"],
-      ["Operation", "Maintained / non-maintained"],
-      ["Backup duration", "1 hr / 3 hr options"],
-      ["Self-test", "Optional automatic self-test"],
-      ["Certification", "EN 60598-2-22"],
-    ],
-    tags: ["emergency light", "escape route", "LED luminaire"],
-  },
-  {
-    id: "teknoware-mounting-kit",
-    name: "Teknoware Universal Mounting Kit",
-    supplier: "teknoware",
-    category: "emergency-light",
-    price: 38,
-    images: [P+"teknoware/real/mounting-teknoware-twt91xx-handrail-luminaire.jpg"],
-    short: "Surface, recessed and pendant mounting accessories for luminaires.",
-    description: "A complete range of mounting brackets and accessories that adapt Teknoware emergency luminaires to surface, recessed ceiling, wall or pendant installations, simplifying specification across varied building layouts.",
-    specs: [
-      ["Compatibility", "Teknoware luminaire range"],
-      ["Mounting types", "Surface, recessed, pendant"],
-      ["Material", "Powder-coated steel / polycarbonate"],
-    ],
-    tags: ["mounting kit", "bracket", "accessory"],
-  },
-  {
-    id: "teknoware-battery-pack",
-    name: "Teknoware Emergency Battery Pack",
-    supplier: "teknoware",
-    category: "emergency-light",
-    price: 62,
-    images: [P+"teknoware/real/battery-and-exit-luminaires-teknoware-central-battery-system-cabinet.jpg"],
-    short: "NiMH / Li-ion backup battery packs for emergency luminaires.",
-    description: "Long-life rechargeable battery packs sized for Teknoware's emergency lighting range, ensuring reliable backup runtime that meets EN 50171 requirements over repeated charge cycles.",
-    specs: [
-      ["Chemistry", "NiMH / Li-ion options"],
-      ["Runtime", "1 hr / 3 hr rated"],
-      ["Certification", "EN 50171"],
-      ["Lifecycle", "4+ years typical service life"],
-    ],
-    tags: ["battery", "backup power"],
-  },
-
   /* ---------------- H3C — NETWORKING & ICT (selected representative products) ---------------- */
   {
     id: "h3c-s6520x-ei",
@@ -346,44 +185,6 @@ export const PRODUCTS = [
     ],
     tags: ["server", "rack server", "compute"],
   },
-
-  /* ---------------- URANUS CABLE — FIRE RESISTANT CABLES ---------------- */
-  {
-    id: "uranus-fire-resistance-cable",
-    name: "Uranus Fire Resistant Power Cable",
-    supplier: "uranus",
-    category: "cables",
-    price: 4.2,
-    priceUnit: "per meter",
-    images: [P+"uranus/real/products-tratos-fire-resistant-cable.jpg"],
-    short: "Fire-resistant, low smoke halogen-free power and control cable.",
-    description: "Uranus fire resistant cables maintain circuit integrity under direct flame exposure, keeping critical life-safety systems — fire pumps, emergency lighting, alarm circuits — operational during a fire event. Low smoke, halogen-free construction reduces toxic smoke hazard in occupied buildings.",
-    specs: [
-      ["Construction", "Fire-resistant, LSZH sheath"],
-      ["Fire performance", "IEC 60331 circuit integrity"],
-      ["Application", "Fire pumps, alarm circuits, emergency systems"],
-      ["Colour", "Red identification sheath"],
-    ],
-    tags: ["fire cable", "LSZH", "power cable"],
-  },
-  {
-    id: "uranus-application-cable",
-    name: "Uranus Fire Alarm & Data Cable",
-    supplier: "uranus",
-    category: "cables",
-    price: 2.6,
-    priceUnit: "per meter",
-    images: [P+"uranus/real/products-low-smoke-zero-halogen-cable.jpg"],
-    short: "Screened data and fire alarm circuit cable.",
-    description: "Purpose-built for fire detection loop wiring and low-voltage data circuits, this screened cable range provides reliable signal integrity across addressable loop and networked panel installations.",
-    specs: [
-      ["Application", "Fire alarm loop wiring, data circuits"],
-      ["Screening", "Overall foil/braid screen"],
-      ["Conductor", "Solid / stranded copper"],
-    ],
-    tags: ["data cable", "alarm cable", "screened cable"],
-  },
-
   /* ---------------- KD PIPES — PIPES & FITTINGS ---------------- */
   {
     id: "kdpipes-fire-network-pipe",
@@ -532,36 +333,6 @@ const REAL_BULK = [
   { name: "H3C WX3840X", supplier: "h3c", category: "networking", file: "h3c/real/h3c-wlan-products-wx3840x.jpg", price: 22900 },
   { name: "H3C WX5860X", supplier: "h3c", category: "networking", file: "h3c/real/h3c-wlan-products-wx5860x.jpg", price: 25350 },
   { name: "H3C VAC", supplier: "h3c", category: "networking", file: "h3c/real/h3c-wlan-products-vac.jpg", price: 55700 },
-  { name: "Honeywell Morley DXc1 Fire Panel", supplier: "honeywell", category: "fire-alarm", file: "honeywell/real/dxc-fire-panels-honeywell-morley-dxc1-fire-panel.jpg", price: 4700 },
-  { name: "Honeywell Morley DXc2 Fire Panel", supplier: "honeywell", category: "fire-alarm", file: "honeywell/real/dxc-fire-panels-honeywell-morley-dxc2-fire-panel.jpg", price: 3850 },
-  { name: "Honeywell Morley DXc4 Fire Panel", supplier: "honeywell", category: "fire-alarm", file: "honeywell/real/dxc-fire-panels-honeywell-morley-dxc4-fire-panel.jpg", price: 4450 },
-  { name: "Honeywell Visualeyez Fire Graphics Software", supplier: "honeywell", category: "fire-alarm", file: "honeywell/real/dxc-fire-panels-honeywell-visualeyez-fire-graphics-software.jpg", price: 3150 },
-  { name: "Honeywell L-POM20A Column Speaker", supplier: "honeywell", category: "fire-alarm", file: "honeywell/real/extend-speakers-honeywell-l-pom20a-column-speaker.jpg", price: 5100 },
-  { name: "Honeywell L-POM80A Column Speaker", supplier: "honeywell", category: "fire-alarm", file: "honeywell/real/extend-speakers-honeywell-l-pom80a-column-speaker.jpg", price: 1850 },
-  { name: "Honeywell L-PWP40A Speaker", supplier: "honeywell", category: "fire-alarm", file: "honeywell/real/extend-speakers-honeywell-l-pwp40a-speaker.jpg", price: 3900 },
-  { name: "Honeywell ECS-50WHV Amplifier", supplier: "honeywell", category: "fire-alarm", file: "honeywell/real/fire-alarm-and-emergency-honeywell-ecs-50whv-amplifier.jpg", price: 5000 },
-  { name: "Honeywell ECS-DUAL50WHV Amplifier", supplier: "honeywell", category: "fire-alarm", file: "honeywell/real/fire-alarm-and-emergency-honeywell-ecs-dual50whv-amplifier.jpg", price: 4300 },
-  { name: "Honeywell ECS-INT50W Module", supplier: "honeywell", category: "fire-alarm", file: "honeywell/real/fire-alarm-and-emergency-honeywell-ecs-int50w-module.jpg", price: 2550 },
-  { name: "Honeywell ECS-LOC2100B Panel", supplier: "honeywell", category: "fire-alarm", file: "honeywell/real/fire-alarm-and-emergency-honeywell-ecs-loc2100b-panel.jpg", price: 2800 },
-  { name: "Honeywell IDP-Heat Detector", supplier: "honeywell", category: "fire-alarm", file: "honeywell/real/fire-alarm-and-emergency-honeywell-idp-heat-detector.jpg", price: 3650 },
-  { name: "Honeywell IDP-Monitor Module", supplier: "honeywell", category: "fire-alarm", file: "honeywell/real/fire-alarm-and-emergency-honeywell-idp-monitor-module.jpg", price: 1450 },
-  { name: "Honeywell IDP-Photo Smoke Detector", supplier: "honeywell", category: "fire-alarm", file: "honeywell/real/fire-alarm-and-emergency-honeywell-idp-photo-smoke-detector.jpg", price: 4000 },
-  { name: "Honeywell IDP-Relay Module", supplier: "honeywell", category: "fire-alarm", file: "honeywell/real/fire-alarm-and-emergency-honeywell-idp-relay-module.jpg", price: 1600 },
-  { name: "Honeywell IFP-2100ECSHVB Fire Alarm Panel", supplier: "honeywell", category: "fire-alarm", file: "honeywell/real/fire-alarm-and-emergency-honeywell-ifp-2100ecshvb-fire-alarm-panel.jpg", price: 3900 },
-  { name: "Honeywell IFP-2100HV Fire Alarm Panel", supplier: "honeywell", category: "fire-alarm", file: "honeywell/real/fire-alarm-and-emergency-honeywell-ifp-2100hv-fire-alarm-panel.jpg", price: 405 },
-  { name: "Honeywell RA-2000GRAY Remote Annunciator", supplier: "honeywell", category: "fire-alarm", file: "honeywell/real/fire-alarm-and-emergency-honeywell-ra-2000gray-remote-annunciator.jpg", price: 1450 },
-  { name: "Honeywell RFP-2100HV Fire Alarm Panel", supplier: "honeywell", category: "fire-alarm", file: "honeywell/real/fire-alarm-and-emergency-honeywell-rfp-2100hv-fire-alarm-panel.jpg", price: 615 },
-  { name: "Honeywell RPS-1000B Power Supply", supplier: "honeywell", category: "fire-alarm", file: "honeywell/real/fire-alarm-and-emergency-honeywell-rps-1000b-power-supply.jpg", price: 4350 },
-  { name: "Honeywell Explosion Proof Gas Detector", supplier: "honeywell", category: "fire-alarm", file: "honeywell/real/fire-alarm-and-emergency-honeywell-explosion-proof-gas-detector.jpg", price: 940 },
-  { name: "Honeywell Fire Alarm Horn Strobe", supplier: "honeywell", category: "fire-alarm", file: "honeywell/real/fire-alarm-and-emergency-honeywell-fire-alarm-horn-strobe.jpg", price: 1800 },
-  { name: "Honeywell Infrared Beam Smoke Detector", supplier: "honeywell", category: "fire-alarm", file: "honeywell/real/fire-alarm-and-emergency-honeywell-infrared-beam-smoke-detector.jpg", price: 2750 },
-  { name: "Honeywell Morley-IAS Fire Alarm Panel", supplier: "honeywell", category: "fire-alarm", file: "honeywell/real/morley-ias-honeywell-morley-ias-fire-alarm-panel.jpg", price: 2800 },
-  { name: "Honeywell PA Ceiling Speaker", supplier: "honeywell", category: "fire-alarm", file: "honeywell/real/x-618-pa-system-honeywell-pa-ceiling-speaker.jpg", price: 4550 },
-  { name: "Honeywell PA Handheld Microphone", supplier: "honeywell", category: "fire-alarm", file: "honeywell/real/x-618-pa-system-honeywell-pa-handheld-microphone.jpg", price: 2150 },
-  { name: "Honeywell PA Wall Speaker", supplier: "honeywell", category: "fire-alarm", file: "honeywell/real/x-618-pa-system-honeywell-pa-wall-speaker.jpg", price: 3600 },
-  { name: "Honeywell X-NPMI Paging Microphone", supplier: "honeywell", category: "fire-alarm", file: "honeywell/real/x-618-pa-system-honeywell-x-npmi-paging-microphone.jpg", price: 3350 },
-  { name: "Honeywell Ziton ZX1Se Fire Panel", supplier: "honeywell", category: "fire-alarm", file: "honeywell/real/zxse-honeywell-ziton-zx1se-fire-panel.jpg", price: 1750 },
-  { name: "Honeywell Ziton ZX5Se Fire Panel", supplier: "honeywell", category: "fire-alarm", file: "honeywell/real/zxse-honeywell-ziton-zx5se-fire-panel.jpg", price: 3950 },
   { name: "KD Pipes Steel Furniture Manufacturing", supplier: "kdpipes", category: "pipes", file: "kdpipes/real/applications-steel-furniture-manufacturing.jpg", price: 30 },
   { name: "KD Pipes Steel Handrail Pipes", supplier: "kdpipes", category: "pipes", file: "kdpipes/real/applications-steel-handrail-pipes.jpg", price: 115 },
   { name: "KD Pipes Steel Parking Shade Structure", supplier: "kdpipes", category: "pipes", file: "kdpipes/real/applications-steel-parking-shade-structure.jpg", price: 25 },
@@ -572,29 +343,6 @@ const REAL_BULK = [
   { name: "KD Pipes Steel Scaffolding Pipes Construction", supplier: "kdpipes", category: "pipes", file: "kdpipes/real/applications-steel-scaffolding-pipes-construction.jpg", price: 115 },
   { name: "KD Pipes Steel Structure Engineering Fabrication", supplier: "kdpipes", category: "pipes", file: "kdpipes/real/applications-steel-structure-engineering-fabrication.jpg", price: 40 },
   { name: "KD Pipes Steel Water Line Pipes", supplier: "kdpipes", category: "pipes", file: "kdpipes/real/applications-steel-water-line-pipes.jpg", price: 100 },
-  { name: "Teknoware TWX1651WK Step Emergency Light", supplier: "teknoware", category: "emergency-light", file: "teknoware/real/battery-and-exit-luminaires-teknoware-twx1651wk-step-emergency-light.jpg", price: 635 },
-  { name: "Teknoware TWX3051WK Exit Luminaire", supplier: "teknoware", category: "emergency-light", file: "teknoware/real/battery-and-exit-luminaires-teknoware-twx3051wk-exit-luminaire.jpg", price: 790 },
-  { name: "Teknoware TWX3151WK Exit Luminaire", supplier: "teknoware", category: "emergency-light", file: "teknoware/real/battery-and-exit-luminaires-teknoware-twx3151wk-exit-luminaire.jpg", price: 670 },
-  { name: "Teknoware TWX5751WKH Emergency Light", supplier: "teknoware", category: "emergency-light", file: "teknoware/real/battery-and-exit-luminaires-teknoware-twx5751wkh-emergency-light.jpg", price: 695 },
-  { name: "Teknoware TWX8051WK Exit Sign", supplier: "teknoware", category: "emergency-light", file: "teknoware/real/battery-and-exit-luminaires-teknoware-twx8051wk-exit-sign.jpg", price: 150 },
-  { name: "Teknoware TWX8051WKB Exit Light", supplier: "teknoware", category: "emergency-light", file: "teknoware/real/battery-and-exit-luminaires-teknoware-twx8051wkb-exit-light.jpg", price: 760 },
-  { name: "Teknoware TWX8151WK Exit Sign", supplier: "teknoware", category: "emergency-light", file: "teknoware/real/battery-and-exit-luminaires-teknoware-twx8151wk-exit-sign.jpg", price: 385 },
-  { name: "Teknoware TWX9051WK Exit Sign", supplier: "teknoware", category: "emergency-light", file: "teknoware/real/battery-and-exit-luminaires-teknoware-twx9051wk-exit-sign.jpg", price: 110 },
-  { name: "Teknoware TWX9051WKB Exit Light", supplier: "teknoware", category: "emergency-light", file: "teknoware/real/battery-and-exit-luminaires-teknoware-twx9051wkb-exit-light.jpg", price: 925 },
-  { name: "Teknoware TWXB151WK Combo Light", supplier: "teknoware", category: "emergency-light", file: "teknoware/real/battery-and-exit-luminaires-teknoware-twxb151wk-combo-light.jpg", price: 950 },
-  { name: "Teknoware Escalux DALI Gateway Module", supplier: "teknoware", category: "emergency-light", file: "teknoware/real/escalux-teknoware-escalux-dali-gateway-module.jpg", price: 375 },
-  { name: "Teknoware Escalux System Overview", supplier: "teknoware", category: "emergency-light", file: "teknoware/real/escalux-teknoware-escalux-system-overview.jpg", price: 175 },
-  { name: "Teknoware TWX1151WK Emergency Light", supplier: "teknoware", category: "emergency-light", file: "teknoware/real/mounting-teknoware-twx1151wk-emergency-light.jpg", price: 270 },
-  { name: "Teknoware TWX1151WKP Emergency Light Phased Input", supplier: "teknoware", category: "emergency-light", file: "teknoware/real/mounting-teknoware-twx1151wkp-emergency-light-phased-input.jpg", price: 125 },
-  { name: "Teknoware TWX1351WK Recessed Emergency Light", supplier: "teknoware", category: "emergency-light", file: "teknoware/real/mounting-teknoware-twx1351wk-recessed-emergency-light.jpg", price: 445 },
-  { name: "Teknoware TWX1351WKP Recessed Emergency Light Phased Input", supplier: "teknoware", category: "emergency-light", file: "teknoware/real/mounting-teknoware-twx1351wkp-recessed-emergency-light-phased-input.jpg", price: 565 },
-  { name: "Teknoware TWX3651WK Surface Mount Light", supplier: "teknoware", category: "emergency-light", file: "teknoware/real/mounting-teknoware-twx3651wk-surface-mount-light.jpg", price: 360 },
-  { name: "Teknoware TWX4351WKH Surface Mount Light", supplier: "teknoware", category: "emergency-light", file: "teknoware/real/mounting-teknoware-twx4351wkh-surface-mount-light.jpg", price: 170 },
-  { name: "Teknoware TWX5051WK Recessed Downlight", supplier: "teknoware", category: "emergency-light", file: "teknoware/real/mounting-teknoware-twx5051wk-recessed-downlight.jpg", price: 410 },
-  { name: "Teknoware TWX7351WK Recessed Light", supplier: "teknoware", category: "emergency-light", file: "teknoware/real/mounting-teknoware-twx7351wk-recessed-light.jpg", price: 780 },
-  { name: "Teknoware TWX7551WK Recessed Light", supplier: "teknoware", category: "emergency-light", file: "teknoware/real/mounting-teknoware-twx7551wk-recessed-light.jpg", price: 910 },
-  { name: "Teknoware TWX8251WKH Surface Mount Light", supplier: "teknoware", category: "emergency-light", file: "teknoware/real/mounting-teknoware-twx8251wkh-surface-mount-light.jpg", price: 500 },
-  { name: "Teknoware TWX8851WK Surface Mount Light", supplier: "teknoware", category: "emergency-light", file: "teknoware/real/mounting-teknoware-twx8851wk-surface-mount-light.jpg", price: 660 },
   { name: "Waterfall End Suction Fire Pump", supplier: "waterfall", category: "fire-pumps", file: "waterfall/real/fire-pumps-waterfall-end-suction-fire-pump.jpg", price: 61000 },
   { name: "Waterfall Horizontal Split Case Fire Pump", supplier: "waterfall", category: "fire-pumps", file: "waterfall/real/fire-pumps-waterfall-horizontal-split-case-fire-pump.jpg", price: 16400 },
   { name: "Waterfall Packaged Fire Pump House", supplier: "waterfall", category: "fire-pumps", file: "waterfall/real/fire-pumps-waterfall-packaged-fire-pump-house.jpg", price: 57300 },
@@ -626,6 +374,9 @@ REAL_BULK.forEach((r) => {
   });
 });
 
+/* Honeywell, Teknoware & Uranus products from the official partner datasheets */
+PRODUCTS.push(...PARTNER_PRODUCTS);
+
 /* Utility functions used across pages */
 export const CatalogAPI = {
   all() { return PRODUCTS; },
@@ -655,6 +406,7 @@ export const CatalogAPI = {
     return out;
   },
   formatPrice(p) {
+    if (!p.price) return "Price on request";
     const val = "AED " + p.price.toLocaleString("en-US", { minimumFractionDigits: p.price % 1 === 0 ? 0 : 2, maximumFractionDigits: 2 });
     return p.priceUnit ? val + " " + p.priceUnit : val;
   },

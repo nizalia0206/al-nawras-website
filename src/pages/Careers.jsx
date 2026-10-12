@@ -5,7 +5,7 @@ import PageHeader from "../components/PageHeader";
 import { useLanguage } from "../context/LanguageContext";
 import { careersPage } from "../i18n/pagesAr";
 import useJobPostings from "../hooks/useJobPostings";
-import headerImage from "../assets/page-headers/careers-stairs.png";
+import headerImage from "../assets/page-headers/careers-stairs.jpg";
 
 const VALUES = [
   { icon: "shield", title: "Safety First", body: "Every project we deliver protects lives \u2014 that responsibility shapes how we hire, train and work." },
@@ -88,8 +88,8 @@ export default function Careers() {
 
       <Reveal as="section" className="section benefits-section">
         <div className="container">
-          <span className="eyebrow" style={{ color: "var(--flame-400)" }}>{lang === "ar" ? ar.benefitsLabel : "BENEFITS"}</span>
-          <h2 style={{ marginTop: 12, fontSize: 28, color: "white" }}>{lang === "ar" ? ar.benefitsTitle : "What You'll Get"}</h2>
+          <span className="eyebrow">{lang === "ar" ? ar.benefitsLabel : "BENEFITS"}</span>
+          <h2 style={{ marginTop: 12, fontSize: 28 }}>{lang === "ar" ? ar.benefitsTitle : "What You'll Get"}</h2>
           <div className="benefits-grid">
             {benefits.map(([title, body]) => (
               <div className="benefit-item" key={title}>

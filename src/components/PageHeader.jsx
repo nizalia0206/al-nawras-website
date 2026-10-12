@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { useLanguage } from "../context/LanguageContext";
 
-export default function PageHeader({ eyebrow, eyebrowClassName = "", title, desc, crumbs = [], image }) {
+export default function PageHeader({ eyebrow, eyebrowClassName = "", title, desc, crumbs = [], image, vivid = false }) {
   const { t } = useLanguage();
   return (
     <div className="relative bg-bgdark text-white overflow-hidden">
@@ -25,11 +25,21 @@ export default function PageHeader({ eyebrow, eyebrowClassName = "", title, desc
       />
       {image && (
         <div className="absolute inset-0 z-0">
-          <img key={image} src={image} alt="" className="absolute inset-0 w-full h-full object-cover opacity-70" />
+          <img key={image} src={image} alt="" className={`absolute inset-0 w-full h-full object-cover ${vivid ? "opacity-100" : "opacity-70"}`} />
           {/* uniform wash so text stays readable no matter how bright the photo is,
               plus a top-anchored gradient for extra depth right behind the text */}
-          <div className="absolute inset-0 bg-bgdarker/55" />
-          <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/10 to-transparent" />
+          {vivid ? (
+            <>
+              {/* blue wash in the same tones as the search band below, so header + band read as one piece */}
+              <div className="absolute inset-0 bg-gradient-to-r from-[#3d6a89]/80 via-[#5c93b3]/45 to-[#5c93b3]/20" />
+              <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-b from-transparent to-[#5c93b3]" />
+            </>
+          ) : (
+            <>
+              <div className="absolute inset-0 bg-bgdarker/55" />
+              <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/10 to-transparent" />
+            </>
+          )}
         </div>
       )}
 

@@ -18,6 +18,7 @@ import fireAlarmEnv from "../assets/hero/fire-alarm-env.png";
 import emergencyLightEnv from "../assets/hero/emergency-light-env.png";
 import elvCctv from "../assets/hero/elv-cctv.jpg";
 import smokeFan from "../assets/hero/smoke-fan.jpg";
+import thinkNawras from "../assets/hero/think-nawras.jpg";
 
 const AUTOPLAY_MS = 5500;
 
@@ -29,6 +30,9 @@ function useCategories(t) {
     {
       intro: true,
       key: "intro",
+      icon: IconFlame,
+      image: thinkNawras,
+      imagePosition: "68% center",
       label: t("hero.eyebrowIntro"),
       tabLabel: t("hero.tabIntro"),
     },
@@ -236,6 +240,23 @@ export default function Hero() {
 
               {cat.intro ? (
                 <>
+                  {/* AI-generated brand backdrop for the "Think Al Nawras" slide */}
+                  <div className="absolute inset-0 overflow-hidden">
+                    <img
+                      src={cat.image}
+                      alt=""
+                      className="w-full h-full object-cover"
+                      style={{
+                        objectPosition: cat.imagePosition || "center center",
+                        animation:
+                          i === active ? "kenBurns 6.5s ease-out forwards" : "none",
+                        transformOrigin: cat.imagePosition || "center center",
+                      }}
+                    />
+                  </div>
+                  {/* scrim so the white headline stays readable */}
+                  <div className="absolute inset-0 bg-black/45" />
+                  <div className="absolute inset-0 bg-[radial-gradient(ellipse_70%_70%_at_50%_50%,rgba(10,30,58,.45)_0%,transparent_75%)]" />
                   {/* ambient glow — animated only on this brand slide */}
                   <span
                     className="absolute right-[6%] top-1/2 -translate-y-1/2 w-[52%] h-[80%] rounded-full blur-[90px] opacity-60"
@@ -380,10 +401,11 @@ export default function Hero() {
                 <>
                   <h1
                     key={"h-" + active}
-                    className="font-display font-bold uppercase leading-[1.05] text-[34px] sm:text-[46px] md:text-[58px] lg:text-[64px] max-w-[16ch] text-ink"
+                    className="font-display font-bold uppercase leading-[1.05] text-[34px] sm:text-[46px] md:text-[58px] lg:text-[64px] max-w-[16ch] text-white"
                     style={{
                       animation:
                         "slideIn .55s var(--ease) .05s backwards",
+                      textShadow: "0 4px 24px rgba(0,0,0,.45)",
                     }}
                   >
                     {t("hero.h1line1")}
@@ -520,11 +542,10 @@ export default function Hero() {
           </div>
         </div>
 
-        {/* tab bar — intro "Think Al Nawras" tab is intentionally omitted, product tabs only */}
-        <div className="relative z-[2] border-t border-white/[.08] bg-[#78b0d0]/70 backdrop-blur-sm">
-          <div className="max-w-[1280px] mx-auto px-4 sm:px-8 flex overflow-x-auto sm:grid sm:grid-cols-5 sm:overflow-visible">
+        {/* tab bar — "Think Al Nawras" intro tab + one tab per product category */}
+        <div className="relative z-[2] border-t border-white/[.08] bg-white/85 backdrop-blur-sm">
+          <div className="max-w-[1280px] mx-auto px-4 sm:px-8 flex overflow-x-auto sm:grid sm:grid-cols-6 sm:overflow-visible">
             {CATEGORIES.map((cat, i) => {
-              if (cat.intro) return null;
               const Icon = cat.icon;
               const isActive = i === active;
 
@@ -533,26 +554,26 @@ export default function Hero() {
                   key={cat.label}
                   type="button"
                   onClick={() => goTo(i)}
-                  className={`relative flex items-center justify-center gap-2 min-w-[110px] sm:min-w-0 sm:w-full px-2 sm:px-2.5 py-3 text-center shrink-0 sm:shrink transition-colors duration-300 ${
+                  className={`relative flex items-center justify-center gap-2 min-w-[140px] sm:min-w-0 sm:w-full px-2 sm:px-3 py-4 text-center shrink-0 sm:shrink transition-colors duration-300 ${
                     isActive
-                      ? "text-white"
-                      : "text-steel hover:text-steellight"
+                      ? "text-ink bg-white"
+                      : "text-ink/75 hover:text-ink"
                   }`}
                 >
                   <Icon
-                    className={`w-[18px] h-[18px] shrink-0 transition-all duration-300 ${
+                    className={`w-[22px] h-[22px] shrink-0 transition-all duration-300 ${
                       isActive
-                        ? "text-flame2 scale-110"
+                        ? "text-flame1 scale-110"
                         : "text-steel"
                     }`}
                   />
 
-                  <span className="text-[11px] sm:text-[11.5px] font-semibold leading-tight text-center">
+                  <span className="text-[13.5px] sm:text-[14px] lg:text-[15px] font-bold leading-tight text-center">
                     {cat.intro ? cat.tabLabel : cat.label}
                   </span>
 
                   {/* progress underline */}
-                  <span className="absolute left-0 right-0 bottom-0 h-[2px] bg-white/[.08] overflow-hidden">
+                  <span className="absolute left-0 right-0 bottom-0 h-[3px] bg-ink/[.08] overflow-hidden">
                     {isActive && (
                       <span
                         key={active}
