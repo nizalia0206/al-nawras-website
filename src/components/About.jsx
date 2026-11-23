@@ -27,8 +27,8 @@ export default function About() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           {/* copy */}
           <div>
-            <div className="sec-eyebrow">{t("about.eyebrow")}</div>
-            <h2 className="font-display font-bold uppercase leading-[1.08] text-[28px] sm:text-[36px] md:text-[42px] text-flame1 max-w-[14ch]">
+            <div className="sec-head">{t("about.eyebrow")}</div>
+            <h2 className="sec-sub max-w-[34ch]">
               {t("about.title")}
             </h2>
             <p className="mt-6 text-[15px] sm:text-[16px] leading-[1.75] text-inksoft max-w-[52ch]">

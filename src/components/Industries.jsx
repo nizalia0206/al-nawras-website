@@ -1,14 +1,41 @@
 import { useEffect, useRef } from "react";
+import { Link } from "react-router-dom";
 import useIndustries from "../hooks/useIndustries";
+import useProjects from "../hooks/useProjects";
 import { industriesAr } from "../i18n/arabicContent";
 import { useLanguage } from "../context/LanguageContext";
 
 const AUTO_SPEED = 0.85; // px per frame for the slow auto-scroll
 
+// Sector card -> matching project category on /projects (?type=<category>).
+// Matched by the sector's id/title keywords so sectors added in the CMS link up too;
+// a sector with no matching project category opens the full projects list.
+const SECTOR_KEYWORDS = [
+  [/hotel|hospitality|resort/i, /hospitality|hotel/i],
+  [/health|hospital|clinic|medical/i, /health|medical/i],
+  [/school|universit|educat|college/i, /educat|school/i],
+  [/manufactur|industr|factory|plant|oil|gas/i, /industr|oil|gas|manufactur/i],
+  [/warehouse|logistic/i, /warehouse|logistic/i],
+  [/mall|retail|shopping/i, /mall|shopping|retail/i],
+  [/residential|tower|office|commercial|high-rise/i, /residential|commercial|high-rise/i],
+  [/government|public|civic/i, /government|public/i],
+];
+function sectorHref(item, categories) {
+  const hay = `${item.id || ""} ${item.title || ""}`;
+  for (const [sectorRe, catRe] of SECTOR_KEYWORDS) {
+    if (!sectorRe.test(hay)) continue;
+    const cat = categories.find((c) => catRe.test(c));
+    if (cat) return `/projects?type=${encodeURIComponent(cat)}`;
+  }
+  return "/projects";
+}
+
 export default function Industries({ id }) {
   const { t, lang } = useLanguage();
   const isRtl = lang === "ar";
   const industries = useIndustries();
+  const { projects } = useProjects();
+  const categories = [...new Set(projects.map((p) => p.category).filter(Boolean))];
   // duplicated list so the track can loop seamlessly
   const track = [...industries, ...industries];
   const scrollerRef = useRef(null);
@@ -71,11 +98,9 @@ export default function Industries({ id }) {
           <span className="inline-flex items-center justify-center px-2.5 py-1 text-[11px] font-bold tracking-[.08em] uppercase text-flame1 border border-flame1/40 bg-flame1/[.06] rounded ltr-content">
             {t("industries.badge")}
           </span>
-          <span className="text-[11.5px] font-semibold tracking-[.22em] uppercase text-inksoft">
-            {t("industries.eyebrow")}
-          </span>
         </div>
-        <h2 className="font-display font-semibold uppercase text-[28px] md:text-[40px] leading-[1.08] text-ink max-w-[680px]">
+        <div className="sec-head">{t("industries.eyebrow")}</div>
+        <h2 className="sec-sub max-w-[680px]">
           {t("industries.title")}
         </h2>
       </div>
@@ -113,14 +138,21 @@ export default function Industries({ id }) {
         >
           <div className="industries-track">
             {track.map((item, i) => (
-              <div key={`${item.id}-${i}`} className="industries-card" aria-hidden={i >= industries.length}>
+              <Link
+                key={`${item.id}-${i}`}
+                to={sectorHref(item, categories)}
+                className="industries-card"
+                aria-hidden={i >= industries.length || undefined}
+                tabIndex={i >= industries.length ? -1 : undefined}
+                draggable="false"
+              >
                 <div className="industries-card-img">
-                  <img src={item.image} alt={item.title} loading="lazy" />
+                  <img src={item.image} alt={item.title} loading="lazy" draggable="false" />
                 </div>
                 <div className="industries-card-label">
                   <span>{lang === "ar" ? industriesAr[item.id] || item.title : item.title}</span>
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
         </div>

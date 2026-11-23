@@ -28,8 +28,8 @@ export default function Certifications() {
     <section id="certifications" className="bg-white py-[34px] md:py-[46px] border-t border-ink/[.06]">
       <div className="max-w-[1280px] mx-auto px-8">
         <div className="max-w-[680px] mb-7">
-          <div className="sec-eyebrow">{t("certifications.eyebrow")}</div>
-          <h2 className="font-display font-semibold uppercase text-[28px] md:text-[40px] leading-[1.08] text-ink">
+          <div className="sec-head">{t("certifications.eyebrow")}</div>
+          <h2 className="sec-sub">
             {t("certifications.title")}
           </h2>
           <p className="mt-5 text-[15.5px] md:text-[16.5px] leading-[1.75] text-inksoft">

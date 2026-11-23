@@ -32,7 +32,7 @@ const GLIMPSES = [
     title: "Authorized Distributor",
     desc: "Honeywell, Teknoware, Waterfall, KD Industries, Uranus and H3C — with full product ranges.",
     href: "#brands",
-    tag: "6 Global Brand Partners",
+    tag: "6 Global Partners",
   },
   {
     icon: IconFlame,
@@ -125,8 +125,8 @@ export default function Glimpse() {
     <section className="bg-paper py-[34px] md:py-[46px]">
       <div className="max-w-[1280px] mx-auto px-8">
         <div ref={headRef} className="reveal max-w-[640px] mb-7">
-          <div className="sec-eyebrow">Explore Al Nawras</div>
-          <h2 className="font-display text-[30px] md:text-[42px] font-semibold uppercase leading-[1.05] text-ink">
+          <div className="sec-head">Explore Al Nawras</div>
+          <h2 className="sec-sub">
             Everything Al Nawras Delivers
           </h2>
           <p className="mt-[18px] text-[16px] leading-[1.7] text-inksoft">

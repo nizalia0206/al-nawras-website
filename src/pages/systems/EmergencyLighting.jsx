@@ -31,7 +31,7 @@ export default function EmergencyLighting() {
         eyebrow={tx("pages.systems.emergencyLighting.systems_solutions", lang, "Systems & Solutions", "الأنظمة والحلول")}
         eyebrowClassName="!text-[16px] sm:!text-[17px] !font-extrabold"
         title={tx("pages.systems.emergencyLighting.title", lang, "Emergency Lighting", ar.title)}
-        desc={tx("pages.systems.emergencyLighting.desc", lang, "Central battery systems and DALI-addressable emergency and exit luminaires from Teknoware ESCALUX, monitored end-to-end through IntelliPanel and ESC-GATE gateways for consistent, code-compliant coverage.", ar.desc)}
+        desc={tx("pages.systems.emergencyLighting.desc", lang, "Central battery systems and central monitored self-contained emergency and exit luminaires for code compliance coverage.", ar.desc)}
         crumbs={[
           { label: tx("pages.systems.emergencyLighting.systems_solutions", lang, "Systems & Solutions", "الأنظمة والحلول") },
           { label: tx("pages.systems.emergencyLighting.breadcrumb", lang, "Emergency Lighting", ar.breadcrumb) },

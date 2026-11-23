@@ -27,14 +27,15 @@ export default function Team() {
           { label: tx("pages.about.team.crumbCurrent", lang, "Our Team", ar.crumbCurrent) },
         ]}
         image={headerImage}
+        sky
       />
       <AboutSubNav />
 
       <section className="bg-paper py-16 md:py-24">
         <div className="max-w-[1280px] mx-auto px-8">
           <div className="max-w-[680px] mb-14">
-            <div className="sec-eyebrow">{tx("pages.about.team.leadership", lang, "Leadership", ar.leadership)}</div>
-            <h1 className="font-display font-semibold uppercase text-[28px] md:text-[40px] leading-[1.08] text-ink">
+            <div className="sec-head">{tx("pages.about.team.leadership", lang, "Leadership", ar.leadership)}</div>
+            <h1 className="sec-sub">
               {tx("pages.about.team.heading", lang, "The people behind Al Nawras", ar.heading)}
             </h1>
           </div>

@@ -25,8 +25,8 @@ export default function SystemsShowcase({ id }) {
     <section id={id} className="bg-paper py-[34px] md:py-[46px]">
       <div className="max-w-[1280px] mx-auto px-6 sm:px-8">
         <div className="max-w-[680px] mb-8">
-          <div className="sec-eyebrow">{t("services.eyebrow")}</div>
-          <h2 className="font-display font-semibold uppercase text-[28px] md:text-[40px] leading-[1.08] text-ink">
+          <div className="sec-head">{t("services.eyebrow")}</div>
+          <h2 className="sec-sub">
             {t("services.title")}
           </h2>
         </div>

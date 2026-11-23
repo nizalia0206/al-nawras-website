@@ -150,8 +150,8 @@ export default function ProductDetail() {
       {suggestions.length > 0 && (
         <Reveal as="section" className="suggestions-section">
           <div className="container">
-            <span className="eyebrow">{tx("pages.productDetail.youMayAlsoNeed", lang, "YOU MAY ALSO NEED", ar.youMayAlsoNeed)}</span>
-            <h2 style={{ marginTop: 12 }}>{tx("pages.productDetail.frequentlyPaired", lang, "Frequently paired with this product", ar.frequentlyPaired)}</h2>
+            <span className="sec-head">{tx("pages.productDetail.youMayAlsoNeed", lang, "YOU MAY ALSO NEED", ar.youMayAlsoNeed)}</span>
+            <h2 className="sec-sub" style={{ marginTop: 4 }}>{tx("pages.productDetail.frequentlyPaired", lang, "Frequently paired with this product", ar.frequentlyPaired)}</h2>
             <div className="product-grid sugg-grid">
               {suggestions.map((p) => (
                 <ProductCard product={p} key={p.id} />

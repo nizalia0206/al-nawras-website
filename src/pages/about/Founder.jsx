@@ -27,6 +27,7 @@ export default function Founder() {
           { label: tx("pages.about.founder.crumbCurrent", lang, "Founder", ar.crumbCurrent) },
         ]}
         image={headerImage}
+        sky
       />
       <AboutSubNav />
 
@@ -36,11 +37,11 @@ export default function Founder() {
             <span className="inline-flex items-center justify-center px-2.5 py-1 text-[11px] font-bold tracking-[.08em] uppercase text-flame1 border border-flame1/40 bg-flame1/[.06] rounded ltr-content">
               {tx("pages.about.founder.badge", lang, "MD-01", ar.badge)}
             </span>
-            <span className="text-[11.5px] font-semibold tracking-[.22em] uppercase text-inksoft">
-              {tx("pages.about.founder.badgeLabel", lang, "Message from the Managing Director", ar.badgeLabel)}
-            </span>
           </div>
-          <h1 className="font-display font-semibold uppercase text-[28px] md:text-[40px] leading-[1.1] text-ink">
+          <div className="sec-head sec-head-center">
+            {tx("pages.about.founder.badgeLabel", lang, "Message from the Founder", ar.badgeLabel)}
+          </div>
+          <h1 className="sec-sub">
             {tx("pages.about.founder.heading1", lang, "A word from", ar.heading1)}{" "}
             <span className="text-flame1">{tx("pages.about.founder.heading2", lang, "Eng. Mohammed Ghazy", ar.heading2)}</span>
           </h1>

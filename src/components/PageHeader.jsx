@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { useLanguage } from "../context/LanguageContext";
 
-export default function PageHeader({ eyebrow, eyebrowClassName = "", title, desc, crumbs = [], image, vivid = false }) {
+export default function PageHeader({ eyebrow, eyebrowClassName = "", title, desc, crumbs = [], image, vivid = false, sky = false }) {
   const { t } = useLanguage();
   return (
     <div className="relative bg-bgdark text-white overflow-hidden">
@@ -25,10 +25,17 @@ export default function PageHeader({ eyebrow, eyebrowClassName = "", title, desc
       />
       {image && (
         <div className="absolute inset-0 z-0">
-          <img key={image} src={image} alt="" className={`absolute inset-0 w-full h-full object-cover ${vivid ? "opacity-100" : "opacity-70"}`} />
+          <img key={image} src={image} alt="" className={`absolute inset-0 w-full h-full object-cover ${vivid || sky ? "opacity-100" : "opacity-70"}`} />
           {/* uniform wash so text stays readable no matter how bright the photo is,
               plus a top-anchored gradient for extra depth right behind the text */}
-          {vivid ? (
+          {sky ? (
+            <>
+              {/* About pages (client review): photo clearly visible, a lighter sky-blue
+                  wash instead of the dark navy one — strongest only behind the text */}
+              <div className="absolute inset-0 bg-gradient-to-r from-[#1f7fc4]/55 via-[#4aa8e0]/25 to-[#87ceeb]/5" />
+              <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-b from-transparent to-[#4aa8e0]/25" />
+            </>
+          ) : vivid ? (
             <>
               {/* blue wash in the same tones as the search band below, so header + band read as one piece */}
               <div className="absolute inset-0 bg-gradient-to-r from-[#3d6a89]/80 via-[#5c93b3]/45 to-[#5c93b3]/20" />
@@ -61,12 +68,18 @@ export default function PageHeader({ eyebrow, eyebrowClassName = "", title, desc
             </span>
           ))}
         </div>
-        <div className={`sec-eyebrow !text-flame2 ${eyebrowClassName}`}>{eyebrow}</div>
-        <h1 className="font-display font-semibold uppercase text-[34px] md:text-[52px] leading-[1.05] max-w-[20ch] !text-white">
+        {eyebrow && <div className={`sec-eyebrow sec-eyebrow-lg !text-flame2 ${eyebrowClassName}`}>{eyebrow}</div>}
+        <h1
+          className="font-display font-semibold uppercase text-[34px] md:text-[52px] leading-[1.05] max-w-[20ch] !text-white"
+          style={sky ? { textShadow: "0 2px 18px rgba(8,40,80,.45)" } : undefined}
+        >
           {title}
         </h1>
         {desc && (
-          <p className="mt-5 text-[15px] md:text-[16.5px] leading-[1.7] text-steellight max-w-[62ch]">
+          <p
+            className={`mt-5 text-[15px] md:text-[16.5px] leading-[1.7] max-w-[62ch] ${sky ? "text-white font-medium" : "text-steellight"}`}
+            style={sky ? { textShadow: "0 1px 10px rgba(8,40,80,.5)" } : undefined}
+          >
             {desc}
           </p>
         )}

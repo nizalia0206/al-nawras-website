@@ -31,7 +31,7 @@ export default function Elv() {
         eyebrow={tx("pages.systems.elv.systems_solutions", lang, "Systems & Solutions", "الأنظمة والحلول")}
         eyebrowClassName="!text-[16px] sm:!text-[17px] !font-extrabold"
         title={tx("pages.systems.elv.title", lang, "ELV Systems", ar.title)}
-        desc={tx("pages.systems.elv.desc", lang, "Structured cabling, CCTV, access control and BMS integration delivered as a single low-voltage infrastructure, so every building system reports back through one manageable network.", ar.desc)}
+        desc={tx("pages.systems.elv.desc", lang, "Smart connected buildings — structured cabling, CCTV, access control, GRMS, ICT and BMS integration delivered as a single low-voltage infrastructure, so every building system reports back through one manageable network.", ar.desc)}
         crumbs={[
           { label: tx("pages.systems.elv.systems_solutions", lang, "Systems & Solutions", "الأنظمة والحلول") },
           { label: tx("pages.systems.elv.breadcrumb", lang, "ELV Systems", ar.breadcrumb) },

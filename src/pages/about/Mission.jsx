@@ -57,6 +57,7 @@ export default function Mission() {
           { label: tx("pages.about.mission.crumbCurrent", lang, "Mission & Vision", ar.crumbCurrent) },
         ]}
         image={headerImage}
+        sky
       />
       <AboutSubNav />
 

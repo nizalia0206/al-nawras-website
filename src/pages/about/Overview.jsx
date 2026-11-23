@@ -25,7 +25,7 @@ export default function Overview() {
       l: tx("pages.about.overview.statProjects", lang, "Projects Executed", ar.statProjects),
     },
     { n: String(site.stat_offices), l: tx("pages.about.overview.statOffices", lang, "UAE Branches", ar.statOffices) },
-    { n: String(site.stat_brands), l: tx("pages.about.overview.statBrands", lang, "Global Brand Partners", ar.statBrands) },
+    { n: String(site.stat_brands), l: tx("pages.about.overview.statBrands", lang, "Global Partners", ar.statBrands) },
   ];
 
   return (
@@ -38,6 +38,7 @@ export default function Overview() {
         }
         crumbs={[{ label: tx("pages.about.overview.crumb", lang, "About", ar.crumb) }]}
         image={headerImage}
+        sky
       />
       <AboutSubNav />
 

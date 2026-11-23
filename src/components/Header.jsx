@@ -83,7 +83,7 @@ function useNav(t, lang) {
         { icon: "IconPanel", title: "Honeywell", desc: t("nav.brands_honeywell_desc"), to: "/products?supplier=honeywell" },
         { icon: "IconLightbulb", title: "Teknoware / ESCALUX", desc: t("nav.brands_teknoware_desc"), to: "/products?supplier=teknoware" },
         { icon: "IconPump", title: "Waterfall", desc: t("nav.brands_waterfall_desc"), to: "/products?supplier=waterfall" },
-        { icon: "IconCable", title: "Uranus Cable", desc: t("nav.brands_uranus_desc"), to: "/products?supplier=uranus" },
+        { icon: "IconCable", title: "Uranus Fire Resistant Cables", desc: t("nav.brands_uranus_desc"), to: "/products?supplier=uranus" },
         { icon: "IconServer", title: "H3C", desc: t("nav.brands_h3c_desc"), to: "/products?supplier=h3c" },
         { icon: "IconPipe", title: "KD Pipes", desc: t("nav.brands_kdpipes_desc"), to: "/products?supplier=kdpipes" },
       ],

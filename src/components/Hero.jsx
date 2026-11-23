@@ -21,6 +21,7 @@ import emergencyLightEnv from "../assets/hero/emergency-light-env.png";
 import elvCctv from "../assets/hero/elv-cctv.jpg";
 import smokeFan from "../assets/hero/smoke-fan.jpg";
 import thinkNawras from "../assets/hero/think-nawras.jpg";
+import candle from "../assets/hero/candle.png";
 
 const AUTOPLAY_MS = 5500;
 
@@ -89,7 +90,7 @@ const SLIDE_COPY = {
       line1: "Rapid Response,",
       line2: "Total Suppression",
       tagline:
-        "Pumps, sprinklers, hydrants & risers engineered for total suppression coverage.",
+        "Pumps, sprinklers, hydrants & automatic suppression systems engineered for total suppression coverage.",
     },
     "fire-alarm": {
       line1: "Early Warning,",
@@ -99,15 +100,15 @@ const SLIDE_COPY = {
     },
     "emergency-lighting": {
       line1: "Guided Path,",
-      line2: "Always Lit",
+      line2: "Assured Lighting",
       tagline:
         "Central battery & DALI systems that keep exit paths lit when it matters most.",
     },
     elv: {
-      line1: "Connected Building,",
-      line2: "Constant Watch",
+      line1: "Smart Connected",
+      line2: "Buildings",
       tagline:
-        "Access control, CCTV and low-voltage infrastructure across every building.",
+        "Access control, CCTV, GRMS, ICT and low-voltage infrastructure across every building.",
     },
     "smoke-management": {
       line1: "Clean Air,",
@@ -121,7 +122,7 @@ const SLIDE_COPY = {
       line1: "استجابة سريعة،",
       line2: "إخماد كامل",
       tagline:
-        "مضخات ورشاشات وحنفيات ومواسير رأسية مصمّمة لتغطية إخماد شاملة.",
+        "مضخات ورشاشات وحنفيات وأنظمة إطفاء تلقائية مصمّمة لتغطية إخماد شاملة.",
     },
     "fire-alarm": {
       line1: "إنذار مبكر،",
@@ -129,16 +130,16 @@ const SLIDE_COPY = {
       tagline: "كشف قابل للعنونة وإخلاء صوتي يُنذر مبكرًا ويرشد الجميع إلى الأمان.",
     },
     "emergency-lighting": {
-      line1: "مسار مُضاء،",
-      line2: "دائم الإضاءة",
+      line1: "مسار مُرشد،",
+      line2: "إضاءة مضمونة",
       tagline:
         "أنظمة بطارية مركزية وDALI تُبقي مسارات الخروج مضاءة عند الحاجة.",
     },
     elv: {
-      line1: "مبنى متصل،",
-      line2: "مراقبة دائمة",
+      line1: "مبانٍ ذكية",
+      line2: "متصلة",
       tagline:
-        "التحكم بالدخول وكاميرات المراقبة والبنية التحتية منخفضة الجهد في كل مبنى.",
+        "التحكم بالدخول وكاميرات المراقبة وأنظمة إدارة غرف الفنادق (GRMS) وتقنية المعلومات والاتصالات والبنية التحتية منخفضة الجهد في كل مبنى.",
     },
     "smoke-management": {
       line1: "هواء نظيف،",
@@ -399,7 +400,7 @@ export default function Hero() {
             <div className="max-w-[720px] flex flex-col items-center">
               <div
                 key={"eyebrow-" + active}
-                className="sec-eyebrow !text-flame2 !mb-3"
+                className="sec-eyebrow sec-eyebrow-lg !text-flame2 !mb-3"
                 style={{
                   animation: "slideIn .5s var(--ease)",
                 }}
@@ -409,9 +410,19 @@ export default function Hero() {
 
               {current.intro ? (
                 <>
+                  <div className="flex items-center justify-center gap-4 sm:gap-6">
+                  {/* candle artwork from the company profile, beside "Think Safety / Think Al Nawras" */}
+                  <img
+                    key={"candle-" + active}
+                    src={candle}
+                    alt=""
+                    aria-hidden="true"
+                    className="shrink-0 w-[72px] h-[72px] sm:w-[104px] sm:h-[104px] md:w-[128px] md:h-[128px] rounded-full shadow-[0_10px_30px_-8px_rgba(0,0,0,.55)] ring-2 ring-white/25"
+                    style={{ animation: "slideIn .55s var(--ease) .05s backwards" }}
+                  />
                   <h1
                     key={"h-" + active}
-                    className="font-display font-bold uppercase leading-[1.05] text-[26px] sm:text-[34px] md:text-[42px] lg:text-[46px] max-w-[16ch] text-white"
+                    className="font-display font-bold uppercase leading-[1.05] text-[26px] sm:text-[34px] md:text-[42px] lg:text-[46px] max-w-[16ch] text-white text-start"
                     style={{
                       animation:
                         "slideIn .55s var(--ease) .05s backwards",
@@ -425,6 +436,7 @@ export default function Hero() {
                       {t("hero.h1brand")}
                     </span>
                   </h1>
+                  </div>
 
                   <p
                     key={"p-" + active}

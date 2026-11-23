@@ -41,7 +41,7 @@ export default function Projects() {
   return (
     <>
       <PageHeader
-        eyebrow={lang === "ar" ? ar.eyebrow : catLabel ? "Project Category" : "Our Track Record"}
+        eyebrow={catLabel ? undefined : lang === "ar" ? ar.eyebrow : "Our Track Record"}
         title={
           catLabel
             ? lang === "ar"
@@ -121,8 +121,8 @@ export default function Projects() {
 
       <Reveal as="section" className="process-section section">
         <div className="container">
-          <span className="eyebrow">{tx("pages.projects.howWeWork", lang, "HOW WE WORK", ar.howWeWork)}</span>
-          <h2 style={{ marginTop: 12, fontSize: 30 }}>{tx("pages.projects.processTitle", lang, "Our Project Delivery Process", ar.processTitle)}</h2>
+          <span className="sec-head">{tx("pages.projects.howWeWork", lang, "HOW WE WORK", ar.howWeWork)}</span>
+          <h2 className="sec-sub" style={{ marginTop: 4 }}>{tx("pages.projects.processTitle", lang, "Our Project Delivery Process", ar.processTitle)}</h2>
           <div className="process-grid">
             {([
               { num: "01", title: "Site Assessment", desc: "Our engineers survey the site and review drawings to scope the right fire, life safety or ICT solution." },

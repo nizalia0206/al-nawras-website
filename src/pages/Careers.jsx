@@ -139,8 +139,8 @@ export default function Careers() {
 
       <Reveal as="section" className="section" style={{ paddingBottom: 20 }}>
         <div className="container">
-          <span className="eyebrow">{tx("pages.careers.whyUs", lang, "WHY AL NAWRAS", ar.whyUs)}</span>
-          <h2 style={{ marginTop: 12, fontSize: 28 }}>{tx("pages.careers.whatWeValue", lang, "What We Value", ar.whatWeValue)}</h2>
+          <span className="sec-head">{tx("pages.careers.whyUs", lang, "WHY AL NAWRAS", ar.whyUs)}</span>
+          <h2 className="sec-sub" style={{ marginTop: 4 }}>{tx("pages.careers.whatWeValue", lang, "What We Value", ar.whatWeValue)}</h2>
           <div className="values-grid">
             {values.map((v) => {
               const IconComp = Icon[v.icon];
@@ -158,8 +158,8 @@ export default function Careers() {
 
       <Reveal as="section" className="section benefits-section">
         <div className="container">
-          <span className="eyebrow">{tx("pages.careers.benefitsLabel", lang, "BENEFITS", ar.benefitsLabel)}</span>
-          <h2 style={{ marginTop: 12, fontSize: 28 }}>{tx("pages.careers.benefitsTitle", lang, "What You'll Get", ar.benefitsTitle)}</h2>
+          <span className="sec-head">{tx("pages.careers.benefitsLabel", lang, "BENEFITS", ar.benefitsLabel)}</span>
+          <h2 className="sec-sub" style={{ marginTop: 4 }}>{tx("pages.careers.benefitsTitle", lang, "What You'll Get", ar.benefitsTitle)}</h2>
           <div className="benefits-grid">
             {benefits.map(([title, body]) => (
               <div className="benefit-item" key={title}>
@@ -173,8 +173,8 @@ export default function Careers() {
 
       <main className="section">
         <div className="container">
-          <span className="eyebrow">{tx("pages.careers.openRoles", lang, "OPEN ROLES", ar.openRoles)}</span>
-          <h2 style={{ marginTop: 12, fontSize: 28 }}>{tx("pages.careers.currentOpenings", lang, "Current Openings", ar.currentOpenings)}</h2>
+          <span className="sec-head">{tx("pages.careers.openRoles", lang, "OPEN ROLES", ar.openRoles)}</span>
+          <h2 className="sec-sub" style={{ marginTop: 4 }}>{tx("pages.careers.currentOpenings", lang, "Current Openings", ar.currentOpenings)}</h2>
           <div className="jobs-toolbar">
             {depts.map((d) => (
               <button key={d} className={`pill ${dept === d ? "active" : ""}`} onClick={() => setDept(d)}>{deptLabel(d)}</button>

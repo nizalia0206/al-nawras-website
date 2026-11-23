@@ -62,7 +62,10 @@ export default function ProjectDetail() {
 
   return (
     <>
-      <div className="project-detail-hero" style={{ backgroundImage: `url(${project.image})` }}>
+      {/* title band — the photo is only a soft blurred backdrop here; the full,
+          uncropped photo is shown right below (client review: "don't crop it") */}
+      <div className="project-detail-hero project-detail-hero--band">
+        <div className="project-detail-hero-bg" style={{ backgroundImage: `url(${project.image})` }} aria-hidden="true" />
         <div className="project-detail-hero-scrim" />
         <div className="container project-detail-hero-inner">
           <div className="breadcrumb" style={{ color: "rgba(255,255,255,.75)" }}>
@@ -77,18 +80,27 @@ export default function ProjectDetail() {
               {catLabel}
             </button>
           </div>
-          <span className="badge" style={{ marginTop: 16 }}>{catLabel}</span>
           <h1>{project.title}</h1>
           <p className="lead">{project.location}</p>
         </div>
       </div>
 
+      {project.image && (
+        <div className="container">
+          <figure className="project-detail-photo">
+            <a href={project.image} target="_blank" rel="noopener noreferrer" aria-label={`${project.title} — open full-size photo`}>
+              <img src={project.image} alt={project.title} decoding="async" />
+            </a>
+          </figure>
+        </div>
+      )}
+
       <main className="section" style={{ paddingTop: 40 }}>
         <div className="container">
           <div className="project-detail-grid">
             <div className="project-detail-main">
-              <span className="eyebrow">{tx("pages.projectDetail.overviewLabel", lang, "PROJECT OVERVIEW", ar.overviewLabel)}</span>
-              <h2 style={{ marginTop: 10, fontSize: 26 }}>{tx("pages.projectDetail.scopeOfWork", lang, "Scope of Work", ar.scopeOfWork)}</h2>
+              <span className="sec-head">{tx("pages.projectDetail.overviewLabel", lang, "PROJECT OVERVIEW", ar.overviewLabel)}</span>
+              <h2 className="sec-sub" style={{ marginTop: 4 }}>{tx("pages.projectDetail.scopeOfWork", lang, "Scope of Work", ar.scopeOfWork)}</h2>
               <p className="project-detail-desc">{project.scope}</p>
 
               {bullets.length > 2 && (
@@ -140,8 +152,8 @@ export default function ProjectDetail() {
       {related.length > 0 && (
         <Reveal as="section" className="section" style={{ paddingTop: 0 }}>
           <div className="container">
-            <span className="eyebrow">{tx("pages.projectDetail.moreInCategory", lang, "MORE IN THIS CATEGORY", ar.moreInCategory)}</span>
-            <h2 style={{ marginTop: 12, marginBottom: 24, fontSize: 26 }}>{tx("pages.projectDetail.relatedProjects", lang, "Related Projects", ar.relatedProjects)}</h2>
+            <span className="sec-head">{tx("pages.projectDetail.moreInCategory", lang, "MORE IN THIS CATEGORY", ar.moreInCategory)}</span>
+            <h2 className="sec-sub" style={{ marginTop: 4, marginBottom: 24 }}>{tx("pages.projectDetail.relatedProjects", lang, "Related Projects", ar.relatedProjects)}</h2>
             <div className="project-grid">
               {related.map((p) => (
                 <div

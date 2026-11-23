@@ -128,8 +128,8 @@ export default function Contact() {
         <div className="container">
           <div className="contact-split">
             <div>
-              <span className="eyebrow">{tx("pages.contact.sendMessage", lang, "SEND A MESSAGE", ar.sendMessage)}</span>
-              <h2 style={{ marginTop: 12, marginBottom: 26, fontSize: 28 }}>{tx("pages.contact.requestCallback", lang, "Request a Callback", ar.requestCallback)}</h2>
+              <span className="sec-head">{tx("pages.contact.sendMessage", lang, "SEND A MESSAGE", ar.sendMessage)}</span>
+              <h2 className="sec-sub" style={{ marginTop: 4, marginBottom: 26 }}>{tx("pages.contact.requestCallback", lang, "Request a Callback", ar.requestCallback)}</h2>
               <div className={`success-note ${submitted ? "show" : ""}`}>
                 <Icon.check />
                 <span>{tx("pages.contact.successNote", lang, "Thank you — your message has been received. Our team will contact you shortly.", ar.successNote)}</span>

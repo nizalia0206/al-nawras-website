@@ -91,20 +91,21 @@ export default function Products() {
   return (
     <>
       <PageHeader
-        eyebrow={lang === "ar" ? ar.eyebrow : activeBrand ? "Brand Partner" : "Full Catalog"}
         title={
           activeBrand
             ? lang === "ar"
               ? `منتجات ${activeBrand}`
-              : `${activeBrand} Products`
+              : /\b(cables?|products)$/i.test(activeBrand)
+                ? activeBrand
+                : `${activeBrand} Products`
             : tx("pages.products.title", lang, "Fire, Life Safety & ICT Products", ar.title)
         }
         desc={
           activeBrand
             ? lang === "ar"
               ? `تصفح كافة منتجات ${activeBrand} المتوفرة والمدعومة من قبل الأنوار للأنظمة الآمنة والأمنية.`
-              : `Browse the full range of ${activeBrand} products, supplied, engineered and supported by Al Nawras Safety & Security Systems LLC.`
-            : tx("pages.products.desc", lang, "Certified equipment from Honeywell, Waterfall, H3C, Teknoware, Uranus Cable and KD Pipes — supplied, engineered and supported by Al Nawras Safety & Security Systems LLC.", ar.desc)
+              : `Browse the full range of ${/\b(cables?|products)$/i.test(activeBrand) ? activeBrand : `${activeBrand} products`}, supplied, engineered and supported by Al Nawras Safety & Security Systems LLC.`
+            : tx("pages.products.desc", lang, "Certified equipment from Honeywell, Waterfall, H3C, Teknoware, Uranus Fire Resistant Cables and KD Pipes — supplied, engineered and supported by Al Nawras Safety & Security Systems LLC.", ar.desc)
         }
         crumbs={
           activeBrand

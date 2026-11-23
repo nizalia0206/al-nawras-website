@@ -21,8 +21,8 @@ export default function Brands() {
       <div className="max-w-[1280px] mx-auto px-8">
         <div className="flex flex-wrap items-end justify-between gap-6 mb-7">
           <div className="max-w-[680px]">
-            <div className="sec-eyebrow">{t("brands.eyebrow")}</div>
-            <h2 className="font-display font-semibold uppercase text-[28px] md:text-[40px] leading-[1.08] text-ink">
+            <div className="sec-head">{t("brands.eyebrow")}</div>
+            <h2 className="sec-sub">
               {t("brands.title")}
             </h2>
             <p className="mt-5 text-[15.5px] md:text-[16.5px] leading-[1.75] text-inksoft">

@@ -21,6 +21,7 @@ export default function Certifications() {
           { label: tx("pages.about.certifications.crumbCurrent", lang, "Certifications", ar.crumbCurrent) },
         ]}
         image={headerImage}
+        sky
       />
       <AboutSubNav />
 

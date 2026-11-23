@@ -55,9 +55,9 @@ export const translations = {
     hero: {
       eyebrowIntro: "Established 2005 · United Arab Emirates",
       tabIntro: "Think Al Nawras",
-      h1line1: "Think Safety.",
+      h1line1: "Think Safety",
       h1line2: "Think",
-      h1brand: "Al Nawras.",
+      h1brand: "Al Nawras",
       subtitle:
         "A UAE-based fire & life-safety and ELV solutions provider — engineering, supplying, installing and commissioning systems that protect over a thousand buildings across the Emirates since 2005.",
       viewProjects: "View Our Projects",
@@ -66,7 +66,7 @@ export const translations = {
       statProjects: "Projects Executed",
       statYears: "Years of Experience",
       statOffices: "UAE Branches",
-      statBrands: "Global Brand Partners",
+      statBrands: "Global Partners",
       exploreLabel: "Explore",
     },
     industries: {
@@ -88,10 +88,10 @@ export const translations = {
       statProjects: "Projects Executed",
       statYears: "Years of Experience",
       statOffices: "UAE Branches",
-      statBrands: "Brand Partners",
+      statBrands: "Partners",
     },
     brands: {
-      eyebrow: "Brand Partners",
+      eyebrow: "Partners",
       title: "Authorized distributor for globally certified brands",
       body: "Al Nawras represents a wide network of international manufacturers, bringing internationally recognized equipment and technology into every project we deliver.",
       viewCatalog: "View full catalog",
@@ -191,9 +191,9 @@ export const translations = {
     hero: {
       eyebrowIntro: "تأسست عام 2005 · دولة الإمارات العربية المتحدة",
       tabIntro: "فكّر في الأنوار",
-      h1line1: "فكّر في السلامة.",
+      h1line1: "فكّر في السلامة",
       h1line2: "فكّر في",
-      h1brand: "الأنوار.",
+      h1brand: "الأنوار",
       subtitle:
         "مزوّد إماراتي لحلول السلامة من الحريق والحياة، وأنظمة الجهد المنخفض — نصمم ونورّد ونركّب ونشغّل أنظمة تحمي أكثر من ألف مبنى في جميع أنحاء الإمارات منذ عام 2005.",
       viewProjects: "شاهد مشاريعنا",
@@ -227,7 +227,7 @@ export const translations = {
       statBrands: "شريك علامة تجارية",
     },
     brands: {
-      eyebrow: "الشركاء التجاريون",
+      eyebrow: "الشركاء",
       title: "موزّع معتمد لعلامات تجارية عالمية معتمدة",
       body: "تمثّل الأنوار شبكة واسعة من الشركات المصنّعة العالمية، وتُدخل معدات وتقنيات معترف بها دوليًا في كل مشروع ننفّذه.",
       viewCatalog: "عرض الكتالوج الكامل",
