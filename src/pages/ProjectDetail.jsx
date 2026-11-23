@@ -1,6 +1,6 @@
 import { tx } from "../i18n/tx";
 import { useSiteSettings } from "../context/SiteSettingsContext";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import { Icon } from "../components/CatalogIcons.jsx";
 import Reveal from "../components/Reveal.jsx";
@@ -30,6 +30,12 @@ export default function ProjectDetail() {
   const navigate = useNavigate();
   const { projects: PROJECTS, loading } = useProjects();
   const project = PROJECTS.find((p) => p.slug === slug);
+  // header follows the photo's real shape so the whole building is visible
+  const [photoRatio, setPhotoRatio] = useState(1.8);
+  const onPhotoLoad = (e) => {
+    const { naturalWidth: w, naturalHeight: h } = e.currentTarget;
+    if (w && h) setPhotoRatio(w / h);
+  };
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -62,10 +68,13 @@ export default function ProjectDetail() {
 
   return (
     <>
-      {/* title band — the photo is only a soft blurred backdrop here; the full,
-          uncropped photo is shown right below (client review: "don't crop it") */}
-      <div className="project-detail-hero project-detail-hero--band">
+      {/* header — the project photo IS the header background, with only a gradient
+          over it. The header takes the photo's own proportions (capped for very
+          tall photos), and the photo is never cropped, so the whole building shows. */}
+      <div className="project-detail-hero project-detail-hero--full" style={{ "--ratio": photoRatio }}>
+        {/* blurred, enlarged copy fills the whole header so tall photos never leave empty space */}
         <div className="project-detail-hero-bg" style={{ backgroundImage: `url(${project.image})` }} aria-hidden="true" />
+        <img className="project-detail-hero-photo" src={project.image} alt={project.title} onLoad={onPhotoLoad} />
         <div className="project-detail-hero-scrim" />
         <div className="container project-detail-hero-inner">
           <div className="breadcrumb" style={{ color: "rgba(255,255,255,.75)" }}>
@@ -85,15 +94,6 @@ export default function ProjectDetail() {
         </div>
       </div>
 
-      {project.image && (
-        <div className="container">
-          <figure className="project-detail-photo">
-            <a href={project.image} target="_blank" rel="noopener noreferrer" aria-label={`${project.title} — open full-size photo`}>
-              <img src={project.image} alt={project.title} decoding="async" />
-            </a>
-          </figure>
-        </div>
-      )}
 
       <main className="section" style={{ paddingTop: 40 }}>
         <div className="container">

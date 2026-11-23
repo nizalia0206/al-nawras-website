@@ -594,46 +594,69 @@ html.lang-ar .sys-card h3 { font-family: 'Cairo', 'Inter', sans-serif; }
 }
 
 /* =========================================================================
-   Project detail — full, uncropped project photo (client review)
-   The hero is a title band over a soft, blurred copy of the photo; the real
-   photo sits below at its natural aspect ratio, never cropped or stretched.
+   Project detail header — the whole building is visible (client review)
+   The photo is the header background with a gradient over it. The header's
+   height follows the photo's own proportions (--ratio = width / height, set
+   from the loaded image), capped at 80vh; the photo is fitted with `contain`
+   and anchored to the right, and its left edge fades into the navy, so
+   nothing is ever cropped and no frame/box is visible.
    ========================================================================= */
-.project-detail-hero.project-detail-hero--band{
+.project-detail-hero.project-detail-hero--full{
+  --ratio: 1.8;
+  position: relative;
+  height: clamp(420px, calc(100vw / var(--ratio)), 80vh);
   min-height: 0;
-  padding: 56px 0 40px;
+  padding: 0 0 36px;
   background: #0a1428;
+  background-image: none;
   overflow: hidden;
+  display: flex;
+  align-items: flex-end;
 }
-.project-detail-hero-bg{
+.project-detail-hero--full .project-detail-hero-bg{
   position: absolute;
-  inset: -40px;
+  inset: -60px;
   background-size: cover;
   background-position: center;
-  filter: blur(18px) saturate(1.1);
-  transform: scale(1.08);
-  opacity: .85;
+  filter: blur(26px) saturate(1.15) brightness(.85);
+  transform: scale(1.12);
+  z-index: 0;
 }
-.project-detail-hero--band .project-detail-hero-scrim{
-  background: linear-gradient(180deg, rgba(10,20,40,.45) 0%, rgba(10,20,40,.8) 100%);
-}
-.project-detail-photo{
-  margin: 32px 0 0;
-  padding: 0;
-  display: flex;
-  justify-content: center;
-  background: #eef2f7;
-  border: 1px solid rgba(19,28,51,.08);
-  border-radius: 14px;
-  overflow: hidden;
-  box-shadow: 0 30px 60px -34px rgba(19,28,51,.35);
-}
-.project-detail-photo a{ display: block; line-height: 0; cursor: zoom-in; }
-.project-detail-photo img{
-  display: block;
+.project-detail-hero-photo{
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%;
   width: auto;
-  height: auto;
   max-width: 100%;
-  max-height: 82vh;
-  object-fit: contain;      /* whole photo always visible */
-  image-rendering: auto;
+  object-fit: contain;
+  object-position: right center;
+  z-index: 0;
+  /* several project photos have a thin light frame baked into the file —
+     a tiny zoom pushes it just outside the header so only the building shows */
+  transform: scale(1.06);
+  transform-origin: center;
+  -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 18%);
+          mask-image: linear-gradient(90deg, transparent 0, #000 18%);
+}
+html.lang-ar .project-detail-hero-photo{
+  right: auto; left: 0; object-position: left center;
+  -webkit-mask-image: linear-gradient(270deg, transparent 0, #000 22%);
+          mask-image: linear-gradient(270deg, transparent 0, #000 22%);
+}
+.project-detail-hero--full .project-detail-hero-scrim{
+  z-index: 0;
+  background:
+    linear-gradient(90deg, rgba(10,20,40,.85) 0%, rgba(10,20,40,.45) 38%, rgba(10,20,40,0) 65%),
+    linear-gradient(180deg, rgba(10,20,40,0) 55%, rgba(10,20,40,.75) 100%);
+}
+html.lang-ar .project-detail-hero--full .project-detail-hero-scrim{
+  background:
+    linear-gradient(270deg, rgba(10,20,40,.85) 0%, rgba(10,20,40,.45) 38%, rgba(10,20,40,0) 65%),
+    linear-gradient(180deg, rgba(10,20,40,0) 55%, rgba(10,20,40,.75) 100%);
+}
+.project-detail-hero--full .project-detail-hero-inner{ position: relative; z-index: 1; }
+.project-detail-hero--full .project-detail-hero-inner h1{ margin-top: 10px; text-shadow: 0 2px 16px rgba(0,0,0,.45); }
+@media (max-width: 640px){
+  .project-detail-hero.project-detail-hero--full{ height: clamp(360px, calc(100vw / var(--ratio) + 140px), 85vh); }
 }
